@@ -3,7 +3,7 @@ import {
   Route,
   Routes
 } from 'react-router-dom'
-
+import AuthProvider from './context/AuthContext'
 import NotFound from './components/notFound/NotFound'
 import Curriculos from './pages/curriculos/Curriculos'
 import FormCurriculo from './pages/curriculos/FormCurriculo'
@@ -15,6 +15,7 @@ function Routers() {
   return (
     
       <BrowserRouter>      
+      <AuthProvider>
           <Header />
           <Routes>
             <Route path='*' element={<NotFound />} />
@@ -26,6 +27,7 @@ function Routers() {
             </Route>
         </Routes>
         <Footer />
+        </AuthProvider>
   </BrowserRouter>
 
   )
