@@ -7,31 +7,38 @@ import { useState } from 'react';
 import { Values } from '../../model/CandidatoDTO';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
+
 import * as C from "../../pages/login/Login.styles";
+
+import styles from './form.module.css'
 
 import Loading from '../../components/loading/Loading';
 
 function FormCurriculo() {
   const {idCandidato} = useParams()
   console.log(idCandidato);
-  
+
+  const [trabalhandoAtualmente , setTrabalhandoAtualmente] = useState(false)
+
   const [candidatoForUpdate , setCandidatoForUpdate] = useState()
 
   function postCandidato(values:Values){
-  
    console.log(values);
-   
   }
   
+  function desabledInput(){
+    trabalhandoAtualmente?setTrabalhandoAtualmente(false):setTrabalhandoAtualmente(true)
+  }
+
   async function updateCandidato(values:Values) {
-    
+
     console.log(values);
   }
 
 const SingupSchema = Yup.object().shape({
-  nome:Yup.string()
-  .min(2 , 'Muito Curto')
-  .required('Obrigatorio'),
+  // nome:Yup.string()
+  // .min(2 , 'Muito Curto')
+  // .required('Obrigatorio'),
 })
   
 
@@ -40,7 +47,8 @@ const SingupSchema = Yup.object().shape({
     return(<Loading />)
   }  
   return (
-    <div>
+    <div className={styles.divMaior}>
+      <div className={styles.divContent}>
       <h1>{idCandidato?'Atualizar':'Adicionar'} Candidato</h1>
       <Formik
         initialValues={
@@ -96,18 +104,16 @@ const SingupSchema = Yup.object().shape({
           {idCandidato? updateCandidato(values) : postCandidato(values) }
         }}
       >
-          {({ errors, touched }) =>(
-        <Form>
+        {({ errors, touched }) =>(
+        <Form >
+          
+        <div className={styles.divContent} >
           <h2>Dados Pessoas</h2>
-          <label htmlFor="nome">Nome</label>
-          <Field
+          <label htmlFor="nome">nome</label>
+          <Field 
           id="nome"
           name="nome"
-          placeholder="John"
-           />
-           {errors.nome && touched.nome ? (
-                  <C.Error>{errors.nome}</C.Error>
-            ) : null}
+          placeholder="nome" />
 
           <label htmlFor="cpf">Cpf</label>
           <Field 
@@ -124,7 +130,7 @@ const SingupSchema = Yup.object().shape({
             placeholder="dataNascimento"
             as={InputMask}
             mask="99/99/9999"
-          />    
+          />
 
           <h2>Endereço</h2>
 
@@ -231,6 +237,8 @@ const SingupSchema = Yup.object().shape({
           />
            <label htmlFor="trabalhandoAtualmente">trabalhandoAtualmente</label>
           <Field
+            onClick={()=>desabledInput()}
+            className={styles.checkboxInput} 
             id="trabalhandoAtualmente"
             name="trabalhandoAtualmente"
             placeholder="trabalhandoAtualmente"
@@ -239,6 +247,7 @@ const SingupSchema = Yup.object().shape({
           <br />
            <label htmlFor="dataFinalExperiencia">dataFinalExperiencia</label>
           <Field
+            disabled={trabalhandoAtualmente}
             id="dataFinalExperiencia"
             name="dataFinalExperiencia"
             placeholder="dataFinalExperiencia"
@@ -247,10 +256,11 @@ const SingupSchema = Yup.object().shape({
           />
          
         {idCandidato?<button type="submit">Atualizar</button>:<button type="submit">Adicionar</button>}
-          
+        </div>
         </Form>
         )}
       </Formik>
+      </div>
     </div>)
 }
 
