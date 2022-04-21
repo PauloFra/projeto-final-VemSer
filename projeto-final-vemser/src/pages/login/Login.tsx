@@ -57,7 +57,7 @@ const Login = () => {
             <C.Input
               name="email"
               id="email"
-              placeholder="Digite o seu email"
+              placeholder="Digite seu email"
               value={formikProps.values.email}
               onChange={formikProps.handleChange}
             />
