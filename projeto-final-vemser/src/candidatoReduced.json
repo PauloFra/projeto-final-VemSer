@@ -1,0 +1,10 @@
+{
+    "candidatoReduced": {
+        "cargo": "string",
+        "dataNascimento": "2022-04-21",
+        "idCandidato": 0,
+        "nome": "string",
+        "senioridade": "string"
+      }
+  }
+  
