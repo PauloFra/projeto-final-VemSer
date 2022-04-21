@@ -1,16 +1,18 @@
-import React, { createContext } from "react";
-
-export const AuthContext = createContext({});
+import React, { createContext, useState } from "react";
 
 type Props = {
   children: React.ReactNode;
 };
+export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }: Props) => {
-  const teste = "teste";
-  return <AuthContext.Provider value={teste}>
-    {children}
-  </AuthContext.Provider>;
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+
+  return (
+    <AuthContext.Provider value={{ setIsLogged, isLogged }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
