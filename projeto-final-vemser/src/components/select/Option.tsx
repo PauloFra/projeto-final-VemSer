@@ -1,9 +1,7 @@
 import React from 'react'
 
 function Option({list}:any) {
-  const {escolaridades} = list
-  console.log(escolaridades);
-  
+  const {escolaridades} = list  
   return (
     <>
       {escolaridades.map((option:any)=>(

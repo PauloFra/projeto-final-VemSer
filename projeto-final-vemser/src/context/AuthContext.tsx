@@ -6,6 +6,7 @@ type Props = {
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }: Props) => {
+  
   const [isLogged, setIsLogged] = useState<boolean>(false);
 
   return (

@@ -19,7 +19,8 @@ const Login = () => {
     if (token) {
       navigate("/");
     }
-  }, []);
+  }, [])
+
   const AuthFunction = (formikProps: loginDTO) => {
     if (formikProps.email === email && formikProps.senha === senha) {
       setIsLogged(true);
@@ -41,7 +42,7 @@ const Login = () => {
     ) => {
       AuthFunction(formikProps.values);
       /* handleLogin(formikProps.values); */
-      setSubmitting(false);
+      
     },
   });
 
@@ -65,7 +66,7 @@ const Login = () => {
               <C.Error>{formikProps.errors.email}</C.Error>
             ) : null}
           </C.DivForm>
-          <C.DivForm>
+          <C.DivForm> 
             <label htmlFor="senha">Senha</label>
             <C.Input
               type={pass ? "password" : "text"}

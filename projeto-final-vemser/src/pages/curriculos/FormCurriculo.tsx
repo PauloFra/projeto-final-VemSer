@@ -1,40 +1,49 @@
-
-import arrayCandidato from '../../candidato.json'
-import InputMask from 'react-input-mask'
+import InputMask from 'react-input-mask';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
-import Option from '../../components/select/Option'
-import escolaridadeOpt from '../../escolaridadeOpt.json'
-interface Values {
-  nome: string;
-  cpf: string;
-  dataNascimento: string;
-  rua:string,
-  cidade:string,
-  bairro:string,
-  numero:string,
-  escolaridade:string,
-  dataInicioEscolaridade:string,
-  dataFinal:string
-  nomeEmpresa:string,
-  cargo:string,
-  descricao:string,
-  dataInicioExperiencia:string,
-  trabalhandoAtualmente:string,
-  dataAtual:string
-
-}
-
+import Option from '../../components/select/Option';
+import escolaridadeOpt from '../../escolaridadeOpt.json';
+import Experiencias from '../../components/experienciasForm/Experiencias'
+import { useState } from 'react';
+import { Values } from '../../model/CandidatoDTO';
+import { useParams } from 'react-router-dom';
+import * as Yup from 'yup';
+import * as C from "../../pages/login/Login.styles";
+import Loading from '../../components/loading/Loading';
+import { prepareDataToInsert } from '../../utils';
 function FormCurriculo() {
+  const {idCandidato} = useParams()
+  console.log(idCandidato);
+  
+  const [candidatoForUpdate , setCandidatoForUpdate] = useState()
 
   function postCandidato(values:Values){
-    console.log(values);
+   const newValues = prepareDataToInsert(values);
+   console.log(newValues);
+   
+  }
+  
+  async function updateCandidato(values:Values) {
+    const newValues = prepareDataToInsert(values);
+    console.log(newValues);
   }
 
+const SingupSchema = Yup.object().shape({
+  nome:Yup.string()
+  .min(2 , 'Muito Curto')
+  .required('Obrigatorio'),
+})
+  
+
+  //Quando Adicionar o put adicionar ! no candidatoForUpdate
+  if(idCandidato && candidatoForUpdate ){
+    return(<Loading />)
+  }  
   return (
     <div>
-      <h1>Signup</h1>
+      <h1>{idCandidato?'Atualizar':'Adicionar'} Candidato</h1>
       <Formik
-        initialValues={{
+        initialValues={
+          idCandidato?{
           nome: '',
           cpf: '',
           dataNascimento: '',
@@ -49,17 +58,38 @@ function FormCurriculo() {
           cargo:"",
           descricao:"",
           dataInicioExperiencia:"",
-          trabalhandoAtualmente:"",
-          dataAtual:""
+          trabalhandoAtualmente:false,
+          dataFinalExperiencia:""
 
-        }}
+        }
+        :{
+        nome: '',
+        cpf: '',
+        dataNascimento: '',
+        rua:"",
+        cidade:"",
+        bairro:"",
+        numero:"",
+        escolaridade:"",
+        dataInicioEscolaridade:"",
+        dataFinal:"",
+        nomeEmpresa:"",
+        cargo:"",
+        descricao:"",
+        dataInicioExperiencia:"",
+        trabalhandoAtualmente:false,
+        dataFinalExperiencia:""
+        }
+      }
+        validationSchema={SingupSchema}
         onSubmit={(
           values: Values,
           { setSubmitting }: FormikHelpers<Values>
         ) => {
-          postCandidato(values)
+          {idCandidato? updateCandidato(values) : postCandidato(values) }
         }}
       >
+          {({ errors, touched }) =>(
         <Form>
           <h2>Dados Pessoas</h2>
           <label htmlFor="nome">First Name</label>
@@ -68,6 +98,9 @@ function FormCurriculo() {
           name="nome"
           placeholder="John"
            />
+           {errors.nome && touched.nome ? (
+                  <C.Error>{errors.nome}</C.Error>
+            ) : null}
 
           <label htmlFor="cpf">Cpf</label>
           <Field 
@@ -82,6 +115,8 @@ function FormCurriculo() {
             id="dataNascimento"
             name="dataNascimento"
             placeholder="dataNascimento"
+            as={InputMask}
+            mask="99/99/9999"
           />    
 
           <h2>Endereço</h2>
@@ -115,52 +150,37 @@ function FormCurriculo() {
             name="numero"
             placeholder="numero"
           />
+          <h2>Dados Academicos</h2>
+
           <Field as="select"  name="escolaridade">
               <Option list={escolaridadeOpt} />
           </Field>
 
-          <h2>Experiencias</h2>
+          <label htmlFor="dataInicioEscolaridade">dataInicioEscolaridade</label>
+          <Field
+            id="dataInicioEscolaridade"
+            name="dataInicioEscolaridade"
+            placeholder="dataInicioEscolaridade"
+            as={InputMask}
+            mask="99/99/9999"
+          />
 
-          <label htmlFor="nomeEmpresa">nomeEmpresa</label>
+          <label htmlFor="dataFinal">dataFinal</label>
           <Field
-            id="nomeEmpresa"
-            name="nomeEmpresa"
-            placeholder="nomeEmpresa"
+            id="dataFinal"
+            name="dataFinal"
+            placeholder="dataFinal"
+            as={InputMask}
+            mask="99/99/9999"
           />
-           <label htmlFor="cargo">cargo</label>
-          <Field
-            id="cargo"
-            name="cargo"
-            placeholder="cargo"
-          />
-           <label htmlFor="descricao">descricao</label>
-          <Field
-            id="descricao"
-            name="descricao"
-            placeholder="descricao"
-          />
-           <label htmlFor="dataInicio">dataInicio</label>
-          <Field
-            id="dataInicio"
-            name="dataInicio"
-            placeholder="dataInicio"
-          />
-           <label htmlFor="trabalhandoAtualmente">trabalhandoAtualmente</label>
-          <Field
-            id="trabalhandoAtualmente"
-            name="trabalhandoAtualmente"
-            placeholder="trabalhandoAtualmente"
-            type="checkbox"
-          />
-          <br />
-           <label htmlFor="dataAtual">dataAtual</label>
-          <Field
-            id="dataAtual"
-            name="dataAtual"
-            placeholder="dataAtual"
-          />
-          <button type="submit">Submit</button>
+          <h2>Experiencias</h2>
+          <Experiencias />
+          {/* <button onClick={()=> createExperience() }>+</button>
+       */}
+        {idCandidato?<button type="submit">Atualizar</button>:<button type="submit">Adicionar</button>}
+          
         </Form>
+        )}
       </Formik>
     </div>)
 }

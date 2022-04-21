@@ -1,0 +1,24 @@
+.tableDefault {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    font-size: 20px;
+    border-radius: 10px;
+
+}
+.tableDefault th{
+    padding: 15px 0;
+    border-bottom: 1px solid black;
+}
+.tableDefault td{
+    padding: 10px 0;
+    border-top: 1px solid black;
+}
+.divContainerTable{
+  margin: 0 auto;
+  width: 1200px;
+  
+}
+.centerTd{
+    text-align: center;
+}

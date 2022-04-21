@@ -14,7 +14,7 @@
                 },
                 "Dados-Escolares" :{
                 "escolaridade":"string",
-                "dataInicio":"string",
+                "dataInicioEscolaridade":"string",
                 "dataFinal":"string"
                 },
                 "Experiências":[
@@ -22,9 +22,9 @@
                             "nomeEmpresa":"string",
                             "cargo":"string",
                             "descricao":"string",
-                            "dataInicio":"string",
+                            "dataInicioExperiencia":"string",
                             "trabalhandoAtualmente":false,
-                            "dataAtual":"string"
+                            "dataFinalExperiencia":"string"
                             }	
                         ]
                     }
