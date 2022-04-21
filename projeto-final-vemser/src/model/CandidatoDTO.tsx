@@ -1,18 +1,21 @@
 export interface Values {
-    nome: string;
-    cpf: string;
-    dataNascimento: string;
-    rua:string,
-    cidade:string,
-    bairro:string,
-    numero:string,
-    escolaridade:string,
-    dataInicioEscolaridade:string,
-    dataFinal:string
-    nomeEmpresa:string,
-    cargo:string,
-    descricao:string,
-    dataInicioExperiencia:string,
-    trabalhandoAtualmente:boolean,
-    dataFinalExperiencia:string
+  cpf:string,
+  nome:string,
+  dataNascimento:string,
+  rua:string,
+  cidade:string,
+  bairro:string,
+  telefone:string,
+  numero:string,
+  instituicao:string,
+  senioridade:string,
+  descricaoDoCurso:string,
+  dataInicioDoCurso:string,
+  dataFinalDoCurso:string,                    
+  nomeEmpresa:string,
+  cargo:string,
+  descricaoCargo:string,
+  dataInicioExperiencia:string,
+  trabalhandoAtualmente:false
+  dataFinalExperiencia:string
   }

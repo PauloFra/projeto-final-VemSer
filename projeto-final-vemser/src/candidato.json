@@ -18,7 +18,9 @@
                 "cargo":"string",
                 "descricaoCargo":"string",
                 "dataInicioExperiencia":"string",
-                "trabalhandoAtualmente":false
+                "trabalhandoAtualmente":false,
+                "dataFinalExperiencia":"string"
+                
                 }
         ]
 }

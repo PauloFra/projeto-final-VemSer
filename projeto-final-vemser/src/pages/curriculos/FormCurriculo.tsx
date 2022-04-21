@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 import * as C from "../../pages/login/Login.styles";
 
 import Loading from '../../components/loading/Loading';
-import { prepareDataToInsert } from '../../utils';
+
 function FormCurriculo() {
   const {idCandidato} = useParams()
   console.log(idCandidato);
@@ -18,14 +18,14 @@ function FormCurriculo() {
   const [candidatoForUpdate , setCandidatoForUpdate] = useState()
 
   function postCandidato(values:Values){
-   const newValues = prepareDataToInsert(values);
-   console.log(newValues);
+  
+   console.log(values);
    
   }
   
   async function updateCandidato(values:Values) {
-    const newValues = prepareDataToInsert(values);
-    console.log(newValues);
+    
+    console.log(values);
   }
 
 const SingupSchema = Yup.object().shape({
@@ -45,41 +45,47 @@ const SingupSchema = Yup.object().shape({
       <Formik
         initialValues={
           idCandidato?{
-          nome: '',
-          cpf: '',
-          dataNascimento: '',
-          rua:"",
-          cidade:"",
-          bairro:"",
-          numero:"",
-          escolaridade:"",
-          dataInicioEscolaridade:"",
-          dataFinal:"",
-          nomeEmpresa:"",
-          cargo:"",
-          descricao:"",
-          dataInicioExperiencia:"",
+          nome:'',
+          cpf:'',
+          dataNascimento:'',
+          rua:'',
+          cidade:'',
+          bairro:'',
+          telefone:'',
+          numero:'',
+          instituicao:'',
+          senioridade:'',
+          descricaoDoCurso:'',
+          dataInicioDoCurso:'',
+          dataFinalDoCurso:'',                    
+          nomeEmpresa:'',
+          cargo:'',
+          descricaoCargo:'',
+          dataInicioExperiencia:'',
           trabalhandoAtualmente:false,
-          dataFinalExperiencia:""
+          dataFinalExperiencia:''
 
         }
         :{
-        nome: '',
-        cpf: '',
-        dataNascimento: '',
-        rua:"",
-        cidade:"",
-        bairro:"",
-        numero:"",
-        escolaridade:"",
-        dataInicioEscolaridade:"",
-        dataFinal:"",
-        nomeEmpresa:"",
-        cargo:"",
-        descricao:"",
-        dataInicioExperiencia:"",
-        trabalhandoAtualmente:false,
-        dataFinalExperiencia:""
+          nome:'',
+          cpf:'',
+          dataNascimento:'',
+          rua:'',
+          cidade:'',
+          bairro:'',
+          telefone:'',
+          numero:'',
+          instituicao:'',
+          senioridade:'',
+          descricaoDoCurso:'',
+          dataInicioDoCurso:'',
+          dataFinalDoCurso:'',                    
+          nomeEmpresa:'',
+          cargo:'',
+          descricaoCargo:'',
+          dataInicioExperiencia:'',
+          trabalhandoAtualmente:false,
+          dataFinalExperiencia:''
         }
       }
         validationSchema={SingupSchema}
@@ -93,7 +99,7 @@ const SingupSchema = Yup.object().shape({
           {({ errors, touched }) =>(
         <Form>
           <h2>Dados Pessoas</h2>
-          <label htmlFor="nome">First Name</label>
+          <label htmlFor="nome">Nome</label>
           <Field
           id="nome"
           name="nome"
@@ -151,33 +157,95 @@ const SingupSchema = Yup.object().shape({
             name="numero"
             placeholder="numero"
           />
+          <label htmlFor="telefone">telefone</label>
+          <Field
+            id="telefone"
+            name="telefone"
+            placeholder="telefone"
+          />
           <h2>Dados Academicos</h2>
 
-          <Field as="select"  name="escolaridade">
-              <Option list={escolaridadeOpt} />
-          </Field>
-
-          <label htmlFor="dataInicioEscolaridade">dataInicioEscolaridade</label>
+          <label htmlFor="instituicao">instituicao</label>
           <Field
-            id="dataInicioEscolaridade"
-            name="dataInicioEscolaridade"
-            placeholder="dataInicioEscolaridade"
+            id="instituicao"
+            name="instituicao"
+            placeholder="instituicao"
+          />
+          
+          <label htmlFor="senioridade">senioridade</label>
+          <Field
+            id="senioridade"
+            name="senioridade"
+            placeholder="senioridade"
+          />
+          <label htmlFor="descricaoDoCurso">descricaoDoCurso</label>
+          <Field
+            id="descricaoDoCurso"
+            name="descricaoDoCurso"
+            placeholder="descricaoDoCurso"
+          />
+
+          <label htmlFor="dataInicioDoCurso">dataInicioDoCurso</label>
+          <Field
+            id="dataInicioDoCurso"
+            name="dataInicioDoCurso"
             as={InputMask}
             mask="99/99/9999"
           />
 
-          <label htmlFor="dataFinal">dataFinal</label>
+          <label htmlFor="dataFinalDoCurso">dataFinalDoCurso</label>
           <Field
-            id="dataFinal"
-            name="dataFinal"
-            placeholder="dataFinal"
+            id="dataFinalDoCurso"
+            name="dataFinalDoCurso"
             as={InputMask}
             mask="99/99/9999"
           />
+          
           <h2>Experiencias</h2>
-          <Experiencias />
-          {/* <button onClick={()=> createExperience() }>+</button>
-       */}
+
+          <label htmlFor="nomeEmpresa">nomeEmpresa</label>
+          <Field
+            id="nomeEmpresa"
+            name="nomeEmpresa"
+            placeholder="nomeEmpresa"
+          />
+           <label htmlFor="cargo">cargo</label>
+          <Field
+            id="cargo"
+            name="cargo"
+            placeholder="cargo"
+          />
+           <label htmlFor="descricaoCargo">descricaoCargo</label>
+          <Field
+            id="descricaoCargo"
+            name="descricaoCargo"
+            placeholder="descricaoCargo"
+          />
+           <label htmlFor="dataInicioExperiencia">dataInicioExperiencia</label>
+          <Field
+            id="dataInicioExperiencia"
+            name="dataInicioExperiencia"
+            placeholder="dataInicioExperiencia"
+            as={InputMask}
+            mask="99/99/9999"
+          />
+           <label htmlFor="trabalhandoAtualmente">trabalhandoAtualmente</label>
+          <Field
+            id="trabalhandoAtualmente"
+            name="trabalhandoAtualmente"
+            placeholder="trabalhandoAtualmente"
+            type="checkbox"
+          />
+          <br />
+           <label htmlFor="dataFinalExperiencia">dataFinalExperiencia</label>
+          <Field
+            id="dataFinalExperiencia"
+            name="dataFinalExperiencia"
+            placeholder="dataFinalExperiencia"
+            as={InputMask}
+            mask="99/99/9999"
+          />
+         
         {idCandidato?<button type="submit">Atualizar</button>:<button type="submit">Adicionar</button>}
           
         </Form>
