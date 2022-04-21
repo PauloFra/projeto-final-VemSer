@@ -27,7 +27,7 @@ export const DivLogo = styled.div`
 
 export const TitleLogin = styled.h1`
   font-size: 24px;
-  color: #a4a6b3;
+  color: #6d53a6;
   opacity: 0.7;
 `;
 
@@ -60,25 +60,26 @@ export const Input = styled.input`
   height: 42px;
   margin-top: 6px;
   border-radius: 8px;
-  border: 1px solid #f0f1f7;
+  border: 2px solid #f0f1f7;
   color: #8d8d8d;
   outline: none;
   &::placeholder {
     color: #9fa2b4;
   }
   &:focus {
-    border: 1px solid #9fa2b4;
+    border: 2px solid #9fa2b4;
   }
 `;
 
 export const Botao = styled.button`
   width: 316px;
   height: 48px;
+  font-size: 18px;
+  color: #fff;
   background-color: #3f6abf;
   border-radius: 8px;
   border: none;
   box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
-  color: #fff;
   cursor: pointer;
   :hover {
     background-color: #2c7bbf;
