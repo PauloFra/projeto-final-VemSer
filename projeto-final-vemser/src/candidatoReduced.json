@@ -1,10 +1,116 @@
 {
-    "candidatoReduced": {
-        "cargo": "string",
-        "dataNascimento": "2022-04-21",
-        "idCandidato": 0,
-        "nome": "string",
-        "senioridade": "string"
-      }
-  }
-  
+  "candidatoReduced": [
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    },
+    {
+      "cargo": "Dev Front-end",
+      "dataNascimento": "21/04/2022",
+      "idCandidato": 0,
+      "nome": "Paulo",
+      "senioridade": "Sênior"
+    }
+  ]
+}
