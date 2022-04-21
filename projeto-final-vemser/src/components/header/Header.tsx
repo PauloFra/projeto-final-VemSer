@@ -3,14 +3,20 @@ import { AuthContext } from "../../context/AuthContext";
 import { ContainerHeader } from "./Header.styles";
 import Logo from "../logo/Logo";
 function Header() {
-  const { isLogged, setIsLogged } = useContext<any>(AuthContext);
-
+  const { isLogged ,handleLogout } = useContext<any>(AuthContext);
+  
+  console.log(isLogged);
   return (  
   
-  <ContainerHeader>
-    <Logo />
-    <button>Logout</button>
+  <ContainerHeader> 
+    {isLogged && 
+    <>
+      <Logo />
+      <button onClick={()=>handleLogout()}>Logout</button>
+    </>
+    }
   </ContainerHeader>
+
   )
 }
 

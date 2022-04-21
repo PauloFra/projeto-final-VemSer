@@ -7,40 +7,32 @@ import * as Yup from "yup";
 import { AuthContext } from "../../context/AuthContext";
 import * as C from "./Login.styles";
 import { loginDTO } from "../../model/LoginDTO";
-import AuthJson from "../../Auth.json";
 const Login = () => {
-  const { email, senha } = AuthJson.auth;
-  const { setIsLogged } = useContext<any>(AuthContext);
+  const { setIsLogged , handleLogin } = useContext<any>(AuthContext);
 
   const [pass, setPass] = useState(true);
   const navigate = useNavigate();
+ 
   useEffect(() => {
-    const token = localStorage.getItem("key");
+    const token = localStorage.getItem("token");
     if (token) {
       navigate("/");
     }
   }, [])
-
-  const AuthFunction = (formikProps: loginDTO) => {
-    if (formikProps.email === email && formikProps.senha === senha) {
-      setIsLogged(true);
-      navigate("/");
-    }
-  };
   const formikProps = useFormik({
     initialValues: {
-      email: "string@string.com",
+      usuario: "string@string.com",
       senha: "String@123",
     },
     validationSchema: Yup.object().shape({
-      email: Yup.string().required("Preencha o campo de email!"),
+      usuario: Yup.string().required("Preencha o campo de usuario!"),
       senha: Yup.string().required("Preencha o campo de senha!"),
     }),
     onSubmit: async (
       values: loginDTO,
       { setSubmitting }: FormikHelpers<loginDTO>
     ) => {
-      AuthFunction(formikProps.values);
+      handleLogin(formikProps.values);
       /* handleLogin(formikProps.values); */
       
     },
@@ -54,16 +46,16 @@ const Login = () => {
             <C.TitleLogin>Login VemCV</C.TitleLogin>
           </C.DivLogo>
           <C.DivForm>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="usuario">Usuario</label>
             <C.Input
-              name="email"
-              id="email"
-              placeholder="Digite seu email"
-              value={formikProps.values.email}
+              name="usuario"
+              id="usuario"
+              placeholder="Digite seu usuario"
+              value={formikProps.values.usuario}
               onChange={formikProps.handleChange}
             />
-            {formikProps.errors.email && formikProps.touched.email ? (
-              <C.Error>{formikProps.errors.email}</C.Error>
+            {formikProps.errors.usuario && formikProps.touched.usuario ? (
+              <C.Error>{formikProps.errors.usuario}</C.Error>
             ) : null}
           </C.DivForm>
           <C.DivForm> 

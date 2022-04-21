@@ -1,32 +1,25 @@
 {
-    "candidato":{
-        
+    "candidato":[
+                {
+               "cpf":"string",
                 "Nome":"PAulo",
-                "Dados-pessoais":{
-                "cpf":"string",
-                "dataNascimento":"string"
-                },
-                "endereço":{
-                    "rua":"string",
-                    "cidade":"string",
-                    "bairro":"string",
-                    "numero":"string"
-                },
-                "Dados-Escolares" :{
-                "escolaridade":"string",
-                "dataInicioEscolaridade":"string",
-                "dataFinal":"string"
-                },
-                "Experiências":[
-                            {
-                            "nomeEmpresa":"string",
-                            "cargo":"string",
-                            "descricao":"string",
-                            "dataInicioExperiencia":"string",
-                            "trabalhandoAtualmente":false,
-                            "dataFinalExperiencia":"string"
-                            }	
-                        ]
-                    }
+                "dataNascimento":"string",
+                "rua":"string",
+                "cidade":"string",
+                "bairro":"string",
+                "telefone":"telefone",
+                "numero":"string",
+                "instituicao":"string",
+                "senioridade":"string",
+                "descricaoDoCurso":"string",
+                "dataInicioDoCurso":"string",
+                "dataFinalDoCurso":"string",                    
+                "nomeEmpresa":"string",
+                "cargo":"string",
+                "descricaoCargo":"string",
+                "dataInicioExperiencia":"string",
+                "trabalhandoAtualmente":false
+                }
+        ]
 }
  

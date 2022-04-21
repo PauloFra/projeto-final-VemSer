@@ -1,4 +1,4 @@
 export interface loginDTO {
-  email: string;
+  usuario: string;
   senha: string;
 }

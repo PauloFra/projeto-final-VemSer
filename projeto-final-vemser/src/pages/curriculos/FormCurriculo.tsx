@@ -8,6 +8,7 @@ import { Values } from '../../model/CandidatoDTO';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import * as C from "../../pages/login/Login.styles";
+
 import Loading from '../../components/loading/Loading';
 import { prepareDataToInsert } from '../../utils';
 function FormCurriculo() {
