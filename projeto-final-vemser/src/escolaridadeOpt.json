@@ -1,0 +1,20 @@
+{
+    "escolaridades":[
+        {
+            "value":"escolaridadeM",
+            "label":"Escolaridade Média"
+        },
+        {
+            "value":"escolaridadeA",
+            "label":"Escolaridade Média"
+        },
+        {
+            "value":"escolaridadeB",
+            "label":"Escolaridade Baixa"
+        },
+        {
+            "value":"faculdade",
+            "label":"Faculdade"
+        }
+]
+}

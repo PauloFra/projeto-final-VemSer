@@ -1,0 +1,32 @@
+{
+    "candidato":{
+        
+                "Nome":"PAulo",
+                "Dados-pessoais":{
+                "cpf":"string",
+                "dataNascimento":"string"
+                },
+                "endereço":{
+                    "rua":"string",
+                    "cidade":"string",
+                    "bairro":"string",
+                    "numero":"string"
+                },
+                "Dados-Escolares" :{
+                "escolaridade":"string",
+                "dataInicio":"string",
+                "dataFinal":"string"
+                },
+                "Experiências":[
+                            {
+                            "nomeEmpresa":"string",
+                            "cargo":"string",
+                            "descricao":"string",
+                            "dataInicio":"string",
+                            "trabalhandoAtualmente":false,
+                            "dataAtual":"string"
+                            }	
+                        ]
+                    }
+}
+ 
