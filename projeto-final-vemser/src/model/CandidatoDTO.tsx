@@ -2,20 +2,20 @@ export interface Values {
   cpf:string,
   nome:string,
   dataNascimento:string,
-  rua:string,
+  logradouro:string,
   cidade:string,
   bairro:string,
   telefone:string,
-  numero:string,
+  numero:number,
   instituicao:string,
   senioridade:string,
-  descricaoDoCurso:string,
-  dataInicioDoCurso:string,
-  dataFinalDoCurso:string,                    
+  descricao:string,
+  dataInicioCurso:string,
+  dataFimCurso:string,                    
   nomeEmpresa:string,
   cargo:string,
-  descricaoCargo:string,
+  // descricaoCargo:string,
   dataInicioExperiencia:string,
   trabalhandoAtualmente:false
-  dataFinalExperiencia:string
+  dataFimExperiencia:string
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as C from "./ListCandidates.styles";
 import listCandidatos from "../../candidatoReduced.json";
 const ListCandidates = () => {
@@ -6,7 +7,7 @@ const ListCandidates = () => {
 
   return (
     <C.Nav>
-      <h1>Lista Candidatos</h1>
+        <h1>Lista Candidatos</h1>
       <C.Ul>
         {candidatoReduced.map((listCand: any) => (
           <C.Li key={listCand.idCandidato}>

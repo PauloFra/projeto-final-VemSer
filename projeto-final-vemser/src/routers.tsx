@@ -18,9 +18,11 @@ function Routers() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Vagas />} />
           <Route path="/curriculos" element={<Curriculos />} />
+
           <Route path="/form-curriculo" element={<FormCurriculo />}>
             <Route path=":idCandidato" element={<FormCurriculo />} />
           </Route>
+          
           <Route path="/detalhe-candidato" element={<CandidatoDetalhamento />}>
             <Route path=":idCandidato" element={<CandidatoDetalhamento />} />
           </Route>

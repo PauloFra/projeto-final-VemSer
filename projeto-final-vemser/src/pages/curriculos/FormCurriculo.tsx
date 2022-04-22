@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Values } from '../../model/CandidatoDTO';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
-
+import api from '../../api';
 import * as C from "../../pages/login/Login.styles";
 
 import styles from './form.module.css'
@@ -16,14 +16,21 @@ import Loading from '../../components/loading/Loading';
 
 function FormCurriculo() {
   const {idCandidato} = useParams()
-  console.log(idCandidato);
+ 
 
   const [trabalhandoAtualmente , setTrabalhandoAtualmente] = useState(false)
 
   const [candidatoForUpdate , setCandidatoForUpdate] = useState()
 
-  function postCandidato(values:Values){
-   console.log(values);
+  async function postCandidato(values:Values){
+   try{
+    const {data} = await api.post('candidato/candidato-completo' , values)
+    console.log(data);
+    
+   }
+   catch(error){
+     console.log(error);
+   }
   }
   
   function desabledInput(){
@@ -52,48 +59,48 @@ const SingupSchema = Yup.object().shape({
       <h1>{idCandidato?'Atualizar':'Adicionar'} Candidato</h1>
       <Formik
         initialValues={
-          idCandidato?{
-          nome:'',
-          cpf:'',
-          dataNascimento:'',
-          rua:'',
-          cidade:'',
-          bairro:'',
-          telefone:'',
-          numero:'',
-          instituicao:'',
-          senioridade:'',
-          descricaoDoCurso:'',
-          dataInicioDoCurso:'',
-          dataFinalDoCurso:'',                    
-          nomeEmpresa:'',
-          cargo:'',
-          descricaoCargo:'',
-          dataInicioExperiencia:'',
+          !idCandidato?{
+          nome:'ForTeste',
+          cpf:'10010010010',
+          dataNascimento:'2000-10-10',
+          logradouro:'Teste',
+          cidade:'teste',
+          bairro:'teste',
+          telefone:'teste',
+          numero:1,
+          instituicao:'teste',
+          senioridade:'teste',
+          descricao:'teste',
+          dataInicioCurso:'2000-10-10',
+          dataFimCurso:'2000-10-10',                    
+          nomeEmpresa:'teste',
+          cargo:'teste',
+          // descricaoCargo:'',
+          dataInicioExperiencia:'2000-10-10',
           trabalhandoAtualmente:false,
-          dataFinalExperiencia:''
+          dataFimExperiencia:'2000-10-10'
 
         }
         :{
           nome:'',
           cpf:'',
           dataNascimento:'',
-          rua:'',
+          logradouro:'',
           cidade:'',
           bairro:'',
           telefone:'',
-          numero:'',
+          numero:1,
           instituicao:'',
           senioridade:'',
-          descricaoDoCurso:'',
-          dataInicioDoCurso:'',
-          dataFinalDoCurso:'',                    
+          descricao:'',
+          dataInicioCurso:'',
+          dataFimCurso:'',                    
           nomeEmpresa:'',
           cargo:'',
-          descricaoCargo:'',
+          // descricaoCargo:'',
           dataInicioExperiencia:'',
           trabalhandoAtualmente:false,
-          dataFinalExperiencia:''
+          dataFimExperiencia:''
         }
       }
         validationSchema={SingupSchema}
@@ -118,7 +125,7 @@ const SingupSchema = Yup.object().shape({
           <label htmlFor="cpf">Cpf</label>
           <Field 
           as={InputMask}
-          mask="999.999.999-99"
+          // mask="999.999.999-99"
           id="cpf"
           name="cpf"
           placeholder="Doe" />
@@ -129,16 +136,16 @@ const SingupSchema = Yup.object().shape({
             name="dataNascimento"
             placeholder="dataNascimento"
             as={InputMask}
-            mask="99/99/9999"
+            // mask="99/99/9999"
           />
 
           <h2>Endereço</h2>
 
-          <label htmlFor="rua">rua</label>
+          <label htmlFor="logradouro">logradouro</label>
           <Field
-            id="rua"
-            name="rua"
-            placeholder="rua"
+            id="logradouro"
+            name="logradouro"
+            placeholder="logradouro"
             type="text"
           />
           
@@ -161,6 +168,7 @@ const SingupSchema = Yup.object().shape({
           <Field
             id="numero"
             name="numero"
+            type="number"
             placeholder="numero"
           />
           <label htmlFor="telefone">telefone</label>
@@ -184,31 +192,29 @@ const SingupSchema = Yup.object().shape({
             name="senioridade"
             placeholder="senioridade"
           />
-          <label htmlFor="descricaoDoCurso">descricaoDoCurso</label>
+          <label htmlFor="descricao">descricao</label>
           <Field
-            id="descricaoDoCurso"
-            name="descricaoDoCurso"
-            placeholder="descricaoDoCurso"
+            id="descricao"
+            name="descricao"
+            placeholder="descricao"
           />
 
-          <label htmlFor="dataInicioDoCurso">dataInicioDoCurso</label>
+          <label htmlFor="dataInicioCurso">dataInicioCurso</label>
           <Field
-            id="dataInicioDoCurso"
-            name="dataInicioDoCurso"
+            id="dataInicioCurso"
+            name="dataInicioCurso"
             as={InputMask}
-            mask="99/99/9999"
+            // mask="99/99/9999"
           />
 
-          <label htmlFor="dataFinalDoCurso">dataFinalDoCurso</label>
+          <label htmlFor="dataFimCurso">dataFimCurso</label>
           <Field
-            id="dataFinalDoCurso"
-            name="dataFinalDoCurso"
+            id="dataFimCurso"
+            name="dataFimCurso"
             as={InputMask}
-            mask="99/99/9999"
-          />
-          
+            // mask="99/99/9999"
+          />  
           <h2>Experiencias</h2>
-
           <label htmlFor="nomeEmpresa">nomeEmpresa</label>
           <Field
             id="nomeEmpresa"
@@ -221,19 +227,19 @@ const SingupSchema = Yup.object().shape({
             name="cargo"
             placeholder="cargo"
           />
-           <label htmlFor="descricaoCargo">descricaoCargo</label>
+           {/* <label htmlFor="descricaoCargo">descricaoCargo</label>
           <Field
             id="descricaoCargo"
             name="descricaoCargo"
             placeholder="descricaoCargo"
-          />
+          /> */}
            <label htmlFor="dataInicioExperiencia">dataInicioExperiencia</label>
           <Field
             id="dataInicioExperiencia"
             name="dataInicioExperiencia"
             placeholder="dataInicioExperiencia"
             as={InputMask}
-            mask="99/99/9999"
+            // mask="99/99/9999"
           />
            <label htmlFor="trabalhandoAtualmente">trabalhandoAtualmente</label>
           <Field
@@ -245,15 +251,16 @@ const SingupSchema = Yup.object().shape({
             type="checkbox"
           />
           <br />
-           <label htmlFor="dataFinalExperiencia">dataFinalExperiencia</label>
-          <Field
-            disabled={trabalhandoAtualmente}
-            id="dataFinalExperiencia"
-            name="dataFinalExperiencia"
-            placeholder="dataFinalExperiencia"
-            as={InputMask}
-            mask="99/99/9999"
-          />
+           <label htmlFor="dataFimExperiencia">dataFimExperiencia</label>
+            <Field
+              disabled={trabalhandoAtualmente}
+              id="dataFimExperiencia"
+              name="dataFimExperiencia"
+              placeholder="dataFimExperiencia"
+              as={InputMask}
+              // mask="99/99/9999"
+            />
+          
          
         {idCandidato?<button type="submit">Atualizar</button>:<button type="submit">Adicionar</button>}
         </div>

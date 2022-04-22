@@ -26,7 +26,7 @@ export const CloseModal = styled.button`
   outline: none;
   width: 32px;
   height: 32px;
-  right: calc(-100% + 30px);
+  right:calc(-100% + 30px);
   top: 8px;
   display: flex;
   position: relative;
