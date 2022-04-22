@@ -128,7 +128,7 @@ const SingupSchema = Yup.object().shape({
           dataFimExperiencia:candidatoForUpdate.dataFimExperiencia
         }
         :{
-          nome:'Teste porque funcionou',
+          nome:'',
           cpf:'',
           dataNascimento:'',
           logradouro:'',
