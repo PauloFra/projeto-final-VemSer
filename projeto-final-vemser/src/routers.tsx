@@ -6,12 +6,14 @@ import FormCurriculo from "./pages/curriculos/FormCurriculo";
 import Login from "./pages/login/Login";
 import Vagas from "./pages/vagas/Vagas";
 import Header from "./components/header/Header";
+import GetReducedProvider from "./context/GetReducedContext";
 import Footer from "./components/footer/Footer";
 import CandidatoDetalhamento from "./pages/candidatoDetalhamento/CandidatoDetalhamento";
 function Routers() {
   return (
     <BrowserRouter>
       <AuthProvider>
+      <GetReducedProvider>
         <Header />
         <Routes>
           <Route path="*" element={<NotFound />} />
@@ -28,6 +30,7 @@ function Routers() {
           </Route>
         </Routes>
         <Footer />
+        </GetReducedProvider>
       </AuthProvider>
     </BrowserRouter>
   );
