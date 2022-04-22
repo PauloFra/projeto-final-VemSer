@@ -53,8 +53,8 @@ const ListCandidates = () => {
           </C.Li>
         ))}
       </C.Ul>
-      <button onClick={() => nextPage("+")}> + </button>
       <button onClick={() => nextPage("-")}> - </button>
+      <button onClick={() => nextPage("+")}> + </button>
     </C.Nav>
   );
 };

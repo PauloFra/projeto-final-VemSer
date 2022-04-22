@@ -9,12 +9,12 @@ export interface Values {
   numero:number,
   instituicao:string,
   senioridade:string,
-  descricao:string,
+  descricaoDoCurso:string,
   dataInicioCurso:string,
   dataFimCurso:string,                    
   nomeEmpresa:string,
   cargo:string,
-  // descricaoCargo:string,
+  descricaoDoCargo:string,
   dataInicioExperiencia:string,
   trabalhandoAtualmente:false
   dataFimExperiencia:string

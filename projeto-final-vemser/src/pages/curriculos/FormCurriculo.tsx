@@ -70,12 +70,12 @@ const SingupSchema = Yup.object().shape({
           numero:1,
           instituicao:'teste',
           senioridade:'teste',
-          descricao:'teste',
+          descricaoDoCurso:'teste',
           dataInicioCurso:'2000-10-10',
           dataFimCurso:'2000-10-10',                    
           nomeEmpresa:'teste',
           cargo:'teste',
-          // descricaoCargo:'',
+          descricaoDoCargo:'descricaoDoCurso',
           dataInicioExperiencia:'2000-10-10',
           trabalhandoAtualmente:false,
           dataFimExperiencia:'2000-10-10'
@@ -92,12 +92,12 @@ const SingupSchema = Yup.object().shape({
           numero:1,
           instituicao:'',
           senioridade:'',
-          descricao:'',
+          descricaoDoCurso:'',
           dataInicioCurso:'',
           dataFimCurso:'',                    
           nomeEmpresa:'',
           cargo:'',
-          // descricaoCargo:'',
+          descricaoDoCargo:'',
           dataInicioExperiencia:'',
           trabalhandoAtualmente:false,
           dataFimExperiencia:''
@@ -192,11 +192,11 @@ const SingupSchema = Yup.object().shape({
             name="senioridade"
             placeholder="senioridade"
           />
-          <label htmlFor="descricao">descricao</label>
+          <label htmlFor="descricaoDoCurso">descricaoDoCurso</label>
           <Field
-            id="descricao"
-            name="descricao"
-            placeholder="descricao"
+            id="descricaoDoCurso"
+            name="descricaoDoCurso"
+            placeholder="descricaoDoCurso"
           />
 
           <label htmlFor="dataInicioCurso">dataInicioCurso</label>
@@ -227,12 +227,12 @@ const SingupSchema = Yup.object().shape({
             name="cargo"
             placeholder="cargo"
           />
-           {/* <label htmlFor="descricaoCargo">descricaoCargo</label>
+           <label htmlFor="descricaoDoCargo">descricaoDoCargo</label>
           <Field
-            id="descricaoCargo"
-            name="descricaoCargo"
-            placeholder="descricaoCargo"
-          /> */}
+            id="descricaoDoCargo"
+            name="descricaoDoCargo"
+            placeholder="descricaoDoCargo"
+          />
            <label htmlFor="dataInicioExperiencia">dataInicioExperiencia</label>
           <Field
             id="dataInicioExperiencia"
