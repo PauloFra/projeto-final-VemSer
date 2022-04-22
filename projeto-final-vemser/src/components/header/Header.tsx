@@ -10,9 +10,9 @@ function Header() {
   const { isLogged, handleLogout } = useContext<any>(AuthContext);
 
   return (
-    <ContainerHeader>
-      {isLogged && (
-        <>
+    <>
+    {isLogged && (
+        <ContainerHeader>
            <Logo />
           <nav>
             <Ulflex>
@@ -27,10 +27,10 @@ function Header() {
               </li>
             </Ulflex>
           </nav>
-          
-        </>
+          </ContainerHeader>
+      
       )}
-    </ContainerHeader>
+   </>
   );
 }
 

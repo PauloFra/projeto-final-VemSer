@@ -5,15 +5,28 @@ import { useContext } from "react";
 import Loading from "../loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
 import listCandidatos from "../../candidatoReduced.json";
+import api from "../../api";
 const ListCandidates = () => {
   const { candidatoReduced } = listCandidatos;
   const { GetInReduced, listCandidates } = useContext<any>(GetReducedContext);
   const [page, setPage] = useState<number>(0);
+
+ 
+  
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token')
+    if(token){
+      api.defaults.headers.common['Authorization'] = token
+    }
+    GetInReduced(page);
+   },[])
+ 
   useEffect(() => {
     GetInReduced(page);
   }, [page]);
 
-  if (!listCandidates) {
+  if (!listCandidates ) {
     return <Loading />;
   }
 
