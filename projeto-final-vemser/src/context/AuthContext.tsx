@@ -1,61 +1,72 @@
 import React, { createContext, useEffect, useState } from "react";
 import { loginDTO } from "../model/LoginDTO";
-import api from '../../src/api'
+import api from "../../src/api";
 import Loading from "../components/loading/Loading";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
   children: React.ReactNode;
 };
-export const AuthContext = createContext({});
-
+type ContextProps = {
+  handleLogin: Function;
+  setIsLogged: Function;
+  handleLogout: Function;
+  isLogged: boolean;
+};
+const initialState = {
+  handleLogin: () => {},
+  setIsLogged: () => {},
+  handleLogout: () => {},
+  isLogged: false,
+};
+export const AuthContext = createContext<ContextProps>(initialState);
 export const AuthProvider = ({ children }: Props) => {
-  
-  const navigate = useNavigate()
-  const [loading , setLoading] = useState(true)
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  
-  useEffect(()=>{
-    const token = localStorage.getItem('token')
-    if(token){
-      api.defaults.headers.common['Authorization'] = token;
-      setIsLogged(true)
-    }else{
-      navigate('/login')
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      api.defaults.headers.common["Authorization"] = token;
+      setIsLogged(true);
+    } else {
+      navigate("/login");
     }
 
-    setLoading(false)
-  },[])
+    setLoading(false);
+  }, []);
 
-  async function handleLogin(values:loginDTO) {
-    try{
-      const {data} = await api.post('/auth' , values)
-      localStorage.setItem('token' , data)
-      navigate('/')
-      setIsLogged(true)
-      console.log(data);    
-    }
-    catch(error){
+  async function handleLogin(values: loginDTO) {
+    try {
+      const { data } = await api.post("/auth", values);
+      localStorage.setItem("token", data);
+      navigate("/");
+      setIsLogged(true);
+      console.log(data);
+    } catch (error) {
       console.log(error);
     }
   }
 
-  function handleLogout(){
-    localStorage.removeItem('token');
-    navigate('/login');
-    setIsLogged(false)
+  function handleLogout() {
+    localStorage.removeItem("token");
+    navigate("/login");
+    setIsLogged(false);
   }
 
-  if(loading){
-    return(<Loading />)
+  if (loading) {
+    return <Loading />;
   }
   return (
-    <AuthContext.Provider value={{
-      setIsLogged,
-      handleLogin,
-      handleLogout,
-      isLogged
-      }}>
+    <AuthContext.Provider
+      value={{
+        setIsLogged,
+        handleLogin,
+        handleLogout,
+        isLogged,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
