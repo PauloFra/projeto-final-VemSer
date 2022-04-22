@@ -1,22 +1,37 @@
 .divMaior{
     font-size: 17px;
     margin: 0 auto;
-    width: 1000px;
-}
-.divMaior h1 , h2{
+    width: 1600px;
+   
+}   
+.divMaior h1{
     color: rgb(51, 51, 51);
     margin: 30px 0;
 }
-
+.divAllContentMain{
+    border-radius: 10px;
+    padding: 30px;
+    -webkit-box-shadow: 5px 6px 18px 3px rgba(0,0,0,0.39); 
+    box-shadow: 5px 6px 18px 3px rgba(0,0,0,0.39);
+    margin: 30px 0;
+}
+.divGridContent{
+    display:grid;
+    gap: 15px;
+    grid-template-columns: auto auto;
+}
 .divContent{
+    gap:60px; 
     display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .divContent input {
+    width: 300px;
     margin-top: 5px;
     margin-bottom: 15px;
     border-radius: 9px;
-    padding: 5px 10px;
+    padding: 8px 10px;
     font-size: 17px;
     border: 1px solid rgb(159, 162, 180); 
 }
@@ -31,6 +46,8 @@
     padding: 12px 0;
     font-size: 20px;
     transition: 1s;
+    grid-column-start: 1;
+    grid-column-end: 3;
     color: white;
     box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
     cursor: pointer;
@@ -38,7 +55,4 @@
 .divContent button:hover {
     transition: 1s;
     background-color: #2c7bbf;
-}
-.checkboxInput {
-  padding: 30px;
 }

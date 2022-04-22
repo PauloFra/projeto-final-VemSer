@@ -7,18 +7,21 @@ import { useNavigate } from "react-router-dom";
 type Props = {
   children: React.ReactNode;
 };
+
 type ContextProps = {
   handleLogin: Function;
   setIsLogged: Function;
   handleLogout: Function;
   isLogged: boolean;
 };
+
 const initialState = {
   handleLogin: () => {},
   setIsLogged: () => {},
   handleLogout: () => {},
   isLogged: false,
 };
+
 export const AuthContext = createContext<ContextProps>(initialState);
 export const AuthProvider = ({ children }: Props) => {
   const navigate = useNavigate();
