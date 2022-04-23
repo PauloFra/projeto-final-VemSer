@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AuthProvider from "./context/AuthContext";
 import NotFound from "./components/notFound/NotFound";
 import Curriculos from "./pages/curriculos/Curriculos";
-import FormCurriculo from "./pages/curriculos/FormCurriculo";
+import FormCurriculo from "./pages/formCandidato/FormCurriculo";
 import Login from "./pages/login/Login";
 import Vagas from "./pages/vagas/Vagas";
 import Header from "./components/header/Header";

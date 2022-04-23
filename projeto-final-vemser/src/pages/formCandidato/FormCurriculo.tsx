@@ -5,7 +5,7 @@ import { Values } from "../../model/CandidatoDTO";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import api from "../../api";
-import * as C from "./curriculo.styles";
+import * as C from './curriculo.styles'
 import Notiflix from "notiflix";
 import { prepareDataToInsert } from "../../utils";
 

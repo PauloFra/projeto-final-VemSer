@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import * as C from "./ListCandidates.styles";
 import { useContext } from "react";
 
+
+
 import {IoMdArrowRoundForward ,IoMdArrowRoundBack } from 'react-icons/io'
 
 import Loading from "../loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
-import listCandidatos from "../../candidatoReduced.json";
+
 import api from "../../api";
 const ListCandidates = () => {
   const { GetInReduced, listCandidates } = useContext<any>(GetReducedContext);

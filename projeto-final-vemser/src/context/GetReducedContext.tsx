@@ -4,7 +4,17 @@ type Props = {
     children: React.ReactNode;
   };
 
-export const GetReducedContext = createContext({})
+  type ContextProps = {
+    GetInReduced: Function;
+    listCandidates: object | undefined;
+  };
+  
+  const initialState = {
+    GetInReduced: () => {},
+    listCandidates:[],
+  };
+
+export const GetReducedContext = createContext<ContextProps>(initialState)
 
 const GetReducedProvider= ({ children }: Props) => {
   
