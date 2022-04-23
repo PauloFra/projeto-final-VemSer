@@ -17,7 +17,6 @@ export const ContainerModal = styled.div`
   background-color: #fff;
   color: #000;
   width: 60%;
-  
   border-radius: 8px;
 `;
 
@@ -49,4 +48,8 @@ export const CloseModal = styled.button`
   }
 `;
 
-export const ContentModal = styled.div``;
+export const ContentModal = styled.div`
+
+  
+
+`
