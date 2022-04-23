@@ -8,17 +8,17 @@ import { AuthContext } from "../../context/AuthContext";
 import * as C from "./Login.styles";
 import { loginDTO } from "../../model/LoginDTO";
 const Login = () => {
-  const { setIsLogged , handleLogin } = useContext<any>(AuthContext);
+  const { setIsLogged, handleLogin } = useContext<any>(AuthContext);
 
   const [pass, setPass] = useState(true);
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       navigate("/");
     }
-  }, [])
+  }, []);
   const formikProps = useFormik({
     initialValues: {
       usuario: "string@string.com",
@@ -33,8 +33,6 @@ const Login = () => {
       { setSubmitting }: FormikHelpers<loginDTO>
     ) => {
       handleLogin(formikProps.values);
-      /* handleLogin(formikProps.values); */
-      
     },
   });
 
@@ -58,7 +56,7 @@ const Login = () => {
               <C.Error>{formikProps.errors.usuario}</C.Error>
             ) : null}
           </C.DivForm>
-          <C.DivForm> 
+          <C.DivForm>
             <label htmlFor="senha">Senha</label>
             <C.Input
               type={pass ? "password" : "text"}
