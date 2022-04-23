@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as C from "./ListCandidates.styles";
 import { useContext } from "react";
+
+import {IoMdArrowRoundForward ,IoMdArrowRoundBack } from 'react-icons/io'
+
 import Loading from "../loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
 import listCandidatos from "../../candidatoReduced.json";
 import api from "../../api";
 const ListCandidates = () => {
-  const { candidatoReduced } = listCandidatos;
   const { GetInReduced, listCandidates } = useContext<any>(GetReducedContext);
   const [page, setPage] = useState<number>(0);
-
- 
-  
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
@@ -66,8 +65,13 @@ const ListCandidates = () => {
           </C.Li>
         ))}
       </C.Ul>
-      <button onClick={() => nextPage("-")}> - </button>
-      <button onClick={() => nextPage("+")}> + </button>
+      <C.DivButtonsPage>
+        
+         <C.ButtonPage onClick={() => nextPage("-")}> <IoMdArrowRoundBack/> </C.ButtonPage>
+       
+         <C.ButtonPage onClick={() => nextPage("+")}><IoMdArrowRoundForward/> </C.ButtonPage>
+     
+      </C.DivButtonsPage>
     </C.Nav>
   );
 };

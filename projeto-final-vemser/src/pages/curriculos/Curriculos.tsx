@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ListCandidates from "../../components/listaCandidatos/ListCandidates";
+
 function Curriculos() {
   return (
     <div>
@@ -8,6 +9,7 @@ function Curriculos() {
         <Link to="/form-curriculo">Criar Candidato</Link>
       </h3>
       <ListCandidates />
+      
     </div>
   );
 }

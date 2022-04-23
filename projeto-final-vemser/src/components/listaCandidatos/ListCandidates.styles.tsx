@@ -25,3 +25,16 @@ export const InfoCandidato = styled.p`
 export const RetornoApi = styled.span`
   font-weight: normal;
 `;
+export const DivButtonsPage = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ButtonPage = styled.button`
+padding: 2px 6px;
+
+background-color: #CCC;
+font-size:20px;
+
+`;

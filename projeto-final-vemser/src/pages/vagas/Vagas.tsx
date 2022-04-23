@@ -1,13 +1,33 @@
-import React, { useState } from "react";
-import VagasJson from "../../Vagas.json";
-import "../../components/globalStyles/global.modules.css";
-import ListCandidates from "../../components/listaCandidatos/ListCandidates";
-import ModalList from "../../components/modal/ModalList";
-function Vagas() {
-  const { vagas } = VagasJson;
-  const [visibleModal, setVisibleModal] = useState(false);
-  console.log(visibleModal);
+import { useEffect, useState } from "react";
 
+import "../../components/globalStyles/global.modules.css";
+import ModalList from "../../components/modal/ModalList";
+import moment from "moment";
+import api from "../../api";
+import Loading from "../../components/loading/Loading";
+import { VagasDTO } from "../../model/VagasDTO";
+function Vagas() {
+  
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [vagas, setVagas] = useState<any>();
+  console.log(visibleModal);
+  
+  async function getInVagas() {
+    try{
+      const {data} = await api.get('/vaga/get-vagas-compleo')
+      setVagas(data)
+    }
+    catch(error){
+      console.log(error);
+      
+    }
+  }
+  useEffect(()=>{
+    getInVagas()
+  },[])
+  if(!vagas){
+    return(<Loading />)
+  }
   return (
     <div className="divContainerTable">
       {visibleModal && <ModalList onClose={() => setVisibleModal(false)} />}
@@ -27,14 +47,14 @@ function Vagas() {
           </tr>
         </thead>
         <tbody>
-          {vagas.map((vaga) => (
+          {vagas.map((vaga:any) => (
             <tr key={vaga.id_vaga}>
               <td>{vaga.titulo}</td>
               <td>{vaga.cliente}</td>
               <td>{vaga.status}</td>
               <td>{vaga.responsavel}</td>
               <td>{vaga.estado}</td>
-              <td>{vaga.data_abertura}</td>
+              <td>{moment(vaga.dataAbertura , 'YYYY-MM-DD').format('DD/MM/YYYY')}</td>
               <td>{vaga.cidade}</td>
               <td>{vaga.analista}</td>
               <td>{vaga.pcd ? "Sim" : "Não"}</td>

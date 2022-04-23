@@ -1,10 +1,10 @@
-import React from 'react'
-import load from '../../images/826.gif'
+import { DivForLoading } from './loading.style'
+import load from '../../images/712.gif'
 function Loading() {
   return (
-    <div>
+    <DivForLoading>
         <img src={load} alt="" />
-    </div>
+    </DivForLoading>
   )
 }
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Ulflex, ContainerHeader } from "./Header.styles";
+import { Ulflex, ContainerHeader ,ButtonLogout } from "./Header.styles";
 import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
 function Header() {
@@ -20,7 +20,7 @@ function Header() {
                 <Link to="/curriculos">Candidatos</Link>
               </li>
               <li>
-                <button onClick={() => handleLogout()}>Logout</button>
+                <ButtonLogout onClick={() => handleLogout()}>Logout</ButtonLogout>
               </li>
             </Ulflex>
           </nav>
