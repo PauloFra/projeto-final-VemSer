@@ -1,16 +1,14 @@
 import InputMask from "react-input-mask";
 import { Formik, Field, Form, FormikHelpers } from "formik";
-import Option from "../../components/select/Option";
-import escolaridadeOpt from "../../escolaridadeOpt.json";
-import Experiencias from "../../components/experienciasForm/Experiencias";
 import { useEffect, useState } from "react";
 import { Values } from "../../model/CandidatoDTO";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import api from "../../api";
 import * as C from "./curriculo.styles";
+import Notiflix from "notiflix";
+import { prepareDataToInsert } from "../../utils";
 
-import styles from "./form.module.css";
 
 import Loading from "../../components/loading/Loading";
 
@@ -26,20 +24,22 @@ function FormCurriculo() {
     }
   }, []);
 
-  async function postCandidato(values: Values) {
-    try {
-      const { data } = await api.post("candidato/candidato-completo", values);
+  async function postCandidato(values: Values) { 
+    const newValues = prepareDataToInsert(values)
+   try {
+      const { data } = await api.post("/candidato-completo", newValues);
       console.log(data);
-    } catch (error) {
-      console.log(error);
+      Notiflix.Notify.success('Candidato Cadastrado com sucesso');
+    } 
+    catch (error) {
+      console.log(error);      
     }
   }
 
   async function getInCandidatoById(idCandidato: string) {
+
     try {
-      const { data } = await api.get(
-        `/candidato/candidato-completo-formato-de-entrada?id-candidato=${idCandidato}`
-      );
+      const { data } = await api.get(`/candidato/candidato-completo-formato-de-entrada?id-candidato=${idCandidato}`);
       setCandidatoForUpdate(data);
     } catch (error) {
       console.log(error);
@@ -157,7 +157,13 @@ function FormCurriculo() {
               </C.DivFlexColumn>
               <C.DivFlexColumn>
                 <C.Label htmlFor="cpf">Cpf</C.Label>
-                <Field id="cpf" name="cpf" placeholder="Doe" as={InputMask} />
+                <Field
+                id="cpf" 
+                name="cpf" 
+                placeholder="CPF"
+                as={InputMask}
+                mask="999.999.999-99"
+                />
                 {errors.cpf && touched.cpf ? (
                   <C.DivError>{errors.cpf}</C.DivError>
                 ) : null}
@@ -176,7 +182,7 @@ function FormCurriculo() {
                   name="dataNascimento"
                   placeholder="dataNascimento"
                   as={InputMask}
-                  // mask="99/99/9999"
+                  mask="99/99/9999"
                 />
                 {errors.dataNascimento && touched.dataNascimento ? (
                   <C.DivError>{errors.dataNascimento}</C.DivError>
@@ -255,7 +261,7 @@ function FormCurriculo() {
                   id="dataInicioCurso"
                   name="dataInicioCurso"
                   as={InputMask}
-                  // mask="99/99/9999"
+                  mask="99/99/9999"
                 />
                 {errors.dataInicioCurso && touched.dataInicioCurso ? (
                   <C.DivError>{errors.dataInicioCurso}</C.DivError>
@@ -267,7 +273,7 @@ function FormCurriculo() {
                   id="dataFimCurso"
                   name="dataFimCurso"
                   as={InputMask}
-                  // mask="99/99/9999"
+                  mask="99/99/9999"
                 />
                 {errors.dataFimCurso && touched.dataFimCurso ? (
                   <C.DivError>{errors.dataFimCurso}</C.DivError>
@@ -325,7 +331,7 @@ function FormCurriculo() {
                   name="dataInicioExperiencia"
                   placeholder="Exemplo: 01/01/2000"
                   as={InputMask}
-                  // mask="99/99/9999"
+                  mask="99/99/9999"
                 />
                 {errors.dataInicioExperiencia &&
                 touched.dataInicioExperiencia ? (
@@ -339,7 +345,7 @@ function FormCurriculo() {
                   disabled={trabalhandoAtualmente}
                   id="dataFimExperiencia"
                   name="dataFimExperiencia"
-                  placeholder="Exemplo: 01/01/2000"
+                  mask="99/99/9999"
                   as={InputMask}
                 />
               </C.DivFlexColumn>

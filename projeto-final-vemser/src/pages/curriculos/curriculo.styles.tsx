@@ -10,7 +10,7 @@ export const ContainerGeral = styled.div`
   align-items: center;
   height: calc(100vh - 50px);
   form {
-    column-gap: 30px;
+    gap:15px 150px;
     padding: 0px 30px;
     display: grid;
     grid-template-columns: auto auto;
@@ -36,7 +36,7 @@ export const DivFlexColumn = styled.div`
     padding-left: 5px;
     font-size: 15px;
     border: 1px solid rgb(159, 162, 180);
-    outline: none;
+    
     color: rgb(159, 162, 180);
     ::placeholder {
       color: rgb(159, 162, 180);

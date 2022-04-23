@@ -1,35 +1,37 @@
 import { Values } from "./model/CandidatoDTO"
+import moment from "moment"
 export function defaultFunc(){
 
 }
-export function prepareDataToInsert(values:any){
+export function prepareDataToInsert(values:any) {
+
     const valuesToPost = {
-        nome:values.nome,
-        dadosPessoais:{
-        cpf:values.cpf,
-        dataNascimento:values.dataNascimento
-        },
-        endereço:{
-            rua:values.rua,
-            cidade:values.cidade,
-            bairro:values.bairro,
-            numero:values.numero
-        },
-        dadosEscolares :{
-        escolaridade:values.escolaridade,
-        dataInicioEscolaridade:values.dataInicioEscolaridade,
-        dataFinal:values.dataFinal
-        },
-        Experiências:[
-                    {
-                    nomeEmpresa:values.nomeEmpresa,
-                    cargo:values.cargo,
-                    descricao:values.descricao,
-                    dataInicioExperiencia:values.dataInicioExperiencia,
-                    trabalhandoAtualmente:values.trabalhandoAtualmente,
-                    dataFinalExperiencia:values.dataFinalExperiencia
-                    }
-                ]
-            }
+        bairro: values.bairro,
+        cargo: values.cargo,
+        cidade: values.cidade,
+        cpf: values.cpf,
+        dadosEscolares: [
+          {
+            dataFim:moment( values.dataFimCurso  , 'DD/MM/YYYY').format('YYYY-MM-DD'),
+            dataInicio: moment( values.dataInicioCurso  , 'DD/MM/YYYY').format('YYYY-MM-DD') ,
+            descricao: values.descricaoDoCurso,
+            instituicao: values.instituicao
+          }
+        ],
+        dataNascimento: moment( values.dataNascimento  , 'DD/MM/YYYY').format('YYYY-MM-DD'),
+        experiencias: [
+          {
+            dataFim:  moment( values.dataFimExperiencia  , 'DD/MM/YYYY').format('YYYY-MM-DD'),
+            dataInicio:moment( values.dataInicioExperiencia  , 'DD/MM/YYYY').format('YYYY-MM-DD'),
+            descricao: values.descricaoDoCargo,
+            nomeEmpresa: values.nomeEmpresa
+          }
+        ],
+        logradouro: values.logradouro,
+        nome: values.nome,
+        numero: values.numero,
+        senioridade: values.senioridade,
+        telefone: values.telefone
+    }
     return valuesToPost
 }
