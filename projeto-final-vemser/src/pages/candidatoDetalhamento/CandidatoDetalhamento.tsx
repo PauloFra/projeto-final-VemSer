@@ -2,64 +2,60 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import api from "../../api";
-import { Link } from 'react-router-dom'
+import { PrepareDataFromGet } from "../../utils";
+import { Link } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 type Props = {
   candidato: any;
   fecharMenu: Function;
 };
 type PropsMap = {
-  bairro?: string | undefined;
-  cargo?: string | undefined;
-  cidade?: string | undefined;
-  cpf?: string | undefined;
-  dataNascimento?: string | undefined;
-  idCandidato?: number | undefined;
-  logradouro?: string | undefined;
-  nome?: string | undefined;
-  numero?: number | undefined;
-  senioridade?: string | undefined;
-  telefone?: string | undefined;
+  dataFim: string;
+  dataInicio: string;
+  descricao: string;
+  idExperiencia: number;
+  nomeEmpresa: string;
 };
 
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
-  const { candidatosCompletos } = candidato;
+  const [mapCandidato, setMapCandidato] = useState();
+  console.log(candidato.cidade);
+  console.log(candidato.experiencias);
+
   return (
-    
     <div>
       <ul>
-        {candidatosCompletos.map(
-          ({
-            idCandidato,
-            nome,
-            dataNascimento,
-            cpf,
-            cidade,
-            bairro,
-            logradouro,
-            numero,
-            telefone,
-            senioridade,
-          }: any) => (
-            <li key={idCandidato}>
-              <div>
-                <h3>Dados Pessoais</h3>
-                <Link to={`/form-curriculo/${idCandidato}`}><strong>Atualizar Candidato</strong></Link>
-                <p>Nome: {nome}</p>
-                <p>Data de Nascimento: {dataNascimento}</p>
-                <p>CPF: {cpf}</p>
-                <p>Telefone: {telefone}</p>
-                <h3>Endereço</h3>
-                <p>Cidade: {cidade}</p>
-                <p>Bairro: {bairro}</p>
-                <p>Rua: {logradouro}</p>
-                <p>Número: {numero}</p>
-                <h3>Experiência Profissional</h3>
-                <p>Senioridade: {senioridade}</p>
-                <button onClick={() => fecharMenu(false)}>fechar</button>
+        <li key={candidato.idCandidato}>
+          <div>
+            <h3>Dados Pessoais</h3>
+            <Link to={`/form-curriculo/${candidato.idCandidato}`}>
+              <strong>Atualizar Candidato</strong>
+            </Link>
+            <p>Nome: {candidato.nome}</p>
+            <p>Data de Nascimento: {candidato.dataNascimento}</p>
+            <p>CPF: {candidato.cpf}</p>
+            <p>Telefone: {candidato.telefone}</p>
+            <h3>Endereço</h3>
+            <p>Cidade: {candidato.cidade}</p>
+            <p>Bairro: {candidato.bairro}</p>
+            <p>Rua: {candidato.logradouro}</p>
+            <p>Número: {candidato.numero}</p>
+            <h3>Experiência Profissional</h3>
+
+            {/*  {candidato.experiencias.map((experiencia: PropsMap) => (
+              <div key={experiencia.idExperiencia}>
+                <p>{experiencia.nomeEmpresa}</p>
+                <p>{experiencia.dataInicio}</p>
+                <p>{experiencia.dataFim}</p>
+                <p>{experiencia.descricao}</p>
+                <p>{experiencia.descricao}</p>
               </div>
-            </li>
-          )
-        )}
+            ))} */}
+
+            <p>Senioridade: {candidato.senioridade}</p>
+            <button onClick={() => fecharMenu(false)}>fechar</button>
+          </div>
+        </li>
       </ul>
     </div>
   );

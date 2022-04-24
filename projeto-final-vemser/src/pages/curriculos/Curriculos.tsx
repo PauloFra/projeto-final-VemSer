@@ -12,6 +12,7 @@ function Curriculos() {
   const [page, setPage] = useState<number>(0);
   const [candidatoDetalhado, setCandidatoDetalhado] = useState([]);
   const [modalVisualizar, setModalVisualizar] = useState(false);
+  const [mapCandidato, setMapCandidato] = useState();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -24,7 +25,9 @@ function Curriculos() {
       const { data } = await api.get(
         `candidato-completo/get-paginado?id-candidato=${id}&pagina=0&quantidade-por-pagina=10`
       );
-      setCandidatoDetalhado(data);
+      const { candidatosCompletos } = data;
+
+      candidatosCompletos.map((props: any) => setCandidatoDetalhado(props));
     } catch (error) {
       console.log(error);
     }
@@ -52,63 +55,61 @@ function Curriculos() {
   };
   return (
     <C.ContainerGeral>
-      
-        <C.DivMenu>
-          <h1>Listagem de curriculos </h1>
-          <h3>
-            <Link to="/form-curriculo">Criar Candidato</Link>
-          </h3>
-        </C.DivMenu>
-        <C.ContainerContent>
+      <C.DivMenu>
+        <h1>Listagem de curriculos </h1>
+        <h3>
+          <Link to="/form-curriculo">Criar Candidato</Link>
+        </h3>
+      </C.DivMenu>
+      <C.ContainerContent>
         <C.ContainerGeralTabela>
-        <C.TableCandidates>
-          <C.TableHead>
-            <C.TableTr>
-              <C.TableTh>Nome</C.TableTh>
-              <C.TableTh>Cargo</C.TableTh>
-              <C.TableTh>Data de nascimento</C.TableTh>
-              <C.TableTh>Senioridade</C.TableTh>
-              <C.TableTh>Ações</C.TableTh>
-            </C.TableTr>
-          </C.TableHead>
-          <C.TableBody>
-            {candidatos.map((candidato: any) => (
-              <C.TableTr key={candidato.idCandidato}>
-                <C.TableTd>{candidato.nome}</C.TableTd>
-                <C.TableTd>{candidato.cargo}</C.TableTd>
-                <C.TableTd>{candidato.dataNascimento}</C.TableTd>
-                <C.TableTd>{candidato.senioridade}</C.TableTd>
-                <C.TableTd>
-                  <Link
-                    to="#"
-                    onClick={() => menuDetalhado(candidato.idCandidato, true)}
-                  >
-                    visualizar
-                  </Link>
-                </C.TableTd>
+          <C.TableCandidates>
+            <C.TableHead>
+              <C.TableTr>
+                <C.TableTh>Nome</C.TableTh>
+                <C.TableTh>Cargo</C.TableTh>
+                <C.TableTh>Data de nascimento</C.TableTh>
+                <C.TableTh>Senioridade</C.TableTh>
+                <C.TableTh>Ações</C.TableTh>
               </C.TableTr>
-            ))}
-          </C.TableBody>
-        </C.TableCandidates>
-        <C.DivMenu>
-          <button onClick={() => nextPage("-")}>
-            <IoMdArrowRoundBack />
-          </button>
+            </C.TableHead>
+            <C.TableBody>
+              {candidatos.map((candidato: any) => (
+                <C.TableTr key={candidato.idCandidato}>
+                  <C.TableTd>{candidato.nome}</C.TableTd>
+                  <C.TableTd>{candidato.cargo}</C.TableTd>
+                  <C.TableTd>{candidato.dataNascimento}</C.TableTd>
+                  <C.TableTd>{candidato.senioridade}</C.TableTd>
+                  <C.TableTd>
+                    <Link
+                      to="#"
+                      onClick={() => menuDetalhado(candidato.idCandidato, true)}
+                    >
+                      visualizar
+                    </Link>
+                  </C.TableTd>
+                </C.TableTr>
+              ))}
+            </C.TableBody>
+          </C.TableCandidates>
+          <C.DivMenu>
+            <button onClick={() => nextPage("-")}>
+              <IoMdArrowRoundBack />
+            </button>
 
-          <button onClick={() => nextPage("+")}>
-            <IoMdArrowRoundForward />
-          </button>
-        </C.DivMenu>
-      </C.ContainerGeralTabela>
-      {modalVisualizar && (
-        <CandidatoDetalhamento
-          candidato={candidatoDetalhado}
-          fecharMenu={setModalVisualizar}
-        />
-      )}
+            <button onClick={() => nextPage("+")}>
+              <IoMdArrowRoundForward />
+            </button>
+          </C.DivMenu>
+        </C.ContainerGeralTabela>
+        {modalVisualizar && (
+          <CandidatoDetalhamento
+            candidato={candidatoDetalhado}
+            fecharMenu={setModalVisualizar}
+          />
+        )}
       </C.ContainerContent>
     </C.ContainerGeral>
-    
   );
 }
 /* onClick={() => getCompletoCandidato(candidato.idCandidato)} */
