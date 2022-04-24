@@ -2,7 +2,7 @@ import InputMask from "react-input-mask";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import { useEffect, useState } from "react";
 import { Values } from "../../model/CandidatoDTO";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
@@ -11,9 +11,14 @@ import Loading from "../../components/loading/Loading";
 import { PrepareDataFromGet } from "../../utils";
 function FormCurriculo() {
   const { idCandidato } = useParams();
+  const navigate = useNavigate()
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(token){
+      api.defaults.headers.common['Authorization'] = token
+    }
     if (idCandidato) {
       getInCandidatoById(idCandidato);
     }
@@ -24,7 +29,12 @@ function FormCurriculo() {
     try {
       const { data } = await api.post("/candidato-completo", newValues);
       console.log(data);
+
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
+      setTimeout(() => {
+       document.location.reload();
+      }, 1000);
+
     } catch (error) {
       console.log(error);
     }
@@ -54,6 +64,8 @@ function FormCurriculo() {
     try{
       const {data} = await api.put(`/candidato-completo?id-candidato=${idCandidato}` , newValues)
       console.log(data);
+      Notiflix.Notify.success("Candidato atualizado com sucesso");
+      navigate('/curriculos')
     }
     catch(error){
       console.log(error);
