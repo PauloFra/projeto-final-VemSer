@@ -18,3 +18,4 @@ export const TableBody = styled.tbody``;
 export const ContainerGeral = styled.div`
   background-color: #f1f1f1;
 `;
+ 
