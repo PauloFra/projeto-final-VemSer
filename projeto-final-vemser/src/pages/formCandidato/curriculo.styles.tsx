@@ -10,7 +10,7 @@ export const ContainerGeral = styled.div`
   align-items: center;
   height: calc(100vh - 50px);
   form {
-    gap:15px 150px;
+    gap: 15px 150px;
     padding: 0px 30px;
     display: grid;
     grid-template-columns: auto auto;
@@ -36,7 +36,7 @@ export const DivFlexColumn = styled.div`
     padding-left: 5px;
     font-size: 15px;
     border: 1px solid rgb(159, 162, 180);
-    
+
     color: rgb(159, 162, 180);
     ::placeholder {
       color: rgb(159, 162, 180);
@@ -60,7 +60,6 @@ export const TitleInfoTopic = styled.h2`
   color: rgb(51, 51, 51);
   grid-column-start: 1;
   grid-column-end: 3;
-  width: 250px;
   align-self: end;
 `;
 

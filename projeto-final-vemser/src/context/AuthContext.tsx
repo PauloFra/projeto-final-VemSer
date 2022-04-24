@@ -3,7 +3,6 @@ import { loginDTO } from "../model/LoginDTO";
 import api from "../../src/api";
 import Loading from "../components/loading/Loading";
 import { useNavigate } from "react-router-dom";
-
 type Props = {
   children: React.ReactNode;
 };
@@ -13,6 +12,7 @@ type ContextProps = {
   setIsLogged: Function;
   handleLogout: Function;
   isLogged: boolean;
+  candidatoCompleto: any;
 };
 
 const initialState = {
@@ -20,6 +20,8 @@ const initialState = {
   setIsLogged: () => {},
   handleLogout: () => {},
   isLogged: false,
+  getCompletoCandidato: () => {},
+  candidatoCompleto: [],
 };
 
 export const AuthContext = createContext<ContextProps>(initialState);
@@ -27,6 +29,7 @@ export const AuthProvider = ({ children }: Props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [candidatoCompleto, setCandidatoCompleto] = useState<any>([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -36,7 +39,6 @@ export const AuthProvider = ({ children }: Props) => {
     } else {
       navigate("/login");
     }
-
     setLoading(false);
   }, []);
 
@@ -68,6 +70,7 @@ export const AuthProvider = ({ children }: Props) => {
         handleLogin,
         handleLogout,
         isLogged,
+        candidatoCompleto,
       }}
     >
       {children}

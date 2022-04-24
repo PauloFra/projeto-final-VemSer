@@ -5,41 +5,36 @@ import { Values } from "../../model/CandidatoDTO";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import api from "../../api";
-import * as C from './curriculo.styles'
+import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
 import { prepareDataToInsert } from "../../utils";
-
-
 import Loading from "../../components/loading/Loading";
-
 function FormCurriculo() {
   const { idCandidato } = useParams();
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
-
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
-
   useEffect(() => {
     if (idCandidato) {
       getInCandidatoById(idCandidato);
     }
   }, []);
 
-  async function postCandidato(values: Values) { 
-    const newValues = prepareDataToInsert(values)
-   try {
+  async function postCandidato(values: Values) {
+    const newValues = prepareDataToInsert(values);
+    try {
       const { data } = await api.post("/candidato-completo", newValues);
       console.log(data);
-      Notiflix.Notify.success('Candidato Cadastrado com sucesso');
-    } 
-    catch (error) {
-      console.log(error);      
+      Notiflix.Notify.success("Candidato Cadastrado com sucesso");
+    } catch (error) {
+      console.log(error);
     }
   }
 
   async function getInCandidatoById(idCandidato: string) {
-
     try {
-      const { data } = await api.get(`/candidato/candidato-completo-formato-de-entrada?id-candidato=${idCandidato}`);
+      const { data } = await api.get(
+        `/candidato/candidato-completo-formato-de-entrada?id-candidato=${idCandidato}`
+      );
       setCandidatoForUpdate(data);
     } catch (error) {
       console.log(error);
@@ -101,13 +96,13 @@ function FormCurriculo() {
                 telefone: candidatoForUpdate.telefone,
                 numero: candidatoForUpdate.numero,
                 instituicao: candidatoForUpdate.instituicao,
-                senioridade: candidatoForUpdate.senioridade,
                 descricaoDoCurso: candidatoForUpdate.descricaoDoCurso,
                 dataInicioCurso: candidatoForUpdate.dataInicioCurso,
                 dataFimCurso: candidatoForUpdate.dataFimCurso,
                 nomeEmpresa: candidatoForUpdate.nomeEmpresa,
                 cargo: candidatoForUpdate.cargo,
                 descricaoDoCargo: candidatoForUpdate.descricaoDoCargo,
+                senioridade: candidatoForUpdate.senioridade,
                 dataInicioExperiencia: candidatoForUpdate.dataInicioExperiencia,
                 trabalhandoAtualmente: candidatoForUpdate.trabalhandoAtualmente,
                 dataFimExperiencia: candidatoForUpdate.dataFimExperiencia,
@@ -158,11 +153,11 @@ function FormCurriculo() {
               <C.DivFlexColumn>
                 <C.Label htmlFor="cpf">Cpf</C.Label>
                 <Field
-                id="cpf" 
-                name="cpf" 
-                placeholder="CPF"
-                as={InputMask}
-                mask="999.999.999-99"
+                  id="cpf"
+                  name="cpf"
+                  placeholder="CPF"
+                  as={InputMask}
+                  mask="999.999.999-99"
                 />
                 {errors.cpf && touched.cpf ? (
                   <C.DivError>{errors.cpf}</C.DivError>
@@ -176,7 +171,7 @@ function FormCurriculo() {
                 ) : null}
               </C.DivFlexColumn>
               <C.DivFlexColumn>
-                <C.Label htmlFor="dataNascimento">dataNascimento</C.Label>
+                <C.Label htmlFor="dataNascimento">Data de Nascimento</C.Label>
                 <Field
                   id="dataNascimento"
                   name="dataNascimento"
@@ -245,18 +240,18 @@ function FormCurriculo() {
               </C.DivFlexColumn>
 
               <C.DivFlexColumn>
-                <C.Label htmlFor="descricaoDoCurso">descricaoDoCurso</C.Label>
+                <C.Label htmlFor="descricaoDoCurso">Nome do curso</C.Label>
                 <Field
                   id="descricaoDoCurso"
                   name="descricaoDoCurso"
-                  placeholder="descricaoDoCurso"
+                  placeholder="Exemplo: Informática"
                 />
                 {errors.descricaoDoCurso && touched.descricaoDoCurso ? (
                   <C.DivError>{errors.descricaoDoCurso}</C.DivError>
                 ) : null}
               </C.DivFlexColumn>
               <C.DivFlexColumn>
-                <C.Label htmlFor="dataInicioCurso">dataInicioCurso</C.Label>
+                <C.Label htmlFor="dataInicioCurso">Data de início</C.Label>
                 <Field
                   id="dataInicioCurso"
                   name="dataInicioCurso"
@@ -268,7 +263,7 @@ function FormCurriculo() {
                 ) : null}
               </C.DivFlexColumn>
               <C.DivFlexColumn>
-                <C.Label htmlFor="dataFimCurso">dataFimCurso</C.Label>
+                <C.Label htmlFor="dataFimCurso">Data de conclusão</C.Label>
                 <Field
                   id="dataFimCurso"
                   name="dataFimCurso"
@@ -281,7 +276,9 @@ function FormCurriculo() {
               </C.DivFlexColumn>
             </C.ContainerInputs>
             <C.ContainerInputs>
-              <C.TitleInfoTopic>Experiencias</C.TitleInfoTopic>
+              <C.TitleInfoTopic>
+                Última Experiência Profissional
+              </C.TitleInfoTopic>
               <C.DivFlexColumn>
                 <C.Label htmlFor="nomeEmpresa">Nome da empresa</C.Label>
                 <Field

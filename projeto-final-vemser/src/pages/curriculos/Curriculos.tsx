@@ -1,29 +1,111 @@
 import { Link } from "react-router-dom";
-
-import * as C from './curriculos.styles'
+import * as C from "./curriculos.styles";
 import api from "../../api";
-import ListCandidatesTable from "../../components/ListCandidatesTable/ListCandidatesTable";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import CandidatoDetalhamento from "../candidatoDetalhamento/CandidatoDetalhamento";
+import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+import Loading from "../../components/loading/Loading";
+import { GetReducedContext } from "../../context/GetReducedContext";
 function Curriculos() {
-
-  useEffect(()=>{
-    const token = localStorage.getItem('token')
-    if(token){
-      api.defaults.headers.common['Authorization'] = token
+  const { GetInReduced, listCandidates } = useContext(GetReducedContext);
+  const [page, setPage] = useState<number>(0);
+  const [candidatoDetalhado, setCandidatoDetalhado] = useState([]);
+  const [modalVisualizar, setModalVisualizar] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      api.defaults.headers.common["Authorization"] = token;
     }
-  },[])
+  }, []);
+
+  async function getCompletoCandidato(id: number) {
+    try {
+      const { data } = await api.get(`candidato?idCandidato=${id}`);
+      setCandidatoDetalhado(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    GetInReduced(page);
+  }, [page]);
+
+  if (!listCandidates) {
+    return <Loading />;
+  }
+  const { candidatos, totalDePaginas }: any = listCandidates;
+  const nextPage = (actionPage: string) => {
+    if (actionPage === "+" && page < totalDePaginas - 1) {
+      setPage(page + 1);
+    }
+    if (actionPage === "-" && page > 0) {
+      setPage(page - 1);
+    }
+  };
+  const menuDetalhado = (candidato: number, menu: boolean) => {
+    getCompletoCandidato(candidato);
+    setModalVisualizar(menu);
+  };
   return (
     <C.ContainerGeral>
-      <C.DivMenu>
-      <h1>Listagem de curriculos </h1>
-      <h3>
-        <Link to="/form-curriculo">Criar Candidato</Link>
-      </h3>
-      </C.DivMenu>
-      <ListCandidatesTable />
-      </C.ContainerGeral>
+      <C.ContainerGeralTabela>
+        <C.DivMenu>
+          <h1>Listagem de curriculos </h1>
+          <h3>
+            <Link to="/form-curriculo">Criar Candidato</Link>
+          </h3>
+        </C.DivMenu>
+        <C.TableCandidates>
+          <C.TableHead>
+            <C.TableTr>
+              <C.TableTh>ID</C.TableTh>
+              <C.TableTh>Nome</C.TableTh>
+              <C.TableTh>Cargo</C.TableTh>
+              <C.TableTh>Data de nascimento</C.TableTh>
+              <C.TableTh>Senioridade</C.TableTh>
+              <C.TableTh>Ações</C.TableTh>
+            </C.TableTr>
+          </C.TableHead>
+          <C.TableBody>
+            {candidatos.map((candidato: any) => (
+              <C.TableTr key={candidato.idCandidato}>
+                <C.TableTd>{candidato.idCandidato}</C.TableTd>
+                <C.TableTd>{candidato.nome}</C.TableTd>
+                <C.TableTd>{candidato.cargo}</C.TableTd>
+                <C.TableTd>{candidato.dataNascimento}</C.TableTd>
+                <C.TableTd>{candidato.senioridade}</C.TableTd>
+                <C.TableTd>
+                  <Link
+                    to="#"
+                    onClick={() => menuDetalhado(candidato.idCandidato, true)}
+                  >
+                    visualizar
+                  </Link>
+                </C.TableTd>
+              </C.TableTr>
+            ))}
+          </C.TableBody>
+        </C.TableCandidates>
+        <div>
+          <button onClick={() => nextPage("-")}>
+            <IoMdArrowRoundBack />
+          </button>
 
+          <button onClick={() => nextPage("+")}>
+            <IoMdArrowRoundForward />
+          </button>
+        </div>
+      </C.ContainerGeralTabela>
+      {modalVisualizar && (
+        <CandidatoDetalhamento
+          candidato={candidatoDetalhado}
+          fecharMenu={setModalVisualizar}
+        />
+      )}
+    </C.ContainerGeral>
   );
 }
-
+/* onClick={() => getCompletoCandidato(candidato.idCandidato)} */
 export default Curriculos;
