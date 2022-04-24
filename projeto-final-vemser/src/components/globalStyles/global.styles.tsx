@@ -12,6 +12,7 @@ export const ThDefaultDescrition = styled.tr`
 `
 
 export const TableCandidates = styled.table`
+    width: 100%;
     text-align: left;
     border-collapse:collapse;
 `  
@@ -19,10 +20,12 @@ export const TableTr = styled.tr`
     
 ` 
 export const TableTh = styled.th`
-    
+    color: rgb(159,162,180);
+    font-weight: bold;
+    text-transform: capitalize;
 ` 
 export const TableTd = styled.td`
-    
+    padding: 10px 0;    
 ` 
 export const TableHead = styled.thead`
     
@@ -37,4 +40,15 @@ export const ContainerGeral = styled.div`
     width: 1200px;
     justify-content: center;
     margin: 0 auto;
+`  
+export const DivMenu = styled.div`
+    display: flex;
+    margin-bottom:30px;
+    justify-content: space-between;
+`
+ export const ContainerGeralTabela = styled.div`
+    width: 100%;
+`  
+export const ContainerContent = styled.div`
+display: flex;
 `  

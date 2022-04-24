@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import api from "../../api";
+import { Link } from 'react-router-dom'
 type Props = {
   candidato: string[] | number[];
   fecharMenu: Function;
@@ -24,6 +25,7 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
   console.log(candidato);
 
   return (
+    
     <div>
       <ul>
         {candidato.map(
@@ -42,6 +44,7 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
             <li key={idCandidato}>
               <div>
                 <h3>Dados Pessoais</h3>
+                <Link to={`/form-curriculo/${idCandidato}`}><strong>Atualizar Candidato</strong></Link>
                 <p>Nome: {nome}</p>
                 <p>Data de Nascimento: {dataNascimento}</p>
                 <p>CPF: {cpf}</p>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import * as C from "./curriculos.styles";
+import * as C from "../../components/globalStyles/global.styles";
 import api from "../../api";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
@@ -50,17 +50,18 @@ function Curriculos() {
   };
   return (
     <C.ContainerGeral>
-      <C.ContainerGeralTabela>
+      
         <C.DivMenu>
           <h1>Listagem de curriculos </h1>
           <h3>
             <Link to="/form-curriculo">Criar Candidato</Link>
           </h3>
         </C.DivMenu>
+        <C.ContainerContent>
+        <C.ContainerGeralTabela>
         <C.TableCandidates>
           <C.TableHead>
             <C.TableTr>
-              <C.TableTh>ID</C.TableTh>
               <C.TableTh>Nome</C.TableTh>
               <C.TableTh>Cargo</C.TableTh>
               <C.TableTh>Data de nascimento</C.TableTh>
@@ -71,7 +72,6 @@ function Curriculos() {
           <C.TableBody>
             {candidatos.map((candidato: any) => (
               <C.TableTr key={candidato.idCandidato}>
-                <C.TableTd>{candidato.idCandidato}</C.TableTd>
                 <C.TableTd>{candidato.nome}</C.TableTd>
                 <C.TableTd>{candidato.cargo}</C.TableTd>
                 <C.TableTd>{candidato.dataNascimento}</C.TableTd>
@@ -88,7 +88,7 @@ function Curriculos() {
             ))}
           </C.TableBody>
         </C.TableCandidates>
-        <div>
+        <C.DivMenu>
           <button onClick={() => nextPage("-")}>
             <IoMdArrowRoundBack />
           </button>
@@ -96,7 +96,7 @@ function Curriculos() {
           <button onClick={() => nextPage("+")}>
             <IoMdArrowRoundForward />
           </button>
-        </div>
+        </C.DivMenu>
       </C.ContainerGeralTabela>
       {modalVisualizar && (
         <CandidatoDetalhamento
@@ -104,7 +104,9 @@ function Curriculos() {
           fecharMenu={setModalVisualizar}
         />
       )}
+      </C.ContainerContent>
     </C.ContainerGeral>
+    
   );
 }
 /* onClick={() => getCompletoCandidato(candidato.idCandidato)} */

@@ -3,12 +3,12 @@ import { Formik, Field, Form, FormikHelpers } from "formik";
 import { useEffect, useState } from "react";
 import { Values } from "../../model/CandidatoDTO";
 import { useParams } from "react-router-dom";
-import * as Yup from "yup";
 import api from "../../api";
 import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
-import { prepareDataToInsert } from "../../utils";
+import { prepareDataToInsert , SingupSchema } from "../../utils";
 import Loading from "../../components/loading/Loading";
+import { PrepareDataFromGet } from "../../utils";
 function FormCurriculo() {
   const { idCandidato } = useParams();
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
@@ -32,10 +32,12 @@ function FormCurriculo() {
 
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get(
-        `/candidato/candidato-completo-formato-de-entrada?id-candidato=${idCandidato}`
-      );
-      setCandidatoForUpdate(data);
+      const { data } = await api.get(`/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
+      const {candidatosCompletos} = data
+      candidatosCompletos.map((props:any)=>(
+        setCandidatoForUpdate(props)
+      ))
+
     } catch (error) {
       console.log(error);
     }
@@ -48,65 +50,35 @@ function FormCurriculo() {
   }
 
   async function updateCandidato(values: Values) {
-    console.log(values);
+    const newValues = prepareDataToInsert(values);
+    try{
+      const {data} = await api.put(`/candidato-completo?id-candidato=${idCandidato}` , newValues)
+      console.log(data);
+    }
+    catch(error){
+      console.log(error);
+    }
+    
   }
 
-  const SingupSchema = Yup.object().shape({
-    nome: Yup.string().required("Preencha o campo corretamente!"),
-    cpf: Yup.string().required("Preencha o campo corretamente!"),
-    dataNascimento: Yup.string().required("Preencha o campo corretamente!"),
-    logradouro: Yup.string().required("Preencha o campo corretamente!"),
-    cidade: Yup.string().required("Preencha o campo corretamente!"),
-    bairro: Yup.string().required("Preencha o campo corretamente!"),
-    telefone: Yup.string().required("Preencha o campo corretamente!"),
-    numero: Yup.string().required("Preencha o campo corretamente!"),
-    senioridade: Yup.string().required("Preencha o campo corretamente!"),
-    instituicao: Yup.string().required("Preencha o campo corretamente!"),
-    descricaoDoCurso: Yup.string().required("Preencha o campo corretamente!"),
-    dataInicioCurso: Yup.string().required("Preencha o campo corretamente!"),
-    dataFimCurso: Yup.string().required("Preencha o campo corretamente!"),
-    nomeEmpresa: Yup.string().required("Preencha o campo corretamente!"),
-    cargo: Yup.string().required("Preencha o campo corretamente!"),
-    descricaoDoCargo: Yup.string().required("Preencha o campo corretamente!"),
-    dataInicioExperiencia: Yup.string().required(
-      "Preencha o campo corretamente!"
-    ),
-  });
+ 
 
   //Quando Adicionar o put adicionar ! no candidatoForUpdate
   if (idCandidato && !candidatoForUpdate) {
     return <Loading />;
-  }
-
-  return (
+  }  
+    return (
     <C.ContainerGeral>
       <C.TitleForm>
         {idCandidato ? "Atualizar" : "Adicionar"} Candidato
       </C.TitleForm>
       <Formik
         initialValues={
+          
           idCandidato
             ? {
-                nome: candidatoForUpdate.nome,
-                cpf: candidatoForUpdate.cpf,
-                dataNascimento: candidatoForUpdate.dataNascimento,
-                logradouro: candidatoForUpdate.logradouro,
-                cidade: candidatoForUpdate.cidade,
-                bairro: candidatoForUpdate.bairro,
-                telefone: candidatoForUpdate.telefone,
-                numero: candidatoForUpdate.numero,
-                instituicao: candidatoForUpdate.instituicao,
-                descricaoDoCurso: candidatoForUpdate.descricaoDoCurso,
-                dataInicioCurso: candidatoForUpdate.dataInicioCurso,
-                dataFimCurso: candidatoForUpdate.dataFimCurso,
-                nomeEmpresa: candidatoForUpdate.nomeEmpresa,
-                cargo: candidatoForUpdate.cargo,
-                descricaoDoCargo: candidatoForUpdate.descricaoDoCargo,
-                senioridade: candidatoForUpdate.senioridade,
-                dataInicioExperiencia: candidatoForUpdate.dataInicioExperiencia,
-                trabalhandoAtualmente: candidatoForUpdate.trabalhandoAtualmente,
-                dataFimExperiencia: candidatoForUpdate.dataFimExperiencia,
-              }
+              ...PrepareDataFromGet(candidatoForUpdate)
+            }
             : {
                 nome: "",
                 cpf: "",
@@ -115,7 +87,7 @@ function FormCurriculo() {
                 cidade: "",
                 bairro: "",
                 telefone: "",
-                numero: 1,
+                numero: 0,
                 instituicao: "",
                 senioridade: "",
                 descricaoDoCurso: "",
