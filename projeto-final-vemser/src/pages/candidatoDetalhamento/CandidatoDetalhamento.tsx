@@ -3,10 +3,10 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import api from "../../api";
 type Props = {
-  candidato: string[] | number[];
+  candidato: any;
   fecharMenu: Function;
 };
-/* type PropsMap = {
+type PropsMap = {
   bairro?: string | undefined;
   cargo?: string | undefined;
   cidade?: string | undefined;
@@ -19,14 +19,13 @@ type Props = {
   senioridade?: string | undefined;
   telefone?: string | undefined;
 };
- */
-const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
-  console.log(candidato);
 
+const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
+  const { candidatosCompletos } = candidato;
   return (
     <div>
       <ul>
-        {candidato.map(
+        {candidatosCompletos.map(
           ({
             idCandidato,
             nome,

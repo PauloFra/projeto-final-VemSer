@@ -21,7 +21,9 @@ function Curriculos() {
 
   async function getCompletoCandidato(id: number) {
     try {
-      const { data } = await api.get(`candidato?idCandidato=${id}`);
+      const { data } = await api.get(
+        `candidato-completo/get-paginado?id-candidato=${id}&pagina=0&quantidade-por-pagina=10`
+      );
       setCandidatoDetalhado(data);
     } catch (error) {
       console.log(error);
