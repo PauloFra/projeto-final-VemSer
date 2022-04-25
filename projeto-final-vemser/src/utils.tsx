@@ -32,6 +32,7 @@ export function prepareDataToInsert(values: any) {
         descricao: values.descricaoDoCargo,
         nomeEmpresa: values.nomeEmpresa,
       },
+
     ],
     logradouro: values.logradouro,
     nome: values.nome,
@@ -44,6 +45,7 @@ export function prepareDataToInsert(values: any) {
 
 export function PrepareDataFromGet (candidatoForUpdate:any) {
   const NewDates = {
+    fileInput:null,
     nome: candidatoForUpdate.nome,
     cpf: candidatoForUpdate.cpf,
     dataNascimento:moment(candidatoForUpdate.dataNascimento ,"YYYY-MM-DD").format('DD/MM/YYYY') ,
@@ -54,7 +56,7 @@ export function PrepareDataFromGet (candidatoForUpdate:any) {
     numero: candidatoForUpdate.numero,
     cargo: candidatoForUpdate.cargo,
     senioridade: candidatoForUpdate.senioridade,
-
+   
     instituicao:candidatoForUpdate.dadosEscolares[0].instituicao,
     descricaoDoCurso: candidatoForUpdate.dadosEscolares[0].descricao,
     dataInicioCurso:  moment(candidatoForUpdate.dadosEscolares[0].dataInicio ,"YYYY-MM-DD").format('DD/MM/YYYY'),

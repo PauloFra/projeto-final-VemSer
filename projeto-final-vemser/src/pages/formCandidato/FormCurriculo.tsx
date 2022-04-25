@@ -1,6 +1,9 @@
 import InputMask from "react-input-mask";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import { useEffect, useState } from "react";
+
+// import Experiencias from "../../components/experienciasForm/Experiencias";
+
 import { Values } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
@@ -25,19 +28,20 @@ function FormCurriculo() {
   }, []);
 
   async function postCandidato(values: Values) {
-    const newValues = prepareDataToInsert(values);
-    try {
-      const { data } = await api.post("/candidato-completo", newValues);
-      console.log(data);
+    console.log('FORMIK =>', values);   
+    // const newValues = prepareDataToInsert(values);
+    // try {
+    //   const { data } = await api.post("/candidato-completo", newValues);
+    //   console.log(data);
 
-      Notiflix.Notify.success("Candidato Cadastrado com sucesso");
-      setTimeout(() => {
-       document.location.reload();
-      }, 1000);
+    //   Notiflix.Notify.success("Candidato Cadastrado com sucesso");
+    //   // setTimeout(() => {
+    //   //  document.location.reload();
+    //   // }, 1000);
 
-    } catch (error) {
-      console.log(error);
-    }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   }
 
   async function getInCandidatoById(idCandidato: string) {
@@ -111,6 +115,7 @@ function FormCurriculo() {
                 dataInicioExperiencia: "",
                 trabalhandoAtualmente: false,
                 dataFimExperiencia: "",
+                fileInput:undefined
               }
         }
         validationSchema={SingupSchema}
@@ -345,7 +350,19 @@ function FormCurriculo() {
                   <C.DivError>{errors.trabalhandoAtualmente}</C.DivError>
                 ) : null}
               </C.DivRowFlex>
+              <C.DivFlexColumn>
+                <C.Label htmlFor="fileInput">fileInput</C.Label>
+                <Field
+                  disabled={trabalhandoAtualmente}
+                  id="fileInput"
+                  name="fileInput"
+                  accept="application/pdf" 
+                  type="file"
+                />
+      
+              </C.DivFlexColumn>
             </C.ContainerInputs>
+
             {idCandidato ? (
               <C.Botao type="submit">Atualizar</C.Botao>
             ) : (

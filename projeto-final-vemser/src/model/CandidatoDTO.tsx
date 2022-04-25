@@ -10,7 +10,7 @@ export interface Values {
   instituicao: string;
   descricaoDoCurso: string;
   dataInicioCurso: string;
-  dataFimCurso: string;
+  dataFimCurso: string; 
   nomeEmpresa: string;
   cargo: string;
   senioridade: string;
