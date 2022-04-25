@@ -19,6 +19,8 @@ type PropsMap = {
 
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
   const [mapCandidato, setMapCandidato] = useState();
+  console.log('candidato =>' , candidato);
+  
   console.log(candidato.cidade);
   console.log(candidato.experiencias);
 
