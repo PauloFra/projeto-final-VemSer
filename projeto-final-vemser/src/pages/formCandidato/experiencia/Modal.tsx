@@ -1,5 +1,6 @@
 import { useState } from "react";
 import * as C from "./Modal.styles";
+
 export default ({ status, setStatus, children }: any) => {
   const handleModalClick = () => {
     setStatus(false);

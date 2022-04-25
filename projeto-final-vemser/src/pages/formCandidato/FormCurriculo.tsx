@@ -1,5 +1,12 @@
 import InputMask from "react-input-mask";
-import { Formik, Field, Form, FormikHelpers ,FieldArray , ErrorMessage} from "formik";
+import {
+  Formik,
+  Field,
+  Form,
+  FormikHelpers,
+  FieldArray,
+  ErrorMessage,
+} from "formik";
 import { useEffect, useState } from "react";
 
 // import Experiencias from "../../components/experienciasForm/Experiencias";
@@ -9,17 +16,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
-import {  SingupSchema , prepareDataToInsert } from "../../utils";
+import { SingupSchema, prepareDataToInsert } from "../../utils";
 import Loading from "../../components/loading/Loading";
 import { PrepareDataFromGet } from "../../utils";
 import ExperienciaCandidato from "./experiencia/ExperienciaCandidato";
 import Modal from "./experiencia/Modal";
 function FormCurriculo() {
-
   const { idCandidato } = useParams();
-  
-  
-  
+
   const navigate = useNavigate();
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
@@ -36,9 +40,9 @@ function FormCurriculo() {
   }, []);
 
   async function postCandidato(values: CandidatoDTO) {
-    prepareDataToInsert(values)
+    prepareDataToInsert(values);
     try {
-      const { data } = await api.post("/candidato-completo", values );
+      const { data } = await api.post("/candidato-completo", values);
       console.log(data);
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       setTimeout(() => {
@@ -50,16 +54,16 @@ function FormCurriculo() {
   }
 
   async function getInCandidatoById(idCandidato: string) {
-
     try {
       const { data } = await api.get(
         `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
       );
-      
+
       const { candidatosCompletos } = data;
-      candidatosCompletos.map((props: CandidatoDTO) => setCandidatoForUpdate(props));
+      candidatosCompletos.map((props: CandidatoDTO) =>
+        setCandidatoForUpdate(props)
+      );
       console.log(candidatoForUpdate);
-      
     } catch (error) {
       console.log(error);
     }
@@ -72,9 +76,9 @@ function FormCurriculo() {
   }
 
   async function updateCandidato(values: CandidatoDTO) {
-    console.log('FORMIK =>', values);
-    prepareDataToInsert(values)
-    
+    console.log("FORMIK =>", values);
+    prepareDataToInsert(values);
+
     try {
       const { data } = await api.put(
         `/candidato-completo?id-candidato=${idCandidato}`,
@@ -92,49 +96,41 @@ function FormCurriculo() {
   if (idCandidato && !candidatoForUpdate) {
     return <Loading />;
   }
-  
-  console.log('idCandidato =>' , idCandidato);
 
+  console.log("idCandidato =>", idCandidato);
 
-  console.log('candidatoForUpdate =>' , candidatoForUpdate);
-  
-  
-  const initialValues =
-    {
+  console.log("candidatoForUpdate =>", candidatoForUpdate);
+
+  const initialValues = {
     nome: "TESTE AQUI PARA ADICIONAR",
     cpf: "",
     dataNascimento: "",
     telefone: "",
     logradouro: "",
     numero: 0,
-    
     cargo: "",
     senioridade: "string",
     experiencias: [],
     dadosEscolares: [],
     cidade: "",
     bairro: "",
-    }
-   
-  
+  };
 
   return (
     <C.ContainerGeral>
-
       <C.TitleForm>
         {idCandidato ? "Atualizar" : "Adicionar"} Candidato
       </C.TitleForm>
-    <Formik
-    
-      validationSchema={SingupSchema}
-      initialValues={ idCandidato ?  candidatoForUpdate : initialValues }
-      onSubmit={async (values:CandidatoDTO) => {
+      <Formik
+        validationSchema={SingupSchema}
+        initialValues={idCandidato ? candidatoForUpdate : initialValues}
+        onSubmit={async (values: CandidatoDTO) => {
           idCandidato ? updateCandidato(values) : postCandidato(values);
         }}
-    >
-      {({ values, errors, touched  }:any) => (
-        <Form>
-          <C.ContainerInputs>
+      >
+        {({ values, errors, touched }: any) => (
+          <Form>
+            <C.ContainerInputs>
               <C.TitleInfoTopic>Dados Pessoais</C.TitleInfoTopic>
               <C.DivFlexColumn>
                 <C.Label htmlFor="nome">nome</C.Label>
@@ -216,7 +212,6 @@ function FormCurriculo() {
                 {errors.cidade && touched.cidade ? (
                   <C.DivError>{errors.cidade}</C.DivError>
                 ) : null}
-
               </C.DivFlexColumn>
               <C.DivFlexColumn>
                 <C.Label htmlFor="bairro">bairro</C.Label>
@@ -225,7 +220,6 @@ function FormCurriculo() {
                 {errors.bairro && touched.bairro ? (
                   <C.DivError>{errors.bairro}</C.DivError>
                 ) : null}
-
               </C.DivFlexColumn>
               <C.DivFlexColumn>
                 <C.Label htmlFor="numero">numero</C.Label>
@@ -240,108 +234,233 @@ function FormCurriculo() {
                 ) : null}
               </C.DivFlexColumn>
             </C.ContainerInputs>
-    
 
-          <FieldArray name="experiencias">
-            {({ insert, remove, push }) => (
-              <div>
-                {values.experiencias.length > 0 &&
-                  values.experiencias.map((experiencias:any, index:any) => (
-                    <div className="row" key={index}>
-                      <h1>{`${index+1}º experiencia`}</h1>
-                      <C.DivFlexColumn className="col">
-                        <label htmlFor={`experiencias.${index}.nomeEmpresa`}>nomeEmpresa</label>
-                        <Field
-                          name={`experiencias.${index}.nomeEmpresa`}
-                          placeholder="nomeEmpresa"
-                          type="text"
-                        />
-                        {/* <ErrorMessage
+            <FieldArray name="dadosEscolares">
+              {({ insert, remove, push }) => (
+                <div>
+                  {values.dadosEscolares.length > 0 &&
+                    values.dadosEscolares.map(
+                      (dadosEscolares: any, index: any) => (
+                        <div className="row" key={index}>
+                          <h1>{`${index + 1}º dadosEscolares`}</h1>
+                          <C.DivFlexColumn className="col">
+                            <label
+                              htmlFor={`dadosEscolares.${index}.descricao`}
+                            >
+                              descricao do curso
+                            </label>
+                            <Field
+                              name={`dadosEscolares.${index}.descricao`}
+                              placeholder="descricao"
+                              type="text"
+                            />
+                            {/* <ErrorMessage
                           name={`experiencias.${index}.name`}
                           component="div"
                           className="field-error"
                         /> */}
-                      </C.DivFlexColumn>
-                      <C.DivFlexColumn className="col">
-                        <label htmlFor={`experiencias.${index}.descricao`}>descricao</label>
-                        <Field
-                          name={`experiencias.${index}.descricao`}
-                          placeholder="descricao"
-                          type="text"
-                        />
+                          </C.DivFlexColumn>
+                          <C.DivFlexColumn className="col">
+                            <label
+                              htmlFor={`dadosEscolares.${index}.instituicao`}
+                            >
+                              instituicao
+                            </label>
+                            <Field
+                              name={`dadosEscolares.${index}.instituicao`}
+                              placeholder="instituicao"
+                              type="text"
+                            />
 
-                        {/* <ErrorMessage
+                            {/* <ErrorMessage
                           name={`experiencias.${index}.name`}
                           component="div"
                           className="field-error"
                         /> */}
-                      </C.DivFlexColumn>
-                      <C.DivFlexColumn className="col">
-                        <label htmlFor={`experiencias.${index}.dataInicio`}>dataInicio</label>
-                        <Field
-                          name={`experiencias.${index}.dataInicio`}
-                          placeholder="dataInicio"
-                          type="text"
-                          as={InputMask}
-                          mask="99/99/9999"
-                        />
+                          </C.DivFlexColumn>
+                          <C.DivFlexColumn className="col">
+                            <label
+                              htmlFor={`dadosEscolares.${index}.dataInicio`}
+                            >
+                              dataInicio
+                            </label>
+                            <Field
+                              name={`dadosEscolares.${index}.dataInicio`}
+                              placeholder="dataInicio"
+                              type="text"
+                              as={InputMask}
+                              mask="99/99/9999"
+                            />
 
-                        {/* <ErrorMessage
+                            {/* <ErrorMessage
                           name={`experiencias.${index}.name`}
                           component="div"
                           className="field-error"
                         /> */}
-                      </C.DivFlexColumn>
-                      <C.DivFlexColumn className="col">
-                        <label htmlFor={`experiencias.${index}.dataFim`}>dataFim</label>
-                        <Field
-                          name={`experiencias.${index}.dataFim`}
-                          placeholder="dataFim"
-                          type="text"
-                          as={InputMask}
-                          mask="99/99/9999"
-                        />
+                          </C.DivFlexColumn>
+                          <C.DivFlexColumn className="col">
+                            <label htmlFor={`dadosEscolares.${index}.dataFim`}>
+                              dataFim
+                            </label>
+                            <Field
+                              name={`dadosEscolares.${index}.dataFim`}
+                              placeholder="dataFim"
+                              type="text"
+                              as={InputMask}
+                              mask="99/99/9999"
+                            />
 
-                        {/* <ErrorMessage
+                            {/* <ErrorMessage
                           name={`experiencias.${index}.name`}
                           component="div"
                           className="field-error"
                         /> */}
-                      </C.DivFlexColumn>
+                          </C.DivFlexColumn>
 
-                      <C.DivFlexColumn className="col">
+                          <C.DivFlexColumn className="col">
+                            <button
+                              type="button"
+                              className="secondary"
+                              onClick={() => remove(index)}
+                            >
+                              X dados escolares
+                            </button>
+                          </C.DivFlexColumn>
+                        </div>
+                      )
+                    )}
 
-                        <button
-                          type="button"
-                          className="secondary"
-                          onClick={() => remove(index)}
-                        >
-                          X
-                        </button>
-                      </C.DivFlexColumn>
-                    </div>
-                  ))}
-                <button
-                  type="button"
-                  className="secondary"
-                  onClick={() => push({  
-                    dataFim: "",
-                    dataInicio: "",
-                    descricao: "",
-                    nomeEmpresa: ""
-                  })}
-                >
-                  Add Friend
-                </button>
-              </div>
-            )}
-          </FieldArray>
-          
-          <C.Botao type="submit">Invite</C.Botao>
-        </Form>
-      )}
-    </Formik>
-    
+                  <C.DivFlexColumn>
+                    <button
+                      type="button"
+                      className="secondary"
+                      onClick={() =>
+                        push({
+                          dataFim: "",
+                          dataInicio: "",
+                          descricao: "",
+                          instituicao: "",
+                        })
+                      }
+                    >
+                      Add Dados Escolares
+                    </button>
+                  </C.DivFlexColumn>
+                </div>
+              )}
+            </FieldArray>
+
+            <FieldArray name="experiencias">
+              {({ insert, remove, push }) => (
+                <div>
+                  {values.experiencias.length > 0 &&
+                    values.experiencias.map((experiencias: any, index: any) => (
+                      <div className="row" key={index}>
+                        <h1>{`${index + 1}º experiencia`}</h1>
+                        <C.DivFlexColumn className="col">
+                          <label htmlFor={`experiencias.${index}.nomeEmpresa`}>
+                            nomeEmpresa
+                          </label>
+                          <Field
+                            name={`experiencias.${index}.nomeEmpresa`}
+                            placeholder="nomeEmpresa"
+                            type="text"
+                          />
+                          {/* <ErrorMessage
+                          name={`experiencias.${index}.name`}
+                          component="div"
+                          className="field-error"
+                        /> */}
+                        </C.DivFlexColumn>
+                        <C.DivFlexColumn className="col">
+                          <label htmlFor={`experiencias.${index}.descricao`}>
+                            descricao
+                          </label>
+                          <Field
+                            name={`experiencias.${index}.descricao`}
+                            placeholder="descricao"
+                            type="text"
+                          />
+
+                          {/* <ErrorMessage
+                          name={`experiencias.${index}.name`}
+                          component="div"
+                          className="field-error"
+                        /> */}
+                        </C.DivFlexColumn>
+                        <C.DivFlexColumn className="col">
+                          <label htmlFor={`experiencias.${index}.dataInicio`}>
+                            dataInicio
+                          </label>
+                          <Field
+                            name={`experiencias.${index}.dataInicio`}
+                            placeholder="dataInicio"
+                            type="text"
+                            as={InputMask}
+                            mask="99/99/9999"
+                          />
+
+                          {/* <ErrorMessage
+                          name={`experiencias.${index}.name`}
+                          component="div"
+                          className="field-error"
+                        /> */}
+                        </C.DivFlexColumn>
+                        <C.DivFlexColumn className="col">
+                          <label htmlFor={`experiencias.${index}.dataFim`}>
+                            dataFim
+                          </label>
+                          <Field
+                            name={`experiencias.${index}.dataFim`}
+                            placeholder="dataFim"
+                            type="text"
+                            as={InputMask}
+                            mask="99/99/9999"
+                          />
+
+                          {/* <ErrorMessage
+                          name={`experiencias.${index}.name`}
+                          component="div"
+                          className="field-error"
+                        /> */}
+                        </C.DivFlexColumn>
+
+                        <C.DivFlexColumn className="col">
+                          <button
+                            type="button"
+                            className="secondary"
+                            onClick={() => remove(index)}
+                          >
+                            X
+                          </button>
+                        </C.DivFlexColumn>
+                      </div>
+                    ))}
+
+                  <C.DivFlexColumn>
+                    <button
+                      type="button"
+                      className="secondary"
+                      onClick={() =>
+                        push({
+                          dataFim: "",
+                          dataInicio: "",
+                          descricao: "",
+                          nomeEmpresa: "",
+                        })
+                      }
+                    >
+                      Add Experiência
+                    </button>
+                  </C.DivFlexColumn>
+                </div>
+              )}
+            </FieldArray>
+
+            <C.Botao type="submit">Invite</C.Botao>
+          </Form>
+        )}
+      </Formik>
     </C.ContainerGeral>
   );
 }

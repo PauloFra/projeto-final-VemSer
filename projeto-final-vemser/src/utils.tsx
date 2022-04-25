@@ -2,13 +2,14 @@ import { CandidatoDTO } from "./model/CandidatoDTO";
 import * as Yup from "yup";
 import { ExperienciaDTO } from "./model/ExperienciaDTO";
 import moment from "moment";
+import { DadosEscolaresDTO } from "./model/DadosEscolaresDTO";
 export function defaultFunc() {}
 type dataDTO = {
   value: string | undefined;
-}
-export const formatDateToApi = (value:any) =>{
-  return moment(value, 'DD/MM/YYYY').format('YYYY-MM-DD')
-}
+};
+export const formatDateToApi = (value: any) => {
+  return moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
+};
 // export function prepareDataToInsert(values: any) {
 //   const valuesToPost = {
 //     bairro: values.bairro,
@@ -48,13 +49,15 @@ export const formatDateToApi = (value:any) =>{
 //     telefone: values.telefone,
 //   };
 
-
-export function PrepareDataFromGet (candidatoForUpdate:any) {
+export function PrepareDataFromGet(candidatoForUpdate: any) {
   const NewDates = {
-    fileInput:null,
+    fileInput: null,
     nome: candidatoForUpdate.nome,
     cpf: candidatoForUpdate.cpf,
-    dataNascimento:moment(candidatoForUpdate.dataNascimento ,"YYYY-MM-DD").format('DD/MM/YYYY') ,
+    dataNascimento: moment(
+      candidatoForUpdate.dataNascimento,
+      "YYYY-MM-DD"
+    ).format("DD/MM/YYYY"),
     logradouro: candidatoForUpdate.logradouro,
     cidade: candidatoForUpdate.cidade,
     bairro: candidatoForUpdate.bairro,
@@ -62,19 +65,32 @@ export function PrepareDataFromGet (candidatoForUpdate:any) {
     numero: candidatoForUpdate.numero,
     cargo: candidatoForUpdate.cargo,
     senioridade: candidatoForUpdate.senioridade,
-   
-    instituicao:candidatoForUpdate.dadosEscolares[0].instituicao,
+
+    instituicao: candidatoForUpdate.dadosEscolares[0].instituicao,
     descricaoDoCurso: candidatoForUpdate.dadosEscolares[0].descricao,
-    dataInicioCurso:  moment(candidatoForUpdate.dadosEscolares[0].dataInicio ,"YYYY-MM-DD").format('DD/MM/YYYY'),
-    dataFimCurso:moment(candidatoForUpdate.dadosEscolares[0].dataFim ,"YYYY-MM-DD").format('DD/MM/YYYY'),
+    dataInicioCurso: moment(
+      candidatoForUpdate.dadosEscolares[0].dataInicio,
+      "YYYY-MM-DD"
+    ).format("DD/MM/YYYY"),
+    dataFimCurso: moment(
+      candidatoForUpdate.dadosEscolares[0].dataFim,
+      "YYYY-MM-DD"
+    ).format("DD/MM/YYYY"),
 
     nomeEmpresa: candidatoForUpdate.experiencias[0].nomeEmpresa,
-    descricaoDoCargo:candidatoForUpdate.experiencias[0].descricao,
-    dataInicioExperiencia:moment(candidatoForUpdate.experiencias[0].dataInicio,"YYYY-MM-DD").format('DD/MM/YYYY') ,
-    trabalhandoAtualmente: candidatoForUpdate.experiencias[0].trabalhandoAtualmente,
-    dataFimExperiencia: moment(candidatoForUpdate.experiencias[0].dataFim ,"YYYY-MM-DD").format('DD/MM/YYYY'),
-  }
-  return NewDates
+    descricaoDoCargo: candidatoForUpdate.experiencias[0].descricao,
+    dataInicioExperiencia: moment(
+      candidatoForUpdate.experiencias[0].dataInicio,
+      "YYYY-MM-DD"
+    ).format("DD/MM/YYYY"),
+    trabalhandoAtualmente:
+      candidatoForUpdate.experiencias[0].trabalhandoAtualmente,
+    dataFimExperiencia: moment(
+      candidatoForUpdate.experiencias[0].dataFim,
+      "YYYY-MM-DD"
+    ).format("DD/MM/YYYY"),
+  };
+  return NewDates;
 }
 
 export const SingupSchema = Yup.object().shape({
@@ -88,15 +104,21 @@ export const SingupSchema = Yup.object().shape({
   numero: Yup.string().required("Preencha o campo corretamente!"),
   cargo: Yup.string().required("Preencha o campo corretamente!"),
   senioridade: Yup.string().required("Preencha o campo corretamente!"),
- 
 });
 
-export function prepareDataToInsert(values:CandidatoDTO){
+export function prepareDataToInsert(values: CandidatoDTO) {
   values.dataNascimento = formatDateToApi(values.dataNascimento);
-  if(values.experiencias && values.experiencias.length > 0){
-    values.experiencias.map((experiencia:ExperienciaDTO)=>{
-      experiencia.dataInicio = formatDateToApi(experiencia.dataInicio) ;
+  if (values.experiencias && values.experiencias.length > 0) {
+    values.experiencias.map((experiencia: ExperienciaDTO) => {
+      experiencia.dataInicio = formatDateToApi(experiencia.dataInicio);
       experiencia.dataFim = formatDateToApi(experiencia.dataFim);
-      })
+    });
+  }
+
+  if (values.dadosEscolares && values.dadosEscolares.length > 0) {
+    values.dadosEscolares.map((dadoEscolar: DadosEscolaresDTO) => {
+      dadoEscolar.dataInicio = formatDateToApi(dadoEscolar.dataInicio);
+      dadoEscolar.dataFim = formatDateToApi(dadoEscolar.dataFim);
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { ExperienciaDTO } from "./ExperienciaDTO";
-
+import { DadosEscolaresDTO } from "./DadosEscolaresDTO";
 export interface CandidatoDTO {
   cpf: string;
   nome: string;
@@ -12,6 +12,5 @@ export interface CandidatoDTO {
   cargo: string;
   senioridade: string;
   experiencias?: [ExperienciaDTO];
-  dadosEscolares?: any; 
+  dadosEscolares?: [DadosEscolaresDTO];
 }
-
