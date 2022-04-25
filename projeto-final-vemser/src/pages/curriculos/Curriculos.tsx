@@ -7,6 +7,7 @@ import CandidatoDetalhamento from "../candidatoDetalhamento/CandidatoDetalhament
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
+import ExperienciaCandidato from "../formCandidato/experiencia/ExperienciaCandidato";
 function Curriculos() {
   const { GetInReduced, listCandidates } = useContext(GetReducedContext);
   const [page, setPage] = useState<number>(0);

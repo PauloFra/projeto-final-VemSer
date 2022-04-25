@@ -3,7 +3,7 @@ export interface ExperienciaDTO {
   cargo: string;
   descricaoDoCargo: string;
   dataInicioExperiencia: string;
-  trabalhandoAtualmente: false;
+  trabalhandoAtualmente?: string;
   dataFimExperiencia: string;
   senioridade: string;
 }

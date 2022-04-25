@@ -1,45 +1,42 @@
 import { useEffect, useState } from "react";
-
 import "../../components/globalStyles/global.modules.css";
 import ModalList from "../../components/modal/ModalList";
 import moment from "moment";
 import api from "../../api";
 import Loading from "../../components/loading/Loading";
-import * as C from '../../components/globalStyles/global.styles'
+import * as C from "../../components/globalStyles/global.styles";
 import { VagasDTO } from "../../model/VagasDTO";
+import Modal from "../formCandidato/experiencia/Modal";
+import ExperienciaCandidato from "../formCandidato/experiencia/ExperienciaCandidato";
 function Vagas() {
-  
   const [visibleModal, setVisibleModal] = useState(false);
-  const [vagas, setVagas] = useState<VagasDTO['vagas']>();
-  console.log(visibleModal);
-  
+  const [vagas, setVagas] = useState<VagasDTO["vagas"]>();
+
   async function getInVagas() {
-    try{
-      const {data} = await api.get('/vaga/get-vagas-compleo')
-      setVagas(data)
-    }
-    catch(error){
+    try {
+      const { data } = await api.get("/vaga/get-vagas-compleo");
+      setVagas(data);
+    } catch (error) {
       console.log(error);
-      
     }
   }
-  useEffect(()=>{
-    const token = localStorage.getItem('token')
-    if(token){
-      api.defaults.headers.common['Authorization'] = token
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      api.defaults.headers.common["Authorization"] = token;
     }
-    getInVagas()
-  },[])
+    getInVagas();
+  }, []);
 
-  if(!vagas){
-    return(<Loading />)
+  if (!vagas) {
+    return <Loading />;
   }
 
   return (
     <C.ContainerGeral>
       <h1>Listagem de vagas</h1>
       {visibleModal && <ModalList onClose={() => setVisibleModal(false)} />}
-      <C.TableCandidates >
+      <C.TableCandidates>
         <C.TableHead>
           <C.TableTr>
             <C.TableTh>Titulo</C.TableTh>
@@ -51,7 +48,7 @@ function Vagas() {
             <C.TableTh>cidade</C.TableTh>
             <C.TableTh>analista</C.TableTh>
             {/* <C.TableTh>pcd</C.TableTh> */}
-            <C.TableTh >Vincular Candidato</C.TableTh>
+            <C.TableTh>Vincular Candidato</C.TableTh>
           </C.TableTr>
         </C.TableHead>
         <C.TableBody>
@@ -62,11 +59,13 @@ function Vagas() {
               <C.TableTd>{vaga.status}</C.TableTd>
               <C.TableTd>{vaga.responsavel}</C.TableTd>
               <C.TableTd>{vaga.estado}</C.TableTd>
-              <C.TableTd>{moment(vaga.dataAbertura , 'YYYY-MM-DD').format('DD/MM/YYYY')}</C.TableTd>
+              <C.TableTd>
+                {moment(vaga.dataAbertura, "YYYY-MM-DD").format("DD/MM/YYYY")}
+              </C.TableTd>
               <C.TableTd>{vaga.cidade}</C.TableTd>
               <C.TableTd>{vaga.analista}</C.TableTd>
               {/* <C.TableTd>{vaga.pcd ? "Sim" : "Não"}</C.TableTd> */}
-              <C.TableTd >
+              <C.TableTd>
                 <button onClick={() => setVisibleModal(true)}>Vincular</button>
               </C.TableTd>
             </C.TableTr>
