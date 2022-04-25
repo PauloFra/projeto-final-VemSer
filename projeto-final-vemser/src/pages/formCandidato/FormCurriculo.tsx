@@ -6,18 +6,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
-import { prepareDataToInsert , SingupSchema } from "../../utils";
+import { prepareDataToInsert, SingupSchema } from "../../utils";
 import Loading from "../../components/loading/Loading";
 import { PrepareDataFromGet } from "../../utils";
+import ExperienciaCandidato from "./experiencia/ExperienciaCandidato";
+import Modal from "./experiencia/Modal";
 function FormCurriculo() {
   const { idCandidato } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
+  const [modalStatus, setModalStatus] = useState(false);
+
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if(token){
-      api.defaults.headers.common['Authorization'] = token
+    const token = localStorage.getItem("token");
+    if (token) {
+      api.defaults.headers.common["Authorization"] = token;
     }
     if (idCandidato) {
       getInCandidatoById(idCandidato);
@@ -32,9 +36,8 @@ function FormCurriculo() {
 
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       setTimeout(() => {
-       document.location.reload();
+        document.location.reload();
       }, 1000);
-
     } catch (error) {
       console.log(error);
     }
@@ -42,12 +45,11 @@ function FormCurriculo() {
 
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get(`/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
-      const {candidatosCompletos} = data
-      candidatosCompletos.map((props:any)=>(
-        setCandidatoForUpdate(props)
-      ))
-
+      const { data } = await api.get(
+        `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
+      );
+      const { candidatosCompletos } = data;
+      candidatosCompletos.map((props: any) => setCandidatoForUpdate(props));
     } catch (error) {
       console.log(error);
     }
@@ -61,36 +63,41 @@ function FormCurriculo() {
 
   async function updateCandidato(values: Values) {
     const newValues = prepareDataToInsert(values);
-    try{
-      const {data} = await api.put(`/candidato-completo?id-candidato=${idCandidato}` , newValues)
+    try {
+      const { data } = await api.put(
+        `/candidato-completo?id-candidato=${idCandidato}`,
+        newValues
+      );
       console.log(data);
       Notiflix.Notify.success("Candidato atualizado com sucesso");
-      navigate('/curriculos')
-    }
-    catch(error){
+      navigate("/curriculos");
+    } catch (error) {
       console.log(error);
     }
-    
   }
-
- 
 
   //Quando Adicionar o put adicionar ! no candidatoForUpdate
   if (idCandidato && !candidatoForUpdate) {
     return <Loading />;
-  }  
-    return (
+  }
+  return (
     <C.ContainerGeral>
+      <Modal status={modalStatus} setStatus={setModalStatus}>
+        <ExperienciaCandidato />
+      </Modal>
+      <C.DivFlexColumn>
+        <button onClick={() => setModalStatus(true)}>abrir modal</button>
+      </C.DivFlexColumn>
+
       <C.TitleForm>
         {idCandidato ? "Atualizar" : "Adicionar"} Candidato
       </C.TitleForm>
       <Formik
         initialValues={
-          
           idCandidato
             ? {
-              ...PrepareDataFromGet(candidatoForUpdate)
-            }
+                ...PrepareDataFromGet(candidatoForUpdate),
+              }
             : {
                 nome: "",
                 cpf: "",
