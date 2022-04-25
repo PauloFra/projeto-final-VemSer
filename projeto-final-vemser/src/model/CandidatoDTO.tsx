@@ -1,4 +1,6 @@
-export interface Values {
+import { ExperienciaDTO } from "./ExperienciaDTO";
+
+export interface CandidatoDTO {
   cpf: string;
   nome: string;
   dataNascimento: string;
@@ -7,15 +9,9 @@ export interface Values {
   bairro: string;
   telefone: string;
   numero: number;
-  instituicao: string;
-  descricaoDoCurso: string;
-  dataInicioCurso: string;
-  dataFimCurso: string; 
-  nomeEmpresa: string;
   cargo: string;
   senioridade: string;
-  descricaoDoCargo: string;
-  dataInicioExperiencia: string;
-  trabalhandoAtualmente: false;
-  dataFimExperiencia: string;
+  experiencias?: [ExperienciaDTO];
+  dadosEscolares?: any; 
 }
+

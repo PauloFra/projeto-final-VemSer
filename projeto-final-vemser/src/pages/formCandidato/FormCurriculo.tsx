@@ -3,13 +3,13 @@ import { Formik, Field, Form, FormikHelpers ,FieldArray , ErrorMessage} from "fo
 import { useEffect, useState } from "react";
 
 // import Experiencias from "../../components/experienciasForm/Experiencias";
-
-import { Values } from "../../model/CandidatoDTO";
+import { ExperienciaDTO } from "../../model/ExperienciaDTO";
+import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
-import {  SingupSchema , formatDateToApi } from "../../utils";
+import {  SingupSchema , prepareDataToInsert } from "../../utils";
 import Loading from "../../components/loading/Loading";
 import { PrepareDataFromGet } from "../../utils";
 import ExperienciaCandidato from "./experiencia/ExperienciaCandidato";
@@ -35,12 +35,8 @@ function FormCurriculo() {
     }
   }, []);
 
-  async function postCandidato(values: any) {
-    
-    values.dataNascimento = formatDateToApi(values.dataNascimento)
-    console.log(values);
-    
-    
+  async function postCandidato(values: CandidatoDTO) {
+    prepareDataToInsert(values)
     try {
       const { data } = await api.post("/candidato-completo", values );
       console.log(data);
@@ -61,7 +57,9 @@ function FormCurriculo() {
       );
       
       const { candidatosCompletos } = data;
-      candidatosCompletos.map((props: any) => setCandidatoForUpdate(props));
+      candidatosCompletos.map((props: CandidatoDTO) => setCandidatoForUpdate(props));
+      console.log(candidatoForUpdate);
+      
     } catch (error) {
       console.log(error);
     }
@@ -73,20 +71,21 @@ function FormCurriculo() {
       : setTrabalhandoAtualmente(true);
   }
 
-  async function updateCandidato(values: any) {
-    console.log('FORMIK =>', values);  
-    // const newValues = prepareDataToInsert(values);
-    // try {
-    //   const { data } = await api.put(
-    //     `/candidato-completo?id-candidato=${idCandidato}`,
-    //     newValues
-    //   );
-    //   console.log(data);
-    //   Notiflix.Notify.success("Candidato atualizado com sucesso");
-    //   navigate("/curriculos");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  async function updateCandidato(values: CandidatoDTO) {
+    console.log('FORMIK =>', values);
+    prepareDataToInsert(values)
+    
+    try {
+      const { data } = await api.put(
+        `/candidato-completo?id-candidato=${idCandidato}`,
+        values
+      );
+      console.log(data);
+      Notiflix.Notify.success("Candidato atualizado com sucesso");
+      navigate("/curriculos");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   //Quando Adicionar o put adicionar ! no candidatoForUpdate
@@ -112,6 +111,7 @@ function FormCurriculo() {
     cargo: "",
     senioridade: "string",
     experiencias: [],
+    dadosEscolares: [],
     cidade: "",
     bairro: "",
     }
@@ -128,7 +128,7 @@ function FormCurriculo() {
     
       validationSchema={SingupSchema}
       initialValues={ idCandidato ?  candidatoForUpdate : initialValues }
-      onSubmit={async (values:any) => {
+      onSubmit={async (values:CandidatoDTO) => {
           idCandidato ? updateCandidato(values) : postCandidato(values);
         }}
     >
@@ -249,7 +249,7 @@ function FormCurriculo() {
                   values.experiencias.map((experiencias:any, index:any) => (
                     <div className="row" key={index}>
                       <h1>{`${index+1}º experiencia`}</h1>
-                      <div className="col">
+                      <C.DivFlexColumn className="col">
                         <label htmlFor={`experiencias.${index}.nomeEmpresa`}>nomeEmpresa</label>
                         <Field
                           name={`experiencias.${index}.nomeEmpresa`}
@@ -261,8 +261,8 @@ function FormCurriculo() {
                           component="div"
                           className="field-error"
                         /> */}
-                      </div>
-                      <div className="col">
+                      </C.DivFlexColumn>
+                      <C.DivFlexColumn className="col">
                         <label htmlFor={`experiencias.${index}.descricao`}>descricao</label>
                         <Field
                           name={`experiencias.${index}.descricao`}
@@ -275,13 +275,15 @@ function FormCurriculo() {
                           component="div"
                           className="field-error"
                         /> */}
-                      </div>
-                      <div className="col">
+                      </C.DivFlexColumn>
+                      <C.DivFlexColumn className="col">
                         <label htmlFor={`experiencias.${index}.dataInicio`}>dataInicio</label>
                         <Field
                           name={`experiencias.${index}.dataInicio`}
                           placeholder="dataInicio"
                           type="text"
+                          as={InputMask}
+                          mask="99/99/9999"
                         />
 
                         {/* <ErrorMessage
@@ -289,13 +291,15 @@ function FormCurriculo() {
                           component="div"
                           className="field-error"
                         /> */}
-                      </div>
-                      <div className="col">
+                      </C.DivFlexColumn>
+                      <C.DivFlexColumn className="col">
                         <label htmlFor={`experiencias.${index}.dataFim`}>dataFim</label>
                         <Field
                           name={`experiencias.${index}.dataFim`}
                           placeholder="dataFim"
                           type="text"
+                          as={InputMask}
+                          mask="99/99/9999"
                         />
 
                         {/* <ErrorMessage
@@ -303,9 +307,9 @@ function FormCurriculo() {
                           component="div"
                           className="field-error"
                         /> */}
-                      </div>
+                      </C.DivFlexColumn>
 
-                      <div className="col">
+                      <C.DivFlexColumn className="col">
 
                         <button
                           type="button"
@@ -314,7 +318,7 @@ function FormCurriculo() {
                         >
                           X
                         </button>
-                      </div>
+                      </C.DivFlexColumn>
                     </div>
                   ))}
                 <button
@@ -332,10 +336,12 @@ function FormCurriculo() {
               </div>
             )}
           </FieldArray>
-          <button type="submit">Invite</button>
+          
+          <C.Botao type="submit">Invite</C.Botao>
         </Form>
       )}
     </Formik>
+    
     </C.ContainerGeral>
   );
 }

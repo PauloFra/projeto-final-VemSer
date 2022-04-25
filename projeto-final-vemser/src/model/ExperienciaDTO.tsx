@@ -1,9 +1,8 @@
 export interface ExperienciaDTO {
-  nomeEmpresa: string;
-  cargo: string;
-  descricaoDoCargo: string;
-  dataInicioExperiencia: string;
-  trabalhandoAtualmente?: string;
-  dataFimExperiencia: string;
-  senioridade: string;
+    nomeEmpresa?: string;
+    descricao?: string;
+    dataInicio?: string | undefined;
+    trabalhandoAtualmente?: string;
+    dataFim?: string | undefined;
+ 
 }

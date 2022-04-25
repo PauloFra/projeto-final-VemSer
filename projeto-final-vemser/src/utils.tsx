@@ -1,9 +1,12 @@
-import { Values } from "./model/CandidatoDTO";
+import { CandidatoDTO } from "./model/CandidatoDTO";
 import * as Yup from "yup";
+import { ExperienciaDTO } from "./model/ExperienciaDTO";
 import moment from "moment";
 export function defaultFunc() {}
-
-export const formatDateToApi = (value:string) =>{
+type dataDTO = {
+  value: string | undefined;
+}
+export const formatDateToApi = (value:any) =>{
   return moment(value, 'DD/MM/YYYY').format('YYYY-MM-DD')
 }
 // export function prepareDataToInsert(values: any) {
@@ -87,3 +90,13 @@ export const SingupSchema = Yup.object().shape({
   senioridade: Yup.string().required("Preencha o campo corretamente!"),
  
 });
+
+export function prepareDataToInsert(values:CandidatoDTO){
+  values.dataNascimento = formatDateToApi(values.dataNascimento);
+  if(values.experiencias && values.experiencias.length > 0){
+    values.experiencias.map((experiencia:ExperienciaDTO)=>{
+      experiencia.dataInicio = formatDateToApi(experiencia.dataInicio) ;
+      experiencia.dataFim = formatDateToApi(experiencia.dataFim);
+      })
+  }
+}
