@@ -24,6 +24,9 @@ function FormCurriculo() {
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   const [modalStatus, setModalStatus] = useState(false);
 
+  const [indexExperiencias, setIndexExperiencias] = useState();
+  console.log("indexExperiencias =>", indexExperiencias);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
