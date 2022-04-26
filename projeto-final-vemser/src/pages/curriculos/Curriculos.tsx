@@ -13,7 +13,7 @@ function Curriculos() {
   const [page, setPage] = useState<number>(0);
   const [candidatoDetalhado, setCandidatoDetalhado] = useState([]);
   const [modalVisualizar, setModalVisualizar] = useState(false);
-  const [mapCandidato, setMapCandidato] = useState();
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {

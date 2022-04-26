@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import api from "../../api";
-import { PrepareDataFromGet } from "../../utils";
+import {  useState } from "react";
+import { AiOutlineClose } from 'react-icons/ai'
+
+import * as C from './candidatoDetalhado.styles'
 import { Link } from "react-router-dom";
-import Loading from "../../components/loading/Loading";
 type Props = {
   candidato: any;
   fecharMenu: Function;
@@ -18,48 +16,39 @@ type PropsMap = {
 };
 
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
-  const [mapCandidato, setMapCandidato] = useState();
+
+  
+  
+
   console.log('candidato =>' , candidato);
   
-  console.log(candidato.cidade);
-  console.log(candidato.experiencias);
-
   return (
-    <div>
-      <ul>
-        <li key={candidato.idCandidato}>
-          <div>
+    <C.DivContainerDetail>
+      <C.DivFlex>
+        <h2>Detalhes do Candidato</h2>
+        <C.ButtonClose onClick={() => fecharMenu(false)}><AiOutlineClose /></C.ButtonClose >
+      </C.DivFlex>
+          <C.DivInfo>
             <h3>Dados Pessoais</h3>
-            <Link to={`/form-curriculo/${candidato.idCandidato}`}>
-              <strong>Atualizar Candidato</strong>
-            </Link>
+            
             <p>Nome: {candidato.nome}</p>
             <p>Data de Nascimento: {candidato.dataNascimento}</p>
             <p>CPF: {candidato.cpf}</p>
+            <p>Senioridade: {candidato.senioridade}</p>
             <p>Telefone: {candidato.telefone}</p>
             <h3>Endereço</h3>
             <p>Cidade: {candidato.cidade}</p>
             <p>Bairro: {candidato.bairro}</p>
             <p>Rua: {candidato.logradouro}</p>
             <p>Número: {candidato.numero}</p>
-            <h3>Experiência Profissional</h3>
-
-            {/*  {candidato.experiencias.map((experiencia: PropsMap) => (
-              <div key={experiencia.idExperiencia}>
-                <p>{experiencia.nomeEmpresa}</p>
-                <p>{experiencia.dataInicio}</p>
-                <p>{experiencia.dataFim}</p>
-                <p>{experiencia.descricao}</p>
-                <p>{experiencia.descricao}</p>
-              </div>
-            ))} */}
-
-            <p>Senioridade: {candidato.senioridade}</p>
-            <button onClick={() => fecharMenu(false)}>fechar</button>
-          </div>
-        </li>
-      </ul>
-    </div>
+            
+          </C.DivInfo >        
+      <div>
+        <Link to={`/form-curriculo/${candidato.idCandidato}`} >
+              Atualizar Candidato
+        </Link>
+      </div>
+    </C.DivContainerDetail>
   );
 };
 

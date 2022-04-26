@@ -37,7 +37,7 @@ export const ContainerGeral = styled.div`
     padding:30px 0 ;
     display: flex;
     flex-direction: column;
-    width: 1200px;
+    width:80% ;
     justify-content: center;
     margin: 0 auto;
 `  

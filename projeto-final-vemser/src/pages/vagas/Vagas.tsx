@@ -34,7 +34,10 @@ function Vagas() {
 
   return (
     <C.ContainerGeral>
-      <h1>Listagem de vagas</h1>
+      <C.DivMenu>
+       <h1>Listagem de Vagas </h1>
+       
+      </C.DivMenu>
       {visibleModal && <ModalList onClose={() => setVisibleModal(false)} />}
       <C.TableCandidates>
         <C.TableHead>

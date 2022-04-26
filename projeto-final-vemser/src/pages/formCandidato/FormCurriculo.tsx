@@ -16,7 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
-import { SingupSchema, prepareDataToInsert } from "../../utils";
+import { SingupSchema, prepareDataToInsert ,prepareDateToUser} from "../../utils";
 import Loading from "../../components/loading/Loading";
 import { PrepareDataFromGet } from "../../utils";
 import ExperienciaCandidato from "./experiencia/ExperienciaCandidato";
@@ -55,13 +55,11 @@ function FormCurriculo() {
 
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get(
-        `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
-      );
+      const { data } = await api.get( `/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
 
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
-        setCandidatoForUpdate(props)
+        setCandidatoForUpdate(prepareDateToUser(props))
       );
       console.log(candidatoForUpdate);
     } catch (error) {
@@ -76,14 +74,10 @@ function FormCurriculo() {
   }
 
   async function updateCandidato(values: CandidatoDTO) {
-    console.log("FORMIK =>", values);
+ 
     prepareDataToInsert(values);
-
     try {
-      const { data } = await api.put(
-        `/candidato-completo?id-candidato=${idCandidato}`,
-        values
-      );
+      const { data } = await api.put(`/candidato-completo?id-candidato=${idCandidato}` , values);
       console.log(data);
       Notiflix.Notify.success("Candidato atualizado com sucesso");
       navigate("/curriculos");
@@ -92,14 +86,13 @@ function FormCurriculo() {
     }
   }
 
-  //Quando Adicionar o put adicionar ! no candidatoForUpdate
   if (idCandidato && !candidatoForUpdate) {
     return <Loading />;
   }
 
   console.log("idCandidato =>", idCandidato);
 
-  console.log("candidatoForUpdate =>", candidatoForUpdate);
+  console.log("candidatoForUpdate FFFF =>" );
 
   const initialValues = {
     nome: "TESTE AQUI PARA ADICIONAR",

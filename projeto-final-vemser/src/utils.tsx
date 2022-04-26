@@ -10,6 +10,9 @@ type dataDTO = {
 export const formatDateToApi = (value: any) => {
   return moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
 };
+export const formatDateToUser = (value: any) => {
+  return moment(value, "YYYY-MM-DD" ).format("DD/MM/YYYY");
+};
 // export function prepareDataToInsert(values: any) {
 //   const valuesToPost = {
 //     bairro: values.bairro,
@@ -121,4 +124,22 @@ export function prepareDataToInsert(values: CandidatoDTO) {
       dadoEscolar.dataFim = formatDateToApi(dadoEscolar.dataFim);
     });
   }
+}
+
+export function prepareDateToUser(values: CandidatoDTO) {
+  values.dataNascimento = formatDateToUser(values.dataNascimento);
+  if (values.experiencias && values.experiencias.length > 0) {
+    values.experiencias.map((experiencia: ExperienciaDTO) => {
+      experiencia.dataInicio = formatDateToUser(experiencia.dataInicio);
+      experiencia.dataFim = formatDateToUser(experiencia.dataFim);
+    });
+  }
+
+  if (values.dadosEscolares && values.dadosEscolares.length > 0) {
+    values.dadosEscolares.map((dadoEscolar: DadosEscolaresDTO) => {
+      dadoEscolar.dataInicio = formatDateToUser(dadoEscolar.dataInicio);
+      dadoEscolar.dataFim = formatDateToUser(dadoEscolar.dataFim);
+    });
+  }
+  return values
 }
