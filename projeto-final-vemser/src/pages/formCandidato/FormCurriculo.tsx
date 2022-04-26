@@ -1,15 +1,7 @@
 import InputMask from "react-input-mask";
-import {
-  Formik,
-  Field,
-  Form,
-  FormikHelpers,
-  FieldArray,
-  ErrorMessage,
-} from "formik";
+import { Formik, Field, Form, FieldArray } from "formik";
 import { useEffect, useState } from "react";
-import { AiOutlineClose } from 'react-icons/ai'
-
+import { AiOutlineClose } from "react-icons/ai";
 // import Experiencias from "../../components/experienciasForm/Experiencias";
 import { ExperienciaDTO } from "../../model/ExperienciaDTO";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
@@ -17,14 +9,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
 import * as C from "./curriculo.styles";
 import Notiflix from "notiflix";
-import { SingupSchema, prepareDataToInsert ,prepareDateToUser} from "../../utils";
+import {
+  SingupSchema,
+  prepareDataToInsert,
+  prepareDateToUser,
+} from "../../utils";
 import Loading from "../../components/loading/Loading";
-import { PrepareDataFromGet } from "../../utils";
-import ExperienciaCandidato from "./experiencia/ExperienciaCandidato";
-import Modal from "./experiencia/Modal";
 function FormCurriculo() {
   const { idCandidato } = useParams();
-
+  const [limitExperiencia, setLimitExperiencia] = useState(0);
+  const [limitAcademico, setLimitAcademico] = useState(0);
   const navigate = useNavigate();
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
@@ -56,7 +50,9 @@ function FormCurriculo() {
 
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get( `/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
+      const { data } = await api.get(
+        `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
+      );
 
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
@@ -75,10 +71,12 @@ function FormCurriculo() {
   }
 
   async function updateCandidato(values: CandidatoDTO) {
- 
     prepareDataToInsert(values);
     try {
-      const { data } = await api.put(`/candidato-completo?id-candidato=${idCandidato}` , values);
+      const { data } = await api.put(
+        `/candidato-completo?id-candidato=${idCandidato}`,
+        values
+      );
       console.log(data);
       Notiflix.Notify.success("Candidato atualizado com sucesso");
       navigate("/curriculos");
@@ -91,9 +89,20 @@ function FormCurriculo() {
     return <Loading />;
   }
 
-  console.log("idCandidato =>", idCandidato);
-
-  console.log("candidatoForUpdate FFFF =>" );
+  function addExp() {
+    setLimitExperiencia(limitExperiencia + 1);
+  }
+  function removeExp(index: string, remove: Function) {
+    remove(index);
+    setLimitExperiencia(limitExperiencia - 1);
+  }
+  function addAcad() {
+    setLimitAcademico(limitAcademico + 1);
+  }
+  function removeAcad(index: string, remove: Function) {
+    remove(index);
+    setLimitAcademico(limitAcademico - 1);
+  }
 
   const initialValues = {
     nome: "",
@@ -164,7 +173,7 @@ function FormCurriculo() {
                   <C.DivError>{errors.senioridade}</C.DivError>
                 ) : null}
               </C.DivFlexColumn>
-              
+
               <C.DivFlexColumn>
                 <C.Label htmlFor="telefone">telefone</C.Label>
                 <Field id="telefone" name="telefone" placeholder="Telefone" />
@@ -172,7 +181,7 @@ function FormCurriculo() {
                   <C.DivError>{errors.telefone}</C.DivError>
                 ) : null}
               </C.DivFlexColumn>
-              
+
               <C.DivFlexColumn>
                 <C.Label htmlFor="dataNascimento">Data de Nascimento</C.Label>
                 <Field
@@ -239,16 +248,18 @@ function FormCurriculo() {
                       (dadosEscolares: any, index: any) => (
                         <C.ContainerInputs className="row" key={index}>
                           <C.DivCabeçalho>
-                            <C.TitleInfoTopic>{`Informação Academica ${index + 1}`}</C.TitleInfoTopic>
+                            <C.TitleInfoTopic>{`Informação Academica ${
+                              index + 1
+                            }`}</C.TitleInfoTopic>
                             <C.ButtonExcluir
                               type="button"
                               className="secondary"
-                              onClick={() => remove(index)}
+                              onClick={() => removeAcad(index, remove)}
                             >
                               <AiOutlineClose />
                             </C.ButtonExcluir>
                           </C.DivCabeçalho>
-                          <C.DivFlexColumn >
+                          <C.DivFlexColumn>
                             <C.Label
                               htmlFor={`dadosEscolares.${index}.descricao`}
                             >
@@ -265,7 +276,7 @@ function FormCurriculo() {
                           className="field-error"
                         /> */}
                           </C.DivFlexColumn>
-                          <C.DivFlexColumn >
+                          <C.DivFlexColumn>
                             <C.Label
                               htmlFor={`dadosEscolares.${index}.instituicao`}
                             >
@@ -283,7 +294,7 @@ function FormCurriculo() {
                           className="field-error"
                         /> */}
                           </C.DivFlexColumn>
-                          <C.DivFlexColumn >
+                          <C.DivFlexColumn>
                             <C.Label
                               htmlFor={`dadosEscolares.${index}.dataInicio`}
                             >
@@ -303,8 +314,10 @@ function FormCurriculo() {
                           className="field-error"
                         /> */}
                           </C.DivFlexColumn>
-                          <C.DivFlexColumn >
-                            <C.Label htmlFor={`dadosEscolares.${index}.dataFim`}>
+                          <C.DivFlexColumn>
+                            <C.Label
+                              htmlFor={`dadosEscolares.${index}.dataFim`}
+                            >
                               Data Final
                             </C.Label>
                             <Field
@@ -322,29 +335,30 @@ function FormCurriculo() {
                         /> */}
                           </C.DivFlexColumn>
 
-                          <C.DivFlexColumn >
-                           
-                          </C.DivFlexColumn>
+                          <C.DivFlexColumn></C.DivFlexColumn>
                         </C.ContainerInputs>
                       )
                     )}
-
-                  <C.DivFlexColumn>
-                    <C.ButtonAdd
-                      type="button"
-                      className="secondary"
-                      onClick={() =>
-                        push({
-                          dataFim: "",
-                          dataInicio: "",
-                          descricao: "",
-                          instituicao: "",
-                        })
-                      }
-                    >
-                      Nova Informação Acadêmica
-                    </C.ButtonAdd>
-                  </C.DivFlexColumn>
+                  {limitAcademico < 3 && (
+                    <a onClick={() => addAcad()}>
+                      <C.DivFlexColumn>
+                        <C.ButtonAdd
+                          type="button"
+                          className="secondary"
+                          onClick={() =>
+                            push({
+                              dataFim: "",
+                              dataInicio: "",
+                              descricao: "",
+                              instituicao: "",
+                            })
+                          }
+                        >
+                          Nova Informação Acadêmica
+                        </C.ButtonAdd>
+                      </C.DivFlexColumn>
+                    </a>
+                  )}
                 </div>
               )}
             </FieldArray>
@@ -356,17 +370,21 @@ function FormCurriculo() {
                     values.experiencias.map((experiencias: any, index: any) => (
                       <C.ContainerInputs className="row" key={index}>
                         <C.DivCabeçalho>
-                          <C.TitleInfoTopic>{`Experiência ${index + 1}`} </C.TitleInfoTopic>
+                          <C.TitleInfoTopic>
+                            {`Experiência ${index + 1}`}{" "}
+                          </C.TitleInfoTopic>
                           <C.ButtonExcluir
                             type="button"
                             className="secondary"
-                            onClick={() => remove(index)}
+                            onClick={() => removeExp(index, remove)}
                           >
                             <AiOutlineClose />
                           </C.ButtonExcluir>
                         </C.DivCabeçalho>
-                        <C.DivFlexColumn >
-                          <C.Label htmlFor={`experiencias.${index}.nomeEmpresa`}>
+                        <C.DivFlexColumn>
+                          <C.Label
+                            htmlFor={`experiencias.${index}.nomeEmpresa`}
+                          >
                             Nome Da Empresa
                           </C.Label>
                           <Field
@@ -380,7 +398,7 @@ function FormCurriculo() {
                           className="field-error"
                         /> */}
                         </C.DivFlexColumn>
-                        <C.DivFlexColumn >
+                        <C.DivFlexColumn>
                           <C.Label htmlFor={`experiencias.${index}.descricao`}>
                             Descrição
                           </C.Label>
@@ -396,7 +414,7 @@ function FormCurriculo() {
                           className="field-error"
                         /> */}
                         </C.DivFlexColumn>
-                        <C.DivFlexColumn >
+                        <C.DivFlexColumn>
                           <C.Label htmlFor={`experiencias.${index}.dataInicio`}>
                             Data De Inicio
                           </C.Label>
@@ -414,7 +432,7 @@ function FormCurriculo() {
                           className="field-error"
                         /> */}
                         </C.DivFlexColumn>
-                        <C.DivFlexColumn >
+                        <C.DivFlexColumn>
                           <C.Label htmlFor={`experiencias.${index}.dataFim`}>
                             Data Final
                           </C.Label>
@@ -433,33 +451,34 @@ function FormCurriculo() {
                         /> */}
                         </C.DivFlexColumn>
 
-                        <C.DivFlexColumn >
-                          
-                        </C.DivFlexColumn>
+                        <C.DivFlexColumn></C.DivFlexColumn>
                       </C.ContainerInputs>
                     ))}
-
-                  <C.DivFlexColumn>
-                    <C.ButtonAdd
-                      type="button"
-                      className="secondary"
-                      onClick={() =>
-                        push({
-                          dataFim: "",
-                          dataInicio: "",
-                          descricao: "",
-                          nomeEmpresa: "",
-                        })
-                      }
-                    >
-                      Nova Experiência
-                    </C.ButtonAdd>
-                  </C.DivFlexColumn>
+                  {limitExperiencia < 3 && (
+                    <a onClick={() => addExp()}>
+                      <C.DivFlexColumn>
+                        <C.ButtonAdd
+                          type="button"
+                          className="secondary"
+                          onClick={() =>
+                            push({
+                              dataFim: "",
+                              dataInicio: "",
+                              descricao: "",
+                              nomeEmpresa: "",
+                            })
+                          }
+                        >
+                          Nova Experiência
+                        </C.ButtonAdd>
+                      </C.DivFlexColumn>
+                    </a>
+                  )}
                 </div>
               )}
             </FieldArray>
             <C.Botao type="submit">
-              {idCandidato?'Atualizar':'Enviar'}
+              {idCandidato ? "Atualizar" : "Enviar"}
             </C.Botao>
           </Form>
         )}
