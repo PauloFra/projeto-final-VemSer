@@ -30,6 +30,9 @@ function FormCurriculo() {
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   const [modalStatus, setModalStatus] = useState(false);
 
+  const [indexExperiencias, setIndexExperiencias] = useState();
+  console.log('indexExperiencias =>' , indexExperiencias);
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -237,9 +240,13 @@ function FormCurriculo() {
                   {values.dadosEscolares.length > 0 &&
                     values.dadosEscolares.map(
                       (dadosEscolares: any, index: any) => (
+                        
                         <C.ContainerInputs className="row" key={index}>
+                         
                           <C.DivCabeçalho>
+                              
                             <C.TitleInfoTopic>{`Informação Academica ${index + 1}`}</C.TitleInfoTopic>
+                            
                             <C.ButtonExcluir
                               type="button"
                               className="secondary"
@@ -247,7 +254,9 @@ function FormCurriculo() {
                             >
                               <AiOutlineClose />
                             </C.ButtonExcluir>
+                            
                           </C.DivCabeçalho>
+                          
                           <C.DivFlexColumn >
                             <C.Label
                               htmlFor={`dadosEscolares.${index}.descricao`}
@@ -314,7 +323,7 @@ function FormCurriculo() {
                               as={InputMask}
                               mask="99/99/9999"
                             />
-
+                            
                             {/* <ErrorMessage
                           name={`experiencias.${index}.name`}
                           component="div"
@@ -330,7 +339,7 @@ function FormCurriculo() {
                     )}
 
                   <C.DivFlexColumn>
-                    <C.ButtonAdd
+                  <C.ButtonAdd
                       type="button"
                       className="secondary"
                       onClick={() =>
@@ -340,7 +349,7 @@ function FormCurriculo() {
                           descricao: "",
                           instituicao: "",
                         })
-                      }
+                        }
                     >
                       Nova Informação Acadêmica
                     </C.ButtonAdd>
