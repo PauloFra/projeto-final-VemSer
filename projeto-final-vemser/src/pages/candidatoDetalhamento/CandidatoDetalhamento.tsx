@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { FaUser } from "react-icons/fa";
+
 
 import * as C from "./candidatoDetalhado.styles";
 import { Link, useNavigate } from "react-router-dom";
 import CardExperiencia from "./componentes/CardExperiencia/CardExperiencia";
-import { PropsExperiencia } from "./TypesDetalhamento";
+
 import CardInfoPessoal from "./componentes/CardInfoPessoais/CardInfoPessoal";
 import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
 type Props = {

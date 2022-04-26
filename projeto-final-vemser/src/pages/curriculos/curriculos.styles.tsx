@@ -1,6 +1,8 @@
 import styled from "styled-components";
 export const ContainerGeral = styled.div`
   display: flex;
+  width:80%;
+  margin: 0 auto;
   flex-direction: column;
   justify-content: start;
 `;
@@ -8,14 +10,14 @@ export const ContainerInfoCandidato = styled.div`
   display: flex;
 `;
 export const ContainerGeralTabela = styled.div`
-  display: grid;
-  grid-template-columns: 60% 40%;
+  display: flex;
 `;
 export const TableCandidates = styled.table`
   text-align: left;
   border-collapse: collapse;
   text-align: start;
-  height: calc(100vh - 50px);
+  width: 100%;
+  
 `;
 export const Title = styled.div`
   display: flex;

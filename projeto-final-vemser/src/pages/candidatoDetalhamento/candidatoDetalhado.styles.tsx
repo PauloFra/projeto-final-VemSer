@@ -3,12 +3,11 @@ import styled from "styled-components";
 export const DivContainerDetail = styled.div`
   border-radius: 10px;
   margin-left: 40px;
-  transform: translateX(42px);
   display: flex;
   flex-direction: column;
+  min-width: 490px;
   align-items: start;
-  width: 45%;
-  height: auto;
+ 
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
   box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
 `;

@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 /* import * as C from "../../components/globalStyles/global.styles"; */
-import * as C from "./curriculos.styles";
+import * as C from "../../components/globalStyles/global.styles";
+
+
+
+
 import api from "../../api";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
@@ -59,54 +63,18 @@ function Curriculos() {
     topPage();
   };
   return (
-    <C.ContainerGeral>
-      <C.Title>
-        <h1>Listagem de curriculos </h1>
+    <C.ContainerGeral border="none">
+
+      <C.DivMenu>
+       <C.TitleH>Listagem de Vagas </C.TitleH>
         <h3>
           <Link to="/form-curriculo">Criar Candidato</Link>
         </h3>
-      </C.Title>
-      <C.ContainerInfoCandidato>
-        <C.Ul>
-          {candidatos.map((candidato: any) => (
-            <C.Li key={candidato.idCandidato}>
-              <C.CardCandidato>
-                <FaUser />
-
-                <C.DadosPessoais>
-                  <C.Info>Nome:{candidato.nome}</C.Info>
-                  <C.Info>Cargo:{candidato.cargo}</C.Info>
-                  <C.Info>Data de Nascimento:{candidato.dataNascimento}</C.Info>
-                  <C.Info>Senioridade: {candidato.senioridade}</C.Info>
-                  <Link
-                    to="#"
-                    onClick={() => menuDetalhado(candidato.idCandidato, true)}
-                  >
-                    visualizar
-                  </Link>
-                </C.DadosPessoais>
-              </C.CardCandidato>
-            </C.Li>
-          ))}
-          <C.ContainerButtonsPage>
-            <button onClick={() => nextPage("-")}>
-              <IoMdArrowRoundBack />
-            </button>
-
-            <button onClick={() => nextPage("+")}>
-              <IoMdArrowRoundForward />
-            </button>
-          </C.ContainerButtonsPage>
-        </C.Ul>
-        {modalVisualizar && (
-          <CandidatoDetalhamento
-            candidato={candidatoDetalhado}
-            fecharMenu={setModalVisualizar}
-          />
-        )}
-      </C.ContainerInfoCandidato>
-      {/*  <C.ContainerGeralTabela>
-        <C.TableCandidates>
+      </C.DivMenu>  
+     
+    
+     <C.ContainerGeralTabela>
+        <C.TableCandidates width="100%">
           <C.TableHead>
             <C.TableTr>
               <C.TableTh>Nome</C.TableTh>
@@ -150,8 +118,46 @@ function Curriculos() {
             fecharMenu={setModalVisualizar}
           />
         )}
-      </C.ContainerGeralTabela>
-      */}
+       {/* <C.ContainerInfoCandidato>
+        <C.Ul>
+          {candidatos.map((candidato: any) => (
+            <C.Li key={candidato.idCandidato}>
+              <C.CardCandidato>
+                <FaUser />
+
+                <C.DadosPessoais>
+                  <C.Info>Nome:{candidato.nome}</C.Info>
+                  <C.Info>Cargo:{candidato.cargo}</C.Info>
+                  <C.Info>Data de Nascimento:{candidato.dataNascimento}</C.Info>
+                  <C.Info>Senioridade: {candidato.senioridade}</C.Info>
+                  <Link
+                    to="#"
+                    onClick={() => menuDetalhado(candidato.idCandidato, true)}
+                  >
+                    visualizar
+                  </Link>
+                </C.DadosPessoais>
+              </C.CardCandidato>
+            </C.Li>
+          ))}
+          <C.ContainerButtonsPage>
+            <button onClick={() => nextPage("-")}>
+              <IoMdArrowRoundBack />
+            </button>
+
+            <button onClick={() => nextPage("+")}>
+              <IoMdArrowRoundForward />
+            </button>
+          </C.ContainerButtonsPage>
+        </C.Ul>
+        {modalVisualizar && (
+          <CandidatoDetalhamento
+            candidato={candidatoDetalhado}
+            fecharMenu={setModalVisualizar}
+          />
+        )}
+      </C.ContainerInfoCandidato> */}
+     </C.ContainerGeralTabela>
     </C.ContainerGeral>
   );
 }

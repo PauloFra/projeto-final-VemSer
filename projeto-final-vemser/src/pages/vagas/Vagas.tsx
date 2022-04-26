@@ -35,8 +35,7 @@ function Vagas() {
   return (
     <C.ContainerGeral>
       <C.DivMenu>
-       <h1>Listagem de Vagas </h1>
-       
+       <C.TitleH>Listagem de Vagas </C.TitleH>
       </C.DivMenu>
       {visibleModal && <ModalList onClose={() => setVisibleModal(false)} />}
       <C.TableCandidates>
@@ -51,7 +50,7 @@ function Vagas() {
             <C.TableTh>cidade</C.TableTh>
             <C.TableTh>analista</C.TableTh>
             {/* <C.TableTh>pcd</C.TableTh> */}
-            <C.TableTh>Vincular Candidato</C.TableTh>
+            <C.TableTh align={'center'}>Vincular Candidato</C.TableTh>
           </C.TableTr>
         </C.TableHead>
         <C.TableBody>
@@ -68,7 +67,7 @@ function Vagas() {
               <C.TableTd>{vaga.cidade}</C.TableTd>
               <C.TableTd>{vaga.analista}</C.TableTd>
               {/* <C.TableTd>{vaga.pcd ? "Sim" : "Não"}</C.TableTd> */}
-              <C.TableTd>
+              <C.TableTd align={'center'}>
                 <button onClick={() => setVisibleModal(true)}>Vincular</button>
               </C.TableTd>
             </C.TableTr>
