@@ -1,42 +1,44 @@
-import { createContext , useState} from 'react'
-import api from '.././api'
+import { createContext, useState } from "react";
+import api from ".././api";
 type Props = {
-    children: React.ReactNode;
-  };
+  children: React.ReactNode;
+};
 
-  type ContextProps = {
-    GetInReduced: Function;
-    listCandidates: object | undefined;
-  };
-  
-  const initialState = {
-    GetInReduced: () => {},
-    listCandidates:[],
-  };
+type ContextProps = {
+  GetInReduced: Function;
+  listCandidates: object | undefined;
+};
 
-export const GetReducedContext = createContext<ContextProps>(initialState)
+const initialState = {
+  GetInReduced: () => {},
+  listCandidates: [],
+};
 
-const GetReducedProvider= ({ children }: Props) => {
-  
-    const[listCandidates , setListCandidates] = useState()
-  
-    async function GetInReduced(page:number){
-      try{  
-        const {data} = await api.get(`/candidato/get-paginado?pagina=${page}&quantidadePorPagina=16`)
-        setListCandidates(data)
-      }
-      catch(error){
-          console.log(error);
-      }
+export const GetReducedContext = createContext<ContextProps>(initialState);
+
+const GetReducedProvider = ({ children }: Props) => {
+  const [listCandidates, setListCandidates] = useState();
+
+  async function GetInReduced(page: number) {
+    try {
+      const { data } = await api.get(
+        `/candidato/get-paginado?pagina=${page}&quantidadePorPagina=10`
+      );
+      setListCandidates(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
-    return (
-    <GetReducedContext.Provider value={{
+  return (
+    <GetReducedContext.Provider
+      value={{
         GetInReduced,
-        listCandidates
-        }}>
-        {children}
+        listCandidates,
+      }}
+    >
+      {children}
     </GetReducedContext.Provider>
-  )
-}
+  );
+};
 
-export default GetReducedProvider
+export default GetReducedProvider;

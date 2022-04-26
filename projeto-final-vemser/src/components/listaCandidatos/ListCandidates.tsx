@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as C from "./ListCandidates.styles";
 import { useContext } from "react";
-
-
-
-import {IoMdArrowRoundForward ,IoMdArrowRoundBack } from 'react-icons/io'
+import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 
 import Loading from "../loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
@@ -15,19 +12,19 @@ const ListCandidates = () => {
   const { GetInReduced, listCandidates } = useContext<any>(GetReducedContext);
   const [page, setPage] = useState<number>(0);
 
-  useEffect(()=>{
-    const token = localStorage.getItem('token')
-    if(token){
-      api.defaults.headers.common['Authorization'] = token
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      api.defaults.headers.common["Authorization"] = token;
     }
     GetInReduced(page);
-   },[])
- 
+  }, []);
+
   useEffect(() => {
     GetInReduced(page);
   }, [page]);
 
-  if (!listCandidates ) {
+  if (!listCandidates) {
     return <Loading />;
   }
 
@@ -68,11 +65,14 @@ const ListCandidates = () => {
         ))}
       </C.Ul>
       <C.DivButtonsPage>
-        
-         <C.ButtonPage onClick={() => nextPage("-")}> <IoMdArrowRoundBack/> </C.ButtonPage>
-       
-         <C.ButtonPage onClick={() => nextPage("+")}><IoMdArrowRoundForward/> </C.ButtonPage>
-     
+        <C.ButtonPage onClick={() => nextPage("-")}>
+          {" "}
+          <IoMdArrowRoundBack />{" "}
+        </C.ButtonPage>
+
+        <C.ButtonPage onClick={() => nextPage("+")}>
+          <IoMdArrowRoundForward />{" "}
+        </C.ButtonPage>
       </C.DivButtonsPage>
     </C.Nav>
   );

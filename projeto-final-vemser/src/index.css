@@ -10,6 +10,9 @@ a {
   text-decoration: none;
   color: #000;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;

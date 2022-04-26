@@ -11,7 +11,10 @@ export const formatDateToApi = (value: any) => {
   return moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
 };
 export const formatDateToUser = (value: any) => {
-  return moment(value, "YYYY-MM-DD" ).format("DD/MM/YYYY");
+  return moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
+};
+export const topPage = () => {
+  return window.scrollTo(0, 0);
 };
 // export function prepareDataToInsert(values: any) {
 //   const valuesToPost = {
@@ -141,5 +144,5 @@ export function prepareDateToUser(values: CandidatoDTO) {
       dadoEscolar.dataFim = formatDateToUser(dadoEscolar.dataFim);
     });
   }
-  return values
+  return values;
 }
