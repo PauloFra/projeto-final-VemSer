@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const DivContainerDetail = styled.div`
     border-radius: 10px;
     margin-left: 40px;
-    
-   transform: translateX(42px);
+    transform: translateX(42px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -32,7 +31,25 @@ export const DivInfo = styled.div`
 
 `
 export const ButtonAsLink = styled.button`
-    padding: 15px 0;
+    padding: 10px 0;
     width: 100%;
-    margin: 15px;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+    background-color: #3636ba;
+    border: 1px solid rgb(159,162,180);
+    
+    :hover{
+        border-radius: 0 20px 0 20px;
+        background-color: #1e1ead;
+    }
 `
+
+export const DivBtn = styled.div`
+    padding: 15px 30px;
+    width: 100%;
+
+`
+

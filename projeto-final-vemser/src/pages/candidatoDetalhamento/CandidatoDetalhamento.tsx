@@ -2,7 +2,7 @@ import {  useState } from "react";
 import { AiOutlineClose } from 'react-icons/ai'
 
 import * as C from './candidatoDetalhado.styles'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 type Props = {
   candidato: any;
   fecharMenu: Function;
@@ -18,8 +18,11 @@ type PropsMap = {
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
 
   
-  
+  const navigate = useNavigate()
 
+  function NavigateById(id:number){
+    navigate(`/form-curriculo/${id}`)
+  }
   console.log('candidato =>' , candidato);
   
   return (
@@ -43,11 +46,9 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
             <p>Número: {candidato.numero}</p>
             
           </C.DivInfo >        
-      <div>
-        <Link to={`/form-curriculo/${candidato.idCandidato}`} >
-              Atualizar Candidato
-        </Link>
-      </div>
+        <C.DivBtn>
+              <C.ButtonAsLink onClick={() => NavigateById(candidato.idCandidato)}>Atualizar Candidato</C.ButtonAsLink>
+        </C.DivBtn>
     </C.DivContainerDetail>
   );
 };

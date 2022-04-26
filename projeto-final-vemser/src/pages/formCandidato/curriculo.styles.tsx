@@ -7,9 +7,12 @@ export const ContainerGeral = styled.div`
   min-width: 1200px;
   display: flex;
   flex-direction: column;
+  
   align-items: center;
   height: calc(100vh - 50px);
   form {
+    -webkit-box-shadow: 20px 18px 50px 5px rgba(0,0,0,0.16); 
+    box-shadow: 20px 18px 50px 5px rgba(0,0,0,0.16);  
     gap: 15px 150px;
     padding: 0px 30px;
     display: grid;
@@ -30,10 +33,11 @@ export const DivFlexColumn = styled.div`
   width: 250px;
   input {
     width: 250px;
-    margin-top: 5px;
+    margin-top: 8px;
     border-radius: 9px;
     height: 30px;
-    padding-left: 5px;
+    padding:4px 0 4px 7px;
+    
     font-size: 15px;
     border: 1px solid rgb(159, 162, 180);
 
@@ -60,13 +64,24 @@ export const TitleInfoTopic = styled.h2`
   color: rgb(51, 51, 51);
   grid-column-start: 1;
   grid-column-end: 3;
-  align-self: end;
+  align-self: flex-end;
+  
 `;
-
+export const DivCabeçalho = styled.div`
+  color: rgb(51, 51, 51);
+  display: flex;  
+  align-self: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  
+`;
 export const DivError = styled.div`
   margin: 3px 0px 0px 5px;
   color: #ff6969;
   font-weight: bold;
+
   font-size: 14px;
 `;
 /* FORM */
@@ -81,19 +96,19 @@ export const ContainerInputs = styled.div`
 
 export const Botao = styled.button`
   border-radius: 10px;
-  border: none;
-  background-color: #3f6abf;
+  border: 1px solid black;
+  background-color: transparent;
   padding: 12px 0;
-  margin: 20px;
+  margin: 20px 500px;
   font-size: 20px;
   transition: 1s;
-  color: white;
-  box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
   grid-column: 1/3;
   cursor: pointer;
   :hover {
     transition: 1s;
-    background-color: #2c7bbf;
+    color: white;
+    border: 1px solid white;
+    background-color: rgb(159,162,180);
   }
 `;
 
@@ -101,4 +116,33 @@ export const CheckBox = styled(Field)`
   height: 24px;
   width: 24px;
   margin-left: 5px;
+`;
+
+export const ButtonExcluir = styled.button`
+  color: #ff0000;
+  background-color:  #ffcccc;;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 1s;
+  border-radius: 4px;
+  padding: 4px 6px;
+  :hover{
+    color: #ffcccc;
+    background-color: #ff0000 ;
+  }
+`;
+export const ButtonAdd = styled.button`
+
+  transition: 1s;
+  
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 4px 0;
+  :hover {
+    background-color: rgb(159,162,180);
+  }
 `;
