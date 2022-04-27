@@ -5,10 +5,11 @@ export const BackGroundTabela = styled.div`
   flex-direction: column;
   width: 100%;
   justify-content: center;
-  height: calc(100vh - 65px);
+  margin-bottom: 10px;
+  /* height: calc(100vh - 65px); */
 `;
 export const DivMenu = styled.div`
-  padding-left: 30px;
+  padding: 20px 0px 10px 30px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -31,12 +32,16 @@ export const SubTitle = styled.h3`
 
 export const Tabela = styled.table`
   width: 100%;
+  min-height: 800px;
+  border-radius: 4px;
   text-align: center;
   border-spacing: 0px;
   /* background-color: rgb(207, 213, 225, 0.5); */
   border: 1.5px solid #dfe0eb;
 `;
-
+export const ContainerGeralTabela = styled.div`
+  display: flex;
+`;
 export const TrTabela = styled.tr`
   &:nth-child(even) {
     background-color: rgb(237, 237, 242, 0.5);
@@ -50,15 +55,29 @@ export const TdTabela = styled.td`
   height: 70px;
   a {
     color: #777777;
-    :hover {
-      color: #a6aec1;
-    }
   }
 `;
+export const ThTabela = styled.th``;
 
 export const TheadTabela = styled.thead`
   height: 90px;
   background-color: rgb(237, 237, 242, 0.5);
   font-size: 24px;
   color: #a8a8a8;
+`;
+export const ContainerButtonsPage = styled.div`
+  padding: 10px 0px 10px 20px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 14px;
+
+  button {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
 `;

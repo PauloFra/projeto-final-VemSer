@@ -5,3 +5,13 @@ export type PropsExperiencia = {
   idExperiencia: number;
   nomeEmpresa: string;
 };
+
+export type PropsDados = {
+  dadosEscolares: [
+    dataFim: string,
+    dataInicio: string,
+    descricao: any,
+    idDadosEscolares: number,
+    instituicao: string
+  ];
+};

@@ -3,7 +3,7 @@ import { PropsExperiencia } from "../../TypesDetalhamento";
 import { formatDateToUser } from "../../../../utils";
 import * as GC from "../GlobalStyles.styles";
 type Props = {
-  experiencia: {
+  experiencias: {
     dataFim: string;
     dataInicio: string;
     descricao: string;
@@ -12,16 +12,16 @@ type Props = {
   };
 };
 
-const CardExperiencia = ({ experiencia }: any) => {
-  console.log(experiencia);
+const CardExperiencia = ({ experiencias }: Props | any) => {
+  console.log(experiencias);
 
   return (
     <GC.DivTopicosCandidato>
       <GC.TituloInfo>
         <GC.Negrito>Experiência Profissional</GC.Negrito>
       </GC.TituloInfo>
-      {experiencia &&
-        experiencia.map((exp: PropsExperiencia) => (
+      {experiencias &&
+        experiencias.map((exp: PropsExperiencia) => (
           <GC.ContainerInfo key={exp.idExperiencia}>
             <GC.Info>
               <GC.Negrito>Nome da Empresa:</GC.Negrito>

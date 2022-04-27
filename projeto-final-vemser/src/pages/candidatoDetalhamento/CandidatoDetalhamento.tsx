@@ -1,12 +1,12 @@
 import { AiOutlineClose } from "react-icons/ai";
 
-
 import * as C from "./candidatoDetalhado.styles";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CardExperiencia from "./componentes/CardExperiencia/CardExperiencia";
 import { formatDateToUser } from "../../utils";
 import CardInfoPessoal from "./componentes/CardInfoPessoais/CardInfoPessoal";
 import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
+import CardDadosAcademicos from "./componentes/CardDadosAcademicos/CardDadosAcademicos";
 type Props = {
   candidato: any;
   fecharMenu: Function;
@@ -20,8 +20,7 @@ type PropsMap = {
 };
 
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
-  const { experiencias } = candidato;
-  console.log(experiencias);
+  const { experiencias, dadosEscolares } = candidato;
 
   const navigate = useNavigate();
 
@@ -48,8 +47,8 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
         cpf={candidato.cpf}
         telefone={candidato.telefone}
       />
-
-      <CardExperiencia experiencia={experiencias} />
+      <CardDadosAcademicos dadosEscolares={dadosEscolares} />
+      <CardExperiencia experiencias={experiencias} />
 
       <C.DivBtn>
         <C.ButtonAsLink onClick={() => NavigateById(candidato.idCandidato)}>

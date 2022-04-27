@@ -1,10 +1,10 @@
 import styled from "styled-components";
 export const DivContainerDetail = styled.div`
-  border-radius: 10px;
-  margin-left: 40px;
+  margin: 0px 10px 10px 20px;
   display: flex;
+  border-radius: 4px;
   flex-direction: column;
-  min-width: 490px;
+  min-height: 800px;
   align-items: start;
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
   box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
@@ -13,7 +13,6 @@ export const DivContainerDetail = styled.div`
 export const DivFlex = styled.div`
   display: flex;
   padding: 10px;
-  border-radius: 10px;
   background-color: #f1f3f4;
   width: 100%;
   align-items: center;

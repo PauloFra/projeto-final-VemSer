@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 /* import * as C from "../../components/globalStyles/global.styles"; */
-import * as C from "../../components/globalStyles/global.styles";
+
 import * as CC from "./curriculos.styles";
 import api from "../../api";
 import { useEffect, useState } from "react";
@@ -71,15 +71,15 @@ function Curriculos() {
         </CC.SubTitle>
       </CC.DivMenu>
 
-      <C.ContainerGeralTabela>
+      <CC.ContainerGeralTabela>
         <CC.Tabela>
           <CC.TheadTabela>
             <CC.TrTabela>
-              <C.TableTh>Nome</C.TableTh>
-              <C.TableTh>Cargo</C.TableTh>
-              <C.TableTh>Data de nascimento</C.TableTh>
-              <C.TableTh>Senioridade</C.TableTh>
-              <C.TableTh>Ações</C.TableTh>
+              <CC.ThTabela>Nome</CC.ThTabela>
+              <CC.ThTabela>Cargo</CC.ThTabela>
+              <CC.ThTabela>Data de nascimento</CC.ThTabela>
+              <CC.ThTabela>Senioridade</CC.ThTabela>
+              <CC.ThTabela>Ações</CC.ThTabela>
             </CC.TrTabela>
           </CC.TheadTabela>
 
@@ -102,7 +102,7 @@ function Curriculos() {
             </CC.TrTabela>
           ))}
 
-          <C.ContainerButtonsPage>
+          <CC.ContainerButtonsPage>
             <button onClick={() => nextPage("-")}>
               <IoMdArrowRoundBack />
             </button>
@@ -111,7 +111,7 @@ function Curriculos() {
             <button onClick={() => nextPage("+")}>
               <IoMdArrowRoundForward />
             </button>
-          </C.ContainerButtonsPage>
+          </CC.ContainerButtonsPage>
         </CC.Tabela>
 
         {modalVisualizar && (
@@ -120,7 +120,7 @@ function Curriculos() {
             fecharMenu={setModalVisualizar}
           />
         )}
-      </C.ContainerGeralTabela>
+      </CC.ContainerGeralTabela>
     </CC.BackGroundTabela>
   );
 }
