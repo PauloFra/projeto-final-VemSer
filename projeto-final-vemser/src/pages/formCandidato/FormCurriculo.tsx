@@ -178,8 +178,14 @@ function FormCurriculo() {
               </C.DivFlexColumn>
 
               <C.DivFlexColumn>
-                <C.Label htmlFor="telefone">telefone</C.Label>
-                <Field id="telefone" name="telefone" placeholder="Telefone" />
+                <C.Label htmlFor="telefone">telefone / celular</C.Label>
+                <Field 
+                id="telefone" 
+                name="telefone" 
+                placeholder="Telefone"
+                as={InputMask}
+                mask="(99)99999-9999"
+                />
                 {errors.telefone && touched.telefone ? (
                   <C.DivError>{errors.telefone}</C.DivError>
                 ) : null}
@@ -342,7 +348,7 @@ function FormCurriculo() {
                         </C.ContainerInputs>
                       )
                     )}
-                  {limitAcademico < 3 && (
+                  {limitAcademico < 10 && (
                     <a onClick={() => addAcad()}>
                       <C.DivFlexColumn>
                         <C.ButtonAdd
@@ -457,7 +463,7 @@ function FormCurriculo() {
                         <C.DivFlexColumn></C.DivFlexColumn>
                       </C.ContainerInputs>
                     ))}
-                  {limitExperiencia < 3 && (
+                  {limitExperiencia < 10 && (
                     <a onClick={() => addExp()}>
                       <C.DivFlexColumn>
                         <C.ButtonAdd
