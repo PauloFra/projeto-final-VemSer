@@ -1,5 +1,4 @@
 import styled from "styled-components";
-
 export const DivContainerDetail = styled.div`
   border-radius: 10px;
   margin-left: 40px;
@@ -7,9 +6,9 @@ export const DivContainerDetail = styled.div`
   flex-direction: column;
   min-width: 490px;
   align-items: start;
- 
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
   box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
+  transition: 1s;
 `;
 export const DivFlex = styled.div`
   display: flex;

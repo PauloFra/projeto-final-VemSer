@@ -2,7 +2,7 @@ import InputMask from "react-input-mask";
 import { Formik, Field, Form, FieldArray } from "formik";
 import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-// import Experiencias from "../../components/experienciasForm/Experiencias";
+
 import { ExperienciaDTO } from "../../model/ExperienciaDTO";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";

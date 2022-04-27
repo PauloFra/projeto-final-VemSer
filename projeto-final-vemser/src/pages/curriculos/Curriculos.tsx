@@ -2,10 +2,6 @@ import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 /* import * as C from "../../components/globalStyles/global.styles"; */
 import * as C from "../../components/globalStyles/global.styles";
-
-
-
-
 import api from "../../api";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
@@ -62,18 +58,19 @@ function Curriculos() {
     setModalVisualizar(menu);
     topPage();
   };
+  const zeroLeft = (num: number) => {
+    return num < 10 ? `0${num}` : num < 100 ? `0${num}` : num;
+  };
   return (
     <C.ContainerGeral border="none">
-
       <C.DivMenu>
-       <C.TitleH>Listagem de Vagas </C.TitleH>
+        <C.TitleH>Listagem de Vagas </C.TitleH>
         <h3>
           <Link to="/form-curriculo">Criar Candidato</Link>
         </h3>
-      </C.DivMenu>  
-     
-    
-     <C.ContainerGeralTabela>
+      </C.DivMenu>
+
+      <C.ContainerGeralTabela>
         <C.TableCandidates width="100%">
           <C.TableHead>
             <C.TableTr>
@@ -83,8 +80,8 @@ function Curriculos() {
               <C.TableTh>Senioridade</C.TableTh>
               <C.TableTh>Ações</C.TableTh>
             </C.TableTr>
-          </C.TableHead> 
-        
+          </C.TableHead>
+
           {candidatos.map((candidato: any) => (
             <C.TableTr key={candidato.idCandidato}>
               <C.TableTd>{candidato.nome}</C.TableTd>
@@ -106,19 +103,22 @@ function Curriculos() {
             <button onClick={() => nextPage("-")}>
               <IoMdArrowRoundBack />
             </button>
+            <span> Página: {zeroLeft(page + 1)}</span>
 
             <button onClick={() => nextPage("+")}>
               <IoMdArrowRoundForward />
             </button>
           </C.ContainerButtonsPage>
         </C.TableCandidates>
+
         {modalVisualizar && (
           <CandidatoDetalhamento
             candidato={candidatoDetalhado}
             fecharMenu={setModalVisualizar}
           />
         )}
-       {/* <C.ContainerInfoCandidato>
+
+        {/* <C.ContainerInfoCandidato>
         <C.Ul>
           {candidatos.map((candidato: any) => (
             <C.Li key={candidato.idCandidato}>
@@ -157,7 +157,7 @@ function Curriculos() {
           />
         )}
       </C.ContainerInfoCandidato> */}
-     </C.ContainerGeralTabela>
+      </C.ContainerGeralTabela>
     </C.ContainerGeral>
   );
 }

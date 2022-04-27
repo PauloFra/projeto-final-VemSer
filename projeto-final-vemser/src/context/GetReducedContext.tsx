@@ -22,7 +22,7 @@ const GetReducedProvider = ({ children }: Props) => {
   async function GetInReduced(page: number) {
     try {
       const { data } = await api.get(
-        `/candidato/get-paginado?pagina=${page}&quantidadePorPagina=10`
+        `/candidato/get-paginado?pagina=${page}&quantidadePorPagina=9`
       );
       setListCandidates(data);
     } catch (error) {
