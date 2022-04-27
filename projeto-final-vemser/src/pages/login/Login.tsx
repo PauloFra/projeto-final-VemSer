@@ -37,7 +37,6 @@ const Login = () => {
   });
 
   return (
-    <div>
       <C.ContainerLogin>
         <C.ContainerForm onSubmit={formikProps.handleSubmit}>
           <C.DivLogo>
@@ -76,7 +75,6 @@ const Login = () => {
           <C.Botao type="submit">Login</C.Botao>
         </C.ContainerForm>
       </C.ContainerLogin>
-    </div>
   );
 };
 

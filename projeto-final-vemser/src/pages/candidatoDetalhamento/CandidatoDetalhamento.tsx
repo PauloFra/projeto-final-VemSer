@@ -2,9 +2,9 @@ import { AiOutlineClose } from "react-icons/ai";
 
 
 import * as C from "./candidatoDetalhado.styles";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import CardExperiencia from "./componentes/CardExperiencia/CardExperiencia";
-
+import { formatDateToUser } from "../../utils";
 import CardInfoPessoal from "./componentes/CardInfoPessoais/CardInfoPessoal";
 import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
 type Props = {
@@ -44,7 +44,7 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
         cargo={candidato.cargo}
       />
       <CardInfoGeral
-        dataNascimento={candidato.dataNascimento}
+        dataNascimento={formatDateToUser(candidato.dataNascimento)}
         cpf={candidato.cpf}
         telefone={candidato.telefone}
       />

@@ -6,11 +6,11 @@ import api from "../../api";
 import Loading from "../../components/loading/Loading";
 import * as C from "../../components/globalStyles/global.styles";
 import { VagasDTO } from "../../model/VagasDTO";
-import Modal from "../formCandidato/experiencia/Modal";
-import ExperienciaCandidato from "../formCandidato/experiencia/ExperienciaCandidato";
+import Notiflix from "notiflix";
 function Vagas() {
   const [visibleModal, setVisibleModal] = useState(false);
   const [vagas, setVagas] = useState<VagasDTO["vagas"]>();
+  const [idVagas, setIdVagas] = useState<number | undefined>();
 
   async function getInVagas() {
     try {
@@ -31,13 +31,16 @@ function Vagas() {
   if (!vagas) {
     return <Loading />;
   }
-
+  function ModalTratament(idVaga:number | undefined) {
+    setVisibleModal(true)
+    setIdVagas(idVaga)
+  }
   return (
     <C.ContainerGeral>
       <C.DivMenu>
        <C.TitleH>Listagem de Vagas </C.TitleH>
       </C.DivMenu>
-      {visibleModal && <ModalList onClose={() => setVisibleModal(false)} />}
+      {visibleModal && <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false) } /> }
       <C.TableCandidates>
         <C.TableHead>
           <C.TableTr>
@@ -68,7 +71,7 @@ function Vagas() {
               <C.TableTd>{vaga.analista}</C.TableTd>
               {/* <C.TableTd>{vaga.pcd ? "Sim" : "Não"}</C.TableTd> */}
               <C.TableTd align={'center'}>
-                <button onClick={() => setVisibleModal(true)}>Vincular</button>
+                <button onClick={() => ModalTratament(vaga.id)}>Vincular</button>
               </C.TableTd>
             </C.TableTr>
           ))}

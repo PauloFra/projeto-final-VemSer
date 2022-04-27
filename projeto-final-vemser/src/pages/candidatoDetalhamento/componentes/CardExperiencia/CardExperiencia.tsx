@@ -1,5 +1,6 @@
 import React from "react";
 import { PropsExperiencia } from "../../TypesDetalhamento";
+import { formatDateToUser } from "../../../../utils";
 import * as GC from "../GlobalStyles.styles";
 type Props = {
   experiencia: {
@@ -28,11 +29,11 @@ const CardExperiencia = ({ experiencia }: any) => {
             </GC.Info>
             <GC.Info>
               <GC.Negrito>Data de início: </GC.Negrito>
-              {exp.dataInicio}
+              {formatDateToUser(exp.dataInicio)}
             </GC.Info>
             <GC.Info>
               <GC.Negrito>Data de saída: </GC.Negrito>
-              {exp.dataFim}
+              {formatDateToUser(exp.dataFim)}
             </GC.Info>
             <GC.Info>
               <GC.Negrito>Descrição: </GC.Negrito>
