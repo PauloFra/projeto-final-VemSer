@@ -9,12 +9,11 @@ export const DivContainerDetail = styled.div`
   align-items: start;
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
   box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
-  transition: 1s;
+  
 `;
 export const DivFlex = styled.div`
   display: flex;
   padding: 10px;
-  background-color: #f1f3f4;
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -23,7 +22,10 @@ export const ButtonClose = styled.button`
   font-size: 30px;
   cursor: pointer;
   border: none;
- 
+  background-color:transparent ;
+  :hover{
+    color: red;
+  }
 `;
 
 export const ButtonAsLink = styled.button`

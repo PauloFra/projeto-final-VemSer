@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 /* import * as C from "../../components/globalStyles/global.styles"; */
 
-import * as CC from "./curriculos.styles";
+import * as CC from "../../components/globalStyles/global.styles";
 import api from "../../api";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
@@ -114,14 +114,13 @@ function Curriculos() {
           </CC.ContainerButtonsPage>
         </CC.Tabela>
 
-       <div>
        {modalVisualizar && (
           <CandidatoDetalhamento
             candidato={candidatoDetalhado}
             fecharMenu={setModalVisualizar}
           />
         )}
-       </div>
+       
       </CC.ContainerGeralTabela>
     </CC.BackGroundTabela>
   );

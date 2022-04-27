@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+
 import ModalList from "../../components/modal/ModalList";
 import moment from "moment";
 import api from "../../api";
@@ -35,48 +37,61 @@ function Vagas() {
     setIdVagas(idVaga)
   }
   return (
-    <C.ContainerGeral>
+    <C.BackGroundTabela>
       <C.DivMenu>
-       <C.TitleH>Listagem de Vagas </C.TitleH>
+       <C.Title>Listagem de Vagas </C.Title>
       </C.DivMenu>
       {visibleModal && <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false) } /> }
-      <C.TableCandidates>
-        <C.TableHead>
-          <C.TableTr>
-            <C.TableTh>Titulo</C.TableTh>
-            <C.TableTh>Cliente</C.TableTh>
-            <C.TableTh>Status</C.TableTh>
-            <C.TableTh>Responsavel</C.TableTh>
-            <C.TableTh>estado</C.TableTh>
-            <C.TableTh>data_abertura</C.TableTh>
-            <C.TableTh>cidade</C.TableTh>
-            <C.TableTh>analista</C.TableTh>
-            {/* <C.TableTh>pcd</C.TableTh> */}
-            <C.TableTh align={'center'}>Vincular Candidato</C.TableTh>
-          </C.TableTr>
-        </C.TableHead>
-        <C.TableBody>
+      <C.ContainerGeralTabela>
+      <C.Tabela>
+        <C.TheadTabela>
+          <C.TrTabela>
+            <C.ThTabela>Titulo</C.ThTabela>
+            <C.ThTabela>Cliente</C.ThTabela>
+            <C.ThTabela>Status</C.ThTabela>
+            <C.ThTabela>Responsavel</C.ThTabela>
+            <C.ThTabela>estado</C.ThTabela>
+            <C.ThTabela>data_abertura</C.ThTabela>
+            <C.ThTabela>cidade</C.ThTabela>
+            <C.ThTabela>analista</C.ThTabela>
+            {/* <C.ThTabela>pcd</C.ThTabela> */}
+            <C.ThTabela align={'center'}>Vincular Candidato</C.ThTabela>
+          </C.TrTabela>
+        </C.TheadTabela>
           {vagas.map((vaga) => (
-            <C.TableTr key={vaga.id}>
-              <C.TableTd>{vaga.titulo}</C.TableTd>
-              <C.TableTd>{vaga.cliente}</C.TableTd>
-              <C.TableTd>{vaga.status}</C.TableTd>
-              <C.TableTd>{vaga.responsavel}</C.TableTd>
-              <C.TableTd>{vaga.estado}</C.TableTd>
-              <C.TableTd>
+            <C.TrTabela key={vaga.id}>
+              <C.TdTabela>{vaga.titulo}</C.TdTabela>
+              <C.TdTabela>{vaga.cliente}</C.TdTabela>
+              <C.TdTabela>{vaga.status}</C.TdTabela>
+              <C.TdTabela>{vaga.responsavel}</C.TdTabela>
+              <C.TdTabela>{vaga.estado}</C.TdTabela>
+              <C.TdTabela>
                 {moment(vaga.dataAbertura, "YYYY-MM-DD").format("DD/MM/YYYY")}
-              </C.TableTd>
-              <C.TableTd>{vaga.cidade}</C.TableTd>
-              <C.TableTd>{vaga.analista}</C.TableTd>
-              {/* <C.TableTd>{vaga.pcd ? "Sim" : "Não"}</C.TableTd> */}
-              <C.TableTd align={'center'}>
+              </C.TdTabela>
+              <C.TdTabela>{vaga.cidade}</C.TdTabela>
+              <C.TdTabela>{vaga.analista}</C.TdTabela>
+              {/* <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela> */}
+              <C.TdTabela align={'center'}>
                 <button onClick={() => ModalTratament(vaga.id)}>Vincular</button>
-              </C.TableTd>
-            </C.TableTr>
+              </C.TdTabela>
+            </C.TrTabela>
           ))}
-        </C.TableBody>
-      </C.TableCandidates>
-    </C.ContainerGeral>
+           <C.ContainerButtonsPage>
+            <button onClick={() => {}}>
+              <IoMdArrowRoundBack />
+            </button>
+            <span> Página:</span>
+
+            <button onClick={() => {}}>
+              <IoMdArrowRoundForward />
+            </button>
+          </C.ContainerButtonsPage>
+        
+      </C.Tabela>
+      
+      </C.ContainerGeralTabela>
+      
+    </C.BackGroundTabela>
   );
 }
 
