@@ -27,13 +27,10 @@ function FormCurriculoCopiaTestes() {
 
   const [fileInputData, setFileInputData] = useState<any>();
 
-
-
   const [indexExperbiencias, setIndexExperiencias] = useState();
   const [Link, setLink] = useState();
 
   useEffect(() => {
-    
     const token = localStorage.getItem("token");
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
@@ -41,25 +38,34 @@ function FormCurriculoCopiaTestes() {
     if (idCandidato) {
       getInCandidatoById(idCandidato);
     }
-    GetCurriculo ()
   }, []);
 
-  async function GetCurriculo () {
-    try{
-      const {data} = await api.get('/curriculo/download-curriculo/94')
-      setLink(data);
-    }catch(error){
-      console.log(error);
-      
-    }
+  async function GetCurriculo() {
+    await api({
+      url: "https://vemcv.herokuapp.com/curriculo/download-curriculo/94",
+      responseType: "blob",
+    })
+      .then(function (response) {
+        const blob = new Blob([response.data], {
+          type: "application/pdf",
+        });
+
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
-  async function postCandidato(values: any) {  
+
+  async function postCandidato(values: any) {
     try {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
 
-        {data && PostIn(data.idCandidato)}
-      
+      {
+        data && PostIn(data.idCandidato);
+      }
 
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       navigate("/curriculos");
@@ -68,20 +74,25 @@ function FormCurriculoCopiaTestes() {
     }
   }
 
-  async function PostIn(idCandidatoPost:number){
+  async function PostIn(idCandidatoPost: number) {
     console.log(idCandidatoPost);
     const formData = new FormData();
-    formData.append('curriculo',  fileInputData);
-    try{
-      const {data} = await api.post(`/curriculo/upload-curriculo/${idCandidatoPost}` , formData)
-    }catch(error){
+    formData.append("curriculo", fileInputData);
+    try {
+      const { data } = await api.post(
+        `/curriculo/upload-curriculo/${idCandidatoPost}`,
+        formData
+      );
+    } catch (error) {
       console.log(error);
     }
   }
 
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get(`/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
+      const { data } = await api.get(
+        `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
+      );
 
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
@@ -92,8 +103,6 @@ function FormCurriculoCopiaTestes() {
       console.log(error);
     }
   }
-
-
 
   async function updateCandidato(values: CandidatoDTO) {
     prepareDataToInsert(values);
@@ -113,10 +122,9 @@ function FormCurriculoCopiaTestes() {
   if (idCandidato && !candidatoForUpdate) {
     return <Loading />;
   }
-  if(!Link){
-    (<Loading />)
+  if (!Link) {
+    <Loading />;
   }
-  
 
   function addExp() {
     setLimitExperiencia(limitExperiencia + 1);
@@ -148,18 +156,16 @@ function FormCurriculoCopiaTestes() {
     cidade: "",
     bairro: "",
   };
-  
-
- 
 
   return (
     <C.ContainerGeral>
-      <a download href={Link} target="_blank">Teste</a>
+      <a target="_blank" onClick={GetCurriculo}>
+        Teste
+      </a>
       <C.TitleForm>
         {idCandidato ? "Atualizar" : "Adicionar"} Candidato
       </C.TitleForm>
       <Formik
-      
         initialValues={idCandidato ? candidatoForUpdate : initialValues}
         onSubmit={async (values: CandidatoDTO) => {
           idCandidato ? updateCandidato(values) : postCandidato(values);
@@ -210,33 +216,32 @@ function FormCurriculoCopiaTestes() {
 
               <C.DivFlexColumn>
                 <C.Label htmlFor="telefone">telefone / celular</C.Label>
-                <Field 
-                id="telefone" 
-                name="telefone" 
-                placeholder="Telefone"
-                as={InputMask}
-                mask="(99)99999-9999"
+                <Field
+                  id="telefone"
+                  name="telefone"
+                  placeholder="Telefone"
+                  as={InputMask}
+                  mask="(99)99999-9999"
                 />
                 {errors.telefone && touched.telefone ? (
                   <C.DivError>{errors.telefone}</C.DivError>
                 ) : null}
               </C.DivFlexColumn>
-              
+
               <C.DivFlexColumn>
                 <C.Label htmlFor="fileInput">File Input</C.Label>
 
-                <input 
-                accept=".pdf"
-                onChange={(e:any)=> setFileInputData(e.target.files[0])}
-                id="fileInput" 
-                name="fileInput" 
-                placeholder="fileInput"
-                type="file"
+                <input
+                  accept=".pdf"
+                  onChange={(e: any) => setFileInputData(e.target.files[0])}
+                  id="fileInput"
+                  name="fileInput"
+                  placeholder="fileInput"
+                  type="file"
                 />
                 {errors.telefone && touched.telefone ? (
                   <C.DivError>{errors.telefone}</C.DivError>
                 ) : null}
-
               </C.DivFlexColumn>
               <C.DivFlexColumn>
                 <C.Label htmlFor="dataNascimento">Data de Nascimento</C.Label>
