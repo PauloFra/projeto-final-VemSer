@@ -7,8 +7,9 @@ import { ExperienciaDTO } from "../../model/ExperienciaDTO";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
-import * as C from "./curriculo.styles";
+import * as C from "./FormCurriculo.styles";
 import Notiflix from "notiflix";
+import { ButtonVisualizar } from "../../components/globalStyles/global.styles";
 import {
   SingupSchema,
   prepareDataToInsert,
@@ -43,9 +44,7 @@ function FormCurriculo() {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
-      setTimeout(() => {
-        document.location.reload();
-      }, 1000);
+      navigate("/curriculos");
     } catch (error) {
       console.log(error);
     }
@@ -347,7 +346,7 @@ function FormCurriculo() {
                   {limitAcademico < 10 && (
                     <a onClick={() => addAcad()}>
                       <C.DivFlexColumn>
-                        <C.ButtonAdd
+                        <ButtonVisualizar
                           type="button"
                           className="secondary"
                           onClick={() =>
@@ -360,7 +359,7 @@ function FormCurriculo() {
                           }
                         >
                           Nova Informação Acadêmica
-                        </C.ButtonAdd>
+                        </ButtonVisualizar>
                       </C.DivFlexColumn>
                     </a>
                   )}
@@ -462,7 +461,7 @@ function FormCurriculo() {
                   {limitExperiencia < 10 && (
                     <a onClick={() => addExp()}>
                       <C.DivFlexColumn>
-                        <C.ButtonAdd
+                        <ButtonVisualizar
                           type="button"
                           className="secondary"
                           onClick={() =>
@@ -475,7 +474,7 @@ function FormCurriculo() {
                           }
                         >
                           Nova Experiência
-                        </C.ButtonAdd>
+                        </ButtonVisualizar>
                       </C.DivFlexColumn>
                     </a>
                   )}

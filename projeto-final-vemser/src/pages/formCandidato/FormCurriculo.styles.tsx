@@ -8,13 +8,14 @@ export const ContainerGeral = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  min-height: 87vh;
   margin-bottom: 20px;
   form {
     -webkit-box-shadow: 20px 18px 50px 5px rgba(0, 0, 0, 0.16);
     box-shadow: 20px 18px 50px 5px rgba(0, 0, 0, 0.16);
     gap: 15px 150px;
-    padding: 0px 30px;
+    padding: 0px 30px 20px 30px;
+    margin-bottom: 60px;
     display: grid;
     grid-template-columns: auto auto;
     justify-content: center;
@@ -37,10 +38,8 @@ export const DivFlexColumn = styled.div`
     border-radius: 9px;
     height: 30px;
     padding: 4px 0 4px 7px;
-
     font-size: 15px;
     border: 1px solid rgb(159, 162, 180);
-
     color: rgb(159, 162, 180);
     ::placeholder {
       color: rgb(159, 162, 180);
@@ -93,10 +92,12 @@ export const ContainerInputs = styled.div`
 `;
 
 export const Botao = styled.button`
-  border-radius: 10px;
-  border: 1px solid black;
+ 
+  border: 1px solid rgb(159, 162, 180);
   background-color: transparent;
   padding: 12px 0;
+  color: rgb(159, 162, 180);
+  font-weight: bold;
   margin: 20px 500px;
   font-size: 20px;
   grid-column: 1/3;

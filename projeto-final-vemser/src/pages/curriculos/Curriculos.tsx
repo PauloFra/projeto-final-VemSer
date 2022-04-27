@@ -67,7 +67,11 @@ function Curriculos() {
       <CC.DivMenu>
         <CC.Title>Listagem de Currículos </CC.Title>
         <CC.SubTitle>
-          <Link to="/form-curriculo">Criar Candidato</Link>
+          <Link to="/form-curriculo">
+            <CC.ButtonVisualizar>
+              Adicionar Candidato
+            </CC.ButtonVisualizar>
+            </Link>
         </CC.SubTitle>
       </CC.DivMenu>
 
@@ -75,13 +79,13 @@ function Curriculos() {
         <CC.Tabela>
           <CC.TheadTabela>
             <CC.TrTabela>
-              <CC.ThTabela>Nome</CC.ThTabela>
+              <CC.ThTabela radius="10px 0 0 0">Nome</CC.ThTabela>
               <CC.ThTabela>Cargo</CC.ThTabela>
               <CC.ThTabela>Data de nascimento</CC.ThTabela>
               <CC.ThTabela>Senioridade</CC.ThTabela>
-              <CC.ThTabela>Ações</CC.ThTabela>
+              <CC.ThTabela radius=" 0 10px 0 0" align={'center'}>Visualizar Detalhes</CC.ThTabela>
             </CC.TrTabela>
-          </CC.TheadTabela>
+          </CC.TheadTabela >
 
           {candidatos.map((candidato: any) => (
             <CC.TrTabela key={candidato.idCandidato}>
@@ -91,13 +95,12 @@ function Curriculos() {
                 {formatDateToUser(candidato.dataNascimento)}
               </CC.TdTabela>
               <CC.TdTabela>{candidato.senioridade}</CC.TdTabela>
-              <CC.TdTabela>
-                <Link
-                  to="#"
+              <CC.TdTabela align={'center'}>
+                <CC.ButtonVisualizar
                   onClick={() => menuDetalhado(candidato.idCandidato, true)}
                 >
-                  visualizar
-                </Link>
+                  Visualizar
+                </CC.ButtonVisualizar>
               </CC.TdTabela>
             </CC.TrTabela>
           ))}

@@ -46,16 +46,16 @@ function Vagas() {
       <C.Tabela>
         <C.TheadTabela>
           <C.TrTabela>
-            <C.ThTabela>Titulo</C.ThTabela>
+            <C.ThTabela radius="10px 0 0 0">Titulo</C.ThTabela>
             <C.ThTabela>Cliente</C.ThTabela>
-            <C.ThTabela>Status</C.ThTabela>
+             <C.ThTabela>Status</C.ThTabela>
             <C.ThTabela>Responsavel</C.ThTabela>
             <C.ThTabela>estado</C.ThTabela>
             <C.ThTabela>data_abertura</C.ThTabela>
             <C.ThTabela>cidade</C.ThTabela>
             <C.ThTabela>analista</C.ThTabela>
             {/* <C.ThTabela>pcd</C.ThTabela> */}
-            <C.ThTabela align={'center'}>Vincular Candidato</C.ThTabela>
+            <C.ThTabela radius=" 0 10px 0 0 " align={'center'}>Vincular Candidato</C.ThTabela>
           </C.TrTabela>
         </C.TheadTabela>
           {vagas.map((vaga) => (
@@ -72,7 +72,7 @@ function Vagas() {
               <C.TdTabela>{vaga.analista}</C.TdTabela>
               {/* <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela> */}
               <C.TdTabela align={'center'}>
-                <button onClick={() => ModalTratament(vaga.id)}>Vincular</button>
+                <C.ButtonVisualizar onClick={() => ModalTratament(vaga.id)}>Vincular</C.ButtonVisualizar>
               </C.TdTabela>
             </C.TrTabela>
           ))}
