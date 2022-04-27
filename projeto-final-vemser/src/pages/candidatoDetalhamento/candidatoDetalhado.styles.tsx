@@ -34,12 +34,11 @@ export const ButtonAsLink = styled.button`
   color: white;
   cursor: pointer;
   transition: 0.5s;
-  background-color: #3636ba;
+  background-color: #6c788e;
   border: 1px solid rgb(159, 162, 180);
 
   :hover {
-    border-radius: 0 20px 0 20px;
-    background-color: #1e1ead;
+    background-color: rgb(108, 120, 142, 0.9);
   }
 `;
 

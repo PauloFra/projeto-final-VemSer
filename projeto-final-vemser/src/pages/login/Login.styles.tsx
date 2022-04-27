@@ -5,14 +5,14 @@ export const ContainerLogin = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
+  background-color: #a6aec1;
+
+  /*  background: rgb(166, 174, 193);
   background: linear-gradient(
-    to bottom,
-    #3a79d6,
-    #5c71da,
-    #7d66d9,
-    #9c57d3,
-    #b941c7
-  );
+    183deg,
+    rgba(166, 174, 193, 1) 0%,
+    rgba(207, 213, 225, 1) 100%
+  ); */
   justify-content: center;
   align-items: center;
 `;
@@ -27,7 +27,7 @@ export const DivLogo = styled.div`
 
 export const TitleLogin = styled.h1`
   font-size: 24px;
-  color: #6d53a6;
+  color: #6c788e;
   opacity: 0.7;
 `;
 
@@ -76,13 +76,13 @@ export const Botao = styled.button`
   height: 48px;
   font-size: 18px;
   color: #fff;
-  background-color: #3f6abf;
+  background-color: #6c788e;
   border-radius: 8px;
   border: none;
   box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
   cursor: pointer;
   :hover {
-    background-color: #2c7bbf;
+    background-color: rgb(108, 120, 142, 0.9);
   }
 `;
 

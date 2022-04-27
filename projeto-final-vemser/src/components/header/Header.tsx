@@ -1,36 +1,35 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Ulflex, ContainerHeader ,ButtonLogout } from "./Header.styles";
+import * as C from "./Header.styles";
 import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
 function Header() {
   const { isLogged, handleLogout, nomeUsuario } = useContext(AuthContext);
-  
- 
+
   return (
     <>
       {isLogged && (
-        <ContainerHeader>
+        <C.ContainerHeader>
           <Logo />
           <nav>
-            <Ulflex>
-              <li>
+            <C.Ulflex>
+              <C.Li>
                 <Link to="/">Vagas</Link>
-              </li>
-              <li>
+              </C.Li>
+              <C.Li>
                 <Link to="/curriculos">Candidatos</Link>
-              </li>
-              <li>
-                <h4>
-                  {nomeUsuario}
-                </h4>
-              </li>
-              <li>
-                <ButtonLogout onClick={() => handleLogout()}>Logout</ButtonLogout>
-              </li>
-            </Ulflex>
+              </C.Li>
+              <C.Li>
+                <h4>{nomeUsuario}</h4>
+              </C.Li>
+              <C.Li>
+                <C.ButtonLogout onClick={() => handleLogout()}>
+                  Logout
+                </C.ButtonLogout>
+              </C.Li>
+            </C.Ulflex>
           </nav>
-        </ContainerHeader>
+        </C.ContainerHeader>
       )}
     </>
   );

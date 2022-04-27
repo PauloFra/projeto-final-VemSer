@@ -54,16 +54,15 @@ export const ContainerButtonsPage = styled.div`
 export const ContainerGeral = styled.div<{
   border?: string;
 }>`
-  padding: 30px 0;
   display: flex;
   flex-direction: column;
   width: 80%;
   border-radius: 10px;
   justify-content: center;
-  margin: 20px auto;
+  margin: 0px auto;
   border: 1px solid black;
   padding: 40px 0;
-
+  height: calc(100vh - 65px);
   border: ${(props) => props.border};
 `;
 export const DivMenu = styled.div`

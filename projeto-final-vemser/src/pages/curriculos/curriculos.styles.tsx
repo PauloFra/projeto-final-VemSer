@@ -1,70 +1,64 @@
 import styled from "styled-components";
-export const ContainerGeral = styled.div`
+
+export const BackGroundTabela = styled.div`
   display: flex;
-  width:80%;
-  margin: 0 auto;
   flex-direction: column;
-  justify-content: start;
-`;
-export const ContainerInfoCandidato = styled.div`
-  display: flex;
-`;
-export const ContainerGeralTabela = styled.div`
-  display: flex;
-`;
-export const TableCandidates = styled.table`
-  text-align: left;
-  border-collapse: collapse;
-  text-align: start;
   width: 100%;
-  
+  justify-content: center;
+  height: calc(100vh - 65px);
 `;
-export const Title = styled.div`
+export const DivMenu = styled.div`
+  padding-left: 30px;
+  height: 100%;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-`;
-export const ContainerButtonsPage = styled.div`
-  display: flex;
-`;
-export const ContainerContent = styled.div`
-  display: flex;
-`;
-
-export const TableTr = styled.tr`
-  text-align: center;
-`;
-
-export const Ul = styled.ul`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  width: 50%;
-`;
-export const Li = styled.li`
-  height: 200px;
-  display: flex;
-  align-items: center;
-  background-color: #f1f1f1;
-`;
-export const CardCandidato = styled.div`
-  display: flex;
-  svg {
-    height: 100px;
-    width: 100px;
-    color: #ccc;
+  a {
+    color: #777777;
+    :hover {
+      color: #a6aec1;
+    }
   }
 `;
-export const Info = styled.p`
-  font-size: 20px;
+
+export const Title = styled.h1`
+  color: #777777;
+  /*  margin-bottom: 24px; */
 `;
-export const DadosPessoais = styled.div`
-  display: flex;
-  flex-direction: column;
+export const SubTitle = styled.h3`
+  padding-top: 10px;
 `;
 
-export const TableTh = styled.th``;
-export const TableTd = styled.td``;
-export const TableHead = styled.thead``;
-export const TableBody = styled.tbody``;
+export const Tabela = styled.table`
+  width: 100%;
+  text-align: center;
+  border-spacing: 0px;
+  /* background-color: rgb(207, 213, 225, 0.5); */
+  border: 1.5px solid #dfe0eb;
+`;
+
+export const TrTabela = styled.tr`
+  &:nth-child(even) {
+    background-color: rgb(237, 237, 242, 0.5);
+  }
+`;
+
+export const TdTabela = styled.td`
+  border-bottom: 1.5px solid #dfe0eb;
+  color: #777777;
+  font-size: 18px;
+  height: 70px;
+  a {
+    color: #777777;
+    :hover {
+      color: #a6aec1;
+    }
+  }
+`;
+
+export const TheadTabela = styled.thead`
+  height: 90px;
+  background-color: rgb(237, 237, 242, 0.5);
+  font-size: 24px;
+  color: #a8a8a8;
+`;

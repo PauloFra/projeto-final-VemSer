@@ -3,7 +3,19 @@ import { AuthContext } from "../../context/AuthContext";
 import * as C from "./Footer.styles";
 function Footer() {
   const { isLogged, handleLogout } = useContext<any>(AuthContext);
-  return <C.Footer>{isLogged && <p>Footer</p>}</C.Footer>;
+  return (
+    <>
+      {isLogged && (
+        <C.Footer>
+          <p>
+            Projeto realizado pela equipe VemCV, Front-end: Gabriel Gomes e
+            Paulo Fraga Backend: Gustavo Barbosa e Pablo Kappa Product Owner:
+            Tiago Schmidt
+          </p>
+        </C.Footer>
+      )}
+    </>
+  );
 }
 
 export default Footer;

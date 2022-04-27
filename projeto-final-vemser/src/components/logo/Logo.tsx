@@ -1,11 +1,14 @@
-import React from 'react'
-
+import React from "react";
+import logo from "../../images/logoSVG.svg";
+import { Link } from "react-router-dom";
 function Logo() {
   return (
     <div>
-      <h4>VemCV</h4>
+      <Link to={"/"}>
+        <img src={logo} alt="" />
+      </Link>
     </div>
-  )
+  );
 }
 
-export default Logo
+export default Logo;
