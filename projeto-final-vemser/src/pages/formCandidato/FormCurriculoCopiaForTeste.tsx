@@ -16,7 +16,7 @@ import {
   prepareDateToUser,
 } from "../../utils";
 import Loading from "../../components/loading/Loading";
-function FormCurriculo() {
+function FormCurriculoCopiaTestes() {
   const { idCandidato } = useParams();
   const [limitExperiencia, setLimitExperiencia] = useState(0);
   const [limitAcademico, setLimitAcademico] = useState(0);
@@ -25,13 +25,15 @@ function FormCurriculo() {
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   const [modalStatus, setModalStatus] = useState(false);
 
-
   const [fileInputData, setFileInputData] = useState<any>();
 
-  const [indexExperiencias, setIndexExperiencias] = useState();
-  console.log("indexExperiencias =>", indexExperiencias);
+
+
+  const [indexExperbiencias, setIndexExperiencias] = useState();
+  const [Link, setLink] = useState();
 
   useEffect(() => {
+    
     const token = localStorage.getItem("token");
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
@@ -39,18 +41,26 @@ function FormCurriculo() {
     if (idCandidato) {
       getInCandidatoById(idCandidato);
     }
+    GetCurriculo ()
   }, []);
 
-  async function postCandidato(values: CandidatoDTO) {
-    prepareDataToInsert(values);
+  async function GetCurriculo () {
+    try{
+      const {data} = await api.get('/curriculo/download-curriculo/94')
+      setLink(data);
+    }catch(error){
+      console.log(error);
+      
+    }
+  }
+  async function postCandidato(values: any) {  
     try {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
+
+        {data && PostIn(data.idCandidato)}
       
-      if(fileInputData && data) {
-        PostIn(data.idCandidato)
-      }
-      
+
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       navigate("/curriculos");
     } catch (error) {
@@ -58,8 +68,7 @@ function FormCurriculo() {
     }
   }
 
-
-  async function PostIn(idCandidatoPost:number | string){
+  async function PostIn(idCandidatoPost:number){
     console.log(idCandidatoPost);
     const formData = new FormData();
     formData.append('curriculo',  fileInputData);
@@ -69,7 +78,6 @@ function FormCurriculo() {
       console.log(error);
     }
   }
-
 
   async function getInCandidatoById(idCandidato: string) {
     try {
@@ -89,10 +97,6 @@ function FormCurriculo() {
 
   async function updateCandidato(values: CandidatoDTO) {
     prepareDataToInsert(values);
-
-    if(fileInputData && idCandidato) {
-      PostIn(idCandidato)
-    }
     try {
       const { data } = await api.put(
         `/candidato-completo?id-candidato=${idCandidato}`,
@@ -109,6 +113,10 @@ function FormCurriculo() {
   if (idCandidato && !candidatoForUpdate) {
     return <Loading />;
   }
+  if(!Link){
+    (<Loading />)
+  }
+  
 
   function addExp() {
     setLimitExperiencia(limitExperiencia + 1);
@@ -124,12 +132,13 @@ function FormCurriculo() {
     remove(index);
     setLimitAcademico(limitAcademico - 1);
   }
-  
+
   const initialValues = {
     nome: "",
     cpf: "",
     dataNascimento: "",
     telefone: "",
+    fileInput: [],
     logradouro: "",
     numero: 0,
     cargo: "",
@@ -139,14 +148,18 @@ function FormCurriculo() {
     cidade: "",
     bairro: "",
   };
+  
+
+ 
 
   return (
     <C.ContainerGeral>
+      <a download href={Link} target="_blank">Teste</a>
       <C.TitleForm>
         {idCandidato ? "Atualizar" : "Adicionar"} Candidato
       </C.TitleForm>
       <Formik
-        validationSchema={SingupSchema}
+      
         initialValues={idCandidato ? candidatoForUpdate : initialValues}
         onSubmit={async (values: CandidatoDTO) => {
           idCandidato ? updateCandidato(values) : postCandidato(values);
@@ -194,19 +207,7 @@ function FormCurriculo() {
                   <C.DivError>{errors.senioridade}</C.DivError>
                 ) : null}
               </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="fileInput">File Input</C.Label>
 
-                <input 
-                accept=".pdf"
-                onChange={(e:any)=> setFileInputData(e.target.files[0])}
-                id="fileInput" 
-                name="fileInput" 
-                placeholder="fileInput"
-                type="file"
-                />
-
-              </C.DivFlexColumn>
               <C.DivFlexColumn>
                 <C.Label htmlFor="telefone">telefone / celular</C.Label>
                 <Field 
@@ -220,7 +221,23 @@ function FormCurriculo() {
                   <C.DivError>{errors.telefone}</C.DivError>
                 ) : null}
               </C.DivFlexColumn>
+              
+              <C.DivFlexColumn>
+                <C.Label htmlFor="fileInput">File Input</C.Label>
 
+                <input 
+                accept=".pdf"
+                onChange={(e:any)=> setFileInputData(e.target.files[0])}
+                id="fileInput" 
+                name="fileInput" 
+                placeholder="fileInput"
+                type="file"
+                />
+                {errors.telefone && touched.telefone ? (
+                  <C.DivError>{errors.telefone}</C.DivError>
+                ) : null}
+
+              </C.DivFlexColumn>
               <C.DivFlexColumn>
                 <C.Label htmlFor="dataNascimento">Data de Nascimento</C.Label>
                 <Field
@@ -278,6 +295,7 @@ function FormCurriculo() {
                 ) : null}
               </C.DivFlexColumn>
             </C.ContainerInputs>
+
             <FieldArray name="dadosEscolares">
               {({ insert, remove, push }) => (
                 <div>
@@ -525,4 +543,4 @@ function FormCurriculo() {
   );
 }
 
-export default FormCurriculo;
+export default FormCurriculoCopiaTestes;

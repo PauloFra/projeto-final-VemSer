@@ -10,7 +10,7 @@ import CandidatoDetalhamento from "../candidatoDetalhamento/CandidatoDetalhament
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
-import { topPage, formatDateToUser } from "../../utils";
+import {  formatDateToUser } from "../../utils";
 function Curriculos() {
   const { GetInReduced, listCandidates } = useContext(GetReducedContext);
   const [page, setPage] = useState<number>(0);
@@ -59,9 +59,11 @@ function Curriculos() {
     setModalVisualizar(menu);
     
   };
+
   const zeroLeft = (num: number) => {
     return num < 10 ? `0${num}` : num < 100 ? `0${num}` : num;
   };
+
   return (
     <CC.BackGroundTabela>
       <CC.DivMenu>

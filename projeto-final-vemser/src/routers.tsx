@@ -8,7 +8,7 @@ import Vagas from "./pages/vagas/Vagas";
 import Header from "./components/header/Header";
 import GetReducedProvider from "./context/GetReducedContext";
 import Footer from "./components/footer/Footer";
-
+import FormCurriculoCopiaTestes from "./pages/formCandidato/FormCurriculoCopiaForTeste";
 function Routers() {
   return (
     <BrowserRouter>
@@ -19,6 +19,9 @@ function Routers() {
             <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Vagas />} />
+            
+            <Route path="/TesteTeste" element={<FormCurriculoCopiaTestes />} />
+            
             <Route path="/curriculos" element={<Curriculos />} />
 
             <Route path="/form-curriculo" element={<FormCurriculo />}>

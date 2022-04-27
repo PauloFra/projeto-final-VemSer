@@ -13,8 +13,8 @@ export const formatDateToApi = (value: any) => {
 export const formatDateToUser = (value: any) => {
   return moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
 };
-export const topPage = () => {
-  return window.scrollTo(0, 0);
+export const BottomPage = () => {
+  return window.scrollTo(0, 1000);
 };
 // export function prepareDataToInsert(values: any) {
 //   const valuesToPost = {
