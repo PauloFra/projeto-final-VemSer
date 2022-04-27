@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { loginDTO } from "../model/LoginDTO";
 import api from "../../src/api";
+import Notiflix from "notiflix";
 import Loading from "../components/loading/Loading";
 import { useNavigate } from "react-router-dom";
 type Props = {
@@ -12,7 +13,8 @@ type ContextProps = {
   setIsLogged: Function;
   handleLogout: Function;
   isLogged: boolean;
-  candidatoCompleto: any;
+  candidatoCompleto: Object;
+  nomeUsuario:string | null;
 };
 
 const initialState = {
@@ -22,31 +24,44 @@ const initialState = {
   isLogged: false,
   getCompletoCandidato: () => {},
   candidatoCompleto: [],
+  nomeUsuario:''
 };
 
 export const AuthContext = createContext<ContextProps>(initialState);
 export const AuthProvider = ({ children }: Props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+
+  const [nomeUsuario, setNomeUsuario] = useState<string | null>('');
+
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [candidatoCompleto, setCandidatoCompleto] = useState<any>([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      
       api.defaults.headers.common["Authorization"] = token;
       setIsLogged(true);
+      const nomeUser = localStorage.getItem("nomeUser")
+      setNomeUsuario(nomeUser);
+      
     } else {
       navigate("/login");
     }
-    setLoading(false);
+    
+   setLoading(false);
   }, []);
 
   async function handleLogin(values: loginDTO) {
     try {
       const { data } = await api.post("/auth", values);
       localStorage.setItem("token", data);
+     
+      localStorage.setItem("nomeUser", values.usuario);
       navigate("/");
+      
+      Notiflix.Notify.success(`Bem Vindo ${nomeUsuario}`);
       setIsLogged(true);
       console.log(data);
     } catch (error) {
@@ -55,6 +70,7 @@ export const AuthProvider = ({ children }: Props) => {
   }
 
   function handleLogout() {
+    localStorage.removeItem("nomeUser");
     localStorage.removeItem("token");
     navigate("/login");
     setIsLogged(false);
@@ -71,6 +87,7 @@ export const AuthProvider = ({ children }: Props) => {
         handleLogout,
         isLogged,
         candidatoCompleto,
+        nomeUsuario
       }}
     >
       {children}

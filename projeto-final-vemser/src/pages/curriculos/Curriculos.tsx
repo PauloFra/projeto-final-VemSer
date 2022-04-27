@@ -13,7 +13,7 @@ import CandidatoDetalhamento from "../candidatoDetalhamento/CandidatoDetalhament
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
-import { topPage } from "../../utils";
+import { topPage , formatDateToUser } from "../../utils";
 function Curriculos() {
   const { GetInReduced, listCandidates } = useContext(GetReducedContext);
   const [page, setPage] = useState<number>(0);
@@ -66,7 +66,7 @@ function Curriculos() {
     <C.ContainerGeral border="none">
 
       <C.DivMenu>
-       <C.TitleH>Listagem de Vagas </C.TitleH>
+       <C.TitleH>Listagem de Currículos </C.TitleH>
         <h3>
           <Link to="/form-curriculo">Criar Candidato</Link>
         </h3>
@@ -89,7 +89,7 @@ function Curriculos() {
             <C.TableTr key={candidato.idCandidato}>
               <C.TableTd>{candidato.nome}</C.TableTd>
               <C.TableTd>{candidato.cargo}</C.TableTd>
-              <C.TableTd>{candidato.dataNascimento}</C.TableTd>
+              <C.TableTd>{formatDateToUser(candidato.dataNascimento)}</C.TableTd>
               <C.TableTd>{candidato.senioridade}</C.TableTd>
               <C.TableTd>
                 <Link
