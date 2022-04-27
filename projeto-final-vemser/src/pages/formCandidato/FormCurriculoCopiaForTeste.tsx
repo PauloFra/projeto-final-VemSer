@@ -40,23 +40,7 @@ function FormCurriculoCopiaTestes() {
     }
   }, []);
 
-  async function GetCurriculo() {
-    await api({
-      url: "https://vemcv.herokuapp.com/curriculo/download-curriculo/94",
-      responseType: "blob",
-    })
-      .then(function (response) {
-        const blob = new Blob([response.data], {
-          type: "application/pdf",
-        });
-
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+ 
 
   async function postCandidato(values: any) {
     try {
@@ -159,9 +143,7 @@ function FormCurriculoCopiaTestes() {
 
   return (
     <C.ContainerGeral>
-      <a target="_blank" onClick={GetCurriculo}>
-        Teste
-      </a>
+     
       <C.TitleForm>
         {idCandidato ? "Atualizar" : "Adicionar"} Candidato
       </C.TitleForm>

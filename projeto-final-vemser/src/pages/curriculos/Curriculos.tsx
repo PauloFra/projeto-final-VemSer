@@ -26,10 +26,12 @@ function Curriculos() {
   }, []);
 
   async function getCompletoCandidato(id: number) {
+    setCandidatoDetalhado([])
     try {
       const { data } = await api.get(
         `candidato-completo/get-paginado?id-candidato=${id}&pagina=0&quantidade-por-pagina=10`
       );
+
       const { candidatosCompletos } = data;
 
       candidatosCompletos.map((props: any) => setCandidatoDetalhado(props));
