@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "../../components/globalStyles/global.modules.css";
 import ModalList from "../../components/modal/ModalList";
 import moment from "moment";
 import api from "../../api";

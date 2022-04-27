@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const BackGroundTabela = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  margin-bottom: 10px;
+  width: 80%;
+  padding-bottom: 50px;
+  margin: 50px auto;
   /* height: calc(100vh - 65px); */
 `;
 export const DivMenu = styled.div`
@@ -32,9 +32,9 @@ export const SubTitle = styled.h3`
 
 export const Tabela = styled.table`
   width: 100%;
-  min-height: 800px;
+  min-height: 701px;
   border-radius: 4px;
-  text-align: center;
+  text-align: left;
   border-spacing: 0px;
   /* background-color: rgb(207, 213, 225, 0.5); */
   border: 1.5px solid #dfe0eb;
@@ -52,17 +52,26 @@ export const TdTabela = styled.td`
   border-bottom: 1.5px solid #dfe0eb;
   color: #777777;
   font-size: 18px;
-  height: 70px;
+  height: 10px;
+  padding:20px; 
   a {
     color: #777777;
   }
 `;
-export const ThTabela = styled.th``;
+export const ThTabela = styled.th`
+padding: 35px 0  0 20px;
+max-height: 50px;
+border-bottom: 1.5px solid #dfe0eb;
+
+`
+
+;
 
 export const TheadTabela = styled.thead`
   height: 90px;
   background-color: rgb(237, 237, 242, 0.5);
   font-size: 24px;
+  
   color: #a8a8a8;
 `;
 export const ContainerButtonsPage = styled.div`
@@ -71,6 +80,8 @@ export const ContainerButtonsPage = styled.div`
   align-items: center;
   height: 100%;
   font-size: 14px;
+  position: relative;
+  bottom: 0;
 
   button {
     display: flex;

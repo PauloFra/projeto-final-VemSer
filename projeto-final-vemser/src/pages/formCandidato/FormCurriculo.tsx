@@ -67,11 +67,7 @@ function FormCurriculo() {
     }
   }
 
-  function desabledInput() {
-    trabalhandoAtualmente
-      ? setTrabalhandoAtualmente(false)
-      : setTrabalhandoAtualmente(true);
-  }
+
 
   async function updateCandidato(values: CandidatoDTO) {
     prepareDataToInsert(values);

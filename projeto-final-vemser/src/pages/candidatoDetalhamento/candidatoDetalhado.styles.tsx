@@ -4,7 +4,8 @@ export const DivContainerDetail = styled.div`
   display: flex;
   border-radius: 4px;
   flex-direction: column;
-  min-height: 800px;
+  min-height: 450px;
+  min-width: 350px;
   align-items: start;
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
   box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
@@ -22,7 +23,7 @@ export const ButtonClose = styled.button`
   font-size: 30px;
   cursor: pointer;
   border: none;
-  background-color: transparent;
+ 
 `;
 
 export const ButtonAsLink = styled.button`
@@ -33,7 +34,7 @@ export const ButtonAsLink = styled.button`
   color: white;
   cursor: pointer;
   transition: 0.5s;
-  background-color: #6c788e;
+    background-color: #6c788e;
   border: 1px solid rgb(159, 162, 180);
 
   :hover {

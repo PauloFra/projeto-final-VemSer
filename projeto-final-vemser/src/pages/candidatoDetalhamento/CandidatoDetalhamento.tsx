@@ -7,6 +7,7 @@ import { formatDateToUser } from "../../utils";
 import CardInfoPessoal from "./componentes/CardInfoPessoais/CardInfoPessoal";
 import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
 import CardDadosAcademicos from "./componentes/CardDadosAcademicos/CardDadosAcademicos";
+import Loading from "../../components/loading/Loading";
 type Props = {
   candidato: any;
   fecharMenu: Function;
@@ -27,8 +28,10 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
   function NavigateById(id: number) {
     navigate(`/form-curriculo/${id}`);
   }
-  console.log("candidato =>", candidato);
-
+  
+  if(false){
+  return(<Loading />)
+}
   return (
     <C.DivContainerDetail>
       <C.DivFlex>

@@ -57,7 +57,7 @@ function Curriculos() {
   const menuDetalhado = (candidato: number, menu: boolean) => {
     getCompletoCandidato(candidato);
     setModalVisualizar(menu);
-    topPage();
+    
   };
   const zeroLeft = (num: number) => {
     return num < 10 ? `0${num}` : num < 100 ? `0${num}` : num;
@@ -114,12 +114,14 @@ function Curriculos() {
           </CC.ContainerButtonsPage>
         </CC.Tabela>
 
-        {modalVisualizar && (
+       <div>
+       {modalVisualizar && (
           <CandidatoDetalhamento
             candidato={candidatoDetalhado}
             fecharMenu={setModalVisualizar}
           />
         )}
+       </div>
       </CC.ContainerGeralTabela>
     </CC.BackGroundTabela>
   );
