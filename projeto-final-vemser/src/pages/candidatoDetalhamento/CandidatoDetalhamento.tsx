@@ -9,7 +9,6 @@ import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
 import CardDadosAcademicos from "./componentes/CardDadosAcademicos/CardDadosAcademicos";
 import Loading from "../../components/loading/Loading";
 
-
 type Props = {
   candidato: any;
   fecharMenu: Function;
@@ -23,21 +22,21 @@ type PropsMap = {
 };
 
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
-  const { experiencias, dadosEscolares ,idCandidato } = candidato;
- 
+  const { experiencias, dadosEscolares, idCandidato } = candidato;
+
   const navigate = useNavigate();
 
   function NavigateById(id: number) {
     navigate(`/form-curriculo/${id}`);
   }
-  if(candidato.length === 0){
-    return(<Loading />)
+  if (candidato.length === 0) {
+    return <Loading altura="60vh" largura="28.69vw" />;
   }
   return (
     <C.DivContainerDetail>
       <C.DivFlex>
         <h2>Detalhes do Candidato</h2>
-       
+
         <C.ButtonClose onClick={() => fecharMenu(false)}>
           <AiOutlineClose />
         </C.ButtonClose>
@@ -52,7 +51,6 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
         dataNascimento={formatDateToUser(candidato.dataNascimento)}
         cpf={candidato.cpf}
         telefone={candidato.telefone}
-
       />
       <CardDadosAcademicos dadosEscolares={dadosEscolares} />
       <CardExperiencia experiencias={experiencias} />

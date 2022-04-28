@@ -23,22 +23,26 @@ const CardExperiencia = ({ experiencias }: Props | any) => {
       {experiencias &&
         experiencias.map((exp: PropsExperiencia) => (
           <GC.ContainerInfo key={exp.idExperiencia}>
-            <GC.Info>
-              <GC.Negrito>Nome da Empresa:</GC.Negrito>
-              {exp.nomeEmpresa}
-            </GC.Info>
-            <GC.Info>
-              <GC.Negrito>Data de início: </GC.Negrito>
-              {formatDateToUser(exp.dataInicio)}
-            </GC.Info>
-            <GC.Info>
-              <GC.Negrito>Data de saída: </GC.Negrito>
-              {formatDateToUser(exp.dataFim)}
-            </GC.Info>
-            <GC.Info>
-              <GC.Negrito>Descrição: </GC.Negrito>
-              {exp.descricao}
-            </GC.Info>
+            <GC.DivColumn>
+              <GC.Info>
+                <GC.Negrito>Empresa:</GC.Negrito>
+                {exp.nomeEmpresa}
+              </GC.Info>
+              <GC.Info>
+                <GC.Negrito>Descrição: </GC.Negrito>
+                {exp.descricao}
+              </GC.Info>
+            </GC.DivColumn>
+            <GC.DivColumn>
+              <GC.Info>
+                <GC.Negrito>Início: </GC.Negrito>
+                {formatDateToUser(exp.dataInicio)}
+              </GC.Info>
+              <GC.Info>
+                <GC.Negrito>Saída: </GC.Negrito>
+                {formatDateToUser(exp.dataFim)}
+              </GC.Info>
+            </GC.DivColumn>
           </GC.ContainerInfo>
         ))}
     </GC.DivTopicosCandidato>

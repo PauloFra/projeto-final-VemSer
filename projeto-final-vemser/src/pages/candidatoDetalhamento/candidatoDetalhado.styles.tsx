@@ -1,23 +1,28 @@
 import styled from "styled-components";
 export const DivContainerDetail = styled.div`
-  margin: 0px 10px 0px 20px;
-  display: flex;
+  margin-left: 20px;
   border-radius: 10px;
-
+  display: flex;
   flex-direction: column;
-  min-height: 450px;
-  min-width: 350px;
+  min-height: 701px;
+  min-width: 600px;
   align-items: start;
-  -webkit-box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
-  box-shadow: 0px 10px 13px -7px #000000, 24px 17px 34px 4px #ababab;
+  border-right: 2px solid #ccc;
+  border-left: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
 `;
 export const DivFlex = styled.div`
   display: flex;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 0px 10px;
+  border: none !important;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  background-color: rgb(108, 120, 142, 0.5);
+  color: #444444;
+  height: 80px;
 `;
 export const ButtonClose = styled.button`
   font-size: 30px;

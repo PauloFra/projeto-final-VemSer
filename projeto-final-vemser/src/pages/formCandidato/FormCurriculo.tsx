@@ -1,9 +1,9 @@
 import InputMask from "react-input-mask";
 import { Formik, Field, Form, FieldArray } from "formik";
 import { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
+import { GiConfirmed } from "react-icons/gi";
 
-import { BottomPage } from "../../utils";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../api";
@@ -25,8 +25,8 @@ function FormCurriculo() {
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   const [modalStatus, setModalStatus] = useState(false);
 
-
   const [fileInputData, setFileInputData] = useState<any>();
+  console.log(fileInputData);
 
   const [indexExperiencias, setIndexExperiencias] = useState();
   console.log("indexExperiencias =>", indexExperiencias);
@@ -46,11 +46,11 @@ function FormCurriculo() {
     try {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
-      
-      if(fileInputData && data) {
-        PostIn(data.idCandidato)
+
+      if (fileInputData && data) {
+        PostIn(data.idCandidato);
       }
-      
+
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       navigate("/curriculos");
     } catch (error) {
@@ -58,22 +58,25 @@ function FormCurriculo() {
     }
   }
 
-
-  async function PostIn(idCandidatoPost:number | string){
+  async function PostIn(idCandidatoPost: number | string) {
     console.log(idCandidatoPost);
     const formData = new FormData();
-    formData.append('curriculo',  fileInputData);
-    try{
-      const {data} = await api.post(`/curriculo/upload-curriculo/${idCandidatoPost}` , formData)
-    }catch(error){
+    formData.append("curriculo", fileInputData);
+    try {
+      const { data } = await api.post(
+        `/curriculo/upload-curriculo/${idCandidatoPost}`,
+        formData
+      );
+    } catch (error) {
       console.log(error);
     }
   }
 
-
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get(`/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
+      const { data } = await api.get(
+        `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
+      );
 
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
@@ -85,13 +88,11 @@ function FormCurriculo() {
     }
   }
 
-
-
   async function updateCandidato(values: CandidatoDTO) {
     prepareDataToInsert(values);
 
-    if(fileInputData && idCandidato) {
-      PostIn(idCandidato)
+    if (fileInputData && idCandidato) {
+      PostIn(idCandidato);
     }
     try {
       const { data } = await api.put(
@@ -124,7 +125,7 @@ function FormCurriculo() {
     remove(index);
     setLimitAcademico(limitAcademico - 1);
   }
-  
+
   const initialValues = {
     nome: "",
     cpf: "",
@@ -194,27 +195,15 @@ function FormCurriculo() {
                   <C.DivError>{errors.senioridade}</C.DivError>
                 ) : null}
               </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="fileInput">File Input</C.Label>
 
-                <input 
-                accept=".pdf"
-                onChange={(e:any)=> setFileInputData(e.target.files[0])}
-                id="fileInput" 
-                name="fileInput" 
-                placeholder="fileInput"
-                type="file"
-                />
-
-              </C.DivFlexColumn>
               <C.DivFlexColumn>
                 <C.Label htmlFor="telefone">telefone / celular</C.Label>
-                <Field 
-                id="telefone" 
-                name="telefone" 
-                placeholder="Telefone"
-                as={InputMask}
-                mask="(99)99999-9999"
+                <Field
+                  id="telefone"
+                  name="telefone"
+                  placeholder="Telefone"
+                  as={InputMask}
+                  mask="(99)99999-9999"
                 />
                 {errors.telefone && touched.telefone ? (
                   <C.DivError>{errors.telefone}</C.DivError>
@@ -276,6 +265,27 @@ function FormCurriculo() {
                 {errors.numero && touched.numero ? (
                   <C.DivError>{errors.numero}</C.DivError>
                 ) : null}
+              </C.DivFlexColumn>
+              <C.DivFlexColumn>
+                <C.labelFile htmlFor="fileInput">
+                  {fileInputData ? (
+                    <C.TextFile>
+                      {fileInputData.name} <AiFillFileExcel />
+                    </C.TextFile>
+                  ) : (
+                    <C.TextFile>
+                      Adicione um arquivo <AiFillFileAdd />
+                    </C.TextFile>
+                  )}
+                  <C.inputFile
+                    accept=".pdf"
+                    onChange={(e: any) => setFileInputData(e.target.files[0])}
+                    id="fileInput"
+                    name="fileInput"
+                    placeholder="fileInput"
+                    type="file"
+                  />
+                </C.labelFile>
               </C.DivFlexColumn>
             </C.ContainerInputs>
             <FieldArray name="dadosEscolares">

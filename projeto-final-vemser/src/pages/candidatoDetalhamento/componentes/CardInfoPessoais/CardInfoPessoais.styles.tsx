@@ -15,3 +15,19 @@ export const Container = styled.div`
     color: #ccc;
   }
 `;
+export const DownloadCV = styled.a`
+  cursor: pointer;
+  color: #444444;
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  small:hover {
+    border-bottom: 1px solid rgb(68, 68, 68, 0.5);
+  }
+  svg {
+    color: #444444;
+    width: 18px;
+    height: 18px;
+  }
+`;
+export const DownloadText = styled.small``;

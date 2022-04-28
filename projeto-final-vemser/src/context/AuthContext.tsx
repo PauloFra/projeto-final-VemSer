@@ -14,7 +14,7 @@ type ContextProps = {
   handleLogout: Function;
   isLogged: boolean;
   candidatoCompleto: Object;
-  nomeUsuario:string | null;
+  nomeUsuario: string | null;
 };
 
 const initialState = {
@@ -24,7 +24,7 @@ const initialState = {
   isLogged: false,
   getCompletoCandidato: () => {},
   candidatoCompleto: [],
-  nomeUsuario:''
+  nomeUsuario: "",
 };
 
 export const AuthContext = createContext<ContextProps>(initialState);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: Props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  const [nomeUsuario, setNomeUsuario] = useState<string | null>('');
+  const [nomeUsuario, setNomeUsuario] = useState<string | null>("");
 
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [candidatoCompleto, setCandidatoCompleto] = useState<any>([]);
@@ -40,28 +40,29 @@ export const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      
       api.defaults.headers.common["Authorization"] = token;
       setIsLogged(true);
-      const nomeUser = localStorage.getItem("nomeUser")
+      const nomeUser = localStorage.getItem("nomeUser");
       setNomeUsuario(nomeUser);
-      
     } else {
       navigate("/login");
     }
-    
-   setLoading(false);
+
+    setLoading(false);
   }, []);
 
   async function handleLogin(values: loginDTO) {
     try {
       const { data } = await api.post("/auth", values);
       localStorage.setItem("token", data);
-     
+
       localStorage.setItem("nomeUser", values.usuario);
       navigate("/");
-      
-      Notiflix.Notify.success(`Bem Vindo ${nomeUsuario}`);
+
+      Notiflix.Notify.success("Seja bem vindo!", {
+        timeout: 1000,
+        position: "center-top",
+      });
       setIsLogged(true);
       console.log(data);
     } catch (error) {
@@ -77,7 +78,7 @@ export const AuthProvider = ({ children }: Props) => {
   }
 
   if (loading) {
-    return <Loading />;
+    return <Loading altura="100vh" largura="100vw" />;
   }
   return (
     <AuthContext.Provider
@@ -87,7 +88,7 @@ export const AuthProvider = ({ children }: Props) => {
         handleLogout,
         isLogged,
         candidatoCompleto,
-        nomeUsuario
+        nomeUsuario,
       }}
     >
       {children}

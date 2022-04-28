@@ -10,7 +10,7 @@ import CandidatoDetalhamento from "../candidatoDetalhamento/CandidatoDetalhament
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
-import {  formatDateToUser } from "../../utils";
+import { formatDateToUser } from "../../utils";
 function Curriculos() {
   const { GetInReduced, listCandidates } = useContext(GetReducedContext);
   const [page, setPage] = useState<number>(0);
@@ -26,7 +26,7 @@ function Curriculos() {
   }, []);
 
   async function getCompletoCandidato(id: number) {
-    setCandidatoDetalhado([])
+    setCandidatoDetalhado([]);
     try {
       const { data } = await api.get(
         `candidato-completo/get-paginado?id-candidato=${id}&pagina=0&quantidade-por-pagina=10`
@@ -45,7 +45,7 @@ function Curriculos() {
   }, [page]);
 
   if (!listCandidates) {
-    return <Loading />;
+    return <Loading altura="100vh" largura="100vw" />;
   }
   const { candidatos, totalDePaginas }: any = listCandidates;
   const nextPage = (actionPage: string) => {
@@ -59,7 +59,6 @@ function Curriculos() {
   const menuDetalhado = (candidato: number, menu: boolean) => {
     getCompletoCandidato(candidato);
     setModalVisualizar(menu);
-    
   };
 
   const zeroLeft = (num: number) => {
@@ -72,10 +71,8 @@ function Curriculos() {
         <CC.Title>Listagem de Currículos </CC.Title>
         <CC.SubTitle>
           <Link to="/form-curriculo">
-            <CC.ButtonVisualizar>
-              Adicionar Candidato
-            </CC.ButtonVisualizar>
-            </Link>
+            <CC.ButtonVisualizar>Adicionar Candidato</CC.ButtonVisualizar>
+          </Link>
         </CC.SubTitle>
       </CC.DivMenu>
 
@@ -87,9 +84,11 @@ function Curriculos() {
               <CC.ThTabela>Cargo</CC.ThTabela>
               <CC.ThTabela>Data de nascimento</CC.ThTabela>
               <CC.ThTabela>Senioridade</CC.ThTabela>
-              <CC.ThTabela radius=" 0 10px 0 0" align={'center'}>Visualizar Detalhes</CC.ThTabela>
+              <CC.ThTabela radius=" 0 10px 0 0" align={"center"}>
+                Visualizar Detalhes
+              </CC.ThTabela>
             </CC.TrTabela>
-          </CC.TheadTabela >
+          </CC.TheadTabela>
 
           {candidatos.map((candidato: any) => (
             <CC.TrTabela key={candidato.idCandidato}>
@@ -99,7 +98,7 @@ function Curriculos() {
                 {formatDateToUser(candidato.dataNascimento)}
               </CC.TdTabela>
               <CC.TdTabela>{candidato.senioridade}</CC.TdTabela>
-              <CC.TdTabela align={'center'}>
+              <CC.TdTabela align={"center"}>
                 <CC.ButtonVisualizar
                   onClick={() => menuDetalhado(candidato.idCandidato, true)}
                 >
@@ -121,13 +120,12 @@ function Curriculos() {
           </CC.ContainerButtonsPage>
         </CC.Tabela>
 
-       {modalVisualizar && (
+        {modalVisualizar && (
           <CandidatoDetalhamento
             candidato={candidatoDetalhado}
             fecharMenu={setModalVisualizar}
           />
         )}
-       
       </CC.ContainerGeralTabela>
     </CC.BackGroundTabela>
   );

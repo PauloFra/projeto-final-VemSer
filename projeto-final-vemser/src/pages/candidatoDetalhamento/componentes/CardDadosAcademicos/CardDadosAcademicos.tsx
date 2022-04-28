@@ -31,22 +31,27 @@ const CardDadosAcademicos = ({ dadosEscolares }: PropsDados) => {
             idDadosEscolares,
           }) => (
             <C.DivContainerDados key={idDadosEscolares}>
-              <GC.Info>
-                <GC.Negrito>Nome: </GC.Negrito>
-                {descricao}
-              </GC.Info>
-              <GC.Info>
-                <GC.Negrito>Instituição: </GC.Negrito>
-                {instituicao}
-              </GC.Info>
-              <GC.Info>
-                <GC.Negrito>Data de Início: </GC.Negrito>
-                {formatDateToUser(dataInicio)}
-              </GC.Info>
-              <GC.Info>
-                <GC.Negrito>Data de conclusão: </GC.Negrito>
-                {formatDateToUser(dataFim)}
-              </GC.Info>
+              <GC.DivColumn>
+                <GC.Info>
+                  <GC.Negrito>Nome: </GC.Negrito>
+                  {descricao}
+                </GC.Info>
+                <GC.Info>
+                  <GC.Negrito>Instituição: </GC.Negrito>
+                  {instituicao}
+                </GC.Info>
+              </GC.DivColumn>
+
+              <GC.DivColumn>
+                <GC.Info>
+                  <GC.Negrito>Início: </GC.Negrito>
+                  {formatDateToUser(dataInicio)}
+                </GC.Info>
+                <GC.Info>
+                  <GC.Negrito>Conclusão: </GC.Negrito>
+                  {formatDateToUser(dataFim)}
+                </GC.Info>
+              </GC.DivColumn>
             </C.DivContainerDados>
           )
         )}

@@ -92,7 +92,6 @@ export const ContainerInputs = styled.div`
 `;
 
 export const Botao = styled.button`
- 
   border: 1px solid rgb(159, 162, 180);
   background-color: transparent;
   padding: 12px 0;
@@ -138,5 +137,21 @@ export const ButtonAdd = styled.button`
   padding: 4px 0;
   :hover {
     background-color: rgb(159, 162, 180);
+  }
+`;
+export const labelFile = styled.label`
+  color: rgb(159, 162, 180);
+  font-weight: bold;
+  text-transform: capitalize;
+`;
+export const inputFile = styled.input`
+  display: none;
+`;
+export const TextFile = styled.p`
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  svg {
+    font-size: 22px;
   }
 `;

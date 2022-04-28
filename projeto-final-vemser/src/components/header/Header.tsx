@@ -1,5 +1,7 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
+
+import { IoMdExit } from "react-icons/io";
 import * as C from "./Header.styles";
 import { Link } from "react-router-dom";
 import Logo from "../logo/Logo";
@@ -10,8 +12,9 @@ function Header() {
     <>
       {isLogged && (
         <C.ContainerHeader>
-          <Logo />
-          <nav>
+          <C.Nav>
+            <Logo />
+
             <C.Ulflex>
               <C.Li>
                 <Link to="/">Vagas</Link>
@@ -19,16 +22,14 @@ function Header() {
               <C.Li>
                 <Link to="/curriculos">Candidatos</Link>
               </C.Li>
-              <C.Li>
-                <h4>{nomeUsuario}</h4>
-              </C.Li>
-              <C.Li>
-                <C.ButtonLogout onClick={() => handleLogout()}>
-                  Logout
-                </C.ButtonLogout>
-              </C.Li>
             </C.Ulflex>
-          </nav>
+          </C.Nav>
+          <C.Logout>
+            <h4>{/* {nomeUsuario} */}Administrador</h4>
+            <C.ButtonLogout onClick={() => handleLogout()}>
+              <IoMdExit />
+            </C.ButtonLogout>
+          </C.Logout>
         </C.ContainerHeader>
       )}
     </>

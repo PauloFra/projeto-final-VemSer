@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerHeader = styled.header`
-  background-color: rgb(108, 120, 142, 0.5);
+  background-color: #b0b6c3;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,6 +12,12 @@ export const Ulflex = styled.ul`
   column-gap: 20px;
   display: flex;
 `;
+export const Nav = styled.nav`
+  display: flex;
+  column-gap: 40px;
+  align-items: center;
+`;
+
 export const Li = styled.li`
   font-size: 18px;
   a {
@@ -28,5 +34,15 @@ export const ButtonLogout = styled.button`
   border: none;
   transition: 1s;
   font-size: 17px;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  svg {
+    font-size: 24px;
+  }
+`;
+export const Logout = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
 `;

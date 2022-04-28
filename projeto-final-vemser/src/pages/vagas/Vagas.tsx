@@ -30,34 +30,38 @@ function Vagas() {
   }, []);
 
   if (!vagas) {
-    return <Loading />;
+    return <Loading altura="100vh" largura="100vw" />;
   }
-  function ModalTratament(idVaga:number | undefined) {
-    setVisibleModal(true)
-    setIdVagas(idVaga)
+  function ModalTratament(idVaga: number | undefined) {
+    setVisibleModal(true);
+    setIdVagas(idVaga);
   }
   return (
     <C.BackGroundTabela>
       <C.DivMenu>
-       <C.Title>Listagem de Vagas </C.Title>
+        <C.Title>Listagem de Vagas </C.Title>
       </C.DivMenu>
-      {visibleModal && <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false) } /> }
+      {visibleModal && (
+        <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false)} />
+      )}
       <C.ContainerGeralTabela>
-      <C.Tabela>
-        <C.TheadTabela>
-          <C.TrTabela>
-            <C.ThTabela radius="10px 0 0 0">Titulo</C.ThTabela>
-            <C.ThTabela>Cliente</C.ThTabela>
-             <C.ThTabela>Status</C.ThTabela>
-            <C.ThTabela>Responsavel</C.ThTabela>
-            <C.ThTabela>estado</C.ThTabela>
-            <C.ThTabela>data_abertura</C.ThTabela>
-            <C.ThTabela>cidade</C.ThTabela>
-            <C.ThTabela>analista</C.ThTabela>
-            {/* <C.ThTabela>pcd</C.ThTabela> */}
-            <C.ThTabela radius=" 0 10px 0 0 " align={'center'}>Vincular Candidato</C.ThTabela>
-          </C.TrTabela>
-        </C.TheadTabela>
+        <C.Tabela>
+          <C.TheadTabela>
+            <C.TrTabela>
+              <C.ThTabela radius="10px 0 0 0">Titulo</C.ThTabela>
+              <C.ThTabela>Cliente</C.ThTabela>
+              <C.ThTabela>Status</C.ThTabela>
+              <C.ThTabela>Responsavel</C.ThTabela>
+              <C.ThTabela>estado</C.ThTabela>
+              <C.ThTabela>data_abertura</C.ThTabela>
+              <C.ThTabela>cidade</C.ThTabela>
+              <C.ThTabela>analista</C.ThTabela>
+              {/* <C.ThTabela>pcd</C.ThTabela> */}
+              <C.ThTabela radius=" 0 10px 0 0 " align={"center"}>
+                Vincular Candidato
+              </C.ThTabela>
+            </C.TrTabela>
+          </C.TheadTabela>
           {vagas.map((vaga) => (
             <C.TrTabela key={vaga.id}>
               <C.TdTabela>{vaga.titulo}</C.TdTabela>
@@ -71,12 +75,14 @@ function Vagas() {
               <C.TdTabela>{vaga.cidade}</C.TdTabela>
               <C.TdTabela>{vaga.analista}</C.TdTabela>
               {/* <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela> */}
-              <C.TdTabela align={'center'}>
-                <C.ButtonVisualizar onClick={() => ModalTratament(vaga.id)}>Vincular</C.ButtonVisualizar>
+              <C.TdTabela align={"center"}>
+                <C.ButtonVisualizar onClick={() => ModalTratament(vaga.id)}>
+                  Vincular
+                </C.ButtonVisualizar>
               </C.TdTabela>
             </C.TrTabela>
           ))}
-           <C.ContainerButtonsPage>
+          <C.ContainerButtonsPage>
             <button onClick={() => {}}>
               <IoMdArrowRoundBack />
             </button>
@@ -86,11 +92,8 @@ function Vagas() {
               <IoMdArrowRoundForward />
             </button>
           </C.ContainerButtonsPage>
-        
-      </C.Tabela>
-      
+        </C.Tabela>
       </C.ContainerGeralTabela>
-      
     </C.BackGroundTabela>
   );
 }

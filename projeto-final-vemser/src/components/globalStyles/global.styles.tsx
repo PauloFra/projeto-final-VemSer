@@ -3,15 +3,14 @@ import styled from "styled-components";
 export const BackGroundTabela = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 97%;
+  margin: 0 auto;
   border-radius: 16px;
   margin-bottom: 20px;
-  /* height: calc(100vh - 65px); */
 `;
 export const DivMenu = styled.div`
-  padding: 20px 0px 0px 30px;
   height: 100%;
-  margin-bottom: 20px;
+  margin: 40px 0px 20px 0px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -21,6 +20,9 @@ export const DivMenu = styled.div`
       color: #a6aec1;
     }
   }
+  button {
+    border: none;
+  }
 `;
 
 export const Title = styled.h1`
@@ -28,11 +30,12 @@ export const Title = styled.h1`
   /*  margin-bottom: 24px; */
 `;
 export const SubTitle = styled.h3`
-  padding-top: 10px;
+  padding-top: 5px;
 `;
 
 export const Tabela = styled.table`
   width: 100%;
+  margin: 0 auto;
   min-height: 701px;
   text-align: left;
   border-spacing: 0;
@@ -49,12 +52,10 @@ export const TrTabela = styled.tr`
   }
 `;
 
-export const TdTabela = styled.td<{
-  align?: string;
-}>`
+export const TdTabela = styled.td<{ align?: string }>`
   text-align: ${(props) => props.align};
   border-bottom: 1.5px solid #dfe0eb;
-  color: #777777;
+  color: #444444;
   font-size: 18px;
   height: 10px;
   padding: 20px 0 20px 20px;
@@ -65,14 +66,15 @@ export const ThTabela = styled.th<{
 }>`
   text-align: ${(props) => props.align};
   border-radius: ${(props) => props.radius};
-  padding: 40px 0 0 20px;
-  color: white;
-  background-color: #b3b5b9;
+  padding-left: 20px;
+  color: #444;
+  background-color: rgb(108, 120, 142, 0.5);
+
   border-bottom: 1.5px solid #dfe0eb;
 `;
 
 export const TheadTabela = styled.thead`
-  height: 90px;
+  height: 80px;
   background-color: rgb(237, 237, 242, 0.5);
   font-size: 24px;
   color: rgb(168, 168, 168);

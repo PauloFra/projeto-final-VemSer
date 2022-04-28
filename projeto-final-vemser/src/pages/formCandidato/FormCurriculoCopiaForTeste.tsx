@@ -40,8 +40,6 @@ function FormCurriculoCopiaTestes() {
     }
   }, []);
 
- 
-
   async function postCandidato(values: any) {
     try {
       const { data } = await api.post("/candidato-completo", values);
@@ -143,7 +141,6 @@ function FormCurriculoCopiaTestes() {
 
   return (
     <C.ContainerGeral>
-     
       <C.TitleForm>
         {idCandidato ? "Atualizar" : "Adicionar"} Candidato
       </C.TitleForm>
