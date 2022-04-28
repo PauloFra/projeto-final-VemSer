@@ -2,6 +2,7 @@ import { ExperienciaDTO } from "./ExperienciaDTO";
 import { DadosEscolaresDTO } from "./DadosEscolaresDTO";
 export interface CandidatoDTO {
   cpf: string;
+  idCandidato?:number | undefined;
   nome: string;
   dataNascimento: string;
   logradouro: string;

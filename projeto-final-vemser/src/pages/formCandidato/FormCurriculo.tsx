@@ -26,10 +26,9 @@ function FormCurriculo() {
   const [modalStatus, setModalStatus] = useState(false);
 
   const [fileInputData, setFileInputData] = useState<any>();
-  console.log(fileInputData);
+  console.log('fileInputData' , fileInputData);
 
-  const [indexExperiencias, setIndexExperiencias] = useState();
-  console.log("indexExperiencias =>", indexExperiencias);
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,11 +42,14 @@ function FormCurriculo() {
 
   async function postCandidato(values: CandidatoDTO) {
     prepareDataToInsert(values);
+  
     try {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
 
       if (fileInputData && data) {
+        console.log('entrou');
+        
         PostIn(data.idCandidato);
       }
 
@@ -63,10 +65,7 @@ function FormCurriculo() {
     const formData = new FormData();
     formData.append("curriculo", fileInputData);
     try {
-      const { data } = await api.post(
-        `/curriculo/upload-curriculo/${idCandidatoPost}`,
-        formData
-      );
+      const { data } = await api.post(`/curriculo/upload-curriculo/${idCandidatoPost}`, formData );
     } catch (error) {
       console.log(error);
     }
@@ -74,10 +73,9 @@ function FormCurriculo() {
 
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get(
-        `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
-      );
-
+      const { data } = await api.get(`/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
+        console.log(data);
+        
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
         setCandidatoForUpdate(prepareDateToUser(props))
@@ -89,17 +87,23 @@ function FormCurriculo() {
   }
 
   async function updateCandidato(values: CandidatoDTO) {
-    prepareDataToInsert(values);
+    console.log('values' , values);
 
     if (fileInputData && idCandidato) {
+      console.log('idCandidato' , idCandidato);
+      console.log('fileInputData' , fileInputData);
       PostIn(idCandidato);
     }
+    
+    prepareDataToInsert(values);
+  
+    delete values.idCandidato;
+    
     try {
-      const { data } = await api.put(
-        `/candidato-completo?id-candidato=${idCandidato}`,
-        values
-      );
+      const { data } = await api.put(`/candidato-completo?id-candidato=${idCandidato}`, values );
       console.log(data);
+        
+   
       Notiflix.Notify.success("Candidato atualizado com sucesso");
       navigate("/curriculos");
     } catch (error) {

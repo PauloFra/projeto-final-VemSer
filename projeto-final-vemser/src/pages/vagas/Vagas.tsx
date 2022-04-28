@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
-
+import { Link } from "react-router-dom";
 import ModalList from "../../components/modal/ModalList";
 import moment from "moment";
 import api from "../../api";
@@ -19,7 +19,7 @@ function Vagas() {
   async function getInVagas(id: number) {
     try {
       const { data } = await api.get(
-        `/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=9`
+        `/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=7`
       );
       setTotalVagas(data);
     } catch (error) {
@@ -55,6 +55,9 @@ function Vagas() {
     <C.BackGroundTabela>
       <C.DivMenu>
         <C.Title>Listagem de Vagas </C.Title>
+        <C.SubTitle>
+            <C.ButtonVisualizar>Atualizar Vagas</C.ButtonVisualizar>
+        </C.SubTitle>
       </C.DivMenu>
       {visibleModal && (
         <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false)} />

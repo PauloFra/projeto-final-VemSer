@@ -6,6 +6,7 @@ import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import { IdType } from "../../model/TypeIds";
 import Loading from "../loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
+import Notiflix from "notiflix";
 
 
 import api from "../../api";
@@ -42,7 +43,14 @@ const ListCandidates = ({idVaga}:any) => {
       setPage(page - 1);
     }
   };
-  function VincularCandidato( idCandidato:number ) {
+  async function VincularCandidato( idCandidato:number ) {
+      try{
+      const {data} = await api.post(`/vaga/vincular-candidato?idCandidato=${idCandidato}&idVaga=${idVaga}`);
+      Notiflix.Notify.success('Candidato Vinculado');
+      }
+    catch(error){
+      console.log(error);
+    }
     console.log('idVaga =>', idVaga);
     console.log('idCandidato =>', idCandidato);  
   }
