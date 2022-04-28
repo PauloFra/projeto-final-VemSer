@@ -8,28 +8,43 @@ import Loading from "../../components/loading/Loading";
 import * as C from "../../components/globalStyles/global.styles";
 import { VagasDTO } from "../../model/VagasDTO";
 import Notiflix from "notiflix";
+import { TotalVagasDTO } from "../../model/TotalVagasDTO";
 function Vagas() {
   const [visibleModal, setVisibleModal] = useState(false);
-  const [vagas, setVagas] = useState<VagasDTO["vagas"]>();
+  const [totalVagas, setTotalVagas] = useState<any>();
   const [idVagas, setIdVagas] = useState<number | undefined>();
+  const [page, setPage] = useState<number>(0);
+  console.log(totalVagas);
 
-  async function getInVagas() {
+  async function getInVagas(id: number) {
     try {
-      const { data } = await api.get("/vaga/get-vagas-compleo");
-      setVagas(data);
+      const { data } = await api.get(
+        `/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=9`
+      );
+      setTotalVagas(data);
     } catch (error) {
       console.log(error);
     }
   }
+  const nextPage = (actionPage: string) => {
+    if (actionPage === "+" && page < totalVagas.paginas - 1) {
+      setPage(page + 1);
+    }
+    if (actionPage === "-" && page > 0) {
+      setPage(page - 1);
+    }
+  };
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
     }
-    getInVagas();
   }, []);
+  useEffect(() => {
+    getInVagas(page);
+  }, [page]);
 
-  if (!vagas) {
+  if (!totalVagas) {
     return <Loading altura="100vh" largura="100vw" />;
   }
   function ModalTratament(idVaga: number | undefined) {
@@ -56,13 +71,14 @@ function Vagas() {
               <C.ThTabela>data_abertura</C.ThTabela>
               <C.ThTabela>cidade</C.ThTabela>
               <C.ThTabela>analista</C.ThTabela>
-              {/* <C.ThTabela>pcd</C.ThTabela> */}
+              <C.ThTabela>pcd</C.ThTabela>
+
               <C.ThTabela radius=" 0 10px 0 0 " align={"center"}>
                 Vincular Candidato
               </C.ThTabela>
             </C.TrTabela>
           </C.TheadTabela>
-          {vagas.map((vaga) => (
+          {totalVagas.vagas.map((vaga: any) => (
             <C.TrTabela key={vaga.id}>
               <C.TdTabela>{vaga.titulo}</C.TdTabela>
               <C.TdTabela>{vaga.cliente}</C.TdTabela>
@@ -74,7 +90,7 @@ function Vagas() {
               </C.TdTabela>
               <C.TdTabela>{vaga.cidade}</C.TdTabela>
               <C.TdTabela>{vaga.analista}</C.TdTabela>
-              {/* <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela> */}
+              <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela>
               <C.TdTabela align={"center"}>
                 <C.ButtonVisualizar onClick={() => ModalTratament(vaga.id)}>
                   Vincular
@@ -83,12 +99,12 @@ function Vagas() {
             </C.TrTabela>
           ))}
           <C.ContainerButtonsPage>
-            <button onClick={() => {}}>
+            <button onClick={() => nextPage("-")}>
               <IoMdArrowRoundBack />
             </button>
-            <span> Página:</span>
+            <span> Página:{page + 1}</span>
 
-            <button onClick={() => {}}>
+            <button onClick={() => nextPage("+")}>
               <IoMdArrowRoundForward />
             </button>
           </C.ContainerButtonsPage>
