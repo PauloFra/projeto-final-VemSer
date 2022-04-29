@@ -65,11 +65,9 @@ function Vagas() {
       setLoading(true)
       try{
         api.get('/vaga/atualizar')
-        
       }
       catch(error){
         console.log(error);
-        
       }
     }
   return (
