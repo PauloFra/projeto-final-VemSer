@@ -4,6 +4,7 @@ export const BackGroundTabela = styled.div`
   display: flex;
   flex-direction: column;
   width: 97%;
+  min-height: 94vh;
   margin: 0 auto;
   border-radius: 16px;
   margin-bottom: 20px;
@@ -39,16 +40,24 @@ export const SubTitle = styled.h3`
 export const Tabela = styled.table`
   width: 100%;
   margin: 0 auto;
-  min-height: 701px;
+  /* min-height: 701px; */
   text-align: left;
   border-spacing: 0;
   border: 0.5px solid #dfe0eb;
   border-radius: 10px;
   /* background-color: rgb(207, 213, 225, 0.5); */
 `;
-export const ContainerGeralTabela = styled.div`
-  display: flex;
+export const ContainerGeralTabela = styled.div<{
+  flexD?: string
+  border?: string
   
+  }>`
+  flex-direction: ${(props) => props.flexD};
+  border: ${(props) => props.border};
+  display: flex;
+  min-height: 725px;
+  justify-content: space-between;
+  border-radius: 10px;
 `;
 export const TrTabela = styled.tr`
   &:nth-child(even) {

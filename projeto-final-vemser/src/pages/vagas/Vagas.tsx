@@ -18,9 +18,7 @@ function Vagas() {
 
   async function getInVagas(id: number) {
     try {
-      const { data } = await api.get(
-        `/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=7`
-      );
+      const { data } = await api.get(`/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=7`);
       setTotalVagas(data);
     } catch (error) {
       console.log(error);
@@ -51,8 +49,17 @@ function Vagas() {
     setVisibleModal(true);
     setIdVagas(idVaga);
   }
+ const {vagas} = totalVagas;
+ console.log(vagas.cidade);
+
+    function VerificaUndefined(value:any){
+      if(!value){
+        value = '-'
+      }
+      return value
+    }
   return (
-    <C.BackGroundTabela>
+    <C.BackGroundTabela >
       <C.DivMenu>
         <C.Title>Listagem de Vagas </C.Title>
         <C.SubTitle>
@@ -62,7 +69,7 @@ function Vagas() {
       {visibleModal && (
         <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false)} />
       )}
-      <C.ContainerGeralTabela>
+      <C.ContainerGeralTabela flexD="column" border="0.5px solid #dfe0eb">
         <C.Tabela>
           <C.TheadTabela>
             <C.TrTabela>
@@ -82,18 +89,18 @@ function Vagas() {
             </C.TrTabela>
           </C.TheadTabela>
           <C.TBodyTable>
-          {totalVagas.vagas.map((vaga: any) => (
+          {vagas.map((vaga: any) => (
             <C.TrTabela key={vaga.id}>
-              <C.TdTabela>{vaga.titulo}</C.TdTabela>
-              <C.TdTabela>{vaga.cliente}</C.TdTabela>
-              <C.TdTabela>{vaga.status}</C.TdTabela>
-              <C.TdTabela>{vaga.responsavel}</C.TdTabela>
-              <C.TdTabela>{vaga.estado}</C.TdTabela>
+              <C.TdTabela>{VerificaUndefined(vaga.titulo)}</C.TdTabela>
+              <C.TdTabela>{VerificaUndefined(vaga.cliente)}</C.TdTabela>
+              <C.TdTabela>{VerificaUndefined(vaga.status)}</C.TdTabela>
+              <C.TdTabela>{VerificaUndefined(vaga.responsavel)}</C.TdTabela>
+              <C.TdTabela>{VerificaUndefined(vaga.estado)}</C.TdTabela>
               <C.TdTabela>
                 {moment(vaga.dataAbertura, "YYYY-MM-DD").format("DD/MM/YYYY")}
               </C.TdTabela>
-              <C.TdTabela>{vaga.cidade}</C.TdTabela>
-              <C.TdTabela>{vaga.analista}</C.TdTabela>
+              <C.TdTabela>{VerificaUndefined(vaga.cidade)}</C.TdTabela>
+              <C.TdTabela>{VerificaUndefined(vaga.analista)}</C.TdTabela>
               <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela>
               <C.TdTabela align={"center"}>
                 <C.ButtonVisualizar onClick={() => ModalTratament(vaga.id)}>
@@ -103,7 +110,8 @@ function Vagas() {
             </C.TrTabela>
           ))}
           </C.TBodyTable>
-          <C.ContainerButtonsPage>
+        </C.Tabela>
+        <C.ContainerButtonsPage>
             <C.BtnSeta onClick={() => nextPage("-")}>
               <IoMdArrowRoundBack />
             </C.BtnSeta >
@@ -112,7 +120,6 @@ function Vagas() {
               <IoMdArrowRoundForward />
             </C.BtnSeta >
           </C.ContainerButtonsPage>
-        </C.Tabela>
       </C.ContainerGeralTabela>
     </C.BackGroundTabela>
   );

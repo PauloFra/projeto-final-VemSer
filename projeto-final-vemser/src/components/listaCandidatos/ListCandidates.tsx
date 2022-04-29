@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import * as C from "./ListCandidates.styles";
 import { useContext } from "react";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
-import { IdType } from "../../model/TypeIds";
+import { formatDateToUser } from "../../utils";
 import Loading from "../loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
 import Notiflix from "notiflix";
@@ -100,7 +99,7 @@ const ListCandidates = ({idVaga}:any) => {
                 {listCand.nome}
               </C.TdTabela>
               <C.TdTabela>
-                {listCand.dataNascimento}
+                {formatDateToUser(listCand.dataNascimento)}
               </C.TdTabela>
               <C.TdTabela>
               {listCand.cargo}

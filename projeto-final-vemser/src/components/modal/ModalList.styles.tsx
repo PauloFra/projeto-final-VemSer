@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Modal = styled.div`
   width: 100%;
   padding:  0 250px;
-  height: 106vh;
+  height: 109vh;
   position: absolute;
   top: 0;
   left: 0;
