@@ -14,6 +14,7 @@ import {
   SingupSchema,
   prepareDataToInsert,
   prepareDateToUser,
+
 } from "../../utils";
 import Loading from "../../components/loading/Loading";
 import moment from "moment";
@@ -45,10 +46,7 @@ function FormCurriculo() {
     }
   }, []);
 
-  async function postCandidato(values: CandidatoDTO) {
-    setCandidatoToInsert(values)
-    
-
+  function CloneExperiencia(values:CandidatoDTO){
     if(values.experiencias){
       setExperiencias(values.experiencias.map(experiencia => {
         return{
@@ -59,7 +57,7 @@ function FormCurriculo() {
        }
       }))
      }
-
+  
      if(values.dadosEscolares){
       setDadosEscolares(values.dadosEscolares.map(dadoEscolar => {
         return{
@@ -85,10 +83,13 @@ function FormCurriculo() {
         experiencias,
         dadosEscolares,
       }
-      
-    prepareDataToInsert(NewData)
+    return NewData
+  }
+  async function postCandidato(values: CandidatoDTO) {
+    const NewsValues = CloneExperiencia(values)
+    prepareDataToInsert(NewsValues)
     try {
-      const { data } = await api.post("/candidato-completo", NewData);
+      const { data } = await api.post("/candidato-completo", NewsValues);
       console.log(data);
       if (fileInputData && data) {
         console.log("entrou");
@@ -155,20 +156,13 @@ function FormCurriculo() {
   async function updateCandidato(values: CandidatoDTO) {
     console.log("values", values);
 
-    if (fileInputData && idCandidato) {
-      console.log("idCandidato", idCandidato);
-      console.log("fileInputData", fileInputData);
-      PostIn(idCandidato);
-    }
-    prepareDataToInsert(values);
-    console.log(values);
-    delete values.idCandidato;
-
+    const NewsValues = CloneExperiencia(values)
+    prepareDataToInsert(NewsValues)
     try {
-      const { data } = await api.put(
-        `/candidato-completo?id-candidato=${idCandidato}`,
-        values
-      );
+      const { data } = await api.put(`/candidato-completo?id-candidato=${idCandidato}`, NewsValues );
+      if (fileInputData && data) {
+        PostIn(data.idCandidato);
+      }
       console.log(data);
 
       Notiflix.Notify.success("Candidato atualizado com sucesso");

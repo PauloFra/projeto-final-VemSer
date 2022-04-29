@@ -25,6 +25,15 @@ function Vagas() {
       console.log(error);
     }
   }
+  async function AtualizaVagas() {
+    setLoading(true);
+    try {
+      api.get("/vaga/atualizar");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const nextPage = (actionPage: string) => {
     if (actionPage === "+" && page < totalVagas.paginas - 1) {
       setPage(page + 1);
@@ -39,10 +48,12 @@ function Vagas() {
       api.defaults.headers.common["Authorization"] = token;
     }
   }, []);
+
   useEffect(() => {
     getInVagas(page);
   }, [page]);
 
+  
   if (!totalVagas) {
     return <Loading altura="100vh" largura="100vw" />;
   }
@@ -53,15 +64,6 @@ function Vagas() {
   const { vagas } = totalVagas;
   console.log(vagas.cidade);
 
- 
-    async function AtualizaVagas() {
-      setLoading(true);
-      try {
-        api.get("/vaga/atualizar");
-      } catch (error) {
-        console.log(error);
-      }
-    }
     function VerificaUndefined(value: any) {
       if (!value) {
         value = "-";

@@ -1,12 +1,16 @@
 import { CandidatoDTO } from "./model/CandidatoDTO";
+import { useState } from "react";
 import * as Yup from "yup";
 import { ExperienciaDTO } from "./model/ExperienciaDTO";
 import moment from "moment";
 import { DadosEscolaresDTO } from "./model/DadosEscolaresDTO";
-export function defaultFunc() {}
+
+
 type dataDTO = {
   value: string | undefined;
 };
+
+
 export const formatDateToApi = (value: any) => {
   return moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
 };
@@ -148,6 +152,3 @@ export function prepareDateToUser(values: CandidatoDTO) {
   return values;
 }
 
-// function CloneExperiencia(:CandidatoDTO){
-  
-// }

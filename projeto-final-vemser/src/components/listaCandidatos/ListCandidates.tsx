@@ -6,13 +6,12 @@ import { formatDateToUser } from "../../utils";
 import Loading from "../loading/Loading";
 import { GetReducedContext } from "../../context/GetReducedContext";
 import Notiflix from "notiflix";
-
-
 import api from "../../api";
 const ListCandidates = ({idVaga}:any) => {
   
   const { GetInReduced, listCandidates } = useContext<any>(GetReducedContext);
   const [page, setPage] = useState<number>(0);
+  const [candidatados, setCandidatados] = useState<any>();
  
   
   useEffect(() => {
@@ -20,6 +19,7 @@ const ListCandidates = ({idVaga}:any) => {
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
       GetInReduced(page , 9);
+      getInCadastradosVagas()
     } 
   }, []);
 
@@ -27,12 +27,29 @@ const ListCandidates = ({idVaga}:any) => {
     GetInReduced(page ,9);
   }, [page]);
 
-  if (!listCandidates) {
+  async function getInCadastradosVagas(){
+    try{
+      const {data} = await api.get(`/vaga/candidatos-vinculados?id-vaga=${idVaga}`)
+      console.log(data);
+      
+      setCandidatados(data)
+    }
+    catch(error){
+      console.log(error);
+      
+    }
+  }
+  if (!candidatados ) {
+    return <Loading />;
+  }
+
+  if (!listCandidates ) {
     return <Loading />;
   }
 
   const { candidatos, totalDePaginas } = listCandidates;
-
+  // console.log('candidatados =>' ,candidatados);
+  
   const nextPage = (actionPage: string) => {
     if (actionPage === "+" && page < totalDePaginas - 1) {
       setPage(page + 1);
@@ -45,8 +62,9 @@ const ListCandidates = ({idVaga}:any) => {
       try{
       const {data} = await api.post(`/vaga/vincular-candidato?idCandidato=${idCandidato}&idVaga=${idVaga}`);
       Notiflix.Notify.success('Candidato Vinculado');
+      GetInReduced(page , 9);
       }
-    catch(error:any){
+     catch(error:any){
       console.log(error.response.data);
       console.log(error.response.data.message);
       if(error.response.data.message === 'Candidato já vinculado à vaga'){
@@ -113,7 +131,9 @@ const ListCandidates = ({idVaga}:any) => {
                 {listCand.senioridade}
                 </C.TdTabela>
               <C.TdTabela align={"center"}>
-              <C.ButtonVisualizar  onClick={()=>VincularCandidato(listCand.idCandidato)}>
+              <C.ButtonVisualizar 
+                disabled={candidatados.includes(listCand.idCandidato)}
+                onClick={() => VincularCandidato(listCand.idCandidato) }>
                 Vincular
               </C.ButtonVisualizar>
               </C.TdTabela>
