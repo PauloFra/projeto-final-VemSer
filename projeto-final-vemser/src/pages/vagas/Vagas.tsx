@@ -9,6 +9,9 @@ function Vagas() {
   const [visibleModal, setVisibleModal] = useState(false);
   const [totalVagas, setTotalVagas] = useState<any>();
   const [idVagas, setIdVagas] = useState<number | undefined>();
+
+  const [isLoading, setLoading] = useState<boolean>(false);
+
   const [page, setPage] = useState<number>(0);
   console.log(totalVagas);
 
@@ -54,7 +57,14 @@ function Vagas() {
     if (!value) {
       value = "-";
     }
-    return value;
+    async function AtualizaVagas() {
+      setLoading(true);
+      try {
+        api.get("/vaga/atualizar");
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
   return (
     <C.BackGroundTabela>
@@ -87,7 +97,8 @@ function Vagas() {
             </C.TrTabela>
           </C.TheadTabela>
           <C.TBodyTable>
-            {vagas.map((vaga: any) => (
+            {/*  {vagas.map((vaga: any) => (
+            
               <C.TrTabela key={vaga.id}>
                 <C.TdTabela>{VerificaUndefined(vaga.titulo)}</C.TdTabela>
                 <C.TdTabela>{VerificaUndefined(vaga.cliente)}</C.TdTabela>
@@ -106,7 +117,7 @@ function Vagas() {
                   </C.ButtonVisualizar>
                 </C.TdTabela>
               </C.TrTabela>
-            ))}
+            ))}  */}
           </C.TBodyTable>
         </C.Tabela>
         <C.ContainerButtonsPage>
@@ -122,5 +133,4 @@ function Vagas() {
     </C.BackGroundTabela>
   );
 }
-
 export default Vagas;
