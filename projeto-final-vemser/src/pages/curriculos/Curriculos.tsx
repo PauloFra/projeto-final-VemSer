@@ -22,6 +22,7 @@ function Curriculos() {
     const token = localStorage.getItem("token");
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
+      GetInReduced(page , 9);
     }
   }, []);
 
@@ -41,7 +42,7 @@ function Curriculos() {
   }
 
   useEffect(() => {
-    GetInReduced(page);
+    GetInReduced(page , 9);
   }, [page]);
 
   if (!listCandidates) {
@@ -89,7 +90,7 @@ function Curriculos() {
               </CC.ThTabela>
             </CC.TrTabela>
           </CC.TheadTabela>
-
+          <CC.TBodyTable>
           {candidatos.map((candidato: any) => (
             <CC.TrTabela key={candidato.idCandidato}>
               <CC.TdTabela>{candidato.nome}</CC.TdTabela>
@@ -107,12 +108,12 @@ function Curriculos() {
               </CC.TdTabela>
             </CC.TrTabela>
           ))}
-
+          </CC.TBodyTable>
           <CC.ContainerButtonsPage>
             <button onClick={() => nextPage("-")}>
               <IoMdArrowRoundBack />
             </button>
-            <span> Página: {zeroLeft(page + 1)}</span>
+            <CC.SpanDefault> Página: {zeroLeft(page + 1)}</CC.SpanDefault>
 
             <button onClick={() => nextPage("+")}>
               <IoMdArrowRoundForward />

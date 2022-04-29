@@ -24,8 +24,11 @@ export const DivMenu = styled.div`
     border: none;
   }
 `;
-
+export const TBodyTable = styled.tbody`
+ 
+`;
 export const Title = styled.h1`
+font-size: 40px;
   color: rgb(51, 51, 51);
   /*  margin-bottom: 24px; */
 `;
@@ -45,6 +48,7 @@ export const Tabela = styled.table`
 `;
 export const ContainerGeralTabela = styled.div`
   display: flex;
+  
 `;
 export const TrTabela = styled.tr`
   &:nth-child(even) {
@@ -60,18 +64,7 @@ export const TdTabela = styled.td<{ align?: string }>`
   height: 10px;
   padding: 20px 0 20px 20px;
 `;
-export const ThTabela = styled.th<{
-  align?: string;
-  radius?: string;
-}>`
-  text-align: ${(props) => props.align};
-  border-radius: ${(props) => props.radius};
-  padding-left: 20px;
-  color: #444;
-  background-color: rgb(108, 120, 142, 0.5);
 
-  border-bottom: 1.5px solid #dfe0eb;
-`;
 
 export const TheadTabela = styled.thead`
   height: 80px;
@@ -98,6 +91,7 @@ export const ContainerButtonsPage = styled.div`
     cursor: pointer;
   }
 `;
+
 export const ButtonVisualizar = styled.button`
   padding: 4px;
   border: 1.5px solid rgb(15, 98, 254);
@@ -115,4 +109,25 @@ export const ButtonVisualizar = styled.button`
     box-shadow: 0 1px #666;
     transform: translateY(0.5px);
   }
+`;
+
+export const SpanDefault = styled.span`
+font-weight: bold;
+font-size: 15px;
+  `
+  export const BtnSeta = styled.button`
+  background-color: RED;
+  border: 5px solid #dfe0eb;
+`
+export const ThTabela = styled.th<{
+  align?: string;
+  radius?: string;
+}>`
+font-size:20px;
+  text-align: ${(props) => props.align};
+  border-radius: ${(props) => props.radius};
+  padding-left: 20px;
+  color: #444;
+  background-color: rgb(108, 120, 142, 0.5);
+  border-bottom: 1.5px solid #dfe0eb;
 `;

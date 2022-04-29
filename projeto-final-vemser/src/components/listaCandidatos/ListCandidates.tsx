@@ -16,17 +16,16 @@ const ListCandidates = ({idVaga}:any) => {
   const [page, setPage] = useState<number>(0);
  
   
-  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
-    }
-    GetInReduced(page);
+      GetInReduced(page , 9);
+    } 
   }, []);
 
   useEffect(() => {
-    GetInReduced(page);
+    GetInReduced(page ,9);
   }, [page]);
 
   if (!listCandidates) {
@@ -55,9 +54,9 @@ const ListCandidates = ({idVaga}:any) => {
     console.log('idCandidato =>', idCandidato);  
   }
   return (
-    <C.Nav>
-      <h1>Lista Candidatos</h1>
-      <C.Ul>
+    <C.BackGroundTabela>
+      
+      {/* <C.Ul>
         {candidatos.map((listCand: any) => (
           <C.Li key={listCand.idCandidato}>
             <C.ContainerInfoCandidato>
@@ -80,8 +79,80 @@ const ListCandidates = ({idVaga}:any) => {
             </C.ContainerInfoCandidato>
           </C.Li>
         ))}
-      </C.Ul>
-      <C.DivButtonsPage>
+      </C.Ul> */}
+    <C.Tabela>
+          <C.TheadTabela>
+            <C.TrTabela>
+              <C.ThTabela radius="10px 0 0 0">Nome</C.ThTabela>
+              <C.ThTabela> Data de Nascimento</C.ThTabela>
+              <C.ThTabela>Cargo</C.ThTabela>
+              <C.ThTabela>Senioridade</C.ThTabela>
+              <C.ThTabela radius=" 0 10px 0 0 " align={"center"}> 
+                 Vincular Candidato
+              </C.ThTabela>
+            </C.TrTabela>
+          </C.TheadTabela>
+          <C.TBodyTable>
+          {/*  */}
+          {candidatos.map((listCand: any) => (
+            <C.TrTabela key={listCand.idCandidato}>
+              <C.TdTabela>
+                {listCand.nome}
+              </C.TdTabela>
+              <C.TdTabela>
+                {listCand.dataNascimento}
+              </C.TdTabela>
+              <C.TdTabela>
+              {listCand.cargo}
+              </C.TdTabela>
+                <C.TdTabela>
+                {listCand.senioridade}
+                </C.TdTabela>
+              <C.TdTabela align={"center"}>
+              <C.ButtonVisualizar  onClick={()=>VincularCandidato(listCand.idCandidato)}>
+                Vincular
+              </C.ButtonVisualizar>
+              </C.TdTabela>
+            </C.TrTabela>
+            ))}
+            </C.TBodyTable>
+            </C.Tabela>
+            <C.ContainerButtonsPage>
+            <button onClick={() => nextPage("-")}>
+              <IoMdArrowRoundBack />
+            </button>
+            <C.SpanDefault> Página:{page + 1}</C.SpanDefault>
+
+            <button onClick={() => nextPage("+")}>
+              <IoMdArrowRoundForward />
+            </button>
+          </C.ContainerButtonsPage>
+    </C.BackGroundTabela>
+      /* <C.Ul>
+        {candidatos.map((listCand: any) => (
+          <C.Li key={listCand.idCandidato}>
+            <C.ContainerInfoCandidato>
+              <C.InfoCandidato>
+                Nome: <C.RetornoApi>{listCand.nome}</C.RetornoApi>
+              </C.InfoCandidato>
+              <C.InfoCandidato>
+                Data de Nascimento:{" "}
+                <C.RetornoApi>{listCand.dataNascimento}</C.RetornoApi>
+              </C.InfoCandidato>
+              <C.InfoCandidato>
+                Cargo: <C.RetornoApi>{listCand.cargo}</C.RetornoApi>
+              </C.InfoCandidato>
+              <C.InfoCandidato>
+                Senioridade: <C.RetornoApi>{listCand.senioridade}</C.RetornoApi>
+              </C.InfoCandidato>
+              <C.InfoCandidato>
+                </C.InfoCandidato>
+            </C.ContainerInfoCandidato>
+          </C.Li>
+        ))}
+      </C.Ul> */
+      
+      /* <C.DivButtonsPage>
         <C.ButtonPage onClick={() => nextPage("-")}>
           {" "}
           <IoMdArrowRoundBack />{" "}
@@ -90,8 +161,8 @@ const ListCandidates = ({idVaga}:any) => {
         <C.ButtonPage onClick={() => nextPage("+")}>
           <IoMdArrowRoundForward />{" "}
         </C.ButtonPage>
-      </C.DivButtonsPage>
-    </C.Nav>
+      </C.DivButtonsPage> */
+ 
   );
 };
 

@@ -70,17 +70,18 @@ function Vagas() {
               <C.ThTabela>Cliente</C.ThTabela>
               <C.ThTabela>Status</C.ThTabela>
               <C.ThTabela>Responsavel</C.ThTabela>
-              <C.ThTabela>estado</C.ThTabela>
-              <C.ThTabela>data_abertura</C.ThTabela>
-              <C.ThTabela>cidade</C.ThTabela>
-              <C.ThTabela>analista</C.ThTabela>
-              <C.ThTabela>pcd</C.ThTabela>
+              <C.ThTabela>Estado</C.ThTabela>
+              <C.ThTabela>Data DE Abertura</C.ThTabela>
+              <C.ThTabela>Cidade</C.ThTabela>
+              <C.ThTabela>Analista</C.ThTabela>
+              <C.ThTabela>PCD</C.ThTabela>
 
               <C.ThTabela radius=" 0 10px 0 0 " align={"center"}>
                 Vincular Candidato
               </C.ThTabela>
             </C.TrTabela>
           </C.TheadTabela>
+          <C.TBodyTable>
           {totalVagas.vagas.map((vaga: any) => (
             <C.TrTabela key={vaga.id}>
               <C.TdTabela>{vaga.titulo}</C.TdTabela>
@@ -101,15 +102,15 @@ function Vagas() {
               </C.TdTabela>
             </C.TrTabela>
           ))}
+          </C.TBodyTable>
           <C.ContainerButtonsPage>
-            <button onClick={() => nextPage("-")}>
+            <C.BtnSeta onClick={() => nextPage("-")}>
               <IoMdArrowRoundBack />
-            </button>
-            <span> Página:{page + 1}</span>
-
-            <button onClick={() => nextPage("+")}>
+            </C.BtnSeta >
+              <C.SpanDefault> Página:{page + 1}</C.SpanDefault>
+            <C.BtnSeta  onClick={() => nextPage("+")}>
               <IoMdArrowRoundForward />
-            </button>
+            </C.BtnSeta >
           </C.ContainerButtonsPage>
         </C.Tabela>
       </C.ContainerGeralTabela>

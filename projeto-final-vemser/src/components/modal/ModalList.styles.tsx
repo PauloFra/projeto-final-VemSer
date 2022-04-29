@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Modal = styled.div`
   width: 100%;
-  height: 100vh;
+  padding:  0 250px;
+  height: 106vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,10 +14,26 @@ export const Modal = styled.div`
   align-items: center;
 `;
 
+export const ButtonClose = styled.button`
+  background-color: transparent;
+  font-size: 33px;
+  cursor: pointer;
+  border: none;
+  
+`;
+
+export const MenuHeader = styled.div`
+ display: flex;
+ justify-content: space-between;
+  align-content: center;
+ padding: 20px;
+`;
+
 export const ContainerModal = styled.div`
   background-color: #fff;
+  min-width: 900px;
+  min-height: 600px;
   color: #000;
-  width: 60%;
   border-radius: 8px;
 `;
 

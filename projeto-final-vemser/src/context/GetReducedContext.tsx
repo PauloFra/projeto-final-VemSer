@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import api from ".././api";
 type Props = {
   children: React.ReactNode;
@@ -7,22 +7,25 @@ type Props = {
 type ContextProps = {
   GetInReduced: Function;
   listCandidates: object | undefined;
+  setListCandidates:Function;
 };
 
 const initialState = {
   GetInReduced: () => {},
   listCandidates: [],
+  setListCandidates: () => {}
 };
 
 export const GetReducedContext = createContext<ContextProps>(initialState);
 
 const GetReducedProvider = ({ children }: Props) => {
-  const [listCandidates, setListCandidates] = useState();
+  const [listCandidates, setListCandidates] = useState<any>();
 
-  async function GetInReduced(page: number) {
+  async function GetInReduced(page: number , qtdPorPage:number) {
+
     try {
       const { data } = await api.get(
-        `/candidato/get-paginado?pagina=${page}&quantidadePorPagina=9`
+        `/candidato/get-paginado?pagina=${page}&quantidadePorPagina=${qtdPorPage}`
       );
       setListCandidates(data);
     } catch (error) {
@@ -34,6 +37,7 @@ const GetReducedProvider = ({ children }: Props) => {
       value={{
         GetInReduced,
         listCandidates,
+        setListCandidates
       }}
     >
       {children}

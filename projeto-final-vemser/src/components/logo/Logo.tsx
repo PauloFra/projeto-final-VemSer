@@ -5,7 +5,8 @@ function Logo() {
   return (
     <div>
       <Link to={"/"}>
-        <img src={logo} alt="" />
+        <h3>Vem CV</h3>
+        {/* <img src={logo} alt="" /> */}
       </Link>
     </div>
   );
