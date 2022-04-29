@@ -13,6 +13,9 @@ function Vagas() {
   const [visibleModal, setVisibleModal] = useState(false);
   const [totalVagas, setTotalVagas] = useState<any>();
   const [idVagas, setIdVagas] = useState<number | undefined>();
+
+  const [isLoading, setLoading] = useState<boolean>(false);
+
   const [page, setPage] = useState<number>(0);
   console.log(totalVagas);
 
@@ -58,12 +61,24 @@ function Vagas() {
       }
       return value
     }
+    async function AtualizaVagas() {
+      setLoading(true)
+      try{
+        api.get('/vaga/atualizar')
+        
+      }
+      catch(error){
+        console.log(error);
+        
+      }
+    }
   return (
     <C.BackGroundTabela >
       <C.DivMenu>
         <C.Title>Listagem de Vagas </C.Title>
         <C.SubTitle>
-            <C.ButtonVisualizar>Atualizar Vagas</C.ButtonVisualizar>
+            {/* <C.ButtonVisualizar onClick={()=>AtualizaVagas()}>Atualizar Vagas </C.ButtonVisualizar>
+            {isLoading ?<p>Loading</p>:<p>Pronto</p>} */}
         </C.SubTitle>
       </C.DivMenu>
       {visibleModal && (
