@@ -78,6 +78,7 @@ function Curriculos() {
       </CC.DivMenu>
 
       <CC.ContainerGeralTabela>
+      <CC.DivAuxiliar>
         <CC.Tabela>
           <CC.TheadTabela>
             <CC.TrTabela>
@@ -109,7 +110,8 @@ function Curriculos() {
             </CC.TrTabela>
           ))}
           </CC.TBodyTable>
-          <CC.ContainerButtonsPage>
+        </CC.Tabela>
+        <CC.ContainerButtonsPage>
             <button onClick={() => nextPage("-")}>
               <IoMdArrowRoundBack />
             </button>
@@ -119,8 +121,8 @@ function Curriculos() {
               <IoMdArrowRoundForward />
             </button>
           </CC.ContainerButtonsPage>
-        </CC.Tabela>
-
+          
+        </CC.DivAuxiliar>
         {modalVisualizar && (
           <CandidatoDetalhamento
             candidato={candidatoDetalhado}

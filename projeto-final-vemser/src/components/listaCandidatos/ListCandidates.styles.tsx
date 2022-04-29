@@ -47,6 +47,7 @@ font-size:20px;
 
 export const BackGroundTabela = styled.div`
   padding: 30px;
+  
 `;
 export const DivMenu = styled.div`
   height: 100%;
@@ -79,8 +80,8 @@ export const Tabela = styled.table`
   
   text-align: left;
   border-spacing: 0;
-  border: 0.5px solid #dfe0eb;
-  border-radius: 10px;
+
+  
   /* background-color: rgb(207, 213, 225, 0.5); */
 `;
 export const ContainerGeralTabela = styled.div`
@@ -150,7 +151,15 @@ export const ButtonVisualizar = styled.button`
     transform: translateY(0.5px);
   }
 `;
-
+export const DivAuxiliar = styled.div`
+width: 100%;
+display: flex;
+min-height: 500px;
+justify-content: space-between;
+border-radius: 10px;
+flex-direction: column;
+border: 1px solid #dfe0eb;
+`
 export const ThTabela = styled.th<{
   align?: string
   radius?: string;

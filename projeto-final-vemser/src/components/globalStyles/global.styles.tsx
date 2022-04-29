@@ -43,22 +43,11 @@ export const Tabela = styled.table`
   /* min-height: 701px; */
   text-align: left;
   border-spacing: 0;
-  border: 0.5px solid #dfe0eb;
+ 
   border-radius: 10px;
   /* background-color: rgb(207, 213, 225, 0.5); */
 `;
-export const ContainerGeralTabela = styled.div<{
-  flexD?: string
-  border?: string
-  
-  }>`
-  flex-direction: ${(props) => props.flexD};
-  border: ${(props) => props.border};
-  display: flex;
-  min-height: 725px;
-  justify-content: space-between;
-  border-radius: 10px;
-`;
+
 export const TrTabela = styled.tr`
   &:nth-child(even) {
     background-color: rgb(237, 237, 242, 0.5);
@@ -84,8 +73,9 @@ export const TheadTabela = styled.thead`
 export const ContainerButtonsPage = styled.div`
   padding: 10px 0px 10px 20px;
   display: flex;
-  align-items: center;
+ 
   height: 100%;
+  align-items: end;
   font-size: 14px;
   position: relative;
   bottom: 0;
@@ -128,15 +118,36 @@ font-size: 15px;
   background-color: RED;
   border: 5px solid #dfe0eb;
 `
+export const DivAuxiliar = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+border-radius: 10px;
+flex-direction: column;
+border: 1px solid #dfe0eb;
+`
 export const ThTabela = styled.th<{
   align?: string;
   radius?: string;
 }>`
-font-size:20px;
+  font-size:20px;
   text-align: ${(props) => props.align};
   border-radius: ${(props) => props.radius};
   padding-left: 20px;
   color: #444;
   background-color: rgb(108, 120, 142, 0.5);
   border-bottom: 1.5px solid #dfe0eb;
+`;
+
+export const ContainerGeralTabela = styled.div<{
+  flexD?: string
+  border?: string
+  
+  }>`
+  flex-direction: ${(props) => props.flexD};
+  border: ${(props) => props.border};
+  display: flex;
+  min-height: 725px;
+  justify-content: space-between;
+  border-radius: 10px;
 `;

@@ -53,7 +53,7 @@ const ListCandidates = ({idVaga}:any) => {
     console.log('idCandidato =>', idCandidato);  
   }
   return (
-    <C.BackGroundTabela>
+    <C.BackGroundTabela >
       
       {/* <C.Ul>
         {candidatos.map((listCand: any) => (
@@ -79,6 +79,7 @@ const ListCandidates = ({idVaga}:any) => {
           </C.Li>
         ))}
       </C.Ul> */}
+    <C.DivAuxiliar>
     <C.Tabela>
           <C.TheadTabela>
             <C.TrTabela>
@@ -126,6 +127,7 @@ const ListCandidates = ({idVaga}:any) => {
               <IoMdArrowRoundForward />
             </button>
           </C.ContainerButtonsPage>
+          </C.DivAuxiliar>
     </C.BackGroundTabela>
       /* <C.Ul>
         {candidatos.map((listCand: any) => (
