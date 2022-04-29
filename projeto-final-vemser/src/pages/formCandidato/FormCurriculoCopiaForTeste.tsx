@@ -2,13 +2,11 @@ import InputMask from "react-input-mask";
 import { Formik, Field, Form, FieldArray } from "formik";
 import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-
-import { BottomPage } from "../../utils";
-import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../../api";
 import * as C from "./FormCurriculo.styles";
 import Notiflix from "notiflix";
+import api from "../../api";
+import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { ButtonVisualizar } from "../../components/globalStyles/global.styles";
 import {
   SingupSchema,
@@ -21,13 +19,13 @@ function FormCurriculoCopiaTestes() {
   const [limitExperiencia, setLimitExperiencia] = useState(0);
   const [limitAcademico, setLimitAcademico] = useState(0);
   const navigate = useNavigate();
-  const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
+  /* const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false); */
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
-  const [modalStatus, setModalStatus] = useState(false);
+  /*  const [modalStatus, setModalStatus] = useState(false); */
 
   const [fileInputData, setFileInputData] = useState<any>();
 
-  const [indexExperbiencias, setIndexExperiencias] = useState();
+  /* const [indexExperbiencias, setIndexExperiencias] = useState(); */
   const [Link, setLink] = useState();
 
   useEffect(() => {
@@ -44,11 +42,9 @@ function FormCurriculoCopiaTestes() {
     try {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
-
       {
         data && PostIn(data.idCandidato);
       }
-
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       navigate("/curriculos");
     } catch (error) {
@@ -75,7 +71,6 @@ function FormCurriculoCopiaTestes() {
       const { data } = await api.get(
         `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
       );
-
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
         setCandidatoForUpdate(prepareDateToUser(props))
@@ -518,7 +513,7 @@ function FormCurriculoCopiaTestes() {
               )}
             </FieldArray>
             <C.Botao type="submit">
-              {idCandidato ? "Atualizar" : "Enviar"}
+              {idCandidato ? "Atualizar" : "Adicionar"}
             </C.Botao>
           </Form>
         )}

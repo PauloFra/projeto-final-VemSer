@@ -26,9 +26,7 @@ function FormCurriculo() {
   const [modalStatus, setModalStatus] = useState(false);
 
   const [fileInputData, setFileInputData] = useState<any>();
-  console.log('fileInputData' , fileInputData);
-
-
+  console.log("fileInputData", fileInputData);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -42,14 +40,14 @@ function FormCurriculo() {
 
   async function postCandidato(values: CandidatoDTO) {
     prepareDataToInsert(values);
-  
+
     try {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
 
       if (fileInputData && data) {
-        console.log('entrou');
-        
+        console.log("entrou");
+
         PostIn(data.idCandidato);
       }
 
@@ -65,7 +63,10 @@ function FormCurriculo() {
     const formData = new FormData();
     formData.append("curriculo", fileInputData);
     try {
-      const { data } = await api.post(`/curriculo/upload-curriculo/${idCandidatoPost}`, formData );
+      const { data } = await api.post(
+        `/curriculo/upload-curriculo/${idCandidatoPost}`,
+        formData
+      );
     } catch (error) {
       console.log(error);
     }
@@ -73,9 +74,11 @@ function FormCurriculo() {
 
   async function getInCandidatoById(idCandidato: string) {
     try {
-      const { data } = await api.get(`/candidato-completo/get-paginado?id-candidato=${idCandidato}`);
-        console.log(data);
-        
+      const { data } = await api.get(
+        `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
+      );
+      console.log(data);
+
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
         setCandidatoForUpdate(prepareDateToUser(props))
@@ -87,23 +90,23 @@ function FormCurriculo() {
   }
 
   async function updateCandidato(values: CandidatoDTO) {
-    console.log('values' , values);
+    console.log("values", values);
 
     if (fileInputData && idCandidato) {
-      console.log('idCandidato' , idCandidato);
-      console.log('fileInputData' , fileInputData);
+      console.log("idCandidato", idCandidato);
+      console.log("fileInputData", fileInputData);
       PostIn(idCandidato);
     }
-    
     prepareDataToInsert(values);
-  
     delete values.idCandidato;
-    
+
     try {
-      const { data } = await api.put(`/candidato-completo?id-candidato=${idCandidato}`, values );
+      const { data } = await api.put(
+        `/candidato-completo?id-candidato=${idCandidato}`,
+        values
+      );
       console.log(data);
-        
-   
+
       Notiflix.Notify.success("Candidato atualizado com sucesso");
       navigate("/curriculos");
     } catch (error) {
@@ -115,19 +118,41 @@ function FormCurriculo() {
     return <Loading />;
   }
 
-  function addExp() {
+  function addExp(upDown: string) {
     setLimitExperiencia(limitExperiencia + 1);
+    setTimeout(function () {
+      scrollDown(upDown);
+    }, 1);
   }
-  function removeExp(index: string, remove: Function) {
+  function removeExp(index: string, remove: Function, upDown: string) {
     remove(index);
     setLimitExperiencia(limitExperiencia - 1);
+    setTimeout(function () {
+      scrollDown(upDown);
+    }, 1);
   }
-  function addAcad() {
+  function addAcad(upDown: string) {
     setLimitAcademico(limitAcademico + 1);
+    setTimeout(function () {
+      scrollDown(upDown);
+    }, 1);
   }
-  function removeAcad(index: string, remove: Function) {
+  function removeAcad(index: string, remove: Function, upDown: string) {
     remove(index);
     setLimitAcademico(limitAcademico - 1);
+    setTimeout(function () {
+      scrollDown(upDown);
+    }, 1);
+  }
+
+  function scrollDown(UpDown: string) {
+    if (UpDown === "-") {
+      const down = document.body.clientHeight;
+      return window.scrollTo(0, down);
+    } else {
+      const up = document.body.clientHeight - 274;
+      return window.scrollTo(0, up);
+    }
   }
 
   const initialValues = {
@@ -306,7 +331,7 @@ function FormCurriculo() {
                             <C.ButtonExcluir
                               type="button"
                               className="secondary"
-                              onClick={() => removeAcad(index, remove)}
+                              onClick={() => removeAcad(index, remove, "+")}
                             >
                               <AiOutlineClose />
                             </C.ButtonExcluir>
@@ -392,7 +417,7 @@ function FormCurriculo() {
                       )
                     )}
                   {limitAcademico < 10 && (
-                    <a onClick={() => addAcad()}>
+                    <a onClick={() => addAcad("-")}>
                       <C.DivFlexColumn>
                         <ButtonVisualizar
                           type="button"
@@ -428,7 +453,7 @@ function FormCurriculo() {
                           <C.ButtonExcluir
                             type="button"
                             className="secondary"
-                            onClick={() => removeExp(index, remove)}
+                            onClick={() => removeExp(index, remove, "+")}
                           >
                             <AiOutlineClose />
                           </C.ButtonExcluir>
@@ -507,7 +532,7 @@ function FormCurriculo() {
                       </C.ContainerInputs>
                     ))}
                   {limitExperiencia < 10 && (
-                    <a onClick={() => addExp()}>
+                    <a onClick={() => addExp("-")}>
                       <C.DivFlexColumn>
                         <ButtonVisualizar
                           type="button"
@@ -530,7 +555,7 @@ function FormCurriculo() {
               )}
             </FieldArray>
             <C.Botao type="submit">
-              {idCandidato ? "Atualizar" : "Enviar"}
+              {idCandidato ? "Atualizar" : "Atualizar"}
             </C.Botao>
           </Form>
         )}

@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AiFillEyeInvisible } from "react-icons/ai";
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FormikHelpers, useFormik } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../../context/AuthContext";
@@ -37,44 +36,44 @@ const Login = () => {
   });
 
   return (
-      <C.ContainerLogin>
-        <C.ContainerForm onSubmit={formikProps.handleSubmit}>
-          <C.DivLogo>
-            <C.TitleLogin>Login VemCV</C.TitleLogin>
-          </C.DivLogo>
-          <C.DivForm>
-            <label htmlFor="usuario">Usuario</label>
-            <C.Input
-              name="usuario"
-              id="usuario"
-              placeholder="Digite seu usuario"
-              value={formikProps.values.usuario}
-              onChange={formikProps.handleChange}
-            />
-            {formikProps.errors.usuario && formikProps.touched.usuario ? (
-              <C.Error>{formikProps.errors.usuario}</C.Error>
-            ) : null}
-          </C.DivForm>
-          <C.DivForm>
-            <label htmlFor="senha">Senha</label>
-            <C.Input
-              type={pass ? "password" : "text"}
-              name="senha"
-              id="senha"
-              placeholder="Digite sua senha"
-              value={formikProps.values.senha}
-              onChange={formikProps.handleChange}
-            />
-            <C.TrocarSenha onClick={() => setPass(!pass)}>
-              {pass ? <AiFillEyeInvisible /> : <AiFillEye />}
-            </C.TrocarSenha>
-            {formikProps.errors.senha && formikProps.touched.senha ? (
-              <C.Error>{formikProps.errors.senha}</C.Error>
-            ) : null}
-          </C.DivForm>
-          <C.Botao type="submit">Login</C.Botao>
-        </C.ContainerForm>
-      </C.ContainerLogin>
+    <C.ContainerLogin>
+      <C.ContainerForm onSubmit={formikProps.handleSubmit}>
+        <C.DivLogo>
+          <C.TitleLogin>Login VemCV</C.TitleLogin>
+        </C.DivLogo>
+        <C.DivForm>
+          <label htmlFor="usuario">Usuario</label>
+          <C.Input
+            name="usuario"
+            id="usuario"
+            placeholder="Digite seu usuario"
+            value={formikProps.values.usuario}
+            onChange={formikProps.handleChange}
+          />
+          {formikProps.errors.usuario && formikProps.touched.usuario ? (
+            <C.Error>{formikProps.errors.usuario}</C.Error>
+          ) : null}
+        </C.DivForm>
+        <C.DivForm>
+          <label htmlFor="senha">Senha</label>
+          <C.Input
+            type={pass ? "password" : "text"}
+            name="senha"
+            id="senha"
+            placeholder="Digite sua senha"
+            value={formikProps.values.senha}
+            onChange={formikProps.handleChange}
+          />
+          <C.TrocarSenha onClick={() => setPass(!pass)}>
+            {pass ? <AiFillEyeInvisible /> : <AiFillEye />}
+          </C.TrocarSenha>
+          {formikProps.errors.senha && formikProps.touched.senha ? (
+            <C.Error>{formikProps.errors.senha}</C.Error>
+          ) : null}
+        </C.DivForm>
+        <C.Botao type="submit">Login</C.Botao>
+      </C.ContainerForm>
+    </C.ContainerLogin>
   );
 };
 

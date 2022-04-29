@@ -25,11 +25,9 @@ export const DivMenu = styled.div`
     border: none;
   }
 `;
-export const TBodyTable = styled.tbody`
- 
-`;
+export const TBodyTable = styled.tbody``;
 export const Title = styled.h1`
-font-size: 40px;
+  font-size: 40px;
   color: rgb(51, 51, 51);
   /*  margin-bottom: 24px; */
 `;
@@ -43,7 +41,7 @@ export const Tabela = styled.table`
   /* min-height: 701px; */
   text-align: left;
   border-spacing: 0;
- 
+
   border-radius: 10px;
   /* background-color: rgb(207, 213, 225, 0.5); */
 `;
@@ -63,7 +61,6 @@ export const TdTabela = styled.td<{ align?: string }>`
   padding: 20px 0 20px 20px;
 `;
 
-
 export const TheadTabela = styled.thead`
   height: 80px;
   background-color: rgb(237, 237, 242, 0.5);
@@ -73,7 +70,7 @@ export const TheadTabela = styled.thead`
 export const ContainerButtonsPage = styled.div`
   padding: 10px 0px 10px 20px;
   display: flex;
- 
+
   height: 100%;
   align-items: end;
   font-size: 14px;
@@ -111,26 +108,26 @@ export const ButtonVisualizar = styled.button`
 `;
 
 export const SpanDefault = styled.span`
-font-weight: bold;
-font-size: 15px;
-  `
-  export const BtnSeta = styled.button`
+  font-weight: bold;
+  font-size: 15px;
+`;
+export const BtnSeta = styled.button`
   background-color: RED;
   border: 5px solid #dfe0eb;
-`
+`;
 export const DivAuxiliar = styled.div`
-width: 100%;
-display: flex;
-justify-content: space-between;
-border-radius: 10px;
-flex-direction: column;
-border: 1px solid #dfe0eb;
-`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  flex-direction: column;
+  border: 1px solid #dfe0eb;
+`;
 export const ThTabela = styled.th<{
   align?: string;
   radius?: string;
 }>`
-  font-size:20px;
+  font-size: 20px;
   text-align: ${(props) => props.align};
   border-radius: ${(props) => props.radius};
   padding-left: 20px;
@@ -140,10 +137,9 @@ export const ThTabela = styled.th<{
 `;
 
 export const ContainerGeralTabela = styled.div<{
-  flexD?: string
-  border?: string
-  
-  }>`
+  flexD?: string;
+  border?: string;
+}>`
   flex-direction: ${(props) => props.flexD};
   border: ${(props) => props.border};
   display: flex;

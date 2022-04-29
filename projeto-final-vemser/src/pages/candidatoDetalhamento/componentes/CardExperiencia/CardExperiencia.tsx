@@ -9,10 +9,10 @@ type Props = {
     descricao: string;
     idExperiencia: number;
     nomeEmpresa: string;
-  };
+  }[];
 };
 
-const CardExperiencia = ({ experiencias }: Props | any) => {
+const CardExperiencia = ({ experiencias }: Props) => {
   console.log(experiencias);
 
   return (

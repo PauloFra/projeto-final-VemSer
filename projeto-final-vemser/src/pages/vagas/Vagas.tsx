@@ -1,14 +1,10 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "react-router-dom";
 import ModalList from "../../components/modal/ModalList";
-import moment from "moment";
-import api from "../../api";
 import Loading from "../../components/loading/Loading";
+import api from "../../api";
 import * as C from "../../components/globalStyles/global.styles";
-import { VagasDTO } from "../../model/VagasDTO";
-import Notiflix from "notiflix";
-import { TotalVagasDTO } from "../../model/TotalVagasDTO";
 function Vagas() {
   const [visibleModal, setVisibleModal] = useState(false);
   const [totalVagas, setTotalVagas] = useState<any>();
@@ -18,7 +14,9 @@ function Vagas() {
 
   async function getInVagas(id: number) {
     try {
-      const { data } = await api.get(`/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=7`);
+      const { data } = await api.get(
+        `/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=7`
+      );
       setTotalVagas(data);
     } catch (error) {
       console.log(error);
@@ -49,21 +47,21 @@ function Vagas() {
     setVisibleModal(true);
     setIdVagas(idVaga);
   }
- const {vagas} = totalVagas;
- console.log(vagas.cidade);
+  const { vagas } = totalVagas;
+  console.log(vagas.cidade);
 
-    function VerificaUndefined(value:any){
-      if(!value){
-        value = '-'
-      }
-      return value
+  function VerificaUndefined(value: any) {
+    if (!value) {
+      value = "-";
     }
+    return value;
+  }
   return (
-    <C.BackGroundTabela >
+    <C.BackGroundTabela>
       <C.DivMenu>
         <C.Title>Listagem de Vagas </C.Title>
         <C.SubTitle>
-            <C.ButtonVisualizar>Atualizar Vagas</C.ButtonVisualizar>
+          <C.ButtonVisualizar>Atualizar Vagas</C.ButtonVisualizar>
         </C.SubTitle>
       </C.DivMenu>
       {visibleModal && (
@@ -89,37 +87,37 @@ function Vagas() {
             </C.TrTabela>
           </C.TheadTabela>
           <C.TBodyTable>
-          {vagas.map((vaga: any) => (
-            <C.TrTabela key={vaga.id}>
-              <C.TdTabela>{VerificaUndefined(vaga.titulo)}</C.TdTabela>
-              <C.TdTabela>{VerificaUndefined(vaga.cliente)}</C.TdTabela>
-              <C.TdTabela>{VerificaUndefined(vaga.status)}</C.TdTabela>
-              <C.TdTabela>{VerificaUndefined(vaga.responsavel)}</C.TdTabela>
-              <C.TdTabela>{VerificaUndefined(vaga.estado)}</C.TdTabela>
-              <C.TdTabela>
-                {moment(vaga.dataAbertura, "YYYY-MM-DD").format("DD/MM/YYYY")}
-              </C.TdTabela>
-              <C.TdTabela>{VerificaUndefined(vaga.cidade)}</C.TdTabela>
-              <C.TdTabela>{VerificaUndefined(vaga.analista)}</C.TdTabela>
-              <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela>
-              <C.TdTabela align={"center"}>
-                <C.ButtonVisualizar onClick={() => ModalTratament(vaga.id)}>
-                  Vincular
-                </C.ButtonVisualizar>
-              </C.TdTabela>
-            </C.TrTabela>
-          ))}
+            {vagas.map((vaga: any) => (
+              <C.TrTabela key={vaga.id}>
+                <C.TdTabela>{VerificaUndefined(vaga.titulo)}</C.TdTabela>
+                <C.TdTabela>{VerificaUndefined(vaga.cliente)}</C.TdTabela>
+                <C.TdTabela>{VerificaUndefined(vaga.status)}</C.TdTabela>
+                <C.TdTabela>{VerificaUndefined(vaga.responsavel)}</C.TdTabela>
+                <C.TdTabela>{VerificaUndefined(vaga.estado)}</C.TdTabela>
+                <C.TdTabela>
+                  {moment(vaga.dataAbertura, "YYYY-MM-DD").format("DD/MM/YYYY")}
+                </C.TdTabela>
+                <C.TdTabela>{VerificaUndefined(vaga.cidade)}</C.TdTabela>
+                <C.TdTabela>{VerificaUndefined(vaga.analista)}</C.TdTabela>
+                <C.TdTabela>{vaga.pcd ? "Sim" : "Não"}</C.TdTabela>
+                <C.TdTabela align={"center"}>
+                  <C.ButtonVisualizar onClick={() => ModalTratament(vaga.id)}>
+                    Vincular
+                  </C.ButtonVisualizar>
+                </C.TdTabela>
+              </C.TrTabela>
+            ))}
           </C.TBodyTable>
         </C.Tabela>
         <C.ContainerButtonsPage>
-            <C.BtnSeta onClick={() => nextPage("-")}>
-              <IoMdArrowRoundBack />
-            </C.BtnSeta >
-              <C.SpanDefault> Página:{page + 1}</C.SpanDefault>
-            <C.BtnSeta  onClick={() => nextPage("+")}>
-              <IoMdArrowRoundForward />
-            </C.BtnSeta >
-          </C.ContainerButtonsPage>
+          <C.BtnSeta onClick={() => nextPage("-")}>
+            <IoMdArrowRoundBack />
+          </C.BtnSeta>
+          <C.SpanDefault> Página:{page + 1}</C.SpanDefault>
+          <C.BtnSeta onClick={() => nextPage("+")}>
+            <IoMdArrowRoundForward />
+          </C.BtnSeta>
+        </C.ContainerButtonsPage>
       </C.ContainerGeralTabela>
     </C.BackGroundTabela>
   );
