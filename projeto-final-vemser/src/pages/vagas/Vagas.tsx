@@ -53,10 +53,7 @@ function Vagas() {
   const { vagas } = totalVagas;
   console.log(vagas.cidade);
 
-  function VerificaUndefined(value: any) {
-    if (!value) {
-      value = "-";
-    }
+ 
     async function AtualizaVagas() {
       setLoading(true);
       try {
@@ -65,7 +62,12 @@ function Vagas() {
         console.log(error);
       }
     }
-  }
+    function VerificaUndefined(value: any) {
+      if (!value) {
+        value = "-";
+      }
+      return value
+    }
   return (
     <C.BackGroundTabela>
       <C.DivMenu>
@@ -97,7 +99,7 @@ function Vagas() {
             </C.TrTabela>
           </C.TheadTabela>
           <C.TBodyTable>
-            {/*  {vagas.map((vaga: any) => (
+             {vagas.map((vaga: any) => (
             
               <C.TrTabela key={vaga.id}>
                 <C.TdTabela>{VerificaUndefined(vaga.titulo)}</C.TdTabela>
@@ -117,7 +119,7 @@ function Vagas() {
                   </C.ButtonVisualizar>
                 </C.TdTabela>
               </C.TrTabela>
-            ))}  */}
+            ))} 
           </C.TBodyTable>
         </C.Tabela>
         <C.ContainerButtonsPage>
@@ -132,5 +134,6 @@ function Vagas() {
       </C.ContainerGeralTabela>
     </C.BackGroundTabela>
   );
+
 }
 export default Vagas;
