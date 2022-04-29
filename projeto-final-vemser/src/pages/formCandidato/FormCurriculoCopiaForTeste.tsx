@@ -1,10 +1,11 @@
 import InputMask from "react-input-mask";
-import { Formik, Field, Form, FieldArray } from "formik";
+import { Formik, Field, Form, FieldArray ,getIn } from "formik";
 import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate, useParams } from "react-router-dom";
 import * as C from "./FormCurriculo.styles";
 import Notiflix from "notiflix";
+import * as Yup from 'yup'
 import api from "../../api";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { ButtonVisualizar } from "../../components/globalStyles/global.styles";
@@ -37,8 +38,10 @@ function FormCurriculoCopiaTestes() {
       getInCandidatoById(idCandidato);
     }
   }, []);
+console.log(idCandidato);
 
   async function postCandidato(values: any) {
+    console.log('post');
     try {
       const { data } = await api.post("/candidato-completo", values);
       console.log(data);
@@ -82,6 +85,8 @@ function FormCurriculoCopiaTestes() {
   }
 
   async function updateCandidato(values: CandidatoDTO) {
+    console.log('ATUALIZAR');
+    
     prepareDataToInsert(values);
     try {
       const { data } = await api.put(
@@ -119,20 +124,15 @@ function FormCurriculoCopiaTestes() {
   }
 
   const initialValues = {
-    nome: "",
-    cpf: "",
-    dataNascimento: "",
-    telefone: "",
-    fileInput: [],
-    logradouro: "",
-    numero: 0,
-    cargo: "",
-    senioridade: "",
+
     experiencias: [],
     dadosEscolares: [],
     cidade: "",
     bairro: "",
   };
+
+
+ 
 
   return (
     <C.ContainerGeral>
@@ -146,135 +146,8 @@ function FormCurriculoCopiaTestes() {
         }}
       >
         {({ values, errors, touched }: any) => (
+          
           <Form>
-            <C.ContainerInputs>
-              <C.TitleInfoTopic>Dados Pessoais</C.TitleInfoTopic>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="nome">nome</C.Label>
-                <Field id="nome" name="nome" placeholder="Nome" />
-                {errors.nome && touched.nome ? (
-                  <C.DivError>{errors.nome}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="cpf">CPF</C.Label>
-                <Field
-                  id="cpf"
-                  name="cpf"
-                  placeholder="CPF"
-                  as={InputMask}
-                  mask="999.999.999-99"
-                />
-                {errors.cpf && touched.cpf ? (
-                  <C.DivError>{errors.cpf}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="cargo">Cargo</C.Label>
-                <Field id="cargo" name="cargo" placeholder="Cargo" />
-                {errors.cargo && touched.cargo ? (
-                  <C.DivError>{errors.cargo}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="senioridade">Senioridade</C.Label>
-                <Field
-                  id="senioridade"
-                  name="senioridade"
-                  placeholder="Senioridade"
-                />
-                {errors.senioridade && touched.senioridade ? (
-                  <C.DivError>{errors.senioridade}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-
-              <C.DivFlexColumn>
-                <C.Label htmlFor="telefone">telefone / celular</C.Label>
-                <Field
-                  id="telefone"
-                  name="telefone"
-                  placeholder="Telefone"
-                  as={InputMask}
-                  mask="(99)99999-9999"
-                />
-                {errors.telefone && touched.telefone ? (
-                  <C.DivError>{errors.telefone}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-
-              <C.DivFlexColumn>
-                <C.Label htmlFor="fileInput">File Input</C.Label>
-
-                <input
-                  accept=".pdf"
-                  onChange={(e: any) => setFileInputData(e.target.files[0])}
-                  id="fileInput"
-                  name="fileInput"
-                  placeholder="fileInput"
-                  type="file"
-                />
-                {errors.telefone && touched.telefone ? (
-                  <C.DivError>{errors.telefone}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="dataNascimento">Data de Nascimento</C.Label>
-                <Field
-                  id="dataNascimento"
-                  name="dataNascimento"
-                  placeholder="Data de Nascimento"
-                  as={InputMask}
-                  mask="99/99/9999"
-                />
-                {errors.dataNascimento && touched.dataNascimento ? (
-                  <C.DivError>{errors.dataNascimento}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-            </C.ContainerInputs>
-            <C.ContainerInputs>
-              <C.TitleInfoTopic>Endereço</C.TitleInfoTopic>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="logradouro">Logradouro</C.Label>
-                <Field
-                  id="logradouro"
-                  name="logradouro"
-                  placeholder="Logradouro"
-                  type="text"
-                />
-                {errors.logradouro && touched.logradouro ? (
-                  <C.DivError>{errors.logradouro}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="cidade">Cidade</C.Label>
-                <Field id="cidade" name="cidade" placeholder="Cidade" />
-
-                {errors.cidade && touched.cidade ? (
-                  <C.DivError>{errors.cidade}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="bairro">Bairro</C.Label>
-                <Field id="bairro" name="bairro" placeholder="Bairro" />
-
-                {errors.bairro && touched.bairro ? (
-                  <C.DivError>{errors.bairro}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-              <C.DivFlexColumn>
-                <C.Label htmlFor="numero">Número</C.Label>
-                <Field
-                  id="numero"
-                  name="numero"
-                  type="number"
-                  placeholder="Número"
-                />
-                {errors.numero && touched.numero ? (
-                  <C.DivError>{errors.numero}</C.DivError>
-                ) : null}
-              </C.DivFlexColumn>
-            </C.ContainerInputs>
-
             <FieldArray name="dadosEscolares">
               {({ insert, remove, push }) => (
                 <div>
@@ -305,11 +178,7 @@ function FormCurriculoCopiaTestes() {
                               placeholder="Descrição Do Curso"
                               type="text"
                             />
-                            {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                          { typeof errors.friends === 'string' ? <div>{errors.friends}</div> : null}
                           </C.DivFlexColumn>
                           <C.DivFlexColumn>
                             <C.Label

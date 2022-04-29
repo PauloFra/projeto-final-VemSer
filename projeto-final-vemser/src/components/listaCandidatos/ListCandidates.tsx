@@ -46,8 +46,12 @@ const ListCandidates = ({idVaga}:any) => {
       const {data} = await api.post(`/vaga/vincular-candidato?idCandidato=${idCandidato}&idVaga=${idVaga}`);
       Notiflix.Notify.success('Candidato Vinculado');
       }
-    catch(error){
-      console.log(error);
+    catch(error:any){
+      console.log(error.response.data);
+      console.log(error.response.data.message);
+      if(error.response.data.message === 'Candidato já vinculado à vaga'){
+      Notiflix.Notify.warning('Ops Candidato ja vinculado');
+      }
     }
     console.log('idVaga =>', idVaga);
     console.log('idCandidato =>', idCandidato);  
@@ -83,11 +87,11 @@ const ListCandidates = ({idVaga}:any) => {
     <C.Tabela>
           <C.TheadTabela>
             <C.TrTabela>
-              <C.ThTabela radius="10px 0 0 0">Nome</C.ThTabela>
+              <C.ThTabela>Nome</C.ThTabela>
               <C.ThTabela> Data de Nascimento</C.ThTabela>
               <C.ThTabela>Cargo</C.ThTabela>
               <C.ThTabela>Senioridade</C.ThTabela>
-              <C.ThTabela radius=" 0 10px 0 0 " align={"center"}> 
+              <C.ThTabela align={"center"}> 
                  Vincular Candidato
               </C.ThTabela>
             </C.TrTabela>

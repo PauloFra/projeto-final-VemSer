@@ -73,13 +73,14 @@ function Vagas() {
       <C.DivMenu>
         <C.Title>Listagem de Vagas </C.Title>
         <C.SubTitle>
-          <C.ButtonVisualizar>Atualizar Vagas</C.ButtonVisualizar>
+          <C.ButtonVisualizar onClick={()=>AtualizaVagas()}>Atualizar Vagas</C.ButtonVisualizar>
         </C.SubTitle>
       </C.DivMenu>
       {visibleModal && (
         <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false)} />
       )}
       <C.ContainerGeralTabela flexD="column" border="0.5px solid #dfe0eb">
+        
         <C.Tabela>
           <C.TheadTabela>
             <C.TrTabela>

@@ -16,6 +16,7 @@ import {
   prepareDateToUser,
 } from "../../utils";
 import Loading from "../../components/loading/Loading";
+import moment from "moment";
 function FormCurriculo() {
   const { idCandidato } = useParams();
   const [limitExperiencia, setLimitExperiencia] = useState(0);
@@ -24,6 +25,12 @@ function FormCurriculo() {
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   const [modalStatus, setModalStatus] = useState(false);
+
+  const [candidatoToInsert, setCandidatoToInsert] = useState<any>();
+
+  const [experiencias, setExperiencias] = useState<any>();
+
+  const [dadosEscolares, setDadosEscolares] = useState<any>();
 
   const [fileInputData, setFileInputData] = useState<any>();
   console.log("fileInputData", fileInputData);
@@ -39,23 +46,79 @@ function FormCurriculo() {
   }, []);
 
   async function postCandidato(values: CandidatoDTO) {
-    prepareDataToInsert(values);
+    setCandidatoToInsert(values)
+    
 
+    if(values.experiencias){
+      setExperiencias(values.experiencias.map(experiencia => {
+        return{
+          dataFim: experiencia.dataFim,
+          dataInicio: experiencia.dataInicio,
+          descricao:experiencia.descricao,
+          nomeEmpresa:  experiencia.nomeEmpresa,
+       }
+      }))
+     }
+
+     if(values.dadosEscolares){
+      setDadosEscolares(values.dadosEscolares.map(dadoEscolar => {
+        return{
+          dataFim:dadoEscolar.dataFim,
+          dataInicio:dadoEscolar.dataInicio,
+          descricao:dadoEscolar.descricao,
+          instituicao:dadoEscolar.instituicao,
+       }
+      }))
+     }
+     
+      const NewData:CandidatoDTO = {
+        cpf: values.cpf,
+        nome:values.nome,
+        dataNascimento: values.dataNascimento,
+        logradouro:values.logradouro,
+        cidade:values.cidade,
+        bairro: values.bairro,
+        telefone: values.telefone,
+        numero: values.numero,
+        cargo:values.cargo,
+        senioridade: values.senioridade,
+        experiencias,
+        dadosEscolares,
+      }
+      
+    prepareDataToInsert(NewData)
     try {
-      const { data } = await api.post("/candidato-completo", values);
+      const { data } = await api.post("/candidato-completo", NewData);
       console.log(data);
-
       if (fileInputData && data) {
         console.log("entrou");
-
         PostIn(data.idCandidato);
       }
-
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       navigate("/curriculos");
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      if(error.response.data.errors){
+        switch(error.response.data.errors[0]){
+
+          case 'numero: deve ser maior que 0':
+            Notiflix.Notify.warning('Numero da casa deve ser maior que 0');
+            break;
+
+          case  'cpf: número do registro de contribuinte individual brasileiro (CPF) inválido':
+            Notiflix.Notify.warning('CPF inválido');
+            break;
+        }
     }
+      if(error.response.data.message === 'CPF já cadastrado'){
+        Notiflix.Notify.warning(error.response.data.message);
+      }
+      console.log(error.response.data);
+    }
+   
+    
+    // if(candidatoToInsert){
+      
+      // }
   }
 
   async function PostIn(idCandidatoPost: number | string) {
@@ -71,7 +134,7 @@ function FormCurriculo() {
       console.log(error);
     }
   }
-
+  console.log('candidatoToInsert =>' , candidatoToInsert);
   async function getInCandidatoById(idCandidato: string) {
     try {
       const { data } = await api.get(
@@ -98,6 +161,7 @@ function FormCurriculo() {
       PostIn(idCandidato);
     }
     prepareDataToInsert(values);
+    console.log(values);
     delete values.idCandidato;
 
     try {
@@ -109,14 +173,25 @@ function FormCurriculo() {
 
       Notiflix.Notify.success("Candidato atualizado com sucesso");
       navigate("/curriculos");
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      if(error.response.data.errors){
+        switch(error.response.data.errors[0]){
+          case 'numero: deve ser maior que 0':
+            Notiflix.Notify.warning('Numero da casa deve ser maior que 0');
+            break;
+          case  'cpf: número do registro de contribuinte individual brasileiro (CPF) inválido':
+            Notiflix.Notify.warning('CPF inválido');
+            break;
+        }
+    }
+      if(error.response.data.message === 'CPF já cadastrado'){
+        Notiflix.Notify.warning(error.response.data.message);
+      }
+      console.log(error.response.data);
     }
   }
 
-  if (idCandidato && !candidatoForUpdate) {
-    return <Loading />;
-  }
+
 
   function addExp(upDown: string) {
     setLimitExperiencia(limitExperiencia + 1);
@@ -154,7 +229,12 @@ function FormCurriculo() {
       return window.scrollTo(0, up);
     }
   }
+console.log(idCandidato);
 
+
+  if (idCandidato && !candidatoForUpdate) {
+    return <Loading />;
+  }
   const initialValues = {
     nome: "",
     cpf: "",
@@ -555,7 +635,7 @@ function FormCurriculo() {
               )}
             </FieldArray>
             <C.Botao type="submit">
-              {idCandidato ? "Atualizar" : "Atualizar"}
+              {idCandidato ? "Atualizar" : "Adicionar"}
             </C.Botao>
           </Form>
         )}

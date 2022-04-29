@@ -12,6 +12,6 @@ export interface CandidatoDTO {
   numero: number;
   cargo: string;
   senioridade: string;
-  experiencias?: [ExperienciaDTO];
-  dadosEscolares?: [DadosEscolaresDTO];
+  experiencias?: ExperienciaDTO[];
+  dadosEscolares?: DadosEscolaresDTO[];
 }

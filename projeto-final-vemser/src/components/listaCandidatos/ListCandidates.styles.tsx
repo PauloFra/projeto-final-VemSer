@@ -46,7 +46,6 @@ font-size:20px;
 `;
 
 export const BackGroundTabela = styled.div`
-  padding: 30px;
   
 `;
 export const DivMenu = styled.div`
