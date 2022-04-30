@@ -1,5 +1,4 @@
 import ListCandidates from "../listaCandidatos/ListCandidates";
-
 import * as C from "./ModalList.styles";
 type modalListProps = {
   onClose: Function;

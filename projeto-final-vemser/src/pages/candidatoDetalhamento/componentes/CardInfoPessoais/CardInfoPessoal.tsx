@@ -1,10 +1,9 @@
-import { FaUser } from "react-icons/fa";
-import { CandidatoDTO } from "../../../../model/CandidatoDTO";
 import * as C from "./CardInfoPessoais.styles";
 import * as GC from "../GlobalStyles.styles";
 import api from "../../../../api";
 import Loading from "../../../../components/loading/Loading";
 import { BiDownload } from "react-icons/bi";
+import { FaUser } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 type Props = {

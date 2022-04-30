@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import Notiflix from "notiflix";
-import * as C from "./ListCandidates.styles";
-import { formatDateToUser, zeroLeft } from "../../utils";
 import Loading from "../loading/Loading";
 import api from "../../api";
+import * as C from "./ListCandidates.styles";
+import { useEffect, useState , ChangeEvent} from "react";
+import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+import { formatDateToUser, zeroLeft } from "../../utils";
+
 type ListCandidatesProps = {
   idVaga: number | string | undefined;
 };
@@ -111,7 +112,7 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
       );
     }
   }
-  function DisabledButton(idCandidato: number, event: any) {
+  function DisabledButton(idCandidato: number, event:ChangeEvent<HTMLInputElement>) {
     console.log(candidatados);
     VincularCandidato(idCandidato);
     event.target.disabled = true;
@@ -127,7 +128,7 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
           <C.Title>Candidatos </C.Title>
            <C.Input
             placeholder="Pesquise"
-            onChange={(event: any) => searchInCandidates(event)}
+            onChange={(event:ChangeEvent<HTMLInputElement>) => searchInCandidates(event)}
           ></C.Input>
         </C.DivFlex>
       </C.DivAlignTop>
@@ -154,7 +155,7 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
                 <C.TdTabela align={"center"}>
                   <C.ButtonVisualizar
                     disabled={candidatados.includes(listCand.idCandidato)}
-                    onClick={(event: any) =>
+                    onClick={(event:any) =>
                       DisabledButton(listCand.idCandidato, event)
                     }
                   >

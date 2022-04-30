@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import { ChangeEvent, useEffect, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-
 import * as CC from "../../components/globalStyles/global.styles";
 import api from "../../api";
 import CandidatoDetalhamento from "../candidatoDetalhamento/CandidatoDetalhamento";
-import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/loading/Loading";
 import { formatDateToUser } from "../../utils";
+import { Link } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+
 function Curriculos() {
   const [page, setPage] = useState<number>(0);
   const [candidatoDetalhado, setCandidatoDetalhado] = useState([]);
@@ -110,7 +110,6 @@ function Curriculos() {
   }
   return (
     <CC.BackGroundTabela>
-      {/* onChange={(event:ChangeEvent<HTMLInputElement>) => searchVagas(event) }> */}
       <CC.DivAlignTop>
         <CC.DivFlex>
           <CC.Title>Listagem de Currículos </CC.Title>

@@ -1,12 +1,13 @@
-import { AiOutlineClose } from "react-icons/ai";
 import * as C from "./candidatoDetalhado.styles";
-import { useNavigate } from "react-router-dom";
 import CardExperiencia from "./componentes/CardExperiencia/CardExperiencia";
-import { formatDateToUser } from "../../utils";
 import CardInfoPessoal from "./componentes/CardInfoPessoais/CardInfoPessoal";
 import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
 import CardDadosAcademicos from "./componentes/CardDadosAcademicos/CardDadosAcademicos";
 import Loading from "../../components/loading/Loading";
+import { formatDateToUser } from "../../utils";
+import { useNavigate } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
+
 type Props = {
   candidato: any;
   fecharMenu: Function;

@@ -1,7 +1,6 @@
-import React from "react";
+import * as GC from "../GlobalStyles.styles";
 import { PropsExperiencia } from "../../TypesDetalhamento";
 import { formatDateToUser } from "../../../../utils";
-import * as GC from "../GlobalStyles.styles";
 type Props = {
   experiencias: {
     dataFim: string;

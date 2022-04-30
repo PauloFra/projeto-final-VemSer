@@ -1,5 +1,5 @@
-import { DivForLoading } from "./loading.style";
 import load from "../../images/712.gif";
+import { DivForLoading } from "./loading.style";
 type LoadingProps = {
   largura?: string;
   altura?: string;

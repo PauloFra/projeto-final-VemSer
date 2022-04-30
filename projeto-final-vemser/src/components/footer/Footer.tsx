@@ -1,6 +1,7 @@
+import * as C from "./Footer.styles";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import * as C from "./Footer.styles";
+
 
 function Footer() {
   const { isLogged } = useContext(AuthContext);

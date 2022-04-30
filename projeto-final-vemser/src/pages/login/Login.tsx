@@ -1,10 +1,10 @@
+import * as C from "./Login.styles";
+import * as Yup from "yup";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FormikHelpers, useFormik } from "formik";
-import * as Yup from "yup";
 import { AuthContext } from "../../context/AuthContext";
-import * as C from "./Login.styles";
 import { loginDTO } from "../../model/LoginDTO";
 const Login = () => {
   const { setIsLogged, handleLogin } = useContext<any>(AuthContext);

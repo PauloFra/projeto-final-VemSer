@@ -4,17 +4,13 @@ import { ExperienciaDTO } from "./model/ExperienciaDTO";
 import moment from "moment";
 import { DadosEscolaresDTO } from "./model/DadosEscolaresDTO";
 
-type dataDTO = {
-  value: string | undefined;
-};
-
 export const zeroLeft = (num: number) => {
   return num < 10 ? `0${num}` : num;
 };
-export const formatDateToApi = (value: any) => {
+export const formatDateToApi = (value: string | undefined) => {
   return moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
 };
-export const formatDateToUser = (value: any) => {
+export const formatDateToUser = (value:  string | undefined) => {
   return moment(value, "YYYY-MM-DD").format("DD/MM/YYYY");
 };
 export const BottomPage = () => {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Field } from "formik";
 import Theme from "../../theme/Theme";
+import { Field } from "formik";
 
 export const ContainerGeral = styled.div`
   font-size: ${Theme.fontSize.media};

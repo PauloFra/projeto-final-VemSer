@@ -1,8 +1,7 @@
-import React from "react";
+import { formatDateToUser } from "../../../../utils";
 import { PropsDados } from "../../TypesDetalhamento";
 import * as GC from "../GlobalStyles.styles";
 import * as C from "./CardDadosAcademicos.styles";
-import { formatDateToUser } from "../../../../utils";
 
 type Props = {
   dadosEscolares: {

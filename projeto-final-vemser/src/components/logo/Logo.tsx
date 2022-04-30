@@ -1,6 +1,6 @@
 import logo from "../../images/logoSVG.svg";
-import { Link } from "react-router-dom";
 import * as C from "./Logo.styles";
+import { Link } from "react-router-dom";
 function Logo() {
   return (
     <C.BackGroundTabela>

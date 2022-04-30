@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FormikHelpers, useFormik } from "formik";
+import { CreateUserDTO } from "../../model/CreateUser.DTO";
 import * as Yup from "yup";
 import Notiflix from "notiflix";
 import api from "../../api";
 import * as C from "./CadastrarUsuario.styles"
-import { CreateUserDTO } from "../../model/CreateUser.DTO";
 const Login = () => {
   
   const [pass, setPass] = useState(true);

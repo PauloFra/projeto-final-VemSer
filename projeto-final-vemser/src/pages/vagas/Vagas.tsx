@@ -1,17 +1,19 @@
 import moment from "moment";
+import Loading from "../../components/loading/Loading";
+import api from "../../api";
+import ModalList from "../../components/modal/ModalList";
+import * as C from "../../components/globalStyles/global.styles";
 import { useEffect, useState } from "react";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import { AiOutlineSearch } from "react-icons/ai";
-import ModalList from "../../components/modal/ModalList";
 import { ChangeEvent } from "react";
-import Loading from "../../components/loading/Loading";
-import api from "../../api";
-import * as C from "../../components/globalStyles/global.styles";
+import { VagasInicialDTO ,VagasDTO} from "../../model/VagasDTO";
+
 import { zeroLeft } from "../../utils";
 function Vagas() {
   const [visibleModal, setVisibleModal] = useState(false);
 
-  const [totalVagas, setTotalVagas] = useState<any>();
+  const [totalVagas, setTotalVagas] = useState<VagasDTO[]>();
 
   const [idVagas, setIdVagas] = useState<number | undefined>();
 
@@ -101,7 +103,6 @@ function Vagas() {
   if (!startVagas && !totalVagas) {
     return <Loading altura="100vh" largura="100vw" />;
   }
-
   return (
     <C.BackGroundTabela>
       <C.DivAlignTop>

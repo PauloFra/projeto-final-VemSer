@@ -1,11 +1,5 @@
 import InputMask from "react-input-mask";
-import { Formik, Field, Form, FieldArray } from "formik";
-import { useEffect, useState } from "react";
-import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
-import { GiConfirmed } from "react-icons/gi";
-
-import { CandidatoDTO } from "../../model/CandidatoDTO";
-import { useNavigate, useParams } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 import api from "../../api";
 import * as C from "./FormCurriculo.styles";
 import Notiflix from "notiflix";
@@ -15,8 +9,12 @@ import {
   prepareDataToInsert,
   prepareDateToUser,
 } from "../../utils";
-import Loading from "../../components/loading/Loading";
-import moment from "moment";
+import { Formik, Field, Form, FieldArray } from "formik";
+import { useEffect, useState } from "react";
+import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
+import { CandidatoDTO } from "../../model/CandidatoDTO";
+import { useNavigate, useParams } from "react-router-dom";
+
 function FormCurriculo() {
   const { idCandidato } = useParams();
   const [limitExperiencia, setLimitExperiencia] = useState(0);
