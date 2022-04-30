@@ -47,6 +47,15 @@ export const DivAlignTop = styled.div`
 export const DivFlex = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
+  svg {
+    color: ${Theme.fontColor.primary};
+    margin-right: 5px;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 0;
+  }
 `;
 
 export const TBodyTable = styled.tbody``;
@@ -126,7 +135,7 @@ export const Search = styled.input`
   height: 42px;
   margin: 0 0 0 15px;
   border-radius: 8px;
-  border: 2px solid ${Theme.fontColor.primary};
+  border: 1px solid ${Theme.fontColor.primary};
   color: #8d8d8d;
   outline: none;
   &::placeholder {
@@ -134,8 +143,9 @@ export const Search = styled.input`
     font-weight: bold;
   }
   &:focus {
-    border: 2px solid ${Theme.color.primary};
+    border: 1px solid ${Theme.color.primary};
   }
+
   :focus::placeholder {
     color: ${Theme.fontColor.primary};
   }
@@ -145,7 +155,7 @@ export const ButtonVisualizar = styled.button`
   border: 1.5px solid ${Theme.color.primary};
   font-weight: bold;
   color: ${Theme.color.primary};
-  border-radius: 4px;
+  border-radius: 8px;
   text-align: left;
   cursor: pointer;
   background-color: transparent;
@@ -164,8 +174,6 @@ export const SpanDefault = styled.span`
   font-size: 15px;
 `;
 export const BtnSeta = styled.button`
-  /*   background-color: red;
-  border: 5px solid #dfe0eb; */
   color: ${Theme.color.primary};
   svg {
     font-size: 16px;
@@ -176,6 +184,7 @@ export const BtnSeta = styled.button`
 `;
 export const DivAuxiliar = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   border-radius: 10px;

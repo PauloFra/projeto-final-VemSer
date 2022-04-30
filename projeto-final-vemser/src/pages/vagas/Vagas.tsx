@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+import { AiOutlineSearch } from "react-icons/ai";
 import ModalList from "../../components/modal/ModalList";
 import { ChangeEvent } from "react";
 import Loading from "../../components/loading/Loading";
@@ -27,7 +28,6 @@ function Vagas() {
       const { data } = await api.get(
         `/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=7`
       );
-      console.log(data);
       setVagasInput(data.vagas);
       setStartVagas(data);
     } catch (error) {
@@ -79,8 +79,6 @@ function Vagas() {
         const { data } = await api.get(
           `/vaga/buscar-vagas-aberto?pagina=0&quantidade-por-pagina=${startVagas.total}`
         );
-        console.log(data);
-        console.log(data);
 
         setTotalVagas(data.vagas);
       } catch (error) {
@@ -104,8 +102,6 @@ function Vagas() {
     return <Loading altura="100vh" largura="100vw" />;
   }
 
-  console.log("vagasInput", inputValue);
-
   return (
     <C.BackGroundTabela>
       <C.DivAlignTop>
@@ -117,6 +113,7 @@ function Vagas() {
               searchVagas(event)
             }
           ></C.Search>
+          <AiOutlineSearch />
         </C.DivFlex>
 
         <C.SubTitle>

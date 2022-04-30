@@ -1,12 +1,11 @@
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
-
+import { useContext } from "react";
 import { IoMdExit } from "react-icons/io";
-import * as C from "./Header.styles";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import * as C from "./Header.styles";
 import Logo from "../logo/Logo";
 function Header() {
-  const { isLogged, handleLogout, nomeUsuario } = useContext(AuthContext);
+  const { isLogged, handleLogout } = useContext(AuthContext);
 
   return (
     <>

@@ -1,27 +1,21 @@
 import { Link } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
-/* import * as C from "../../components/globalStyles/global.styles"; */
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
+
 import * as CC from "../../components/globalStyles/global.styles";
 import api from "../../api";
-import { useEffect, useState } from "react";
-import { useContext } from "react";
 import CandidatoDetalhamento from "../candidatoDetalhamento/CandidatoDetalhamento";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import Loading from "../../components/loading/Loading";
-import { GetReducedContext } from "../../context/GetReducedContext";
 import { formatDateToUser } from "../../utils";
 function Curriculos() {
   const [page, setPage] = useState<number>(0);
   const [candidatoDetalhado, setCandidatoDetalhado] = useState([]);
   const [modalVisualizar, setModalVisualizar] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
-
   const [candidatosInput, setCandidatosInput] = useState<any>();
-
   const [listCandidates, setListCandidates] = useState<any>();
   const [listCandidatesAll, setListCandidatesAll] = useState<any>();
-
   const [inputValue, setInputValue] = useState<string | undefined>();
   async function GetInReduced(page: number, qtdPorPage: number) {
     try {
@@ -38,12 +32,10 @@ function Curriculos() {
   async function GetInReducedTotal() {
     if (listCandidates) {
       try {
-        // ${listCandidates.totalDeElementos/10
         const { data } = await api.get(
           `/candidato/get-paginado?pagina=0&quantidadePorPagina=${listCandidates.totalDeElementos}`
         );
         setListCandidatesAll(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -99,8 +91,6 @@ function Curriculos() {
     setInputValue(event.target.value);
     if (listCandidatesAll) {
       const { candidatos } = listCandidatesAll;
-      console.log(candidatosInput);
-      console.log("inputValue.inputValue", inputValue);
       setCandidatosInput(
         candidatos.filter((candidato: any) =>
           candidato.nome.toLowerCase().includes(inputValue?.toLowerCase())
@@ -124,6 +114,7 @@ function Curriculos() {
               searchInCandidates(event)
             }
           ></CC.Search>
+          <AiOutlineSearch />
         </CC.DivFlex>
 
         <CC.SubTitle>

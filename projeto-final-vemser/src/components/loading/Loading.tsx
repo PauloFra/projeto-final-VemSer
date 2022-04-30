@@ -7,7 +7,7 @@ type LoadingProps = {
 function Loading({ largura, altura }: LoadingProps) {
   return (
     <DivForLoading largura={largura} altura={altura}>
-      <img src={load} alt="" />
+      <img src={load} alt="gif de loading" />
     </DivForLoading>
   );
 }

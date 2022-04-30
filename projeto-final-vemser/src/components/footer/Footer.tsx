@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import * as C from "./Footer.styles";
+
 function Footer() {
-  const { isLogged, handleLogout } = useContext<any>(AuthContext);
+  const { isLogged } = useContext(AuthContext);
+
   return (
     <>
       {isLogged && (

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import api from ".././api";
 type Props = {
   children: React.ReactNode;
@@ -7,17 +7,17 @@ type Props = {
 type ContextProps = {
   GetInReduced: Function;
   listCandidates: object | undefined;
-  setListCandidates:Function;
-  listCandidatesAll:object | undefined;
-  GetInReducedTotal:Function
+  setListCandidates: Function;
+  listCandidatesAll: object | undefined;
+  GetInReducedTotal: Function;
 };
 
 const initialState = {
   GetInReduced: () => {},
   listCandidates: [],
   setListCandidates: () => {},
-  listCandidatesAll:[],
-  GetInReducedTotal:()=>{}
+  listCandidatesAll: [],
+  GetInReducedTotal: () => {},
 };
 
 export const GetReducedContext = createContext<ContextProps>(initialState);
@@ -26,7 +26,7 @@ const GetReducedProvider = ({ children }: Props) => {
   const [listCandidates, setListCandidates] = useState<any>();
   const [listCandidatesAll, setListCandidatesAll] = useState<any>();
 
-  async function GetInReduced(page: number , qtdPorPage:number) {
+  async function GetInReduced(page: number, qtdPorPage: number) {
     try {
       const { data } = await api.get(
         `/candidato/get-paginado?pagina=${page}&quantidadePorPagina=${qtdPorPage}`
@@ -54,7 +54,7 @@ const GetReducedProvider = ({ children }: Props) => {
         listCandidates,
         setListCandidates,
         listCandidatesAll,
-        GetInReducedTotal
+        GetInReducedTotal,
       }}
     >
       {children}

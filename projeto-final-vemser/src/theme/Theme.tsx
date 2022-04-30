@@ -16,6 +16,7 @@ const Theme = {
   fontSize: {
     small: "13px",
     media: "17px",
+    large: "24px",
   },
   shadow: {
     container: "0 3px 30px rgb(0 0 0 / 10%), 0 3px 20px rgb(0 0 0 / 10%)",

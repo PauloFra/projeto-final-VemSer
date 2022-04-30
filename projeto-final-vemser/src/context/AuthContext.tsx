@@ -1,9 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
+import Notiflix from "notiflix";
+import { useNavigate } from "react-router-dom";
 import { loginDTO } from "../model/LoginDTO";
 import api from "../../src/api";
-import Notiflix from "notiflix";
 import Loading from "../components/loading/Loading";
-import { useNavigate } from "react-router-dom";
 type Props = {
   children: React.ReactNode;
 };
@@ -31,11 +31,9 @@ export const AuthContext = createContext<ContextProps>(initialState);
 export const AuthProvider = ({ children }: Props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-
   const [nomeUsuario, setNomeUsuario] = useState<string | null>("");
-
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const [candidatoCompleto, setCandidatoCompleto] = useState<any>([]);
+  const [candidatoCompleto, setCandidatoCompleto] = useState<[]>([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -64,7 +62,6 @@ export const AuthProvider = ({ children }: Props) => {
         position: "center-top",
       });
       setIsLogged(true);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

@@ -1,5 +1,4 @@
 import { AiOutlineClose } from "react-icons/ai";
-
 import * as C from "./candidatoDetalhado.styles";
 import { useNavigate } from "react-router-dom";
 import CardExperiencia from "./componentes/CardExperiencia/CardExperiencia";
@@ -8,7 +7,6 @@ import CardInfoPessoal from "./componentes/CardInfoPessoais/CardInfoPessoal";
 import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
 import CardDadosAcademicos from "./componentes/CardDadosAcademicos/CardDadosAcademicos";
 import Loading from "../../components/loading/Loading";
-
 type Props = {
   candidato: any;
   fecharMenu: Function;
@@ -22,6 +20,8 @@ type PropsMap = {
 };
 
 const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
+  console.log(candidato);
+
   const { experiencias, dadosEscolares, idCandidato } = candidato;
 
   const navigate = useNavigate();

@@ -5,7 +5,6 @@ export const DivContainerDetail = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  /* height: 733px; */
   min-height: 701px;
   min-width: 600px;
   align-items: start;
@@ -13,7 +12,6 @@ export const DivContainerDetail = styled.div`
   border-left: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
   box-shadow: ${Theme.shadow.container};
-  /*  overflow-y: scroll; */
 `;
 export const DivFlex = styled.div`
   display: flex;

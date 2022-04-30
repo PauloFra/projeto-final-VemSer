@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import * as C from "./ListCandidates.styles";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
+import Notiflix from "notiflix";
+import * as C from "./ListCandidates.styles";
 import { formatDateToUser, zeroLeft } from "../../utils";
 import Loading from "../loading/Loading";
-import Notiflix from "notiflix";
 import api from "../../api";
-const ListCandidates = ({ idVaga }: any) => {
+type ListCandidatesProps = {
+  idVaga: number | string | undefined;
+};
+const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
   const [page, setPage] = useState<number>(0);
   const [candidatados, setCandidatados] = useState<any>();
   const [listCandidates, setListCandidates] = useState<any>();
@@ -51,7 +54,6 @@ const ListCandidates = ({ idVaga }: any) => {
           `/candidato/get-paginado?pagina=0&quantidadePorPagina=${listCandidates.totalDeElementos}`
         );
         setListCandidatesAll(data);
-        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -63,7 +65,6 @@ const ListCandidates = ({ idVaga }: any) => {
       const { data } = await api.get(
         `/vaga/candidatos-vinculados?id-vaga=${idVaga}`
       );
-      console.log(data);
       setCandidatados(data);
     } catch (error) {
       console.log(error);
@@ -114,10 +115,10 @@ const ListCandidates = ({ idVaga }: any) => {
     event.target.disabled = true;
   }
   if (!listCandidates && !candidatosInput) {
-    return <Loading />;
+    return <Loading altura="50vh" largura=" 50vw" />;
   }
   if (!candidatados) {
-    return <Loading />;
+    return <Loading altura="50vh" largura=" 50vw" />;
   }
   return (
     <C.BackGroundTabela>
@@ -169,7 +170,6 @@ const ListCandidates = ({ idVaga }: any) => {
             <IoMdArrowRoundBack />
           </C.BtnSeta>
           <C.SpanDefault> Página:{zeroLeft(page + 1)}</C.SpanDefault>
-
           <C.BtnSeta onClick={() => nextPage("+")}>
             <IoMdArrowRoundForward />
           </C.BtnSeta>
