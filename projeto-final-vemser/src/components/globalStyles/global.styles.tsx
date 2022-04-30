@@ -105,6 +105,7 @@ export const ButtonVisualizar = styled.button`
     box-shadow: 0 1px #666;
     transform: translateY(0.5px);
   }
+ 
 `;
 
 export const SpanDefault = styled.span`

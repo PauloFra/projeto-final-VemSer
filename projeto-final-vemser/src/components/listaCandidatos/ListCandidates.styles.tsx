@@ -145,9 +145,11 @@ export const ButtonVisualizar = styled.button`
     background: rgb(15, 98, 254);
     color: white;
   }
-  :active {
-    box-shadow: 0 1px #666;
-    transform: translateY(0.5px);
+  
+  :disabled{
+    background-color: rgb(204,204,204);
+    color: #918e8e;
+    border: 1.5px solid rgb(204,204,204);
   }
 `;
 export const DivAuxiliar = styled.div`

@@ -74,6 +74,12 @@ const ListCandidates = ({idVaga}:any) => {
     console.log('idVaga =>', idVaga);
     console.log('idCandidato =>', idCandidato);  
   }
+
+  function DisabledButton(idCandidato:number , event:any){
+    VincularCandidato( idCandidato ) 
+    event.target.disabled = true;
+    
+  }
   return (
     <C.BackGroundTabela >
       
@@ -133,7 +139,7 @@ const ListCandidates = ({idVaga}:any) => {
               <C.TdTabela align={"center"}>
               <C.ButtonVisualizar 
                 disabled={candidatados.includes(listCand.idCandidato)}
-                onClick={() => VincularCandidato(listCand.idCandidato) }>
+                onClick={(event:any) => DisabledButton(listCand.idCandidato , event)}>
                 Vincular
               </C.ButtonVisualizar>
               </C.TdTabela>
