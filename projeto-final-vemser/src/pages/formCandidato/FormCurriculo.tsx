@@ -23,15 +23,10 @@ function FormCurriculo() {
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   const [modalStatus, setModalStatus] = useState(false);
-
   const [candidatoToInsert, setCandidatoToInsert] = useState<any>();
-
-  const [experiencias, setExperiencias] = useState<any>([]);
-
+  const [experiencias, setExperiencias] = useState<object>([]);
   const [dadosEscolares, setDadosEscolares] = useState<any>([]);
-
   const [fileInputData, setFileInputData] = useState<any>();
-  console.log("fileInputData", fileInputData);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -81,8 +76,8 @@ function FormCurriculo() {
       numero: values.numero,
       cargo: values.cargo,
       senioridade: values.senioridade,
-      experiencias,
-      dadosEscolares,
+      experiencias: values.experiencias,
+      dadosEscolares: values.dadosEscolares,
     };
     return NewData;
   }
@@ -116,10 +111,6 @@ function FormCurriculo() {
       }
       console.log(error.response.data);
     }
-
-    // if(candidatoToInsert){
-
-    // }
   }
 
   async function PostIn(idCandidatoPost: number | string) {
@@ -373,16 +364,15 @@ function FormCurriculo() {
                       Adicione um arquivo <AiFillFileAdd />
                     </C.TextFile>
                   )}
-                  </C.labelFile>
-                  <C.inputFile
-                    accept=".pdf"
-                    onChange={(e: any) => setFileInputData(e.target.files[0])}
-                    id="fileInput"
-                    name="fileInput"
-                    placeholder="fileInput"
-                    type="file"
-                  />
-                
+                </C.labelFile>
+                <C.inputFile
+                  accept=".pdf"
+                  onChange={(e: any) => setFileInputData(e.target.files[0])}
+                  id="fileInput"
+                  name="fileInput"
+                  placeholder="fileInput"
+                  type="file"
+                />
               </C.DivFlexColumn>
             </C.ContainerInputs>
             <FieldArray name="dadosEscolares">
@@ -415,11 +405,9 @@ function FormCurriculo() {
                               placeholder="Descrição Do Curso"
                               type="text"
                             />
-                            {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                            {/*   {errors.esperiencias && touched.esperiencias ? (
+                              <C.DivError>{errors.esperiencias}</C.DivError>
+                            ) : null} */}
                           </C.DivFlexColumn>
                           <C.DivFlexColumn>
                             <C.Label
