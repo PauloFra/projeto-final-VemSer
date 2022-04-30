@@ -13,6 +13,8 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
   const [candidatados, setCandidatados] = useState<any>();
   const [listCandidates, setListCandidates] = useState<any>();
   const [listCandidatesAll, setListCandidatesAll] = useState<any>();
+  const [isLoading , setIsLoading] = useState<boolean>(true)
+
   const [inputValue, setInputValue] = useState<any>();
   const [candidatosInput, setCandidatosInput] = useState<any>();
   async function GetInReduced(page: number, qtdPorPage: number) {
@@ -33,7 +35,6 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
       GetInReduced(page, 9);
-      GetInReducedTotal();
       getInCadastradosVagas();
     }
   }, []);
@@ -54,6 +55,7 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
           `/candidato/get-paginado?pagina=0&quantidadePorPagina=${listCandidates.totalDeElementos}`
         );
         setListCandidatesAll(data);
+        setIsLoading(false)
       } catch (error) {
         console.log(error);
       }
@@ -100,7 +102,7 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
     setInputValue(event.target.value);
     if (listCandidatesAll) {
       const { candidatos } = listCandidatesAll;
-      console.log(candidatosInput);
+    
       console.log("inputValue.inputValue", inputValue);
       setCandidatosInput(
         candidatos.filter((candidato: any) =>
@@ -114,21 +116,19 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
     VincularCandidato(idCandidato);
     event.target.disabled = true;
   }
-  if (!listCandidates && !candidatosInput) {
+  if (isLoading) {
     return <Loading altura="50vh" largura=" 50vw" />;
   }
-  if (!candidatados) {
-    return <Loading altura="50vh" largura=" 50vw" />;
-  }
+ 
   return (
     <C.BackGroundTabela>
       <C.DivAlignTop>
         <C.DivFlex>
           <C.Title>Candidatos </C.Title>
-          {/*  <C.Input
+           <C.Input
             placeholder="Pesquise"
             onChange={(event: any) => searchInCandidates(event)}
-          ></C.Input> */}
+          ></C.Input>
         </C.DivFlex>
       </C.DivAlignTop>
       <C.DivAuxiliar>

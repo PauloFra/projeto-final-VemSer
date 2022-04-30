@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Field } from "formik";
 import Theme from "../../theme/Theme";
+
 export const ContainerGeral = styled.div`
   font-size: ${Theme.fontSize.media};
   margin: 0 auto;
@@ -146,7 +147,7 @@ export const ButtonAdd = styled.button`
   }
 `;
 export const labelFile = styled.label`
-  color: ${Theme.color.secondary};
+  color:  ${Theme.fontColor.primary};
   font-weight: bold;
   text-transform: capitalize;
 `;

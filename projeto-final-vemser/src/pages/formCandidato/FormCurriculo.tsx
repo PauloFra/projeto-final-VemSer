@@ -376,6 +376,7 @@ function FormCurriculo() {
                       Adicione um arquivo <AiFillFileAdd />
                     </C.TextFile>
                   )}
+                  </C.labelFile>
                   <C.inputFile
                     accept=".pdf"
                     onChange={(e: any) => setFileInputData(e.target.files[0])}
@@ -384,7 +385,7 @@ function FormCurriculo() {
                     placeholder="fileInput"
                     type="file"
                   />
-                </C.labelFile>
+                
               </C.DivFlexColumn>
             </C.ContainerInputs>
             <FieldArray name="dadosEscolares">

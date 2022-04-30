@@ -8,6 +8,7 @@ import Vagas from "./pages/vagas/Vagas";
 import Header from "./components/header/Header";
 import GetReducedProvider from "./context/GetReducedContext";
 import Footer from "./components/footer/Footer";
+import CadastrarUsuarios from './pages/CadastrarUsuarios/CadastrarUsuarios'
 function Routers() {
   return (
     <BrowserRouter>
@@ -16,8 +17,10 @@ function Routers() {
           <Header />
           <Routes>
             <Route path="*" element={<NotFound />} />
+            <Route path="/cadastrar-usuario" element={<CadastrarUsuarios />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Vagas />} />
+            <Route path="/curriculos" element={<Curriculos />} />
             <Route path="/curriculos" element={<Curriculos />} />
             <Route path="/form-curriculo" element={<FormCurriculo />}>
               <Route path=":idCandidato" element={<FormCurriculo />} />

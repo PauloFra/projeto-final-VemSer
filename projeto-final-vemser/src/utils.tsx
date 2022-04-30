@@ -1,5 +1,4 @@
 import { CandidatoDTO } from "./model/CandidatoDTO";
-import { useState } from "react";
 import * as Yup from "yup";
 import { ExperienciaDTO } from "./model/ExperienciaDTO";
 import moment from "moment";
