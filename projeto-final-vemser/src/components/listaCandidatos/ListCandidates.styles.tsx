@@ -3,6 +3,50 @@ import styled from "styled-components";
 export const Nav = styled.nav`
   padding-left: 20px;
 `;
+export const Input = styled.input`
+  padding-left: 10px;
+  font-size: 18px;
+  width: 316px;
+  height: 42px;
+  margin: 0 0 0 15px;
+  border-radius: 8px;
+  border: 2px solid #f0f1f7;
+  color: #8d8d8d;
+  outline: none;
+  &::placeholder {
+    color: #9fa2b4;
+  }
+  &:focus {
+    border: 2px solid #9fa2b4;
+  }
+
+`;
+
+export const DivAlignTop = styled.div`
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 40px 0;
+`;
+export const DivFlex = styled.div`
+ display: flex;
+align-items: center;
+ 
+`;
+export const ButtonClose = styled.button`
+  background-color: transparent;
+  font-size: 33px;
+  cursor: pointer;
+  border: none;
+  
+`;
+
+export const MenuHeader = styled.div`
+ display: flex;
+ justify-content: space-between;
+  align-content: center;
+ padding: 20px;
+`;
 
 export const Ul = styled.ul`
   padding: 20px 20px 20px 0px;

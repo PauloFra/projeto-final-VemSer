@@ -9,16 +9,33 @@ import Notiflix from "notiflix";
 import api from "../../api";
 const ListCandidates = ({idVaga}:any) => {
   
-  const { GetInReduced, listCandidates } = useContext<any>(GetReducedContext);
   const [page, setPage] = useState<number>(0);
   const [candidatados, setCandidatados] = useState<any>();
  
+  const [listCandidates, setListCandidates] = useState<any>();
+  const [listCandidatesAll, setListCandidatesAll] = useState<any>();
+  const [inputValue, setInputValue] = useState<any>();
+ 
+  const [candidatosInput, setCandidatosInput] = useState<any>();
+  async function GetInReduced(page: number , qtdPorPage:number) {
+    try {
+      const { data } = await api.get(
+        `/candidato/get-paginado?pagina=${page}&quantidadePorPagina=${qtdPorPage}`
+      );
+      setCandidatosInput(data.candidatos)
+      setListCandidates(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
       GetInReduced(page , 9);
+      GetInReducedTotal()
       getInCadastradosVagas()
     } 
   }, []);
@@ -27,37 +44,45 @@ const ListCandidates = ({idVaga}:any) => {
     GetInReduced(page ,9);
   }, [page]);
 
+  useEffect(() => {
+    GetInReducedTotal()
+  }, [listCandidates]);
+  
+  async function GetInReducedTotal() {
+    if(listCandidates){
+     try {
+       // ${listCandidates.totalDeElementos/10
+       const { data } = await api.get(`/candidato/get-paginado?pagina=0&quantidadePorPagina=${listCandidates.totalDeElementos}`);
+       setListCandidatesAll(data);
+       console.log(data);
+       
+     } catch (error) {
+       console.log(error);
+    }
+     }
+   }
+  
   async function getInCadastradosVagas(){
     try{
       const {data} = await api.get(`/vaga/candidatos-vinculados?id-vaga=${idVaga}`)
       console.log(data);
-      
       setCandidatados(data)
     }
     catch(error){
       console.log(error);
-      
     }
   }
-  if (!candidatados ) {
-    return <Loading />;
-  }
-
-  if (!listCandidates ) {
-    return <Loading />;
-  }
-
-  const { candidatos, totalDePaginas } = listCandidates;
-  // console.log('candidatados =>' ,candidatados);
+  
   
   const nextPage = (actionPage: string) => {
-    if (actionPage === "+" && page < totalDePaginas - 1) {
+    if (actionPage === "+" && page < listCandidates.totalDePaginas - 1) {
       setPage(page + 1);
     }
     if (actionPage === "-" && page > 0) {
       setPage(page - 1);
     }
   };
+
   async function VincularCandidato( idCandidato:number ) {
       try{
       const {data} = await api.post(`/vaga/vincular-candidato?idCandidato=${idCandidato}&idVaga=${idVaga}`);
@@ -71,42 +96,37 @@ const ListCandidates = ({idVaga}:any) => {
       Notiflix.Notify.warning('Ops Candidato ja vinculado');
       }
     }
-    console.log('idVaga =>', idVaga);
-    console.log('idCandidato =>', idCandidato);  
+    getInCadastradosVagas()
   }
-
+  function searchInCandidates (event:any) {
+    setInputValue(event.target.value)
+    if(listCandidatesAll){
+      const { candidatos } = listCandidatesAll
+      console.log(candidatosInput); 
+      console.log('inputValue.inputValue' , inputValue);
+      setCandidatosInput(candidatos.filter((candidato:any) => candidato.nome.toLowerCase().includes(inputValue?.toLowerCase()) ))
+    }
+     }
   function DisabledButton(idCandidato:number , event:any){
+    console.log(candidatados);
     VincularCandidato( idCandidato ) 
     event.target.disabled = true;
-    
+  }
+  if (!listCandidates && !candidatosInput ) {
+    return <Loading />;
+  }
+  if(!candidatados){
+    return <Loading />;
   }
   return (
     <C.BackGroundTabela >
-      
-      {/* <C.Ul>
-        {candidatos.map((listCand: any) => (
-          <C.Li key={listCand.idCandidato}>
-            <C.ContainerInfoCandidato>
-              <C.InfoCandidato>
-                Nome: <C.RetornoApi>{listCand.nome}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                Data de Nascimento:{" "}
-                <C.RetornoApi>{listCand.dataNascimento}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                Cargo: <C.RetornoApi>{listCand.cargo}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                Senioridade: <C.RetornoApi>{listCand.senioridade}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                <button onClick={()=>VincularCandidato(listCand.idCandidato)}>Vincular Candidato</button>
-              </C.InfoCandidato>
-            </C.ContainerInfoCandidato>
-          </C.Li>
-        ))}
-      </C.Ul> */}
+        <C.DivAlignTop >
+        <C.DivFlex>
+          <C.Title>Listagem de Vagas </C.Title>
+          <C.Input placeholder="Pesquise" onChange={(event:any)=> searchInCandidates(event) }></C.Input>
+        </C.DivFlex>
+        </C.DivAlignTop>
+    
     <C.DivAuxiliar>
     <C.Tabela>
           <C.TheadTabela>
@@ -122,7 +142,7 @@ const ListCandidates = ({idVaga}:any) => {
           </C.TheadTabela>
           <C.TBodyTable>
           {/*  */}
-          {candidatos.map((listCand: any) => (
+          {candidatosInput.slice(0 , 9).map((listCand: any) => (
             <C.TrTabela key={listCand.idCandidato}>
               <C.TdTabela>
                 {listCand.nome}
@@ -159,42 +179,7 @@ const ListCandidates = ({idVaga}:any) => {
           </C.ContainerButtonsPage>
           </C.DivAuxiliar>
     </C.BackGroundTabela>
-      /* <C.Ul>
-        {candidatos.map((listCand: any) => (
-          <C.Li key={listCand.idCandidato}>
-            <C.ContainerInfoCandidato>
-              <C.InfoCandidato>
-                Nome: <C.RetornoApi>{listCand.nome}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                Data de Nascimento:{" "}
-                <C.RetornoApi>{listCand.dataNascimento}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                Cargo: <C.RetornoApi>{listCand.cargo}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                Senioridade: <C.RetornoApi>{listCand.senioridade}</C.RetornoApi>
-              </C.InfoCandidato>
-              <C.InfoCandidato>
-                </C.InfoCandidato>
-            </C.ContainerInfoCandidato>
-          </C.Li>
-        ))}
-      </C.Ul> */
-      
-      /* <C.DivButtonsPage>
-        <C.ButtonPage onClick={() => nextPage("-")}>
-          {" "}
-          <IoMdArrowRoundBack />{" "}
-        </C.ButtonPage>
-
-        <C.ButtonPage onClick={() => nextPage("+")}>
-          <IoMdArrowRoundForward />{" "}
-        </C.ButtonPage>
-      </C.DivButtonsPage> */
- 
-  );
+    );
 };
 
 export default ListCandidates;

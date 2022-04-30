@@ -87,6 +87,8 @@ function FormCurriculo() {
   }
   async function postCandidato(values: CandidatoDTO) {
     const NewsValues = CloneExperiencia(values)
+    console.log(NewsValues);
+    
     prepareDataToInsert(NewsValues)
     try {
       const { data } = await api.post("/candidato-completo", NewsValues);
