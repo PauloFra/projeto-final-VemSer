@@ -14,20 +14,7 @@ export const Modal = styled.div`
   align-items: center;
 `;
 
-export const ButtonClose = styled.button`
-  background-color: transparent;
-  font-size: 33px;
-  cursor: pointer;
-  border: none;
-  
-`;
 
-export const MenuHeader = styled.div`
- display: flex;
- justify-content: space-between;
-  align-content: center;
- padding: 20px;
-`;
 
 export const ContainerModal = styled.div`
   background-color: #fff;

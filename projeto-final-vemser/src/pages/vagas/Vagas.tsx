@@ -2,50 +2,56 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { IoMdArrowRoundForward, IoMdArrowRoundBack } from "react-icons/io";
 import ModalList from "../../components/modal/ModalList";
+import { ChangeEvent } from "react";
 import Loading from "../../components/loading/Loading";
 import api from "../../api";
 import * as C from "../../components/globalStyles/global.styles";
 function Vagas() {
   const [visibleModal, setVisibleModal] = useState(false);
+  
   const [totalVagas, setTotalVagas] = useState<any>();
+  
   const [idVagas, setIdVagas] = useState<number | undefined>();
+  
+  const [startVagas, setStartVagas] = useState<any>();
+  
 
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string | undefined>();
+  
+  const [vagasInput, setVagasInput] = useState<any>();
 
   const [page, setPage] = useState<number>(0);
-  console.log(totalVagas);
+
 
   async function getInVagas(id: number) {
     try {
       const { data } = await api.get(
         `/vaga/buscar-vagas-aberto?pagina=${id}&quantidade-por-pagina=7`
       );
-      setTotalVagas(data);
+      console.log(data);
+      setVagasInput(data.vagas)
+      setStartVagas(data);
     } catch (error) {
       console.log(error);
     }
-  }
-  async function AtualizaVagas() {
-    setLoading(true);
-    try {
-      api.get("/vaga/atualizar");
-    } catch (error) {
-      console.log(error);
-    }
+    
   }
 
   const nextPage = (actionPage: string) => {
-    if (actionPage === "+" && page < totalVagas.paginas - 1) {
+    if (actionPage === "+" && page < startVagas.paginas - 1) {
       setPage(page + 1);
     }
     if (actionPage === "-" && page > 0) {
       setPage(page - 1);
     }
   };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       api.defaults.headers.common["Authorization"] = token;
+      getInVagas(7)
+      Setup()
     }
   }, []);
 
@@ -53,31 +59,62 @@ function Vagas() {
     getInVagas(page);
   }, [page]);
 
-  
-  if (!totalVagas) {
-    return <Loading altura="100vh" largura="100vw" />;
-  }
+  useEffect(() => {
+    Setup()
+  }, [startVagas]);
+
+
   function ModalTratament(idVaga: number | undefined) {
     setVisibleModal(true);
     setIdVagas(idVaga);
   }
-  const { vagas } = totalVagas;
-  console.log(vagas.cidade);
-
+ 
     function VerificaUndefined(value: any) {
       if (!value) {
         value = "-";
       }
       return value
     }
-  return (
+    
+    async function Setup(){
+     if(startVagas){
+      try{
+        const { data } = await api.get(`/vaga/buscar-vagas-aberto?pagina=0&quantidade-por-pagina=${startVagas.total}`)
+        console.log(data);
+        console.log(data);
+        
+        setTotalVagas(data.vagas)
+        }catch(error){
+        console.log(error);
+      }
+     }
+    }
+
+    async function searchVagas(event:ChangeEvent<HTMLInputElement>){
+      setInputValue(event.target.value)
+      if(totalVagas){
+          setVagasInput(totalVagas.filter((vaga:any) => vaga.cliente.toLowerCase().includes(inputValue?.toLowerCase()) ))
+         }
+      }
+
+    if (!startVagas && !totalVagas) {  
+      return <Loading altura="100vh" largura="100vw" />; 
+    }
+   
+    console.log('vagasInput' , inputValue);
+    
+    return (
     <C.BackGroundTabela>
-      <C.DivMenu>
-        <C.Title>Listagem de Vagas </C.Title>
+      <C.DivAlignTop >
+        <C.DivFlex>
+          <C.Title>Listagem de Vagas </C.Title>
+          <C.Input placeholder="Pesquise" onChange={(event:ChangeEvent<HTMLInputElement>) => searchVagas(event) }></C.Input>
+        </C.DivFlex>
+        
         <C.SubTitle>
-          <C.ButtonVisualizar onClick={()=>AtualizaVagas()}>Atualizar Vagas</C.ButtonVisualizar>
+          <C.ButtonVisualizar >Atualizar Vagas</C.ButtonVisualizar>
         </C.SubTitle>
-      </C.DivMenu>
+        </C.DivAlignTop>
       {visibleModal && (
         <ModalList idVaga={idVagas} onClose={() => setVisibleModal(false)} />
       )}
@@ -102,7 +139,7 @@ function Vagas() {
             </C.TrTabela>
           </C.TheadTabela>
           <C.TBodyTable>
-             {vagas.map((vaga: any) => (
+             {vagasInput.slice(0 , 7).map((vaga: any) => (
             
               <C.TrTabela key={vaga.id}>
                 <C.TdTabela>{VerificaUndefined(vaga.titulo)}</C.TdTabela>

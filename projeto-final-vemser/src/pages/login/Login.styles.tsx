@@ -38,6 +38,8 @@ export const DivForm = styled.div`
   height: 67.7px;
 `;
 
+
+
 export const ContainerForm = styled.form`
   width: 380px;
   height: 482px;

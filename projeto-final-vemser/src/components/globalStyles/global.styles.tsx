@@ -9,12 +9,14 @@ export const BackGroundTabela = styled.div`
   border-radius: 16px;
   margin-bottom: 20px;
 `;
-export const DivMenu = styled.div`
+export const DivMenu = styled.div<{ flexD?: string }>`
+
   height: 100%;
   margin: 40px 0px 20px 0px;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  flex-direction: ${(props) => props.flexD};
   a {
     color: #777777;
     :hover {
@@ -25,6 +27,19 @@ export const DivMenu = styled.div`
     border: none;
   }
 `;
+
+export const DivAlignTop = styled.div`
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 40px 0;
+`;
+export const DivFlex = styled.div`
+ display: flex;
+align-items: center;
+ 
+`;
+
 export const TBodyTable = styled.tbody``;
 export const Title = styled.h1`
   font-size: 40px;
@@ -85,6 +100,24 @@ export const ContainerButtonsPage = styled.div`
     background-color: transparent;
     border: none;
     cursor: pointer;
+  }
+`;
+
+export const Input = styled.input`
+  padding-left: 10px;
+  font-size: 18px;
+  width: 316px;
+  height: 42px;
+  margin: 0 0 0 15px;
+  border-radius: 8px;
+  border: 2px solid #f0f1f7;
+  color: #8d8d8d;
+  outline: none;
+  &::placeholder {
+    color: #9fa2b4;
+  }
+  &:focus {
+    border: 2px solid #9fa2b4;
   }
 `;
 
