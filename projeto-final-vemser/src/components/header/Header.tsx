@@ -21,9 +21,6 @@ function Header() {
               <C.Li>
                 <Link to="/curriculos">Candidatos</Link>
               </C.Li>
-              <C.Li>
-                <Link to="/cadastrar-usuario">Cadastro</Link>
-              </C.Li>
             </C.Ulflex>
           </C.Nav>
           <C.Logout>

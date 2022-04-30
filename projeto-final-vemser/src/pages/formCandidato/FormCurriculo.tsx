@@ -26,9 +26,9 @@ function FormCurriculo() {
 
   const [candidatoToInsert, setCandidatoToInsert] = useState<any>();
 
-  const [experiencias, setExperiencias] = useState<any>();
+  const [experiencias, setExperiencias] = useState<any>([]);
 
-  const [dadosEscolares, setDadosEscolares] = useState<any>();
+  const [dadosEscolares, setDadosEscolares] = useState<any>([]);
 
   const [fileInputData, setFileInputData] = useState<any>();
   console.log("fileInputData", fileInputData);
@@ -88,9 +88,8 @@ function FormCurriculo() {
   }
   async function postCandidato(values: CandidatoDTO) {
     const NewsValues = CloneExperiencia(values);
-    console.log(NewsValues);
-
     prepareDataToInsert(NewsValues);
+    console.log(NewsValues);
     try {
       const { data } = await api.post("/candidato-completo", NewsValues);
       console.log(data);

@@ -173,6 +173,11 @@ export const SpanDefault = styled.span`
   font-weight: bold;
   font-size: 15px;
 `;
+export const SpanDefaultHour = styled.span`
+  margin-right: 10px;
+  color:${Theme.fontColor.primary}; 
+  font-size: 15px;
+`;
 export const BtnSeta = styled.button`
   color: ${Theme.color.primary};
   svg {
