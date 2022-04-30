@@ -1,12 +1,13 @@
 const Theme = {
   color: {
     primary: "#922c88",
-    secondary: "#9fa2b4",
+    secondary: "#ffffff",
     error: "#ff6969",
     background: "#f8f8f8",
+    hover: "#6e1b66",
   },
   fontColor: {
-    primary: "#444444",
+    primary: "#8f8f8f",
     secondary: "#ffffff",
   },
   space: {
@@ -15,6 +16,9 @@ const Theme = {
   fontSize: {
     small: "13px",
     media: "17px",
+  },
+  shadow: {
+    container: "0 3px 30px rgb(0 0 0 / 10%), 0 3px 20px rgb(0 0 0 / 10%)",
   },
 };
 

@@ -33,10 +33,9 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
     return <Loading altura="60vh" largura="28.69vw" />;
   }
   return (
-    <C.DivContainerDetail >
+    <C.DivContainerDetail>
       <C.DivFlex>
-        <h2>Detalhes do Candidato</h2>
-
+        <C.Title>Detalhes do Candidato</C.Title>
         <C.ButtonClose onClick={() => fecharMenu(false)}>
           <AiOutlineClose />
         </C.ButtonClose>

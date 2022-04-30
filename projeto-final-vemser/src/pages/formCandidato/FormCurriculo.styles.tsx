@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { Field } from "formik";
 import Theme from "../../theme/Theme";
-const { fontColor, color, space, fontSize } = Theme;
 export const ContainerGeral = styled.div`
-  font-size: ${fontSize.media};
+  font-size: ${Theme.fontSize.media};
   margin: 0 auto;
   min-width: 1200px;
   display: flex;
@@ -11,7 +10,8 @@ export const ContainerGeral = styled.div`
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 65px);
-  margin-bottom: ${space.default};
+  margin-bottom: ${Theme.space.default};
+  background-color: ${Theme.color.background};
   form {
     -webkit-box-shadow: 20px 18px 50px 5px rgba(0, 0, 0, 0.16);
     box-shadow: 20px 18px 50px 5px rgba(0, 0, 0, 0.16);
@@ -21,13 +21,14 @@ export const ContainerGeral = styled.div`
     display: grid;
     grid-template-columns: auto auto;
     justify-content: center;
-    border: 1px solid ${color.secondary};
+    border: 1px solid ${Theme.color.secondary};
     border-radius: 8px;
+    background-color: ${Theme.color.secondary};
   }
 `;
 
 export const TitleForm = styled.h1`
-  color: ${fontColor.primary};
+  color: ${Theme.color.primary};
   margin: 20px 0;
 `;
 
@@ -42,10 +43,14 @@ export const DivFlexColumn = styled.div`
     height: 30px;
     padding: 4px 0 4px 7px;
     font-size: 15px;
-    border: 1px solid #9fa2b4;
-    color: rgb(159, 162, 180);
+    border: 1px solid ${Theme.fontColor.primary};
+    color: ${Theme.fontColor.primary};
+    outline: none;
     ::placeholder {
-      color: ${color.secondary};
+      color: ${Theme.fontColor.primary};
+    }
+    :focus {
+      border: 1px solid ${Theme.color.primary};
     }
   }
 `;
@@ -58,18 +63,18 @@ export const DivRowFlex = styled.div`
   }
 `;
 export const Label = styled.label`
-  color: ${color.secondary};
+  color: ${Theme.fontColor.primary};
   font-weight: bold;
   text-transform: capitalize;
 `;
 export const TitleInfoTopic = styled.h2`
-  color: ${fontColor.primary};
+  color: ${Theme.color.primary};
   grid-column-start: 1;
   grid-column-end: 3;
   align-self: flex-end;
 `;
 export const DivCabeçalho = styled.div`
-  color: ${fontColor.primary};
+  color: ${Theme.fontColor.primary};
   display: flex;
   align-self: flex-end;
   justify-content: space-between;
@@ -79,7 +84,7 @@ export const DivCabeçalho = styled.div`
 `;
 export const DivError = styled.div`
   margin: 3px 0px 0px 5px;
-  color: ${color.error};
+  color: ${Theme.color.error};
   font-weight: bold;
   font-size: 14px;
 `;
@@ -92,11 +97,11 @@ export const ContainerInputs = styled.div`
 `;
 
 export const Botao = styled.button`
-  border: 1px solid #9fa2b4;
+  border: 1px solid ${Theme.color.primary};
   background-color: transparent;
   padding: 12px 0;
   border-radius: 10px;
-  color: ${color.secondary};
+  color: ${Theme.color.primary};
   font-weight: bold;
   margin: 20px 500px;
   font-size: 20px;
@@ -105,7 +110,7 @@ export const Botao = styled.button`
   :hover {
     color: white;
     border: 1px solid white;
-    background-color: ${color.secondary};
+    background-color: ${Theme.color.primary};
   }
 `;
 
@@ -116,7 +121,7 @@ export const CheckBox = styled(Field)`
 `;
 
 export const ButtonExcluir = styled.button`
-  color: ${color.error};
+  color: ${Theme.color.error};
   background-color: transparent;
   border: 0.5px solid rgb(255, 0, 0, 0.3);
   display: flex;
@@ -137,11 +142,11 @@ export const ButtonAdd = styled.button`
   font-size: 14px;
   padding: 4px 0;
   :hover {
-    background-color: ${color.secondary};
+    background-color: ${Theme.color.secondary};
   }
 `;
 export const labelFile = styled.label`
-  color: ${color.secondary};
+  color: ${Theme.color.secondary};
   font-weight: bold;
   text-transform: capitalize;
 `;

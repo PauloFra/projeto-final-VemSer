@@ -14,7 +14,6 @@ import {
   SingupSchema,
   prepareDataToInsert,
   prepareDateToUser,
-
 } from "../../utils";
 import Loading from "../../components/loading/Loading";
 import moment from "moment";
@@ -46,50 +45,54 @@ function FormCurriculo() {
     }
   }, []);
 
-  function CloneExperiencia(values:CandidatoDTO){
-    if(values.experiencias){
-      setExperiencias(values.experiencias.map(experiencia => {
-        return{
-          dataFim: experiencia.dataFim,
-          dataInicio: experiencia.dataInicio,
-          descricao:experiencia.descricao,
-          nomeEmpresa:  experiencia.nomeEmpresa,
-       }
-      }))
-     }
-  
-     if(values.dadosEscolares){
-      setDadosEscolares(values.dadosEscolares.map(dadoEscolar => {
-        return{
-          dataFim:dadoEscolar.dataFim,
-          dataInicio:dadoEscolar.dataInicio,
-          descricao:dadoEscolar.descricao,
-          instituicao:dadoEscolar.instituicao,
-       }
-      }))
-     }
-     
-      const NewData:CandidatoDTO = {
-        cpf: values.cpf,
-        nome:values.nome,
-        dataNascimento: values.dataNascimento,
-        logradouro:values.logradouro,
-        cidade:values.cidade,
-        bairro: values.bairro,
-        telefone: values.telefone,
-        numero: values.numero,
-        cargo:values.cargo,
-        senioridade: values.senioridade,
-        experiencias,
-        dadosEscolares,
-      }
-    return NewData
+  function CloneExperiencia(values: CandidatoDTO) {
+    if (values.experiencias) {
+      setExperiencias(
+        values.experiencias.map((experiencia) => {
+          return {
+            dataFim: experiencia.dataFim,
+            dataInicio: experiencia.dataInicio,
+            descricao: experiencia.descricao,
+            nomeEmpresa: experiencia.nomeEmpresa,
+          };
+        })
+      );
+    }
+
+    if (values.dadosEscolares) {
+      setDadosEscolares(
+        values.dadosEscolares.map((dadoEscolar) => {
+          return {
+            dataFim: dadoEscolar.dataFim,
+            dataInicio: dadoEscolar.dataInicio,
+            descricao: dadoEscolar.descricao,
+            instituicao: dadoEscolar.instituicao,
+          };
+        })
+      );
+    }
+
+    const NewData: CandidatoDTO = {
+      cpf: values.cpf,
+      nome: values.nome,
+      dataNascimento: values.dataNascimento,
+      logradouro: values.logradouro,
+      cidade: values.cidade,
+      bairro: values.bairro,
+      telefone: values.telefone,
+      numero: values.numero,
+      cargo: values.cargo,
+      senioridade: values.senioridade,
+      experiencias,
+      dadosEscolares,
+    };
+    return NewData;
   }
   async function postCandidato(values: CandidatoDTO) {
-    const NewsValues = CloneExperiencia(values)
+    const NewsValues = CloneExperiencia(values);
     console.log(NewsValues);
-    
-    prepareDataToInsert(NewsValues)
+
+    prepareDataToInsert(NewsValues);
     try {
       const { data } = await api.post("/candidato-completo", NewsValues);
       console.log(data);
@@ -99,33 +102,30 @@ function FormCurriculo() {
       }
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
       navigate("/curriculos");
-    } catch (error:any) {
-      if(error.response.data.errors){
-        switch(error.response.data.errors[0]){
-
-          case 'numero: deve ser maior que 0':
-            Notiflix.Notify.warning('Numero da casa deve ser maior que 0');
+    } catch (error: any) {
+      if (error.response.data.errors) {
+        switch (error.response.data.errors[0]) {
+          case "numero: deve ser maior que 0":
+            Notiflix.Notify.warning("Numero da casa deve ser maior que 0");
             break;
 
-          case  'cpf: número do registro de contribuinte individual brasileiro (CPF) inválido':
-            Notiflix.Notify.warning('CPF inválido');
+          case "cpf: número do registro de contribuinte individual brasileiro (CPF) inválido":
+            Notiflix.Notify.warning("CPF inválido");
             break;
         }
-    }
-      if(error.response.data.message === 'CPF já cadastrado'){
+      }
+      if (error.response.data.message === "CPF já cadastrado") {
         Notiflix.Notify.warning(error.response.data.message);
       }
       console.log(error.response.data);
     }
-   
-    
+
     // if(candidatoToInsert){
-      
-      // }
+
+    // }
   }
 
   async function PostIn(idCandidatoPost: number | string) {
-    console.log(idCandidatoPost);
     const formData = new FormData();
     formData.append("curriculo", fileInputData);
     try {
@@ -137,31 +137,29 @@ function FormCurriculo() {
       console.log(error);
     }
   }
-  console.log('candidatoToInsert =>' , candidatoToInsert);
   async function getInCandidatoById(idCandidato: string) {
     try {
       const { data } = await api.get(
         `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
       );
-      console.log(data);
 
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
         setCandidatoForUpdate(prepareDateToUser(props))
       );
-      console.log(candidatoForUpdate);
     } catch (error) {
       console.log(error);
     }
   }
 
   async function updateCandidato(values: CandidatoDTO) {
-    console.log("values", values);
-
-    const NewsValues = CloneExperiencia(values)
-    prepareDataToInsert(NewsValues)
+    const NewsValues = CloneExperiencia(values);
+    prepareDataToInsert(NewsValues);
     try {
-      const { data } = await api.put(`/candidato-completo?id-candidato=${idCandidato}`, NewsValues );
+      const { data } = await api.put(
+        `/candidato-completo?id-candidato=${idCandidato}`,
+        NewsValues
+      );
       if (fileInputData && data) {
         PostIn(data.idCandidato);
       }
@@ -169,25 +167,23 @@ function FormCurriculo() {
 
       Notiflix.Notify.success("Candidato atualizado com sucesso");
       navigate("/curriculos");
-    } catch (error:any) {
-      if(error.response.data.errors){
-        switch(error.response.data.errors[0]){
-          case 'numero: deve ser maior que 0':
-            Notiflix.Notify.warning('Numero da casa deve ser maior que 0');
+    } catch (error: any) {
+      if (error.response.data.errors) {
+        switch (error.response.data.errors[0]) {
+          case "numero: deve ser maior que 0":
+            Notiflix.Notify.warning("Numero da casa deve ser maior que 0");
             break;
-          case  'cpf: número do registro de contribuinte individual brasileiro (CPF) inválido':
-            Notiflix.Notify.warning('CPF inválido');
+          case "cpf: número do registro de contribuinte individual brasileiro (CPF) inválido":
+            Notiflix.Notify.warning("CPF inválido");
             break;
         }
-    }
-      if(error.response.data.message === 'CPF já cadastrado'){
+      }
+      if (error.response.data.message === "CPF já cadastrado") {
         Notiflix.Notify.warning(error.response.data.message);
       }
       console.log(error.response.data);
     }
   }
-
-
 
   function addExp(upDown: string) {
     setLimitExperiencia(limitExperiencia + 1);
@@ -225,8 +221,6 @@ function FormCurriculo() {
       return window.scrollTo(0, up);
     }
   }
-console.log(idCandidato);
-
 
   if (idCandidato && !candidatoForUpdate) {
     return <Loading />;
@@ -249,7 +243,7 @@ console.log(idCandidato);
   return (
     <C.ContainerGeral>
       <C.TitleForm>
-        {idCandidato ? "Atualizar" : "Adicionar"} Candidato
+        {idCandidato ? "Atualizar" : "Cadastrar"} Candidato
       </C.TitleForm>
       <Formik
         validationSchema={SingupSchema}
@@ -631,7 +625,7 @@ console.log(idCandidato);
               )}
             </FieldArray>
             <C.Botao type="submit">
-              {idCandidato ? "Atualizar" : "Adicionar"}
+              {idCandidato ? "Atualizar" : "Cadastrar"}
             </C.Botao>
           </Form>
         )}

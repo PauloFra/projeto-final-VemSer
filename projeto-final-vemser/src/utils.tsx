@@ -5,12 +5,13 @@ import { ExperienciaDTO } from "./model/ExperienciaDTO";
 import moment from "moment";
 import { DadosEscolaresDTO } from "./model/DadosEscolaresDTO";
 
-
 type dataDTO = {
   value: string | undefined;
 };
 
-
+export const zeroLeft = (num: number) => {
+  return num < 10 ? `0${num}` : num;
+};
 export const formatDateToApi = (value: any) => {
   return moment(value, "DD/MM/YYYY").format("YYYY-MM-DD");
 };
@@ -117,7 +118,6 @@ export const SingupSchema = Yup.object().shape({
 });
 
 export function prepareDataToInsert(values: CandidatoDTO) {
-
   values.dataNascimento = formatDateToApi(values.dataNascimento);
   if (values.experiencias && values.experiencias.length > 0) {
     values.experiencias.map((experiencia: ExperienciaDTO) => {
@@ -131,7 +131,6 @@ export function prepareDataToInsert(values: CandidatoDTO) {
       dadoEscolar.dataFim = formatDateToApi(dadoEscolar.dataFim);
     });
   }
-
 }
 
 export function prepareDateToUser(values: CandidatoDTO) {
@@ -151,4 +150,3 @@ export function prepareDateToUser(values: CandidatoDTO) {
   }
   return values;
 }
-

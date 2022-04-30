@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Theme from "../../theme/Theme";
 export const DivContainerDetail = styled.div`
   margin-left: 20px;
   border-radius: 10px;
@@ -11,6 +12,7 @@ export const DivContainerDetail = styled.div`
   border-right: 2px solid #ccc;
   border-left: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
+  box-shadow: ${Theme.shadow.container};
   /*  overflow-y: scroll; */
 `;
 export const DivFlex = styled.div`
@@ -22,17 +24,21 @@ export const DivFlex = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(108, 120, 142, 0.5);
-  color: #444444;
+  background-color: ${Theme.color.primary};
+
   height: 80px;
+`;
+export const Title = styled.h2`
+  color: ${Theme.color.secondary};
 `;
 export const ButtonClose = styled.button`
   font-size: 30px;
   cursor: pointer;
   border: none;
   background-color: transparent;
+  color: ${Theme.color.secondary};
   :hover {
-    color: red;
+    color: ${Theme.color.hover};
   }
 `;
 
@@ -44,11 +50,11 @@ export const ButtonAsLink = styled.button`
   color: white;
   cursor: pointer;
   transition: 0.5s;
-  background-color: #6c788e;
+  background-color: ${Theme.color.primary};
   border: 1px solid rgb(159, 162, 180);
 
   :hover {
-    background-color: rgb(108, 120, 142, 0.9);
+    background-color: ${Theme.color.hover};
   }
 `;
 

@@ -11,6 +11,14 @@ export const BackGroundTabela = styled.div`
   margin-bottom: 20px;
   background-color: ${Theme.color.background};
 `;
+export const Tabela = styled.table`
+  width: 100%;
+  box-shadow: ${Theme.shadow.container};
+  margin: 0 auto;
+  text-align: left;
+  border-spacing: 0;
+  border-radius: 10px;
+`;
 export const DivMenu = styled.div<{ flexD?: string }>`
   height: 100%;
   margin: 40px 0px 20px 0px;
@@ -42,35 +50,25 @@ export const DivFlex = styled.div`
 `;
 
 export const TBodyTable = styled.tbody``;
+
 export const Title = styled.h1`
   font-size: 40px;
-  color: rgb(51, 51, 51);
+  color: ${Theme.fontColor.primary};
 `;
 export const SubTitle = styled.h3`
   padding-top: 5px;
 `;
 
-export const Tabela = styled.table`
-  width: 100%;
-  margin: 0 auto;
-  /* min-height: 701px; */
-  text-align: left;
-  border-spacing: 0;
-
-  border-radius: 10px;
-  /* background-color: rgb(207, 213, 225, 0.5); */
-`;
-
 export const TrTabela = styled.tr`
   &:nth-child(even) {
-    background-color: rgb(237, 237, 242, 0.5);
+    background-color: ${Theme.color.secondary};
   }
 `;
 
 export const TdTabela = styled.td<{ align?: string }>`
   text-align: ${(props) => props.align};
   border-bottom: 1.5px solid #dfe0eb;
-  color: #444444;
+  color: ${Theme.fontColor.primary};
   font-size: 18px;
   height: 10px;
   padding: 20px 0 20px 20px;
@@ -83,14 +81,16 @@ export const TheadTabela = styled.thead`
   color: rgb(168, 168, 168);
 `;
 export const ContainerButtonsPage = styled.div`
-  padding: 10px 0px 10px 20px;
+  padding: 10px 0px 10px 10px;
   display: flex;
   height: 100%;
   align-items: end;
   font-size: 14px;
   position: relative;
   bottom: 0;
-
+  display: flex;
+  align-items: center;
+  color: ${Theme.color.primary};
   button {
     display: flex;
     margin: 0 10px;
@@ -119,18 +119,38 @@ export const Input = styled.input`
     border: 2px solid #9fa2b4;
   }
 `;
-
+export const Search = styled.input`
+  padding-left: 10px;
+  font-size: 18px;
+  width: 316px;
+  height: 42px;
+  margin: 0 0 0 15px;
+  border-radius: 8px;
+  border: 2px solid ${Theme.fontColor.primary};
+  color: #8d8d8d;
+  outline: none;
+  &::placeholder {
+    color: ${Theme.color.primary};
+    font-weight: bold;
+  }
+  &:focus {
+    border: 2px solid ${Theme.color.primary};
+  }
+  :focus::placeholder {
+    color: ${Theme.fontColor.primary};
+  }
+`;
 export const ButtonVisualizar = styled.button`
   padding: 4px;
-  border: 1.5px solid rgb(15, 98, 254);
+  border: 1.5px solid ${Theme.color.primary};
   font-weight: bold;
-  color: rgb(15, 98, 254);
-  border-radius: 3px;
+  color: ${Theme.color.primary};
+  border-radius: 4px;
   text-align: left;
   cursor: pointer;
   background-color: transparent;
   :hover {
-    background: rgb(15, 98, 254);
+    background: ${Theme.color.primary};
     color: white;
   }
   :active {
@@ -144,8 +164,15 @@ export const SpanDefault = styled.span`
   font-size: 15px;
 `;
 export const BtnSeta = styled.button`
-  background-color: RED;
-  border: 5px solid #dfe0eb;
+  /*   background-color: red;
+  border: 5px solid #dfe0eb; */
+  color: ${Theme.color.primary};
+  svg {
+    font-size: 16px;
+    :hover {
+      color: ${Theme.color.hover};
+    }
+  }
 `;
 export const DivAuxiliar = styled.div`
   width: 100%;
@@ -166,6 +193,9 @@ export const ThTabela = styled.th<{
   color: ${Theme.fontColor.secondary};
   background-color: ${Theme.color.primary};
   border-bottom: 1.5px solid #dfe0eb;
+  :last-child {
+    padding-right: 20px;
+  }
 `;
 
 export const ContainerGeralTabela = styled.div<{

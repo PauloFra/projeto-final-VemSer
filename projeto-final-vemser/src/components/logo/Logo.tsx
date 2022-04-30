@@ -1,14 +1,14 @@
 import React from "react";
 import logo from "../../images/logoSVG.svg";
 import { Link } from "react-router-dom";
+import * as C from "./Logo.styles";
 function Logo() {
   return (
-    <div>
+    <C.BackGroundTabela>
       <Link to={"/"}>
-        <h3>Vem CV</h3>
-        {/* <img src={logo} alt="" /> */}
+        <img src={logo} alt="" />
       </Link>
-    </div>
+    </C.BackGroundTabela>
   );
 }
 

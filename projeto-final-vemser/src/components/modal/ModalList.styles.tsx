@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Modal = styled.div`
   width: 100%;
-  padding:  0 250px;
+  padding: 0 250px;
   height: 109vh;
   position: absolute;
   top: 0;
@@ -14,14 +14,12 @@ export const Modal = styled.div`
   align-items: center;
 `;
 
-
-
 export const ContainerModal = styled.div`
   background-color: #fff;
   min-width: 900px;
   min-height: 600px;
   color: #000;
-  border-radius: 8px;
+  border-radius: 10px;
 `;
 
 export const CloseModal = styled.button`
@@ -29,7 +27,7 @@ export const CloseModal = styled.button`
   outline: none;
   width: 32px;
   height: 32px;
-  right:calc(-100% + 30px);
+  right: calc(-100% + 30px);
   top: 8px;
   display: flex;
   position: relative;
@@ -53,7 +51,6 @@ export const CloseModal = styled.button`
 `;
 
 export const ContentModal = styled.div`
-
-  
-
-`
+  border-radius: 10px;
+  padding: 20px;
+`;

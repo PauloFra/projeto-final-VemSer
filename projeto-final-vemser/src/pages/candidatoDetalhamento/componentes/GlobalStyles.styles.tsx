@@ -1,16 +1,20 @@
 import styled from "styled-components";
+import Theme from "../../../theme/Theme";
 
 export const TituloInfo = styled.h3`
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 3px;
+  color: ${Theme.color.primary};
 `;
 export const Info = styled.p`
   font-size: 16px;
   padding-left: 5px;
+  color: ${Theme.fontColor.primary};
 `;
 export const Negrito = styled.span`
-  font-weight: bold;
+  color: ${Theme.color.primary};
   padding-left: 5px;
+  font-weight: bold;
 `;
 export const ContainerInfo = styled.div`
   width: 100%;
