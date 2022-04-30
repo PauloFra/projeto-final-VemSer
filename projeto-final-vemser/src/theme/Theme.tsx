@@ -1,11 +1,13 @@
 const Theme = {
   color: {
-    primary: "#b0b6c3",
+    primary: "#922c88",
     secondary: "#9fa2b4",
     error: "#ff6969",
+    background: "#f8f8f8",
   },
   fontColor: {
     primary: "#444444",
+    secondary: "#ffffff",
   },
   space: {
     default: "20px",

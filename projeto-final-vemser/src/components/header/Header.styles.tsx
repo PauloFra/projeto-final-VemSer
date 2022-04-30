@@ -1,12 +1,13 @@
 import styled from "styled-components";
-
+import Theme from "../../theme/Theme";
 export const ContainerHeader = styled.header`
-  background-color: #b0b6c3;
+  background-color: #922c88;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px 30px;
   height: 65px;
+  color: ${Theme.fontColor.secondary};
 `;
 export const Ulflex = styled.ul`
   column-gap: 20px;
@@ -23,7 +24,7 @@ export const Li = styled.li`
   a {
     font-size: 18px;
 
-    color: #2c2c2c;
+    color: ${Theme.fontColor.secondary};
     :hover {
       color: rgb(44, 44, 44, 0.8);
     }
@@ -36,6 +37,7 @@ export const ButtonLogout = styled.button`
   font-size: 17px;
   display: flex;
   align-items: center;
+  color: ${Theme.fontColor.secondary};
   cursor: pointer;
   svg {
     font-size: 24px;

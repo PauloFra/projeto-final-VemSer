@@ -1,13 +1,15 @@
 import styled from "styled-components";
-
+import Theme from "../../theme/Theme";
 export const BackGroundTabela = styled.div`
   display: flex;
   flex-direction: column;
-  width: 97%;
+  width: 100%;
+  padding: 0px 3%;
   min-height: 94vh;
   margin: 0 auto;
   border-radius: 16px;
   margin-bottom: 20px;
+  background-color: ${Theme.color.background};
 `;
 export const DivMenu = styled.div`
   height: 100%;
@@ -15,12 +17,13 @@ export const DivMenu = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  a {
+  /*  a {
     color: #777777;
+    font-size: 50px;
     :hover {
-      color: #a6aec1;
+      color: red;
     }
-  }
+  } */
   button {
     border: none;
   }
@@ -29,7 +32,6 @@ export const TBodyTable = styled.tbody``;
 export const Title = styled.h1`
   font-size: 40px;
   color: rgb(51, 51, 51);
-  /*  margin-bottom: 24px; */
 `;
 export const SubTitle = styled.h3`
   padding-top: 5px;
@@ -70,7 +72,6 @@ export const TheadTabela = styled.thead`
 export const ContainerButtonsPage = styled.div`
   padding: 10px 0px 10px 20px;
   display: flex;
-
   height: 100%;
   align-items: end;
   font-size: 14px;
@@ -105,7 +106,6 @@ export const ButtonVisualizar = styled.button`
     box-shadow: 0 1px #666;
     transform: translateY(0.5px);
   }
- 
 `;
 
 export const SpanDefault = styled.span`
@@ -132,8 +132,8 @@ export const ThTabela = styled.th<{
   text-align: ${(props) => props.align};
   border-radius: ${(props) => props.radius};
   padding-left: 20px;
-  color: #444;
-  background-color: rgb(108, 120, 142, 0.5);
+  color: ${Theme.fontColor.secondary};
+  background-color: ${Theme.color.primary};
   border-bottom: 1.5px solid #dfe0eb;
 `;
 
