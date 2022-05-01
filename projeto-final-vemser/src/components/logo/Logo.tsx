@@ -5,7 +5,7 @@ function Logo() {
   return (
     <C.BackGroundTabela>
       <Link to={"/"}>
-        <img src={logo} alt="logo da empresa VemCV" />
+        <C.TitleLogo>VemCV</C.TitleLogo>
       </Link>
     </C.BackGroundTabela>
   );
