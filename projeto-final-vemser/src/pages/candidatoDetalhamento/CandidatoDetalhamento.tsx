@@ -8,6 +8,7 @@ import Loading from "../../components/loading/Loading";
 import { formatDateToUser } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
+import CardEndereco from "./componentes/CardEnderecos/CardEndereco";
 
 type Props = {
   candidato: any;
@@ -52,6 +53,12 @@ const CandidatoDetalhamento = ({ candidato, fecharMenu }: Props) => {
         dataNascimento={formatDateToUser(candidato.dataNascimento)}
         cpf={candidato.cpf}
         telefone={candidato.telefone}
+      />
+      <CardEndereco
+        bairro={candidato.bairro}
+        cidade={candidato.cidade}
+        rua={candidato.logradouro}
+        numero={candidato.numero}
       />
       <CardDadosAcademicos dadosEscolares={dadosEscolares} />
       <CardExperiencia experiencias={experiencias} />
