@@ -1,11 +1,5 @@
 import InputMask from "react-input-mask";
-import { Formik, Field, Form, FieldArray } from "formik";
-import { useEffect, useState } from "react";
-import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
-import { GiConfirmed } from "react-icons/gi";
-
-import { CandidatoDTO } from "../../model/CandidatoDTO";
-import { useNavigate, useParams } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 import api from "../../api";
 import * as C from "./FormCurriculo.styles";
 import Notiflix from "notiflix";
@@ -15,9 +9,14 @@ import {
   prepareDataToInsert,
   prepareDateToUser,
 } from "../../utils";
-import Loading from "../../components/loading/Loading";
-import moment from "moment";
+import { Formik, Field, Form, FieldArray } from "formik";
+import { useEffect, useState } from "react";
+import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
+import { CandidatoDTO } from "../../model/CandidatoDTO";
+import { useNavigate, useParams } from "react-router-dom";
+
 function FormCurriculo() {
+  //TESTE TESTE TESTE TESTE
   const { idCandidato } = useParams();
   const [limitExperiencia, setLimitExperiencia] = useState(0);
   const [limitAcademico, setLimitAcademico] = useState(0);
@@ -28,9 +27,9 @@ function FormCurriculo() {
 
   const [candidatoToInsert, setCandidatoToInsert] = useState<any>();
 
-  const [experiencias, setExperiencias] = useState<any>();
+  const [experiencias, setExperiencias] = useState<any>([]);
 
-  const [dadosEscolares, setDadosEscolares] = useState<any>();
+  const [dadosEscolares, setDadosEscolares] = useState<any>([]);
 
   const [fileInputData, setFileInputData] = useState<any>();
   console.log("fileInputData", fileInputData);
@@ -90,9 +89,8 @@ function FormCurriculo() {
   }
   async function postCandidato(values: CandidatoDTO) {
     const NewsValues = CloneExperiencia(values);
-    console.log(NewsValues);
-
     prepareDataToInsert(NewsValues);
+    console.log(NewsValues);
     try {
       const { data } = await api.post("/candidato-completo", NewsValues);
       console.log(data);
@@ -376,6 +374,7 @@ function FormCurriculo() {
                       Adicione um arquivo <AiFillFileAdd />
                     </C.TextFile>
                   )}
+                  </C.labelFile>
                   <C.inputFile
                     accept=".pdf"
                     onChange={(e: any) => setFileInputData(e.target.files[0])}
@@ -384,7 +383,7 @@ function FormCurriculo() {
                     placeholder="fileInput"
                     type="file"
                   />
-                </C.labelFile>
+                
               </C.DivFlexColumn>
             </C.ContainerInputs>
             <FieldArray name="dadosEscolares">
