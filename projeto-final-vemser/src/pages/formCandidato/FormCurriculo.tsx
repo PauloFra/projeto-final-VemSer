@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
-
+//teste
 function FormCurriculo() {
   const { idCandidato } = useParams();
   const [limitExperiencia, setLimitExperiencia] = useState(0);
