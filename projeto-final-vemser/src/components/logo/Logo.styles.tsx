@@ -5,3 +5,5 @@ export const BackGroundTabela = styled.div`
     color: #fff;
   }
 `;
+
+export const TitleLogo = styled.h3``;
