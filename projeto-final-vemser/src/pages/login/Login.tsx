@@ -20,7 +20,7 @@ const Login = () => {
   }, []);
   const formikProps = useFormik({
     initialValues: {
-      usuario: "string@string.com",
+      usuario: "admin@dbccompany.com.br",
       senha: "String@123",
     },
     validationSchema: Yup.object().shape({
@@ -42,7 +42,7 @@ const Login = () => {
           <C.TitleLogin>Login VemCV</C.TitleLogin>
         </C.DivLogo>
         <C.DivForm>
-          <C.Label  htmlFor="usuario">Usuario</C.Label >
+          <C.Label htmlFor="usuario">Usuario</C.Label>
           <C.Input
             name="usuario"
             id="usuario"
@@ -55,7 +55,7 @@ const Login = () => {
           ) : null}
         </C.DivForm>
         <C.DivForm>
-          <C.Label  htmlFor="senha">Senha</C.Label >
+          <C.Label htmlFor="senha">Senha</C.Label>
           <C.Input
             type={pass ? "password" : "text"}
             name="senha"
