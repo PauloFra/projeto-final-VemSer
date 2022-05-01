@@ -20,8 +20,8 @@ const Login = () => {
   }, []);
   const formikProps = useFormik({
     initialValues: {
-      usuario: "admin@dbccompany.com.br",
-      senha: "String@123",
+      usuario: "",
+      senha: "",
     },
     validationSchema: Yup.object().shape({
       usuario: Yup.string().required("Preencha o campo de usuario!"),

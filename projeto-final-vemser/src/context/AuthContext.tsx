@@ -63,6 +63,10 @@ export const AuthProvider = ({ children }: Props) => {
       });
       setIsLogged(true);
     } catch (error) {
+      Notiflix.Notify.warning("Ops , Usuario ou Senha incorreto", {
+        timeout: 1000,
+        position: "center-top",
+      });
       console.log(error);
     }
   }
