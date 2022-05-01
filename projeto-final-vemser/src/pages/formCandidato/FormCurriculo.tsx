@@ -203,7 +203,7 @@ function FormCurriculo() {
   }
 
   if (idCandidato && !candidatoForUpdate) {
-    return <Loading />;
+    return <Loading largura="90vw" altura="100vh" />;
   }
   const initialValues = {
     nome: "",
