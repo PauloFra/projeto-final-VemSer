@@ -16,7 +16,6 @@ import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
 
 function FormCurriculo() {
-  //TESTE TESTE TESTE TESTE
   const { idCandidato } = useParams();
   const [limitExperiencia, setLimitExperiencia] = useState(0);
   const [limitAcademico, setLimitAcademico] = useState(0);
@@ -374,16 +373,15 @@ function FormCurriculo() {
                       Adicione um arquivo <AiFillFileAdd />
                     </C.TextFile>
                   )}
-                  </C.labelFile>
-                  <C.inputFile
-                    accept=".pdf"
-                    onChange={(e: any) => setFileInputData(e.target.files[0])}
-                    id="fileInput"
-                    name="fileInput"
-                    placeholder="fileInput"
-                    type="file"
-                  />
-                
+                </C.labelFile>
+                <C.inputFile
+                  accept=".pdf"
+                  onChange={(e: any) => setFileInputData(e.target.files[0])}
+                  id="fileInput"
+                  name="fileInput"
+                  placeholder="fileInput"
+                  type="file"
+                />
               </C.DivFlexColumn>
             </C.ContainerInputs>
             <FieldArray name="dadosEscolares">
