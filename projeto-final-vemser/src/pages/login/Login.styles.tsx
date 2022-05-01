@@ -1,16 +1,14 @@
 import styled from "styled-components";
-import Theme from "../../theme/Theme";
 
 export const ContainerLogin = styled.div`
-
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
+  background-color: #8f8f8f;
   justify-content: center;
   align-items: center;
   font-size: 17px;
-  background-color: ${Theme.color.background};
 `;
 
 export const DivLogo = styled.div`
@@ -23,50 +21,32 @@ export const DivLogo = styled.div`
 
 export const TitleLogin = styled.h1`
   font-size: 27px;
-  margin-top: 25px;
-  color:  ${Theme.color.primary};
+  color: #6c788e;
   opacity: 0.7;
 `;
 
 export const DivForm = styled.div`
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  `;
-export const Label = styled.label`
- color: ${Theme.fontColor.primary};
- font-size:20px;
+  display: grid;
+  margin-bottom: 76px;
+  position: relative;
+  height: 67.7px;
 `;
 
-
-
-export const TrocarSenha = styled.a`
-  position: absolute;
-  margin-top: 45px;
-  margin-left: 290px;
-  color: #9fa2b4;
-  cursor: pointer;
-`;
 
 
 export const ContainerForm = styled.form`
   width: 380px;
-  display: grid;
+  height: 482px;
   background-color: #fff;
-  border: 1.5px solid #dfe0eb;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-shadow: ${Theme.shadow.container};
+  justify-content: start;
   color: #9fa2b4;
-  border-radius: 10px;
+  border-radius: 8px;
 `;
 export const Error = styled.small`
   margin-top: 5px;
-  width: 316px;
-  margin-bottom: 10px;
-  display: flex;
-  
-  font-weight: bold;
   color: red;
 `;
 export const Input = styled.input`
@@ -88,20 +68,17 @@ export const Input = styled.input`
 `;
 
 export const Botao = styled.button`
-  border: 1px solid ${Theme.color.primary};
-  background-color: transparent;
-  padding: 12px 0;
-  margin-bottom:40px;
-  width: 100%;
-  border-radius: 10px;
-  color: ${Theme.color.primary};
-  font-weight: bold;
-  font-size: 20px;
+  width: 316px;
+  height: 48px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #6c788e;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
   cursor: pointer;
   :hover {
-    color: white;
-    border: 1px solid white;
-    background-color: ${Theme.color.primary};
+    background-color: rgb(108, 120, 142, 0.9);
   }
 `;
 
@@ -142,4 +119,12 @@ export const SignUp = styled.span`
   font-size: 14px;
   font-weight: bold;
   margin-left: 5px;
+`;
+
+export const TrocarSenha = styled.a`
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  color: #9fa2b4;
+  cursor: pointer;
 `;

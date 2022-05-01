@@ -1,6 +1,5 @@
 import * as C from "./candidatoDetalhado.styles";
 import CardExperiencia from "./componentes/CardExperiencia/CardExperiencia";
-
 import CardInfoPessoal from "./componentes/CardInfoPessoais/CardInfoPessoal";
 import CardInfoGeral from "./componentes/CardInfoGeral/CardInfoGeral";
 import CardDadosAcademicos from "./componentes/CardDadosAcademicos/CardDadosAcademicos";

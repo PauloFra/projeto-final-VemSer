@@ -63,7 +63,7 @@ const Login = () => {
     <C.ContainerUser>
       <C.ContainerForm onSubmit={formikProps.handleSubmit}>
         <C.DivLogo>
-          <C.TitleLogin>Cadastro VemCV</C.TitleLogin>
+          <C.TitleLogin>Login VemCV</C.TitleLogin>
         </C.DivLogo>
         <C.DivForm>
           <C.Label  htmlFor="nome">Nome</C.Label >

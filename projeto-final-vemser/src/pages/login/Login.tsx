@@ -42,7 +42,7 @@ const Login = () => {
           <C.TitleLogin>Login VemCV</C.TitleLogin>
         </C.DivLogo>
         <C.DivForm>
-          <C.Label  htmlFor="usuario">Usuario</C.Label >
+          <label htmlFor="usuario">Usuario</label>
           <C.Input
             name="usuario"
             id="usuario"
@@ -55,7 +55,7 @@ const Login = () => {
           ) : null}
         </C.DivForm>
         <C.DivForm>
-          <C.Label  htmlFor="senha">Senha</C.Label >
+          <label htmlFor="senha">Senha</label>
           <C.Input
             type={pass ? "password" : "text"}
             name="senha"

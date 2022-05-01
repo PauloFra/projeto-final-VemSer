@@ -19,8 +19,6 @@ function Vagas() {
 
   const [startVagas, setStartVagas] = useState<any>();
 
-  const [dateLastUp, setDateLastUp] = useState<string>('');
-
   const [inputValue, setInputValue] = useState<string | undefined>();
 
   const [vagasInput, setVagasInput] = useState<any>();
@@ -54,7 +52,6 @@ function Vagas() {
       api.defaults.headers.common["Authorization"] = token;
       getInVagas(7);
       Setup();
-      BuscaDataUltimaAtualizacao()
     }
   }, []);
 
@@ -102,17 +99,9 @@ function Vagas() {
       );
     }
   }
-  async function BuscaDataUltimaAtualizacao(){
-    try{
-      const {data} = await api.get('/vaga/data-ultima-atualizacao')
-      setDateLastUp( moment(data).format('DD/MM/YYYY  , h:mm:ss a'))
-    }
-    catch(error){
-      console.log(error);
-    }
-  }
+
   if (!startVagas && !totalVagas) {
-    return <Loading altura="350vh" largura="520vw" />;
+    return <Loading altura="100vh" largura="100vw" />;
   }
   return (
     <C.BackGroundTabela>
@@ -129,10 +118,7 @@ function Vagas() {
         </C.DivFlex>
 
         <C.SubTitle>
-          <C.SpanDefaultHour>
-            Última Atualização : {dateLastUp}
-          </C.SpanDefaultHour>
-          <C.ButtonVisualizar onClick={() =>BuscaDataUltimaAtualizacao() }>Atualizar Vagas</C.ButtonVisualizar>
+          <C.ButtonVisualizar>Atualizar Vagas</C.ButtonVisualizar>
         </C.SubTitle>
       </C.DivAlignTop>
       {visibleModal && (
