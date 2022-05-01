@@ -12,9 +12,9 @@ function Footer() {
         <C.Footer>
           <p>
             Projeto realizado pela equipe VemCV, Front-end: Gabriel Gomes e
-            Paulo Fraga Backend: Gustavo Barbosa e Pablo Kappa Product Owner:
+            Paulo Fraga Backend: Gustavo Barbosa e Pablo Kapp Product Owner:
             Tiago Schmidt
-          </p>
+          </p>  
         </C.Footer>
       )}
     </>

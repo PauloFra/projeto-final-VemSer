@@ -148,6 +148,7 @@ export const ButtonAdd = styled.button`
   }
 `;
 export const labelFile = styled.label`
+  cursor: pointer;
   color:  ${Theme.fontColor.primary};
   font-weight: bold;
   text-transform: capitalize;

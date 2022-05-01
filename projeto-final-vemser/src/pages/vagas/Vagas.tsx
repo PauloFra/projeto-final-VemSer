@@ -112,7 +112,7 @@ function Vagas() {
     }
   }
   if (!startVagas && !totalVagas) {
-    return <Loading altura="350vh" largura="520vw" />;
+    return <Loading altura="100vh" largura="auto" />;
   }
   return (
     <C.BackGroundTabela>
