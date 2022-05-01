@@ -113,14 +113,15 @@ export const SingupSchema = Yup.object().shape({
 });
 
 export function prepareDataToInsert(values: CandidatoDTO) {
+  
   values.dataNascimento = formatDateToApi(values.dataNascimento);
-  if (values.experiencias && values.experiencias.length > 0) {
+  if (values.experiencias) {
     values.experiencias.map((experiencia: ExperienciaDTO) => {
       experiencia.dataInicio = formatDateToApi(experiencia.dataInicio);
       experiencia.dataFim = formatDateToApi(experiencia.dataFim);
     });
   }
-  if (values.dadosEscolares && values.dadosEscolares.length > 0) {
+  if (values.dadosEscolares) {
     values.dadosEscolares.map((dadoEscolar: DadosEscolaresDTO) => {
       dadoEscolar.dataInicio = formatDateToApi(dadoEscolar.dataInicio);
       dadoEscolar.dataFim = formatDateToApi(dadoEscolar.dataFim);
