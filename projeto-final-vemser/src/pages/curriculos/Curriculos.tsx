@@ -15,7 +15,7 @@ function Curriculos() {
   const [candidatosInput, setCandidatosInput] = useState<any>();
   const [listCandidates, setListCandidates] = useState<any>();
   const [listCandidatesAll, setListCandidatesAll] = useState<any>();
-  const [isLoading , setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string | undefined>();
   async function GetInReduced(page: number, qtdPorPage: number) {
     try {
@@ -36,7 +36,7 @@ function Curriculos() {
           `/candidato/get-paginado?pagina=0&quantidadePorPagina=${listCandidates.totalDeElementos}`
         );
         setListCandidatesAll(data);
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -102,19 +102,19 @@ function Curriculos() {
   }
 
   if (isLoading) {
-    return <Loading altura="100vh" largura="100vw" />;
+    return <Loading altura="100vh" largura="auto" />;
   }
   return (
     <CC.BackGroundTabela>
       <CC.DivAlignTop>
         <CC.DivFlex>
           <CC.Title>Listagem de Currículos </CC.Title>
-        <CC.Search
+          <CC.Search
             placeholder="Pesquise"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               searchInCandidates(event)
             }
-          ></CC.Search>  
+          ></CC.Search>
           <AiOutlineSearch />
         </CC.DivFlex>
 
