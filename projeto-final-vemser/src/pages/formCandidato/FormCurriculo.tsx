@@ -9,7 +9,7 @@ import {
   prepareDataToInsert,
   prepareDateToUser,
 } from "../../utils";
-import { Formik, Field, Form, FieldArray } from "formik";
+import { Formik, Field, Form, FieldArray , ErrorMessage } from "formik";
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
@@ -397,6 +397,9 @@ function FormCurriculo() {
                               placeholder="Descrição Do Curso"
                               type="text"
                             />
+                            <ErrorMessage name={`dadosEscolares.${index}.descricao`}
+                            component={C.DivError}
+                            />
                             {/* <ErrorMessage
                           name={`experiencias.${index}.name`}
                           component="div"
@@ -414,12 +417,10 @@ function FormCurriculo() {
                               placeholder="Instituição"
                               type="text"
                             />
-
-                            {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                            <ErrorMessage name={`dadosEscolares.${index}.instituicao`}
+                            component={C.DivError}
+                            />
+                            
                           </C.DivFlexColumn>
                           <C.DivFlexColumn>
                             <C.Label
@@ -434,12 +435,9 @@ function FormCurriculo() {
                               as={InputMask}
                               mask="99/99/9999"
                             />
-
-                            {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                              <ErrorMessage name={`dadosEscolares.${index}.dataInicio`}
+                             component={C.DivError} />
+                          
                           </C.DivFlexColumn>
                           <C.DivFlexColumn>
                             <C.Label
@@ -453,15 +451,10 @@ function FormCurriculo() {
                               type="text"
                               as={InputMask}
                               mask="99/99/9999"
-                            />
+                            /><ErrorMessage name={`dadosEscolares.${index}.dataFim`}
+                            component={C.DivError} />
 
-                            {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
                           </C.DivFlexColumn>
-
                           <C.DivFlexColumn></C.DivFlexColumn>
                         </C.ContainerInputs>
                       )
@@ -519,11 +512,9 @@ function FormCurriculo() {
                             placeholder="Nome Da Empresa"
                             type="text"
                           />
-                          {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                         <ErrorMessage name={`experiencias.${index}.nomeEmpresa`}
+                            component={C.DivError}
+                            />
                         </C.DivFlexColumn>
                         <C.DivFlexColumn>
                           <C.Label htmlFor={`experiencias.${index}.descricao`}>
@@ -535,11 +526,9 @@ function FormCurriculo() {
                             type="text"
                           />
 
-                          {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                            <ErrorMessage name={`experiencias.${index}.descricao`}
+                            component={C.DivError}
+                            />  
                         </C.DivFlexColumn>
                         <C.DivFlexColumn>
                           <C.Label htmlFor={`experiencias.${index}.dataInicio`}>
@@ -553,11 +542,9 @@ function FormCurriculo() {
                             mask="99/99/9999"
                           />
 
-                          {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                            <ErrorMessage name={`experiencias.${index}.dataInicio`}
+                            component={C.DivError}
+                            />  
                         </C.DivFlexColumn>
                         <C.DivFlexColumn>
                           <C.Label htmlFor={`experiencias.${index}.dataFim`}>
@@ -570,12 +557,9 @@ function FormCurriculo() {
                             as={InputMask}
                             mask="99/99/9999"
                           />
-
-                          {/* <ErrorMessage
-                          name={`experiencias.${index}.name`}
-                          component="div"
-                          className="field-error"
-                        /> */}
+                          <ErrorMessage name={`experiencias.${index}.dataFim`}
+                            component={C.DivError}
+                            />  
                         </C.DivFlexColumn>
 
                         <C.DivFlexColumn></C.DivFlexColumn>

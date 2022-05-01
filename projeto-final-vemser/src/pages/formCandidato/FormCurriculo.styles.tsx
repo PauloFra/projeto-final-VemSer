@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Theme from "../../theme/Theme";
-import { Field } from "formik";
+import { Field  } from "formik";
 
 export const ContainerGeral = styled.div`
   font-size: ${Theme.fontSize.media};
@@ -114,6 +114,7 @@ export const Botao = styled.button`
     background-color: ${Theme.color.primary};
   }
 `;
+
 
 export const CheckBox = styled(Field)`
   height: 24px;

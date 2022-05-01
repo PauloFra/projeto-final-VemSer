@@ -16,7 +16,9 @@ export const formatDateToUser = (value:  string | undefined) => {
 export const BottomPage = () => {
   return window.scrollTo(0, 1000);
 };
-
+const getFormatedDate = (currentDate:string) => {
+  return currentDate.split('/').reverse().join('-');
+ }
 export const SingupSchema = Yup.object().shape({
   nome: Yup.string().required("Preencha o campo corretamente!"),
   cpf: Yup.string().required("Preencha o campo corretamente!"),
@@ -28,6 +30,51 @@ export const SingupSchema = Yup.object().shape({
     "Data Inválida , maioridade obrigatória",
     (date) => moment().diff(moment(formatDateToApi(date)), "years") >= 18
   ),
+  dadosEscolares: Yup.array().of(
+    Yup.object().shape({
+      descricao: Yup.string().required("Descrição Obrigatória"),
+      instituicao: Yup.string().required("Instituição Obrigatória"),
+      dataInicio:
+      Yup.string()
+      .required("Data Obrigatória")
+      .test(
+        "DATE",
+        "Data Inválida",
+        (date) => moment().diff(moment(formatDateToApi(date)), "years") >= 1
+      ),
+      dataFim:
+      Yup.string()
+      .required("Data Obrigatória")
+      .test(
+        "DATE",
+        "Data Inválida",
+        (date) => moment().diff(moment(formatDateToApi(date)), "years") >= 1
+      ),
+    })),
+    
+    experiencias: Yup.array().of(
+      Yup.object().shape({
+        nomeEmpresa: Yup.string().required("Nome da Empresa Obrigatória"),
+        descricao: Yup.string().required("Descrição Obrigatória"),
+        dataInicio:
+        Yup.string()
+        .required("Data Obrigatória")
+        .test(
+          "DATE",
+          "Data Inválida",
+          (date) => moment().diff( moment(formatDateToApi(date)), "years") >= 1
+        ),
+        dataFim:
+        Yup.string()
+        .required("Data Obrigatória")
+        .test(
+          "DATE",
+          "Data Inválida",
+          (date) => moment().diff(moment(formatDateToApi(date)), "years") >= 1
+        ),
+      })),
+
+
 
   logradouro: Yup.string().required("Preencha o campo corretamente!"),
   cidade: Yup.string().required("Preencha o campo corretamente!"),
