@@ -59,12 +59,12 @@ export const AuthProvider = ({ children }: Props) => {
 
       Notiflix.Notify.success("Seja bem vindo!", {
         timeout: 1000,
-        position: "center-top",
+        position: "center-top",    
       });
       setIsLogged(true);
     } catch (error) {
-      Notiflix.Notify.warning("Ops , Usuario ou Senha incorreto", {
-        timeout: 1000,
+      Notiflix.Notify.failure("Ops! Usuario ou Senha incorreto", {
+        timeout: 2000,
         position: "center-top",
       });
       console.log(error);

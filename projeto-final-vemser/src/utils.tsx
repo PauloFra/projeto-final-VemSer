@@ -40,7 +40,7 @@ export const SingupSchema = Yup.object().shape({
       .test(
         "DATE",
         "Data Inválida",
-        (date) => moment().diff(moment(formatDateToApi(date)), "years") >= 1
+        (date) => moment().diff(moment(formatDateToApi(date)), "years") > -1
       ),
       dataFim:
       Yup.string()
@@ -48,7 +48,7 @@ export const SingupSchema = Yup.object().shape({
       .test(
         "DATE",
         "Data Inválida",
-        (date) => moment().diff(moment(formatDateToApi(date)), "years") >= 1
+        (date) => moment().diff(moment(formatDateToApi(date)), "years") >= -1
       ),
     })),
     
@@ -62,7 +62,7 @@ export const SingupSchema = Yup.object().shape({
         .test(
           "DATE",
           "Data Inválida",
-          (date) => moment().diff( moment(formatDateToApi(date)), "years") >= 1
+          (date) => moment().diff( moment(formatDateToApi(date)), "years") >= -1
         ),
         dataFim:
         Yup.string()
@@ -70,7 +70,7 @@ export const SingupSchema = Yup.object().shape({
         .test(
           "DATE",
           "Data Inválida",
-          (date) => moment().diff(moment(formatDateToApi(date)), "years") >= 1
+          (date) => moment().diff(moment(formatDateToApi(date)), "years") >= -1
         ),
       })),
 

@@ -12,15 +12,11 @@ function Curriculos() {
   const [page, setPage] = useState<number>(0);
   const [candidatoDetalhado, setCandidatoDetalhado] = useState([]);
   const [modalVisualizar, setModalVisualizar] = useState(false);
-  const [modalStatus, setModalStatus] = useState(false);
   const [candidatosInput, setCandidatosInput] = useState<any>();
   const [listCandidates, setListCandidates] = useState<any>();
   const [listCandidatesAll, setListCandidatesAll] = useState<any>();
-  
   const [isLoading , setIsLoading] = useState<boolean>(true)
-
   const [inputValue, setInputValue] = useState<string | undefined>();
-
   async function GetInReduced(page: number, qtdPorPage: number) {
     try {
       const { data } = await api.get(

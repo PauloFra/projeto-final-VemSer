@@ -1,8 +1,8 @@
 export interface ExperienciaDTO {
     nomeEmpresa?: string;
     descricao?: string;
-    dataInicio?: string | undefined;
+    dataInicio?: any;
     trabalhandoAtualmente?: string;
-    dataFim?: string | undefined;
+    dataFim?: any;
  
 }
