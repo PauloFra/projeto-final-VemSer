@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineClose, AiFillFileAdd, AiFillFileExcel } from "react-icons/ai";
 import { CandidatoDTO } from "../../model/CandidatoDTO";
 import { useNavigate, useParams } from "react-router-dom";
-//teste
+
 function FormCurriculo() {
   const { idCandidato } = useParams();
   const [limitExperiencia, setLimitExperiencia] = useState(0);
@@ -23,15 +23,8 @@ function FormCurriculo() {
   const [trabalhandoAtualmente, setTrabalhandoAtualmente] = useState(false);
   const [candidatoForUpdate, setCandidatoForUpdate] = useState<any>();
   const [modalStatus, setModalStatus] = useState(false);
-
   const [candidatoToInsert, setCandidatoToInsert] = useState<any>();
-
-  const [experiencias, setExperiencias] = useState<any>([]);
-
-  const [dadosEscolares, setDadosEscolares] = useState<any>([]);
-
   const [fileInputData, setFileInputData] = useState<any>();
-  console.log("fileInputData", fileInputData);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -44,30 +37,28 @@ function FormCurriculo() {
   }, []);
 
   function CloneExperiencia(values: CandidatoDTO) {
+    let candidatoExperiencias;
     if (values.experiencias) {
-      setExperiencias(
-        values.experiencias.map((experiencia) => {
-          return {
-            dataFim: experiencia.dataFim,
-            dataInicio: experiencia.dataInicio,
-            descricao: experiencia.descricao,
-            nomeEmpresa: experiencia.nomeEmpresa,
-          };
-        })
-      );
+      candidatoExperiencias = values.experiencias.map((experiencia) => {
+        return {
+          dataFim: experiencia.dataFim,
+          dataInicio: experiencia.dataInicio,
+          descricao: experiencia.descricao,
+          nomeEmpresa: experiencia.nomeEmpresa,
+        };
+      });
     }
 
+    let candidatoDadosEscolares;
     if (values.dadosEscolares) {
-      setDadosEscolares(
-        values.dadosEscolares.map((dadoEscolar) => {
-          return {
-            dataFim: dadoEscolar.dataFim,
-            dataInicio: dadoEscolar.dataInicio,
-            descricao: dadoEscolar.descricao,
-            instituicao: dadoEscolar.instituicao,
-          };
-        })
-      );
+      candidatoDadosEscolares = values.dadosEscolares.map((dadoEscolar) => {
+        return {
+          dataFim: dadoEscolar.dataFim,
+          dataInicio: dadoEscolar.dataInicio,
+          descricao: dadoEscolar.descricao,
+          instituicao: dadoEscolar.instituicao,
+        };
+      });
     }
 
     const NewData: CandidatoDTO = {
@@ -81,20 +72,18 @@ function FormCurriculo() {
       numero: values.numero,
       cargo: values.cargo,
       senioridade: values.senioridade,
-      experiencias,
-      dadosEscolares,
+      experiencias: candidatoExperiencias,
+      dadosEscolares: candidatoDadosEscolares,
     };
+
     return NewData;
   }
   async function postCandidato(values: CandidatoDTO) {
     const NewsValues = CloneExperiencia(values);
     prepareDataToInsert(NewsValues);
-    console.log(NewsValues);
     try {
       const { data } = await api.post("/candidato-completo", NewsValues);
-      console.log(data);
       if (fileInputData && data) {
-        console.log("entrou");
         PostIn(data.idCandidato);
       }
       Notiflix.Notify.success("Candidato Cadastrado com sucesso");
@@ -116,10 +105,6 @@ function FormCurriculo() {
       }
       console.log(error.response.data);
     }
-
-    // if(candidatoToInsert){
-
-    // }
   }
 
   async function PostIn(idCandidatoPost: number | string) {
@@ -139,7 +124,6 @@ function FormCurriculo() {
       const { data } = await api.get(
         `/candidato-completo/get-paginado?id-candidato=${idCandidato}`
       );
-
       const { candidatosCompletos } = data;
       candidatosCompletos.map((props: CandidatoDTO) =>
         setCandidatoForUpdate(prepareDateToUser(props))
@@ -160,7 +144,6 @@ function FormCurriculo() {
       if (fileInputData && data) {
         PostIn(data.idCandidato);
       }
-      console.log(data);
 
       Notiflix.Notify.success("Candidato atualizado com sucesso");
       navigate("/curriculos");
