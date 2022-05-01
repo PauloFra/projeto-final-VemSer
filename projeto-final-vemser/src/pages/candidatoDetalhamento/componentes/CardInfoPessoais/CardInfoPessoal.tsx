@@ -44,7 +44,7 @@ const CardInfoPessoal = (candidato: Props) => {
   }, []);
   console.log("isErro =>>>>>>>", isBoolean);
   if (isLoading) {
-    return <Loading altura="62vh" largura="33.53vw" />;
+    return <Loading  largura="100%" padding="50px" />;
   }
   return (
     <C.Container>
