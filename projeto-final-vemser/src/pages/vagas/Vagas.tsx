@@ -132,7 +132,6 @@ function Vagas() {
           <C.SpanDefaultHour>
             Última Atualização : {dateLastUp}
           </C.SpanDefaultHour>
-          <C.ButtonVisualizar onClick={() =>BuscaDataUltimaAtualizacao() }>Atualizar Vagas</C.ButtonVisualizar>
         </C.SubTitle>
       </C.DivAlignTop>
       {visibleModal && (

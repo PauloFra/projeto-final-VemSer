@@ -12,8 +12,6 @@ type Props = {
 };
 
 const CardExperiencia = ({ experiencias }: Props) => {
-  console.log(experiencias);
-
   return (
     <GC.DivTopicosCandidato>
       <GC.TituloInfo>

@@ -103,7 +103,9 @@ function FormCurriculo() {
       if (error.response.data.message === "CPF já cadastrado") {
         Notiflix.Notify.warning(error.response.data.message);
       }
-      console.log(error.response.data);
+      if(error.response.data.message === 'Data final deve ser após a Data de início'){
+        Notiflix.Notify.warning('Data final não pode ser anterior à data de inicio');
+      }
     }
   }
 
@@ -161,7 +163,10 @@ function FormCurriculo() {
       if (error.response.data.message === "CPF já cadastrado") {
         Notiflix.Notify.warning(error.response.data.message);
       }
-      console.log(error.response.data);
+      if(error.response.data.message === 'Data final deve ser após a Data de início'){
+        Notiflix.Notify.warning(error.response.data.message);
+      }
+      
     }
   }
 

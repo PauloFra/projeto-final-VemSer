@@ -21,9 +21,7 @@ const Login = () => {
     }
     catch(error){
       console.log(error);
-    }
-
-    
+    }  
   }
 
   const formikProps = useFormik({

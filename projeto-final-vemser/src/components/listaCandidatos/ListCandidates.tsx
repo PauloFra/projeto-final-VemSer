@@ -91,8 +91,6 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
       Notiflix.Notify.success("Candidato Vinculado");
       GetInReduced(page, 9);
     } catch (error: any) {
-      console.log(error.response.data);
-      console.log(error.response.data.message);
       if (error.response.data.message === "Candidato já vinculado à vaga") {
         Notiflix.Notify.warning("Ops Candidato ja vinculado");
       }
@@ -103,8 +101,6 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
     setInputValue(event.target.value);
     if (listCandidatesAll) {
       const { candidatos } = listCandidatesAll;
-    
-      console.log("inputValue.inputValue", inputValue);
       setCandidatosInput(
         candidatos.filter((candidato: any) =>
           candidato.nome.toLowerCase().includes(inputValue?.toLowerCase())
@@ -113,7 +109,6 @@ const ListCandidates = ({ idVaga }: ListCandidatesProps) => {
     }
   }
   function DisabledButton(idCandidato: number, event:ChangeEvent<HTMLInputElement>) {
-    console.log(candidatados);
     VincularCandidato(idCandidato);
     event.target.disabled = true;
   }

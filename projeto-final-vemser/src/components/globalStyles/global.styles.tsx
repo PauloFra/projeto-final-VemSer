@@ -176,7 +176,7 @@ export const SpanDefault = styled.span`
 export const SpanDefaultHour = styled.span`
   margin-right: 10px;
   color:${Theme.fontColor.primary}; 
-  font-size: 15px;
+  font-size: ${Theme.fontSize.small}; 
 `;
 export const BtnSeta = styled.button`
   color: ${Theme.color.primary};
