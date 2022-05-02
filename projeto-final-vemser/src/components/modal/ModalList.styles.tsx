@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import Theme from "../../theme/Theme";
 export const Modal = styled.div`
   width: 100%;
   padding: 0 250px;
@@ -15,7 +15,7 @@ export const Modal = styled.div`
 `;
 
 export const ContainerModal = styled.div`
-  background-color: #fff;
+  background-color: ${Theme.color.background};
   min-width: 900px;
   min-height: 600px;
   color: #000;

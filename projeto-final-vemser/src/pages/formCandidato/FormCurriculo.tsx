@@ -242,7 +242,7 @@ function FormCurriculo() {
             <C.ContainerInputs>
               <C.TitleInfoTopic>Dados Pessoais</C.TitleInfoTopic>
               <C.DivFlexColumn>
-                <C.Label htmlFor="nome">nome</C.Label>
+                <C.Label htmlFor="nome">Nome</C.Label>
                 <Field id="nome" name="nome" placeholder="Nome" />
                 {errors.nome && touched.nome ? (
                   <C.DivError>{errors.nome}</C.DivError>
@@ -358,7 +358,7 @@ function FormCurriculo() {
                     </C.TextFile>
                   ) : (
                     <C.TextFile>
-                      Adicione um arquivo <AiFillFileAdd />
+                      Adicione um Currículo <AiFillFileAdd />
                     </C.TextFile>
                   )}
                 </C.labelFile>
@@ -395,7 +395,7 @@ function FormCurriculo() {
                             <C.Label
                               htmlFor={`dadosEscolares.${index}.descricao`}
                             >
-                              Descrição Do Curso
+                              Descrição do Curso
                             </C.Label>
                             <Field
                               name={`dadosEscolares.${index}.descricao`}
@@ -431,7 +431,7 @@ function FormCurriculo() {
                             <C.Label
                               htmlFor={`dadosEscolares.${index}.dataInicio`}
                             >
-                              Data De Início
+                              Data de Início
                             </C.Label>
                             <Field
                               name={`dadosEscolares.${index}.dataInicio`}
@@ -510,7 +510,7 @@ function FormCurriculo() {
                           <C.Label
                             htmlFor={`experiencias.${index}.nomeEmpresa`}
                           >
-                            Nome Da Empresa
+                            Nome da Empresa
                           </C.Label>
                           <Field
                             name={`experiencias.${index}.nomeEmpresa`}
@@ -537,7 +537,7 @@ function FormCurriculo() {
                         </C.DivFlexColumn>
                         <C.DivFlexColumn>
                           <C.Label htmlFor={`experiencias.${index}.dataInicio`}>
-                            Data De Inicio
+                            Data de Inicio
                           </C.Label>
                           <Field
                             name={`experiencias.${index}.dataInicio`}

@@ -66,7 +66,6 @@ export const DivRowFlex = styled.div`
 export const Label = styled.label`
   color: ${Theme.fontColor.primary};
   font-weight: bold;
-  text-transform: capitalize;
 `;
 export const TitleInfoTopic = styled.h2`
   color: ${Theme.color.primary};
@@ -151,7 +150,6 @@ export const labelFile = styled.label`
   cursor: pointer;
   color:  ${Theme.fontColor.primary};
   font-weight: bold;
-  text-transform: capitalize;
 `;
 export const inputFile = styled.input`
   display: none;
