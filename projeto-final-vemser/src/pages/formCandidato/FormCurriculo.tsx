@@ -281,7 +281,7 @@ function FormCurriculo() {
               </C.DivFlexColumn>
 
               <C.DivFlexColumn>
-                <C.Label htmlFor="telefone">telefone / celular</C.Label>
+                <C.Label htmlFor="telefone">Telefone</C.Label>
                 <Field
                   id="telefone"
                   name="telefone"
